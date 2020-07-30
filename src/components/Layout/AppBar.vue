@@ -36,7 +36,7 @@
                     <v-btn text v-on="on">
                         <v-icon size="25" color="secondary">mdi-account</v-icon>
                         <div class="d-none d-md-flex align-center">
-                            <h6>Olá, Alex Alexandre</h6>
+                            <h6>{{user.pessoa.tx_nome_pessoa}}</h6>
                             <v-icon color="secondary">mdi-chevron-down</v-icon>
                         </div>
                     </v-btn>
@@ -78,6 +78,7 @@
                 { text: 'Alterar e-mail', icon: 'mdi-email'},
                 { text: 'Alterar senha', icon: 'mdi-lock'},
             ],
+            user: JSON.parse(localStorage.getItem('user'))
         }),
     }
 </script>
