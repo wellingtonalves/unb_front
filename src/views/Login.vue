@@ -81,8 +81,6 @@
         if (this.$refs.form.validate()) {
           this.loading = true;
           let response = await login(this.username, this.password);
-          this.loading = false;
-
 
           if (response.status !== 200) {
             this.snackbar.text = response.data.message;
@@ -95,6 +93,7 @@
             this.$router.push('/');
           });
           
+          this.loading = false;
         }
 
       }

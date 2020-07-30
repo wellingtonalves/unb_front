@@ -10,8 +10,14 @@ export const login = async (username, password) => {
     .catch(error => error.response);
 };
 
+export const logout = async () => {
+  return await httpClient
+    .post('/auth/logout')
+    .then(response => response)
+    .catch(error => error.response);
+};
+
 export const user = async () => {
-  console.log('auth.service -> user');
   return await httpClient
     .get('/auth/user')
     .then(response => response)
