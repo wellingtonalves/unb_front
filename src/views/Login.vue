@@ -2,10 +2,18 @@
   <v-app>
     <v-layout>
       <v-container fluid>
-        <v-row justify="center">
-          <v-col cols="4" align="center">
-            <v-col style="margin-bottom: 30px">
-              <img src="@/assets/logo-secretaria.svg" height="60"/>
+        <v-row justify="start">
+          <v-col cols="7">
+            <v-col>
+              <div class="region-text">
+                <p>É para os <strong>servidores</strong>.<br> É para toda a <strong>sociedade</strong>.</p>
+              </div>
+            </v-col>
+          </v-col>
+
+          <v-col cols="3" align="center" class="form-login">
+            <v-col>
+              <h1><a href="/">Secretaria Virtual - Login</a></h1>
             </v-col>
 
             <v-form ref="form" lazy-validation v-model="validForm">
@@ -13,29 +21,29 @@
                 v-model="username"
                 :rules="rules.email"
                 solo
-                placeholder="Digite seu e-mail"
+                placeholder="Informe seu e-mail"
               />
-
 
               <v-text-field
                 v-model="password"
                 :rules="rules.required"
                 solo
                 type="password"
-                placeholder="Digite sua senha"
+                placeholder="Informe sua senha"
               />
 
               <v-btn block large color="accent" :loading="loading" v-if="validForm" style="margin-bottom: 30px" @click="login()">
-                ACESSAR
+                Acessar
               </v-btn>
 
               <v-btn block large color="accent" :loading="loading" v-else disabled style="margin-bottom: 30px">
-                ACESSAR
+                Acessar
               </v-btn>
 
             </v-form>
-            <a href="/">Voltar ao portal</a>
+            <a href="/">Voltar para o portal</a>
           </v-col>
+
         </v-row>
       </v-container>
 
@@ -102,14 +110,46 @@
 </script>
 
 <style scoped>
-  .layout {
-    background-image: url('../assets/bg-login-responsive.png');
-    /*TODO - FABIO - ajustar o tamanho da imagem pra ficar responsiva*/
-    height: 100vh;
+  #app {
+    background-color: $contrast; /* TODO - Utilizar corretamente a variavel */
+    background-image: url(../assets/bg-login.png);
+    background-position: center center;
+    background-repeat: no-repeat;
     background-size: cover;
+    min-height: 100vh;
   }
-
   a {
     color: white;
   }
+  h1 {
+    margin-bottom: 2rem;
+  }
+  h1 a {
+    background-image: url(../assets/logo-secretaria.svg);
+    background-position: center 0;
+    background-repeat: no-repeat;
+    background-size: contain;
+    display: block;
+    height: 60px;
+    text-indent: -9000px;
+  }
+  .form-login {
+    margin-top: 8rem;
+  }
+  .region-text {
+    color: #fff; /* TODO - utilizar variável */
+    font-size: 1.6rem;
+    font-weight: 300;
+    height: calc(100vh - 72px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    width: 100%;
+  }
+  .region-text strong {
+    font-weight: 900;
+  }
+
+  /* TODO - adicionar media queries */
 </style>
