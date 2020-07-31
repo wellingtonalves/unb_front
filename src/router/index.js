@@ -25,6 +25,21 @@ const routes = [
           requiresAuth: true,
         },
       },
+      {
+        path: '/cursos',
+        component: () => import('../components/Layout/RouterViewComponent.vue'),
+        children: [
+          {
+            path: '',
+            name: 'curso',
+            component: () => import('../views/cursos/Curso.vue'),
+            meta: {
+              requiresAuth: true,
+              title: 'Curso',
+            },
+          },
+        ],
+      },
     ],
   },
 ];
