@@ -1,3 +1,4 @@
+<!--suppress CssUnresolvedCustomProperty -->
 <template>
   <v-app>
     <v-layout>
@@ -110,8 +111,9 @@
 </script>
 
 <style scoped>
+  /*noinspection ALL*/
   #app {
-    background-color: $contrast; /* TODO - Utilizar corretamente a variavel */
+    background-color: var(--v-contrast-base);
     background-image: url(../assets/bg-login.png);
     background-position: center center;
     background-repeat: no-repeat;
@@ -119,7 +121,7 @@
     min-height: 100vh;
   }
   a {
-    color: white;
+    color: var(--v-white-base);
   }
   h1 {
     margin-bottom: 2rem;
@@ -136,8 +138,10 @@
   .form-login {
     margin-top: 8rem;
   }
+
+  /*noinspection ALL*/
   .region-text {
-    color: #fff; /* TODO - utilizar variável */
+    color: var(--v-white-base);
     font-size: 1.6rem;
     font-weight: 300;
     height: calc(100vh - 72px);
