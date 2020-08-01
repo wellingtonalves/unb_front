@@ -3,7 +3,7 @@
     <v-layout>
       <v-container fluid>
         <v-row justify="start">
-          <v-col cols="7">
+          <v-col cols="12" md="7" order="2" order-md="1">
             <v-col>
               <div class="region-text">
                 <p>É para os <strong>servidores</strong>.<br> É para toda a <strong>sociedade</strong>.</p>
@@ -11,7 +11,7 @@
             </v-col>
           </v-col>
 
-          <v-col cols="3" align="center" class="form-login">
+          <v-col cols="12" md="3" order="1" order-md="2" align="center" class="form-login">
             <v-col>
               <h1><a href="/">Secretaria Virtual - Login</a></h1>
             </v-col>
@@ -32,11 +32,11 @@
                 placeholder="Informe sua senha"
               />
 
-              <v-btn block large color="accent" :loading="loading" v-if="validForm" style="margin-bottom: 30px" @click="login()">
+              <v-btn block large color="accent" :loading="loading" v-if="validForm" @click="login()">
                 Acessar
               </v-btn>
 
-              <v-btn block large color="accent" :loading="loading" v-else disabled style="margin-bottom: 30px">
+              <v-btn block large color="accent" :loading="loading" v-else disabled>
                 Acessar
               </v-btn>
 
@@ -151,5 +151,9 @@
     font-weight: 900;
   }
 
-  /* TODO - adicionar media queries */
+  @media screen and (max-width: 960px) {
+    #app {
+      background-image: url(../assets/bg-login-responsive.png);
+    }
+  }
 </style>
