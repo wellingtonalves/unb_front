@@ -17,7 +17,7 @@
               <h1><a href="/">Secretaria Virtual - Login</a></h1>
             </v-col>
 
-            <v-form ref="form" lazy-validation v-model="validForm">
+            <v-form ref="form" lazy-validation v-model="validForm" class="mb-8">
               <v-text-field
                 v-model="username"
                 :rules="rules.email"
