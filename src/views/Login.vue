@@ -1,4 +1,3 @@
-<!--suppress CssUnresolvedCustomProperty -->
 <template>
   <v-app>
     <v-layout>
@@ -111,7 +110,6 @@
 </script>
 
 <style scoped>
-  /*noinspection ALL*/
   #app {
     background-color: var(--v-contrast-base);
     background-image: url(../assets/bg-login.png);
