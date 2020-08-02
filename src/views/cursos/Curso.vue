@@ -57,10 +57,12 @@
               <v-data-table
                 :headers="headers"
                 :items="data"
-                :search="search"
+                :loading="loading"
+                :server-items-length="pagination.total"
+                :items-per-page="15"
+                :options.sync="options"
                 sort-by="tx_nome_curso"
                 class="elevation-1"
-                :loading="loading"
                 no-data-text="Nenhum registro encontrado"
                 no-results-text="Nenhum registro encontrado"
                 loading-text="Aguarde, estamos carregando os dados.">
@@ -70,13 +72,6 @@
                     <v-toolbar-title>Lista de usuários</v-toolbar-title>
                     <v-divider class="mx-4" inset vertical></v-divider>
                     <v-spacer></v-spacer>
-                    <v-text-field
-                      v-model="search"
-                      append-icon="mdi-magnify"
-                      label="Procurar"
-                      single-line
-                      hide-details
-                    ></v-text-field>
                   </v-toolbar>
                 </template>
 
@@ -87,29 +82,28 @@
 
                 <template v-slot:item.action="{ item }">
 
-                  <v-tooltip bottom>
-                    <template v-slot:activator="{ on }">
-                      <v-btn small class="mr-2" color="primary" icon @click="editar(item.id_curso)" v-on="on">
-                        <v-icon>mdi-pencil</v-icon>
-                      </v-btn>
-                    </template>
-                    <span>Editar</span>
-                  </v-tooltip>
+                  <v-row>
+                    <v-tooltip bottom>
+                      <template v-slot:activator="{ on }">
+                        <v-btn small color="primary" icon @click="editar(item.id_curso)" v-on="on">
+                          <v-icon>mdi-pencil</v-icon>
+                        </v-btn>
+                      </template>
+                      <span>Editar</span>
+                    </v-tooltip>
 
-                  <v-tooltip bottom>
-                    <template v-slot:activator="{ on }">
-                      <v-btn small class="mr-2" color="error" icon @click="detalhar(item.id_curso)" v-on="on">
-                        <v-icon>mdi-delete</v-icon>
-                      </v-btn>
-                    </template>
-                    <span>Visualizar</span>
-                  </v-tooltip>
+                    <v-tooltip bottom>
+                      <template v-slot:activator="{ on }">
+                        <v-btn small color="error" icon @click="excluir(item.id_curso)" v-on="on">
+                          <v-icon>mdi-delete</v-icon>
+                        </v-btn>
+                      </template>
+                      <span>Visualizar</span>
+                    </v-tooltip>
+                  </v-row>
 
                 </template>
-
-                <template v-slot:no-data>
-                  <h4>Nenhum registro encontrado</h4>
-                </template>
+                
               </v-data-table>
 
             </v-card>
@@ -136,32 +130,46 @@
         'ENAP'
       ],
       data:  [],
-      search: '',
+      pagination: {},
+      options: {},
       headers: [
         {text: 'id', value: 'id_curso'},
-        {text: 'Curso', value: 'tx_nome_curso'},
-        {text: 'Carga Horaria Minima', value: 'qt_carga_horaria_minima'},
+        {text: 'Curso', value: 'tx_nome_curso', align: 'start',},
+        {text: 'Carga Horaria Minima', value: 'qt_carga_horaria_minima', align: 'center',},
         {text: 'Status', value: 'tp_situacao_curso'},
         {text: 'Origem', value: 'tp_origem_curso'},
-        {text: 'Ações', align: 'center', value: 'action', sortable: false},
+        {text: 'Ações', value: 'action', sortable: false},
       ],
       loading: false,
     }),
     mounted() {
       this.getAll();
     },
+    watch: {
+      options: {
+        handler (val) {
+          if (val.itemsPerPage == '-1') {
+            this.getAll(`?pagination=false`);
+            return 
+          }
+          
+          this.getAll(`?per_page=${val.itemsPerPage}&page=${val.page}`);
+        },
+        deep: true,
+      },
+    },
     methods: {
-      async getAll() {
+      async getAll(filter = '') {
         this.loading = true;
-        const response = await getAll('/cursos');
+        const response = await getAll('/cursos' + filter);
+        this.pagination = response.data;
         this.data = response.data.data;
         this.loading = false;
-        console.log(response);
       },
       async editar() {
         console.log('editar');
       },
-      async detalhar() {
+      async excluir() {
         console.log('detalhar');
       }
     }
