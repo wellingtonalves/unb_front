@@ -94,6 +94,7 @@
             this.snackbar.text = response.data.message;
             this.snackbar.color = response.data.messageType;
             this.snackbar.active = true;
+            this.loading = false;
             return;
           }
 

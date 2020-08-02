@@ -25,21 +25,21 @@ const routes = [
           requiresAuth: true,
         },
       },
-      // {
-      //   path: '/cursos',
-      //   component: () => import('../components/Layout/RouterViewComponent.vue'),
-      //   children: [
-      //     {
-      //       path: '',
-      //       name: 'curso',
-      //       component: () => import('../views/cursos/Curso.vue'),
-      //       meta: {
-      //         requiresAuth: true,
-      //         title: 'Curso',
-      //       },
-      //     },
-      //   ],
-      // },
+      {
+        path: '/cursos',
+        component: () => import('../components/Layout/RouterViewComponent.vue'),
+        children: [
+          {
+            path: '',
+            name: 'curso',
+            component: () => import('../views/cursos/Curso.vue'),
+            meta: {
+              requiresAuth: true,
+              title: 'Curso',
+            },
+          },
+        ],
+      },
     ],
   },
 ];
@@ -61,7 +61,7 @@ router.beforeEach(async (to, from, next) => {
   await new Promise(resolve => {
     // if (store.getters.isAuthenticated === 'false') {
     //TODO - trocar pra linha de cima
-    if (!localStorage.getItem('isAuthenticated')) {
+    if (localStorage.getItem('isAuthenticated') === 'false') {
       next('/login');
       return;
     }
