@@ -16,12 +16,12 @@
                     <v-row align="center">
 
                       <v-col class="d-flex" cols="4" sm="6">
-                        <v-select solo label="Status do curso" :items="statusCurso" item-text="label" item-value="value" />
+                        <v-select v-model="filterData.tp_situacao_curso" solo label="Status do curso" :items="statusCurso" item-text="label" item-value="value" />
 
                       </v-col>
 
                       <v-col class="d-flex" cols="4" sm="6">
-                        <v-select solo label="Origem do curso" :items="tpOrigemCurso" item-text="label" item-value="value" />
+                        <v-select v-model="filterData.tp_origem_curso" solo label="Origem do curso" :items="tpOrigemCurso" item-text="label" item-value="value" />
                       </v-col>
 
                     </v-row>
@@ -29,15 +29,22 @@
                     <v-row align="center">
                       <v-col class="d-flex" cols="6" sm="8">
                         <v-text-field
+                          v-model="filterData.tx_nome_curso"
                           solo
                           placeholder="Digite o nome do curso"
                         />
                       </v-col>
 
                       <v-col class="d-flex justify-center" cols="6" sm="4">
-                        <v-btn color="primary" dark outlined rounded class="mb-8">
+
+                        <v-btn color="primary" dark outlined rounded class="mb-8 mr-5" @click="filtrar()">
                           <v-icon>mdi-magnify</v-icon>
                           Pesquisar
+                        </v-btn>
+
+                        <v-btn color="primary" dark outlined rounded class="mb-8" @click="limparFiltros()">
+                          <v-icon>mdi-magnify-close</v-icon>
+                          Limpar
                         </v-btn>
                       </v-col>
                     </v-row>
@@ -117,13 +124,21 @@
 
 <script>
   import {getAll} from "@/services/abstract.service";
+  import {filterFormat} from "@/helpers/filterFormat";
 
   export default {
     name: "Curso",
     data: () => ({
+      filterData: {},
       statusCurso: [
-        'ATIVO',
-        'INATIVO'
+        {
+          label: 'ATIVO',
+          value: 'A'
+        },
+        {
+          label: 'INATIVO',
+          value: 'I'
+        },
       ],
       tpOrigemCurso: [
         'MIGRADO',
@@ -165,6 +180,14 @@
         this.pagination = response.data;
         this.data = response.data.data;
         this.loading = false;
+      },
+      async filtrar() {
+        const filters = await filterFormat(this.filterData);
+        await this.getAll('?search=' + filters + '&searchJoin=and');
+      },
+      limparFiltros() {
+        this.filterData = {};
+        this.getAll();
       },
       async editar() {
         console.log('editar');
