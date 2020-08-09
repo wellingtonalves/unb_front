@@ -55,6 +55,19 @@ const routes = [
               ],
             },
           },
+          {
+            path: '/curso/:id/edit',
+            component: () => import('../views/cursos/CursoEdit.vue'),
+            meta: {
+              title: 'Editar curso',
+              requiresAuth: true,
+              breadcrumb: [
+                {text: 'Home', disabled: false, href: '/'},
+                {text: 'Cursos', disabled: false, href: '/cursos'},
+                {text: 'Editar curso', disabled: true, href: '/cursos'},
+              ],
+            },
+          },
         ],
       },
     ],

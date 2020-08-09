@@ -42,7 +42,6 @@
           <v-text-field
             v-model="dataResponse.tx_url_video_curso"
             :error-messages="errorData.tx_url_video_curso"
-            :rules="rules.required"
             outlined
             label="Url do vídeo do curso"
             required />
@@ -55,7 +54,7 @@
           </v-col>
 
           <v-col>
-            <v-switch v-model="dataResponse.bl_destaque_curso" :error-messages="errorData.bl_destaque_curso" :rules="rules.required" 
+            <v-switch v-model="dataResponse.bl_destaque_curso" :error-messages="errorData.bl_destaque_curso" 
                       label="Curso em destaque ?" />
           </v-col>
           
@@ -87,15 +86,15 @@
 </template>
 
 <script>
-  import {getAll} from "@/services/abstract.service";
+  import {get} from "@/services/abstract.service";
   import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
   
   export default {
     name: "CursoForm",
-    props: ['errors'],
+    props: ['data', 'errors'],
     data: () => ({
       validForm: false,
-      dataResponse: {},
+      dataResponse: {} || this.data,
       errorData: {},
       rules: {
         required: [v => !!v || 'Campo obrigatório'],
@@ -124,13 +123,16 @@
       errors: function (val) {
         this.errorData = val;
       },
+      data: function (val) {
+        this.dataResponse = val;
+      }
     },
     mounted() {
       this.getTematicaCurso();
     },
     methods: {
       async getTematicaCurso() {
-        const response = await getAll('/tematica-curso?pagination=false');
+        const response = await get('/tematica-curso?pagination=false');
         this.tematicaCurso = response.data.data;
       },
     }

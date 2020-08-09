@@ -102,7 +102,7 @@
                   <v-row>
                     <v-tooltip bottom>
                       <template v-slot:activator="{ on }">
-                        <v-btn small color="primary" icon @click="editar(item.id_curso)" v-on="on">
+                        <v-btn small color="primary" icon @click="$router.push(`/curso/${item.id_curso}/edit`)" v-on="on">
                           <v-icon>mdi-pencil</v-icon>
                         </v-btn>
                       </template>
@@ -137,7 +137,7 @@
 </template>
 
 <script>
-  import {getAll} from "@/services/abstract.service";
+  import {get} from "@/services/abstract.service";
   import {filterFormat} from "@/helpers/filterFormat";
 
   export default {
@@ -173,39 +173,36 @@
       loading: false,
     }),
     mounted() {
-      this.getAll();
+      this.get();
     },
     watch: {
       options: {
         handler (val) {
           if (val.itemsPerPage == '-1') {
-            this.getAll(`?pagination=false`);
+            this.get(`?pagination=false`);
             return 
           }
           
-          this.getAll(`?per_page=${val.itemsPerPage}&page=${val.page}`);
+          this.get(`?per_page=${val.itemsPerPage}&page=${val.page}`);
         },
         deep: true,
       },
     },
     methods: {
-      async getAll(filter = '') {
+      async get(filter = '') {
         this.loading = true;
-        const response = await getAll('/curso' + filter);
+        const response = await get('/curso' + filter);
         this.pagination = response.data;
         this.data = response.data.data;
         this.loading = false;
       },
       async filtrar() {
         const filters = await filterFormat(this.filterData);
-        await this.getAll('?search=' + filters + '&searchJoin=and');
+        await this.get('?search=' + filters + '&searchJoin=and');
       },
       limparFiltros() {
         this.filterData = {};
-        this.getAll();
-      },
-      async editar() {
-        console.log('editar');
+        this.get();
       },
       async excluir() {
         console.log('detalhar');
