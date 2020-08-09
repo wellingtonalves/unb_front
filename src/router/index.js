@@ -36,6 +36,10 @@ const routes = [
             meta: {
               requiresAuth: true,
               title: 'Curso',
+              breadcrumb: [
+                {text: 'Home', disabled: false, href: '/'},
+                {text: 'Cursos', disabled: true, href: '/cursos'},
+              ],
             },
           },
           {
@@ -44,6 +48,11 @@ const routes = [
             meta: {
               title: 'Cadastrar curso',
               requiresAuth: true,
+              breadcrumb: [
+                {text: 'Home', disabled: false, href: '/'},
+                {text: 'Cursos', disabled: false, href: '/cursos'},
+                {text: 'Cadastrar curso', disabled: true, href: '/cursos'},
+              ],
             },
           },
         ],

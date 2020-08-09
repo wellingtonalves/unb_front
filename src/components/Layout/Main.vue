@@ -2,6 +2,7 @@
   <v-app>
     <AppBar />
     <v-main>
+      <v-breadcrumbs :items="$route.meta.breadcrumb" divider="-" />
       <router-view />
     </v-main>
 
