@@ -191,7 +191,7 @@
     methods: {
       async getAll(filter = '') {
         this.loading = true;
-        const response = await getAll('/cursos' + filter);
+        const response = await getAll('/curso' + filter);
         this.pagination = response.data;
         this.data = response.data.data;
         this.loading = false;

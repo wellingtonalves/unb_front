@@ -1,6 +1,6 @@
 <template>
   <v-container>
-    <v-layout text-center wrap>
+    <v-layout wrap>
       <v-card class="mx-auto" height="100%" width="100%" elevation="10">
         <v-container class="pa-5" fluid>
           <curso-form @update="update" :errors="errors">
@@ -10,7 +10,7 @@
                 Voltar
               </v-btn>
 
-              <v-btn class="mr-4" color="primary" @click="save()" type="submit" :loading="loading">
+              <v-btn class="mr-4" color="primary" :loading="loading" @click="save()">
                 <v-icon class="mr-4">mdi-content-save</v-icon>
                 Salvar
               </v-btn>
@@ -31,6 +31,7 @@
 
 <script>
   import CursoForm from "./CursoForm";
+  import {create} from "@/services/abstract.service";
   export default {
     name: "CursoCreate",
     components: {CursoForm},
@@ -45,14 +46,35 @@
         timeout: 5000
       },
     }),
-    mounted() {
-      // this.getAll();
+    watch: {
+      'snackbar.active': function (val) {
+        if (this.snackbar.color == 'success' && val == false) {
+          this.$router.push('/cursos');
+        }
+      }
     },
-    watch: {},
     methods: {
       update(data) {
         this.data = data;
       },
+      async save() {
+        this.loading = true;
+        const response = await create('curso', this.data)
+
+        this.loading = false;
+        
+        if (response.errors) {
+          this.errors = response.errors;
+          this.snackbar.text = response.message;
+          this.snackbar.color = response.messageType;
+          this.snackbar.active = true;
+          return ;
+        }
+
+        this.snackbar.text = response.data.message;
+        this.snackbar.color = response.data.messageType;
+        this.snackbar.active = true;
+      }
     }
   }
 </script>
