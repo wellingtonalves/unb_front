@@ -68,6 +68,10 @@
                 :server-items-length="pagination.total"
                 :items-per-page="15"
                 :options.sync="options"
+                :single-expand="true"
+                :expanded.sync="expanded"
+                show-expand
+                item-key="id_curso"
                 sort-by="tx_nome_curso"
                 class="elevation-1"
                 no-data-text="Nenhum registro encontrado"
@@ -110,6 +114,10 @@
                   </v-row>
 
                 </template>
+
+                <template v-slot:expanded-item="{ headers, item }">
+                  <td :colspan="headers.length"  v-html="item.tx_conteudo_programatico"></td>
+                </template>
                 
               </v-data-table>
 
@@ -129,6 +137,7 @@
   export default {
     name: "Curso",
     data: () => ({
+      expanded: [],
       filterData: {},
       statusCurso: [
         {
