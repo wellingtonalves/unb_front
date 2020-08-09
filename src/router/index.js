@@ -38,6 +38,14 @@ const routes = [
               title: 'Curso',
             },
           },
+          {
+            path: '/curso/create',
+            component: () => import('../views/cursos/CursoCreate.vue'),
+            meta: {
+              title: 'Cadastrar curso',
+              requiresAuth: true,
+            },
+          },
         ],
       },
     ],

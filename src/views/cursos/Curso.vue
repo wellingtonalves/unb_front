@@ -83,6 +83,12 @@
                     <v-toolbar-title>Lista de usuários</v-toolbar-title>
                     <v-divider class="mx-4" inset vertical></v-divider>
                     <v-spacer></v-spacer>
+
+                    <v-btn color="primary" dark outlined rounded @click="$router.push('/curso/create')">
+                      <v-icon>mdi-plus</v-icon>
+                      Novo
+                    </v-btn>
+                    
                   </v-toolbar>
                 </template>
 
