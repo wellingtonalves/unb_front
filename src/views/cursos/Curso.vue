@@ -111,7 +111,7 @@
 
                     <v-tooltip bottom>
                       <template v-slot:activator="{ on }">
-                        <v-btn small color="error" icon @click="excluir(item.id_curso)" v-on="on">
+                        <v-btn small color="error" icon @click="excluir(item)" v-on="on">
                           <v-icon>mdi-delete</v-icon>
                         </v-btn>
                       </template>
@@ -130,6 +130,27 @@
             </v-card>
           </v-card>
         </v-row>
+
+        <v-row justify="center">
+          <v-dialog v-model="dialogDelete" persistent max-width="500">
+            <v-card>
+              <v-card-title class="headline">Atenção!</v-card-title>
+              <v-card-text>Deseja excluir o registro <strong>{{dialogDeleteData.tx_nome_curso}}</strong> ?</v-card-text>
+              <v-card-actions>
+                <v-spacer></v-spacer>
+                <v-btn color="error" text @click="dialogDelete = false">Cancelar</v-btn>
+                <v-btn color="primary" text @click="excluirItem(dialogDeleteData.id_curso)">Confirmar</v-btn>
+              </v-card-actions>
+            </v-card>
+          </v-dialog>
+        </v-row>
+
+        <v-snackbar v-model="snackbar.active" :color="snackbar.color" :timeout="5000">
+          {{snackbar.text}}
+          <v-btn text @click.stop="snackbar.active = false">
+            Fechar
+          </v-btn>
+        </v-snackbar>
         
       </v-container>
     </v-layout>
@@ -139,6 +160,7 @@
 <script>
   import {get} from "@/services/abstract.service";
   import {filterFormat} from "@/helpers/filterFormat";
+  import {remove} from "../../services/abstract.service";
 
   export default {
     name: "Curso",
@@ -171,6 +193,13 @@
         {text: 'Ações', value: 'action', sortable: false},
       ],
       loading: false,
+      dialogDelete: false,
+      dialogDeleteData: {},
+      snackbar: {
+        active: false,
+        color: '',
+        text: ''
+      }
     }),
     mounted() {
       this.get();
@@ -204,8 +233,19 @@
         this.filterData = {};
         this.get();
       },
-      async excluir() {
-        console.log('detalhar');
+      excluir(item) {
+        this.dialogDeleteData = item;
+        this.dialogDelete = true;
+      },
+      async excluirItem(id) {
+        const response = await remove(`/curso/${id}`);
+        this.dialogDelete = false;
+        
+        this.snackbar.text = response.message;
+        this.snackbar.color = response.messageType;
+        this.snackbar.active = true;
+
+        await this.get();
       }
     }
   }

@@ -21,6 +21,13 @@ export const update = async (url, data) => {
     .catch(error => errorHandler(error));
 };
 
+export const remove = async endpoint => {
+  return await httpClient
+    .delete(endpoint)
+    .then(result => result.data)
+    .catch(error => error.response.data);
+};
+
 function errorHandler(error) {
   const result = {};
   if (error.response.data.errros) {
