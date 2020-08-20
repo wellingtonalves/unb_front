@@ -1,84 +1,135 @@
 <template>
-  <div>
-    <v-app-bar app>
-      <div class="d-flex align-center">
-        <v-img
-          alt="Vuetify Logo"
-          class="shrink mr-2"
-          contain
-          src="@/assets/logo.svg"
-          transition="scale-transition"
-          width="90"
-        />
+  <v-app-bar app>
 
-      </div>
+    <v-container fluid>
+      <v-row>
 
-      <v-spacer/>
+        <v-col cols="1">
 
-      <v-toolbar-title>
-        Secretaria Virtual
-      </v-toolbar-title>
+          <v-img
+            alt="Vuetify Logo"
+            class="shrink mr-2"
+            contain
+            src="@/assets/logo.svg"
+            transition="scale-transition"
+            width="90"
+          />
 
-      <v-spacer/>
+        </v-col>
+        
+        <v-col cols="8">
+          <v-list nav dense flat id="main-nav">
 
-      <v-btn icon title="Notificações">
-        <v-icon>mdi-bell</v-icon>
-      </v-btn>
+            <v-list-item link :to="'https://www.escolavirtual.gov.br/catalogo'">
+              <v-list-item-content>
+                <v-list-item-title>Catálogo</v-list-item-title>
+                <v-list-item-subtitle>de Cursos</v-list-item-subtitle>
+              </v-list-item-content>
+            </v-list-item>
 
-      <v-btn icon @click.stop="$vuetify.theme.dark = !$vuetify.theme.dark" title="Modo Noturno">
-        <v-icon v-if="$vuetify.theme.dark">mdi-invert-colors-off</v-icon>
-        <v-icon v-else>mdi-invert-colors</v-icon>
-      </v-btn>
+            <v-list-item link :to="'https://www.escolavirtual.gov.br/programas'">
+              <v-list-item-content>
+                <v-list-item-title>Catálogo</v-list-item-title>
+                <v-list-item-subtitle>de Programas</v-list-item-subtitle>
+              </v-list-item-content>
+            </v-list-item>
 
-      <v-menu offset-y>
-        <template v-slot:activator="{ on }">
+            <v-list-item link :to="'https://www.escolavirtual.gov.br/conheca-a-escola'">
+              <v-list-item-content>
+                <v-list-item-title>Conheça</v-list-item-title>
+                <v-list-item-subtitle>a Escola</v-list-item-subtitle>
+              </v-list-item-content>
+            </v-list-item>
 
-          <v-btn text v-on="on">
-            <v-icon size="25" color="secondary">mdi-account</v-icon>
-            <div class="d-none d-md-flex align-center">
-              <h6>{{user.pessoa.tx_nome_pessoa}}</h6>
-              <v-icon color="secondary">mdi-chevron-down</v-icon>
-            </div>
+            <v-list-item link :to="'https://www.escolavirtual.gov.br/adesao-institucional'">
+              <v-list-item-content>
+                <v-list-item-title>Adesão </v-list-item-title>
+                <v-list-item-subtitle>Institucional</v-list-item-subtitle>
+              </v-list-item-content>
+            </v-list-item>
+
+            <v-list-item link :to="'https://www.escolavirtual.gov.br/documentos/validacao'">
+              <v-list-item-content>
+                <v-list-item-title>Validação</v-list-item-title>
+                <v-list-item-subtitle>de Documentos</v-list-item-subtitle>
+              </v-list-item-content>
+            </v-list-item>
+
+            <v-list-item link :to="'https://www.escolavirtual.gov.br/perguntas-frequentes'">
+              <v-list-item-content>
+                <v-list-item-title>Perguntas</v-list-item-title>
+                <v-list-item-subtitle>Frequentes</v-list-item-subtitle>
+              </v-list-item-content>
+            </v-list-item>
+
+          </v-list>
+        </v-col>
+
+        <v-col cols="3">
+
+          <v-btn icon title="Notificações">
+            <v-icon>mdi-bell</v-icon>
           </v-btn>
-        </template>
 
-        <v-list nav dense>
+          <v-btn icon @click.stop="$vuetify.theme.dark = !$vuetify.theme.dark" title="Modo Noturno">
+            <v-icon v-if="$vuetify.theme.dark">mdi-invert-colors-off</v-icon>
+            <v-icon v-else>mdi-invert-colors</v-icon>
+          </v-btn>
 
-          <v-divider/>
+          <v-menu offset-y>
+            <template v-slot:activator="{ on }">
 
-          <v-list-item link :to="'/cursos'">
-            <v-list-item-icon>
-              <v-icon>mdi-book-open-page-variant</v-icon>
-            </v-list-item-icon>
-            <v-list-item-content>
-              <v-list-item-title>Cursos</v-list-item-title>
-            </v-list-item-content>
-          </v-list-item>
-          
-          <v-list-item v-for="(item, i) in items" :key="i">
-            <v-list-item-icon>
-              <v-icon v-text="item.icon"></v-icon>
-            </v-list-item-icon>
-            <v-list-item-content>
+              <v-btn text v-on="on">
+                <v-icon size="25" color="secondary">mdi-account</v-icon>
+                <div class="d-none d-md-flex align-center">
+                  <h6>{{user.pessoa.tx_nome_pessoa}}</h6>
+                  <v-icon color="secondary">mdi-chevron-down</v-icon>
+                </div>
+              </v-btn>
+            </template>
 
-              <v-list-item-title v-text="item.text"></v-list-item-title>
-            </v-list-item-content>
-          </v-list-item>
+            <v-list nav dense>
 
-          <v-divider/>
+              <v-divider/>
 
-          <v-list-item @click="logout()">
-            <v-list-item-icon>
-              <v-icon>mdi-logout</v-icon>
-            </v-list-item-icon>
-            <v-list-item-content>
-              <v-list-item-title>Sair</v-list-item-title>
-            </v-list-item-content>
-          </v-list-item>
-        </v-list>
-      </v-menu>
-    </v-app-bar>
-  </div>
+              <v-list-item link :to="'/cursos'">
+                <v-list-item-icon>
+                  <v-icon>mdi-book-open-page-variant</v-icon>
+                </v-list-item-icon>
+                <v-list-item-content>
+                  <v-list-item-title>Cursos</v-list-item-title>
+                </v-list-item-content>
+              </v-list-item>
+              
+              <v-list-item v-for="(item, i) in items" :key="i">
+                <v-list-item-icon>
+                  <v-icon v-text="item.icon"></v-icon>
+                </v-list-item-icon>
+                <v-list-item-content>
+
+                  <v-list-item-title v-text="item.text"></v-list-item-title>
+                </v-list-item-content>
+              </v-list-item>
+
+              <v-divider/>
+
+              <v-list-item @click="logout()">
+                <v-list-item-icon>
+                  <v-icon>mdi-logout</v-icon>
+                </v-list-item-icon>
+                <v-list-item-content>
+                  <v-list-item-title>Sair</v-list-item-title>
+                </v-list-item-content>
+              </v-list-item>
+            </v-list>
+          </v-menu>
+
+        </v-col>
+
+      </v-row>
+    </v-container>
+
+  </v-app-bar>
 </template>
 
 <script>
@@ -110,5 +161,48 @@
 </script>
 
 <style scoped>
-
+  #main-nav {
+    background-color: transparent;
+  }
+  #main-nav a {
+    color: var(--v-black-base);
+    float: left;
+    margin-right: 30px;
+    text-transform: uppercase;
+  }
+  #main-nav .v-list-item__content {
+    display: inline-block;
+    position: relative;
+  }
+  #main-nav .v-list-item__content::after,
+  #main-nav .v-list-item__content::before {
+    background-color: var(--v-primary-base);
+    content: "";
+    height: 2px;
+    min-height: 2px;
+    opacity: 0;
+    position: absolute;
+    left: 0;
+    width: 100%;
+    -webkit-transition: opacity .3s,-webkit-transform .6s;
+    -moz-transition: opacity .3s,-moz-transform .6s;
+    transition: opacity .3s,transform .6s;
+    -webkit-transform: translateY(10px);
+    -moz-transform: translateY(10px);
+    transform: translateY(10px);
+  }
+  #main-nav .v-list-item__content::after {
+    bottom: 10px;
+  }
+  #main-nav .v-list-item__content::before {
+    top: -10px;
+  }
+  #main-nav .v-list-item__content:hover::after,
+  #main-nav .v-list-item__content:hover::before {
+    opacity: 1;
+  }
+  #main-nav .v-list-item__subtitle {
+    color: var(--v-primary-base);
+    font-weight: 600;
+  }
 </style>
