@@ -143,12 +143,6 @@
         {text: 'Alterar e-mail', icon: 'mdi-email'},
         {text: 'Alterar senha', icon: 'mdi-lock'},
       ],
-      menu: [
-        { title: 'Catálogo de Cursos' },
-        { title: 'Catálogo de Programas' },
-        { title: 'Conheça a Escola' },
-        { title: 'Adesão Institucional' },
-      ],
       user: JSON.parse(localStorage.getItem('user'))
     }),
     methods: {
