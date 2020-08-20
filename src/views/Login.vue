@@ -137,7 +137,6 @@
   .form-login {
     margin-top: 8rem;
   }
-
   .region-text {
     color: var(--v-white-base);
     font-size: 1.6rem;
