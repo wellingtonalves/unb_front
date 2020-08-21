@@ -1,5 +1,5 @@
 <template>
-  <v-layout wrap>
+  <v-layout wrap class="align-stretch">
 
     <h2>Cursos</h2>
     
@@ -16,18 +16,18 @@
             <v-row align="center">
 
               <v-col cols="2">
-                <v-select v-model="filterData.tp_situacao_curso" solo label="Status do curso" :items="statusCurso" item-text="label" item-value="value" />
+                <v-select dense v-model="filterData.tp_situacao_curso" label="Status do curso" :items="statusCurso" item-text="label" item-value="value" />
               </v-col>
 
               <v-col cols="2">
-                <v-select v-model="filterData.tp_origem_curso" solo label="Origem do curso" :items="tpOrigemCurso" item-text="label" item-value="value" />
+                <v-select dense v-model="filterData.tp_origem_curso" label="Origem do curso" :items="tpOrigemCurso" item-text="label" item-value="value" />
               </v-col>
 
               <v-col cols="4">
-                <v-text-field
+                <v-text-field dense
                   v-model="filterData.tx_nome_curso"
-                  solo
-                  placeholder="Digite o nome do curso"
+                  label="Nome do curso"
+                  placeholder="Informe o nome do curso"
                 />
               </v-col>
 
@@ -52,7 +52,7 @@
       </v-expansion-panel>
     </v-expansion-panels>
 
-    <v-row class="align-self-stretch">
+    <v-row class="flex-basis-100">
       <v-col cols="12">
         <v-card>
 
@@ -69,8 +69,8 @@
             item-key="id_curso"
             sort-by="tx_nome_curso"
             class="elevation-1"
-            no-data-text="Nenhum registro encontrado"
-            no-results-text="Nenhum registro encontrado"
+            no-data-text="Nenhum registro encontrado."
+            no-results-text="Nenhum registro encontrado."
             loading-text="Aguarde, estamos carregando os dados.">
 
             <template v-slot:top>
@@ -82,7 +82,6 @@
                   <v-icon>mdi-plus</v-icon>
                   Novo
                 </v-btn>
-                
               </v-toolbar>
             </template>
 
@@ -248,6 +247,13 @@
     font-size: 200%;
     padding-bottom: 16px;
     text-transform: uppercase;
+  }
+  .flex-basis-100 {
+    flex-basis: 100%;
+  }
+  .v-expansion-panel::before,
+  .v-sheet.v-card:not(.v-sheet--outlined) {
+    box-shadow: 0 0 10px 3px rgba(0, 0, 0, .075);
   }
 
 </style>
