@@ -10,55 +10,21 @@
 
       </v-col>
       
-<!--       <v-col cols="8">
+      <v-col cols="8">
+
         <v-list nav dense flat id="main-nav">
 
-          <v-list-item link :to="'https://www.escolavirtual.gov.br/catalogo'">
+          <v-list-item v-for="item in menu" :key="item" :href="item.url">
             <v-list-item-content>
-              <v-list-item-title>Catálogo</v-list-item-title>
-              <v-list-item-subtitle>de Cursos</v-list-item-subtitle>
-            </v-list-item-content>
-          </v-list-item>
-
-          <v-list-item link :to="'https://www.escolavirtual.gov.br/programas'">
-            <v-list-item-content>
-              <v-list-item-title>Catálogo</v-list-item-title>
-              <v-list-item-subtitle>de Programas</v-list-item-subtitle>
-            </v-list-item-content>
-          </v-list-item>
-
-          <v-list-item link :to="'https://www.escolavirtual.gov.br/conheca-a-escola'">
-            <v-list-item-content>
-              <v-list-item-title>Conheça</v-list-item-title>
-              <v-list-item-subtitle>a Escola</v-list-item-subtitle>
-            </v-list-item-content>
-          </v-list-item>
-
-          <v-list-item link :to="'https://www.escolavirtual.gov.br/adesao-institucional'">
-            <v-list-item-content>
-              <v-list-item-title>Adesão </v-list-item-title>
-              <v-list-item-subtitle>Institucional</v-list-item-subtitle>
-            </v-list-item-content>
-          </v-list-item>
-
-          <v-list-item link :to="'https://www.escolavirtual.gov.br/documentos/validacao'">
-            <v-list-item-content>
-              <v-list-item-title>Validação</v-list-item-title>
-              <v-list-item-subtitle>de Documentos</v-list-item-subtitle>
-            </v-list-item-content>
-          </v-list-item>
-
-          <v-list-item link :to="'https://www.escolavirtual.gov.br/perguntas-frequentes'">
-            <v-list-item-content>
-              <v-list-item-title>Perguntas</v-list-item-title>
-              <v-list-item-subtitle>Frequentes</v-list-item-subtitle>
+              <v-list-item-title>{{ item.titulo }}</v-list-item-title>
+              <v-list-item-subtitle>{{ item.subtitulo }}</v-list-item-subtitle>
             </v-list-item-content>
           </v-list-item>
 
         </v-list>
-      </v-col> -->
+      </v-col>
 
-      <v-col class="d-flex justify-end" cols="10">
+      <v-col class="d-flex justify-end align-center" cols="2">
 
         <v-btn icon title="Notificações">
           <v-icon>mdi-bell</v-icon>
@@ -72,7 +38,7 @@
         <v-menu offset-y>
           <template v-slot:activator="{ on }">
 
-            <v-btn text v-on="on" id="user-button">
+            <v-btn text v-on="on">
               <v-icon size="25" color="secondary">mdi-account</v-icon>
               <div class="d-none d-md-flex align-center">
                 <h6>{{ user.pessoa.tx_nome_pessoa }}</h6>
@@ -132,6 +98,14 @@
   export default {
     name: "AppBar",
     data: () => ({
+      menu: [
+        {url: 'https://www.escolavirtual.gov.br/catalogo', titulo: 'Catálogo', subtitulo: 'de Cursos'},
+        {url: 'https://www.escolavirtual.gov.br/programas', titulo: 'Catálogo', subtitulo: 'de Programas'},
+        {url: 'https://www.escolavirtual.gov.br/conheca-a-escola', titulo: 'Conheça', subtitulo: 'a Escola'},
+        {url: 'https://www.escolavirtual.gov.br/adesao-institucional', titulo: 'Adesão', subtitulo: 'Institucional'},
+        {url: 'https://www.escolavirtual.gov.br/documentos/validacao', titulo: 'Validação', subtitulo: 'de Documentos'},
+        // {url: 'https://www.escolavirtual.gov.br/perguntas-frequentes', titulo: 'Perguntas', subtitulo: 'Frequentes'},
+      ],
       items: [
         {text: 'Meus dados', icon: 'mdi-home'},
         {text: 'Alterar e-mail', icon: 'mdi-email'},
@@ -161,16 +135,13 @@
     background-repeat: no-repeat;
     background-size: contain;
     display: block;
-    height: 48px;
+    height: 62px;
     text-indent: -9000px;
-    width: 86px;
+    width: 112px;
   }
   header.v-app-bar .container {
     padding-bottom: 0;
     padding-top: 0;
-  }
-  #user-button {
-    margin-top: 6px;
   }
   #main-nav {
     background-color: transparent;
@@ -178,7 +149,7 @@
   #main-nav a {
     color: var(--v-black-base);
     float: left;
-    margin-right: 30px;
+    margin-right: 20px;
     text-transform: uppercase;
   }
   #main-nav .v-list-item__content {
@@ -210,7 +181,7 @@
   }
   #main-nav .v-list-item__content:hover::after,
   #main-nav .v-list-item__content:hover::before {
-    opacity: 1;
+    opacity: .25;
   }
   #main-nav .v-list-item__subtitle {
     color: var(--v-primary-base);
