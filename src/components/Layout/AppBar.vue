@@ -14,7 +14,7 @@
 
         <v-list nav dense flat id="main-nav">
 
-          <v-list-item v-for="item in menu" :key="item" :href="item.url">
+          <v-list-item v-for="item in topMenu" :key="item" :href="item.url">
             <v-list-item-content>
               <v-list-item-title>{{ item.titulo }}</v-list-item-title>
               <v-list-item-subtitle>{{ item.subtitulo }}</v-list-item-subtitle>
@@ -61,7 +61,7 @@
               </v-list-item-content>
             </v-list-item>
             
-            <v-list-item v-for="(item, i) in items" :key="i">
+            <v-list-item v-for="(item, i) in dropdownMenu" :key="i">
               <v-list-item-icon>
                 <v-icon v-text="item.icon"></v-icon>
               </v-list-item-icon>
@@ -98,7 +98,7 @@
   export default {
     name: "AppBar",
     data: () => ({
-      menu: [
+      topMenu: [
         {url: 'https://www.escolavirtual.gov.br/catalogo', titulo: 'Catálogo', subtitulo: 'de Cursos'},
         {url: 'https://www.escolavirtual.gov.br/programas', titulo: 'Catálogo', subtitulo: 'de Programas'},
         {url: 'https://www.escolavirtual.gov.br/conheca-a-escola', titulo: 'Conheça', subtitulo: 'a Escola'},
@@ -106,7 +106,7 @@
         {url: 'https://www.escolavirtual.gov.br/documentos/validacao', titulo: 'Validação', subtitulo: 'de Documentos'},
         // {url: 'https://www.escolavirtual.gov.br/perguntas-frequentes', titulo: 'Perguntas', subtitulo: 'Frequentes'},
       ],
-      items: [
+      dropdownMenu: [
         {text: 'Meus dados', icon: 'mdi-home'},
         {text: 'Alterar e-mail', icon: 'mdi-email'},
         {text: 'Alterar senha', icon: 'mdi-lock'},

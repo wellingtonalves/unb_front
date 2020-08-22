@@ -25,7 +25,7 @@
 
             <h3>Sobre a Escola</h3>
             <v-list dense flat>
-              <v-list-item v-for="item in sobre_escola" :key="item" :href="item.url">
+              <v-list-item v-for="item in sobreEscola" :key="item" :href="item.url">
                 <v-list-item-content>
                   <v-list-item-title>{{ item.text }}</v-list-item-title>
                 </v-list-item-content>
@@ -74,7 +74,7 @@
         {url: 'https://www.instagram.com/enapgovbr/', icon: 'mdi-instagram'},
         {url: 'https://www.facebook.com/enapgovbr/', icon: 'mdi-facebook'},
       ],
-      sobre_escola: [
+      sobreEscola: [
         {url: 'https://www.escolavirtual.gov.br/catalogo', text: 'Catálogo de Cursos'},
         {url: 'https://www.escolavirtual.gov.br/programas', text: 'Catálogo de Programas'},
         {url: 'https://www.escolavirtual.gov.br/conheca-a-escola', text: 'Conheça a Escola'},
