@@ -1,5 +1,5 @@
 const en = {
-  $vuetify: {
+  message: {
     appBar: {
       catalogoCursos: {
         title: 'Catalog',

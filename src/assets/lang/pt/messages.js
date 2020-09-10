@@ -1,5 +1,6 @@
 const pt = {
-  $vuetify: {
+  message: {
+    hello: 'asda',
     appBar: {
       catalogoCursos: {
         title: 'Catálogo',
