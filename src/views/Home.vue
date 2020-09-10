@@ -11,3 +11,13 @@ export default {
   components: {}
 }
 </script>
+
+<style scoped>
+.v-card__actions {
+    padding: 0 32px 32px;
+}
+.v-card__actions .v-icon {
+  font-size: 16px;
+  margin-right: 8px;
+}
+</style>
