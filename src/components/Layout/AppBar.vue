@@ -14,10 +14,38 @@
 
         <v-list nav dense flat id="main-nav">
 
-          <v-list-item v-for="item in topMenu" :key="item" :href="item.url">
+          <v-list-item href="https://www.escolavirtual.gov.br/catalogo">
             <v-list-item-content>
-              <v-list-item-title>{{ item.titulo }}</v-list-item-title>
-              <v-list-item-subtitle>{{ item.subtitulo }}</v-list-item-subtitle>
+              <v-list-item-title>{{ $vuetify.lang.t('$vuetify.appBar.catalogoCursos.title') }}</v-list-item-title>
+              <v-list-item-subtitle>{{ $vuetify.lang.t('$vuetify.appBar.catalogoCursos.subtitle') }}</v-list-item-subtitle>
+            </v-list-item-content>
+          </v-list-item>
+
+          <v-list-item href="https://www.escolavirtual.gov.br/programas">
+            <v-list-item-content>
+              <v-list-item-title>{{ $vuetify.lang.t('$vuetify.appBar.catalogoProgramas.title') }}</v-list-item-title>
+              <v-list-item-subtitle>{{ $vuetify.lang.t('$vuetify.appBar.catalogoProgramas.subtitle') }}</v-list-item-subtitle>
+            </v-list-item-content>
+          </v-list-item>
+
+          <v-list-item href="https://www.escolavirtual.gov.br/conheca-a-escola">
+            <v-list-item-content>
+              <v-list-item-title>{{ $vuetify.lang.t('$vuetify.appBar.conhecaEscola.title') }}</v-list-item-title>
+              <v-list-item-subtitle>{{ $vuetify.lang.t('$vuetify.appBar.conhecaEscola.subtitle') }}</v-list-item-subtitle>
+            </v-list-item-content>
+          </v-list-item>
+
+          <v-list-item href="https://www.escolavirtual.gov.br/adesao-institucional">
+            <v-list-item-content>
+              <v-list-item-title>{{ $vuetify.lang.t('$vuetify.appBar.adesaoInstitucional.title') }}</v-list-item-title>
+              <v-list-item-subtitle>{{ $vuetify.lang.t('$vuetify.appBar.adesaoInstitucional.subtitle') }}</v-list-item-subtitle>
+            </v-list-item-content>
+          </v-list-item>
+
+          <v-list-item href="https://www.escolavirtual.gov.br/validacao">
+            <v-list-item-content>
+              <v-list-item-title>{{ $vuetify.lang.t('$vuetify.appBar.validacaoDocumentos.title') }}</v-list-item-title>
+              <v-list-item-subtitle>{{ $vuetify.lang.t('$vuetify.appBar.validacaoDocumentos.subtitle') }}</v-list-item-subtitle>
             </v-list-item-content>
           </v-list-item>
 
@@ -94,18 +122,9 @@
 
 <script>
   import {logout} from '@/services/auth.service';
-  
   export default {
     name: "AppBar",
     data: () => ({
-      topMenu: [
-        {url: 'https://www.escolavirtual.gov.br/catalogo', titulo: 'Catálogo', subtitulo: 'de Cursos'},
-        {url: 'https://www.escolavirtual.gov.br/programas', titulo: 'Catálogo', subtitulo: 'de Programas'},
-        {url: 'https://www.escolavirtual.gov.br/conheca-a-escola', titulo: 'Conheça', subtitulo: 'a Escola'},
-        {url: 'https://www.escolavirtual.gov.br/adesao-institucional', titulo: 'Adesão', subtitulo: 'Institucional'},
-        {url: 'https://www.escolavirtual.gov.br/documentos/validacao', titulo: 'Validação', subtitulo: 'de Documentos'},
-        // {url: 'https://www.escolavirtual.gov.br/perguntas-frequentes', titulo: 'Perguntas', subtitulo: 'Frequentes'},
-      ],
       dropdownMenu: [
         {text: 'Meus dados', icon: 'mdi-home'},
         {text: 'Alterar e-mail', icon: 'mdi-email'},
