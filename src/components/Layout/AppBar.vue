@@ -62,7 +62,7 @@
             contain
             src="@/assets/img/br-flag.png"
             transition="scale-transition"
-            width="35"
+            width="30"
           />
 
           <v-img
@@ -72,7 +72,7 @@
             contain
             src="@/assets/img/us-flag.png"
             transition="scale-transition"
-            width="35"
+            width="30"
           />
         </v-btn>
         

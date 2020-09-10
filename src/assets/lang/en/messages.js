@@ -22,6 +22,22 @@ const en = {
         subtitle: 'Validation',
       },
     },
+    appFooter: {
+      portalUnico: 'Single Government Portal',
+      solucaoUnica:
+        'A solution for the provision of distance training in the Brazilian public service',
+      sobreEscola: 'About school',
+      catalogoCursos: 'Course Catalog',
+      catalogoProgramas: 'Program Catalog',
+      conhecaEscola: 'Meet the School',
+      adesaoInstitucional: 'Institutional Adherence',
+      instituicoesParticipantes: 'Participating Institutions',
+      politicaPrivacidade: 'Privacy policy',
+      utilidades: 'Utilities',
+      validacaoDocumentos: 'Document Validation',
+      perguntasFrequentes: 'Common questions',
+      organizadoPor: 'Organized by National School of Public Administration',
+    },
   },
 };
 

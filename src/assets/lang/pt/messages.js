@@ -23,6 +23,22 @@ const pt = {
         subtitle: 'de Documentos',
       },
     },
+    appFooter: {
+      portalUnico: 'Portal Único de Governo',
+      solucaoUnica:
+        'Uma solução para a oferta de capacitação a distância no serviço público brasileiro',
+      sobreEscola: 'Sobre a escola',
+      catalogoCursos: 'Catálogo de Cursos',
+      catalogoProgramas: 'Catálogo de Programas',
+      conhecaEscola: 'Conheça a Escola',
+      adesaoInstitucional: 'Adesão Institucional',
+      instituicoesParticipantes: 'Instituições Participantes',
+      politicaPrivacidade: 'Política de Privacidade',
+      utilidades: 'Utilidades',
+      validacaoDocumentos: 'Validação de Documentos',
+      perguntasFrequentes: 'Perguntas Frequentes',
+      organizadoPor: 'Organizado por Escola Nacional de Administração Pública',
+    },
   },
 };
 
