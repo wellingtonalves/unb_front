@@ -47,17 +47,42 @@
             required />
         </v-col>
 
-        <v-col class="d-flex" cols="4" sm="6" style="margin-top: -10px">
-          <v-col>
-            <v-select v-model="dataResponse.tp_origem_curso" :error-messages="errorData.tp_origem_curso" :rules="rules.required"
-                      :items="tpOrigemCurso" outlined label="Origem do curso" item-text="label" item-value="value" />
-          </v-col>
+        <v-col class="d-flex" cols="4" sm="6">
+          <v-select v-model="dataResponse.tp_origem_curso" :error-messages="errorData.tp_origem_curso" :rules="rules.required"
+                    :items="tpOrigemCurso" outlined label="Origem do curso" item-text="label" item-value="value" />
+        </v-col>
+      </v-row>
+      
+      <v-row>
+        
+        <v-col class="d-flex" cols="4" sm="6">
+          <v-menu
+            v-model="calendarPopUp"
+            :close-on-content-click="false"
+            :nudge-right="40"
+            transition="scale-transition"
+            offset-y
+            min-width="290px"
+          >
+            <template v-slot:activator="{ on, attrs }">
+              <v-text-field
+                v-model="computedDateFormatted"
+                :error-messages="errorData.dt_lancamento"
+                outlined
+                label="Data de lançamento"
+                prepend-inner-icon="mdi-calendar"
+                readonly
+                v-bind="attrs"
+                v-on="on"
+              ></v-text-field>
+            </template>
+            <v-date-picker v-model="dataResponse.dt_lancamento" @input="calendarPopUp = false" locale="pt-BR" />
+          </v-menu>
+        </v-col>
 
-          <v-col>
-            <v-switch v-model="dataResponse.bl_destaque_curso" :error-messages="errorData.bl_destaque_curso" 
-                      label="Curso em destaque ?" />
-          </v-col>
-          
+        <v-col>
+          <v-switch v-model="dataResponse.bl_destaque_curso" :error-messages="errorData.bl_destaque_curso"
+                    label="Curso em destaque ?" />
         </v-col>
       </v-row>
 
@@ -92,9 +117,11 @@
   export default {
     name: "CursoForm",
     props: ['data', 'errors'],
-    data: () => ({
+    data: vm => ({
       validForm: false,
-      dataResponse: {} || this.data,
+      dataResponse: {
+        dt_lancamento: new Date().toISOString().substr(0, 10) 
+      } || this.data,
       errorData: {},
       rules: {
         required: [v => !!v || 'Campo obrigatório'],
@@ -115,7 +142,14 @@
       ],
       tematicaCurso: [],
       editor: ClassicEditor,
+      dateFormatted: vm.formatDate(new Date().toISOString().substr(0, 10)),
+      calendarPopUp: false,
     }),
+    computed: {
+      computedDateFormatted () {
+        return this.formatDate(this.dataResponse.dt_lancamento)
+      },
+    },
     watch: {
       dataResponse: function (val) {
         this.$emit('update', val);
@@ -125,7 +159,7 @@
       },
       data: function (val) {
         this.dataResponse = val;
-      }
+      },
     },
     mounted() {
       this.getTematicaCurso();
@@ -135,6 +169,12 @@
         const response = await get('/tematica-curso?pagination=false');
         this.tematicaCurso = response.data.data;
       },
+      formatDate (date) {
+        if (!date) return null
+
+        const [year, month, day] = date.split('-')
+        return `${day}/${month}/${year}`
+      }
     }
   }
 </script>
