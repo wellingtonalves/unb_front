@@ -1,5 +1,5 @@
 <template>
-  <v-footer app absolute="false" class="justify-center">
+  <v-footer app :absolute="false" class="justify-center">
 
     <v-container>
       <v-layout class="flex-column">
@@ -11,7 +11,7 @@
 
             <v-btn
               v-for="icon in icons"
-              :key="icon"
+              :key="icon.id"
               class="mx-3 white--text"
               icon
               :href="icon.url"
@@ -106,10 +106,10 @@
       environment: process.env.VUE_APP_AMBIENTE,
       version: packageJson.version,
       icons: [
-        {url: 'https://www.youtube.com/channel/UCksexEveRkoez2kiEjaKZxQ', icon: 'mdi-youtube'},
-        {url: 'https://twitter.com/enapgovbr', icon: 'mdi-twitter'},
-        {url: 'https://www.instagram.com/enapgovbr/', icon: 'mdi-instagram'},
-        {url: 'https://www.facebook.com/enapgovbr/', icon: 'mdi-facebook'},
+        {id: 1,url: 'https://www.youtube.com/channel/UCksexEveRkoez2kiEjaKZxQ', icon: 'mdi-youtube'},
+        {id: 2,url: 'https://twitter.com/enapgovbr', icon: 'mdi-twitter'},
+        {id: 3,url: 'https://www.instagram.com/enapgovbr/', icon: 'mdi-instagram'},
+        {id: 4,url: 'https://www.facebook.com/enapgovbr/', icon: 'mdi-facebook'},
       ],
     })
   }
