@@ -1,5 +1,5 @@
 <template>
-  <v-footer app :absolute="false" class="justify-center">
+  <v-footer :absolute="false" class="justify-center">
 
     <v-container>
       <v-layout class="flex-column">
