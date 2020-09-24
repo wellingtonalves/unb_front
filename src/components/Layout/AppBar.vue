@@ -256,9 +256,15 @@
     text-indent: -9000px;
     width: 112px;
   }
+  header.v-app-bar {
+    height: auto !important;
+  }
   header.v-app-bar .container {
     padding-bottom: 0;
     padding-top: 0;
+  }
+  nav.v-navigation-drawer {
+    top: 94px !important;
   }
   #main-nav {
     background-color: transparent;

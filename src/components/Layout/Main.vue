@@ -2,13 +2,16 @@
   <v-app>
     <AppBar />
     <v-main>
+      
       <v-container>
         <v-breadcrumbs :items="$route.meta.breadcrumb" divider="→" />
         <router-view />
       </v-container>
-    </v-main>
 
-    <AppFooter />
+      <AppFooter />
+
+    </v-main>
+    
   </v-app>
 </template>
 
