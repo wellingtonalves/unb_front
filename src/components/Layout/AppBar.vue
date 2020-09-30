@@ -21,7 +21,7 @@
           </v-list-item-content>
         </v-list-item>
 
-        <v-list-item link :to="'cursos/'" v-show="permission('CURSO_LISTAR')">
+        <v-list-item link :to="'/cursos/'" v-show="permission('CURSO_LISTAR')">
           <v-list-item-action>
             <v-icon>mdi-book-open-page-variant</v-icon>
           </v-list-item-action>
@@ -30,7 +30,7 @@
           </v-list-item-content>
         </v-list-item>
 
-        <v-list-item link :to="'ava/'" v-show="permission('APOIO_UPLOAD')">
+        <v-list-item link :to="'/ava/'" v-show="permission('APOIO_UPLOAD')">
           <v-list-item-action>
             <v-icon>mdi-school-outline</v-icon>
           </v-list-item-action>
