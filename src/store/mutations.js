@@ -14,10 +14,21 @@ const mutations = {
     localStorage.setItem('isAuthenticated', 'false');
     localStorage.removeItem('token');
     localStorage.removeItem('user');
+    localStorage.removeItem('userRole');
   },
   UPDATE_USER_DATA(state, data) {
+    const permissoes = data.perfil.permissao.map(value => {
+      let {tx_nome_permissao} = value;
+      return tx_nome_permissao;
+    });
+
+    delete data.perfil;
+
     state.user = data;
     localStorage.setItem('user', JSON.stringify(data));
+
+    state.userRole = permissoes;
+    localStorage.setItem('userRole', JSON.stringify(permissoes));
   },
 };
 

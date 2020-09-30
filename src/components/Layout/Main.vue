@@ -2,13 +2,15 @@
   <v-app>
     <AppBar />
     <v-main>
+      
       <v-container>
         <v-breadcrumbs :items="$route.meta.breadcrumb" divider="→" />
         <router-view />
+        <AppFooter />
       </v-container>
-    </v-main>
 
-    <AppFooter />
+    </v-main>
+    
   </v-app>
 </template>
 
@@ -43,11 +45,16 @@
   }
   main.v-main {
     background-color: var(--v-lightgrey-base);
-    padding-top: 82px !important;
+    padding-top: 94px !important;
   }
   .v-breadcrumbs {
     padding-bottom: 0;
     padding-left: 0;
     padding-right: 0;
+  }
+  @media (min-width: 1264px) {
+    .v-main__wrap > .container {
+      /*max-width: 900px;*/
+    }
   }
 </style>
