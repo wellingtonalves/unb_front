@@ -111,6 +111,15 @@
                 <v-list-item-title>Cursos</v-list-item-title>
               </v-list-item-content>
             </v-list-item>
+
+            <v-list-item link :to="'/ava'">
+              <v-list-item-icon>
+                <v-icon>mdi-book-open-page-variant</v-icon>
+              </v-list-item-icon>
+              <v-list-item-content>
+                <v-list-item-title>AVA</v-list-item-title>
+              </v-list-item-content>
+            </v-list-item>
             
             <v-list-item v-for="(item, i) in dropdownMenu" :key="i">
               <v-list-item-icon>
