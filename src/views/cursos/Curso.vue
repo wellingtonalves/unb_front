@@ -1,5 +1,5 @@
 <template>
-  <v-layout wrap class="align-stretch">
+  <v-layout wrap>
 
     <h2>Cursos</h2>
     

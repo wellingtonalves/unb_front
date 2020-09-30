@@ -26,7 +26,7 @@
             <v-icon>mdi-book-open-page-variant</v-icon>
           </v-list-item-action>
           <v-list-item-content>
-            <v-list-item-title>Curso</v-list-item-title>
+            <v-list-item-title>Cursos</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
 
@@ -125,28 +125,27 @@
 
           <v-col class="d-flex justify-end align-center" cols="2">
 
-            <v-btn icon  title="Modo Noturno" @click="switchLocale()">
+            <v-btn icon  title="Alterar idioma" @click="switchLocale()">
               <v-img
                 v-if="this.$i18n.locale === 'pt'"
-                alt="Vuetify Logo"
-                class="shrink mr-2"
+                alt="Idioma Português Brasileiro"
+                class="shrink"
                 contain
                 src="@/assets/img/br-flag.png"
                 transition="scale-transition"
-                width="30"
+                width="24"
               />
 
               <v-img
                 v-else
-                alt="Vuetify Logo"
-                class="shrink mr-2"
+                alt="Idioma Inglês (EUA)"
+                class="shrink"
                 contain
                 src="@/assets/img/us-flag.png"
                 transition="scale-transition"
-                width="30"
+                width="24"
               />
             </v-btn>
-
 
             <v-btn icon title="Notificações">
               <v-icon>mdi-bell</v-icon>
@@ -245,6 +244,21 @@
   }
 </script>
 
+<style>
+  nav.v-navigation-drawer .v-list-item__action,
+  nav.v-navigation-drawer .v-list-item__icon {
+    margin: 8px 0;
+    margin-right: 8px !important;
+  }
+  nav.v-navigation-drawer .v-list-item__action .v-icon.v-icon,
+  nav.v-navigation-drawer .v-list-group .v-list-item__action .v-icon.v-icon {
+    font-size: 18px;
+  }
+  nav.v-navigation-drawer .v-list-group__items .v-list-item {
+    padding: 0 32px;
+  }
+</style>
+
 <style scoped>
   h1 a {
     background-image: url(../../assets/logo.svg);
@@ -263,8 +277,18 @@
     padding-bottom: 0;
     padding-top: 0;
   }
+  header.v-app-bar button.v-app-bar__nav-icon {
+    opacity: 0.75;
+    position: absolute;
+  }
   nav.v-navigation-drawer {
     top: 94px !important;
+  }
+  nav.v-navigation-drawer .v-list > .v-list-item:not(:last-child) {
+    border-bottom: 1px solid var(--v-lightgrey-base);
+  }
+  nav.v-navigation-drawer .v-list-item__title {
+    font-size: .85rem;
   }
   #main-nav {
     background-color: transparent;
@@ -309,5 +333,10 @@
   #main-nav .v-list-item__subtitle {
     color: var(--v-primary-base);
     font-weight: 600;
+  }
+  @media (min-width: 1264px) {
+    .v-main__wrap > .container {
+      max-width: 900px;
+    }
   }
 </style>
