@@ -70,6 +70,51 @@ const routes = [
           },
         ],
       },
+      {
+        path: '/ava',
+        component: () => import('../components/Layout/RouterViewComponent.vue'),
+        children: [
+          {
+            path: '',
+            name: 'ava',
+            component: () => import('../views/ava/Ava.vue'),
+            meta: {
+              requiresAuth: true,
+              title: 'Ava',
+              breadcrumb: [
+                {text: 'Home', disabled: false, href: '/'},
+                {text: 'Ava', disabled: true, href: '/ava'},
+              ],
+            },
+          },
+          {
+            path: '/ava/create',
+            component: () => import('../views/ava/AvaCreate.vue'),
+            meta: {
+              title: 'Cadastrar AVA',
+              requiresAuth: true,
+              breadcrumb: [
+                {text: 'Home', disabled: false, href: '/'},
+                {text: 'Ava', disabled: false, href: '/ava'},
+                {text: 'Cadastrar AVA', disabled: true, href: '/ava'},
+              ],
+            },
+          },
+          {
+            path: '/ava/:id/edit',
+            component: () => import('../views/ava/AvaEdit.vue'),
+            meta: {
+              title: 'Editar AVA',
+              requiresAuth: true,
+              breadcrumb: [
+                {text: 'Home', disabled: false, href: '/'},
+                {text: 'AVA', disabled: false, href: '/ava'},
+                {text: 'Editar AVA', disabled: true, href: '/ava'},
+              ],
+            },
+          },
+        ],
+      },
     ],
   },
 ];
