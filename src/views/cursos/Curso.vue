@@ -1,8 +1,6 @@
 <template>
   <v-layout wrap>
 
-    <h2>Cursos</h2>
-    
     <v-expansion-panels :value="0">
       <v-expansion-panel>
 
@@ -241,13 +239,7 @@
 </script>
 
 <style scoped>
-
-  h2 {
-    color: var(--v-primary-base);
-    font-size: 200%;
-    padding-bottom: 16px;
-    text-transform: uppercase;
-  }
+  
   .flex-basis-100 {
     flex-basis: 100%;
   }

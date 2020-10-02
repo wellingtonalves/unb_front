@@ -5,6 +5,7 @@
       
       <v-container>
         <v-breadcrumbs :items="$route.meta.breadcrumb" divider="→" />
+        <h2>{{this.$route.meta.title}}</h2>
         <router-view />
         <AppFooter />
       </v-container>
@@ -35,6 +36,14 @@
 </style>
 
 <style scoped>
+  
+  h2 {
+    color: var(--v-primary-base);
+    font-size: 200%;
+    padding-bottom: 16px;
+    text-transform: uppercase;
+  }
+  
   header.v-app-bar {
     background-color: var(--v-white-base) !important;
     box-shadow: 0 0 10px 0 rgba(55,71,79,.1) !important;
