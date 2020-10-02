@@ -1,6 +1,6 @@
 <template>
 
-  <div>
+  <v-layout>
     
     <v-navigation-drawer
       v-model="drawerSettings.model"
@@ -30,7 +30,7 @@
           </v-list-item-content>
         </v-list-item>
 
-        <v-list-item link :to="'/ava/'" v-show="permission('APOIO_UPLOAD')">
+        <v-list-item link :to="'/ava/'" v-show="permission('AVA_LISTAR')">
           <v-list-item-action>
             <v-icon>mdi-school-outline</v-icon>
           </v-list-item-action>
@@ -39,13 +39,13 @@
           </v-list-item-content>
         </v-list-item>
 
-        <v-list-group prepend-icon="mdi-account-settings" value="true" v-show="(permission('USUARIO_PESQUISAR') || permission('PERFIL_PESQUISAR'))">
+        <v-list-group prepend-icon="mdi-account-settings" value="true" v-show="(permission('USUARIO_LISTAR') || permission('PERFIL_LISTAR'))">
 
           <template v-slot:activator>
             <v-list-item-title>Controle de acessos</v-list-item-title>
           </template>
 
-          <v-list-item link :to="'/usuario'" v-show="permission('USUARIO_PESQUISAR')">
+          <v-list-item link :to="'/usuario'" v-show="permission('USUARIO_LISTAR')">
             <v-list-item-action style="padding-left: 14px;">
               <v-icon>mdi-account-plus</v-icon>
             </v-list-item-action>
@@ -54,7 +54,7 @@
             </v-list-item-content>
           </v-list-item>
 
-          <v-list-item link :to="'/perfil'" v-show="permission('PERFIL_PESQUISAR')">
+          <v-list-item link :to="'/perfil'" v-show="permission('PERFIL_LISTAR')">
             <v-list-item-action style="padding-left: 14px;">
               <v-icon>mdi-account</v-icon>
             </v-list-item-action>
@@ -201,7 +201,7 @@
       </v-container>
     </v-app-bar>
     
-  </div>
+  </v-layout>
   
 </template>
 
