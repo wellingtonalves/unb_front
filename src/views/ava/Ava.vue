@@ -1,5 +1,5 @@
 <template>
-  <v-layout wrap class="align-stretch">
+  <v-layout v-show="permission('AVA_LISTAR')" wrap class="align-stretch">
 
     <h2>AVA</h2>
     
@@ -43,7 +43,7 @@
 
               <v-col class="d-flex justify-end" cols="4">
 
-                <v-btn color="primary" dark outlined rounded class="mb-8 mr-5" @click="filtrar()">
+                <v-btn v-show="permission('AVA_LISTAR')" color="primary" dark outlined rounded class="mb-8 mr-5" @click="filtrar()">
                   <v-icon>mdi-magnify</v-icon>
                   Pesquisar
                 </v-btn>
@@ -87,7 +87,7 @@
                 <v-toolbar-title>Listagem de AVA</v-toolbar-title>
                 <v-spacer></v-spacer>
 
-                <v-btn color="primary" dark outlined rounded @click="$router.push('/ava/create')">
+                <v-btn v-show="permission('AVA_INCLUIR')" color="primary" dark outlined rounded @click="$router.push('/ava/create')">
                   <v-icon>mdi-plus</v-icon>
                   Novo
                 </v-btn>
@@ -103,7 +103,7 @@
 
               <v-tooltip bottom>
                 <template v-slot:activator="{ on }">
-                  <v-btn small color="primary" icon @click="$router.push(`/ava/${item.id_ava}/edit`)" v-on="on">
+                  <v-btn v-show="permission('AVA_EDITAR')" small color="primary" icon @click="$router.push(`/ava/${item.id_ava}/edit`)" v-on="on">
                     <v-icon>mdi-pencil</v-icon>
                   </v-btn>
                 </template>
@@ -112,7 +112,7 @@
 
               <v-tooltip bottom>
                 <template v-slot:activator="{ on }">
-                  <v-btn small color="error" icon @click="excluir(item)" v-on="on">
+                  <v-btn v-show="permission('AVA_EXCLUIR')" small color="error" icon @click="excluir(item)" v-on="on">
                     <v-icon>mdi-delete</v-icon>
                   </v-btn>
                 </template>
@@ -155,6 +155,7 @@
   import {get} from "@/services/abstract.service";
   import {filterFormat} from "@/helpers/filterFormat";
   import {remove} from "../../services/abstract.service";
+  import {checkPermission} from "@/helpers/checkPermission";
 
   export default {
     name: "Ava",
@@ -241,7 +242,10 @@
         this.snackbar.active = true;
 
         await this.get();
-      }
+      },
+      permission(rule) {
+        return checkPermission(rule);
+      },
     }
   }
 </script>
