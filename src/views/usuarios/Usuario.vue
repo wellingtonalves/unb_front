@@ -155,7 +155,7 @@
   import removeMask from "../../helpers/removeMask";
 
   export default {
-    name: "Usuários",
+    name: "Usuario",
     directives: {mask},
     mixins: [inputMask],
     data: () => ({
