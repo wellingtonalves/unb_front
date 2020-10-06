@@ -13,11 +13,11 @@
           <v-form ref="form" lazy-validation>
             <v-row align="center">
 
-              <v-col cols="2">
+              <v-col>
                 <v-select dense v-model="filterData.tp_situacao_curso" label="Status do curso" :items="statusCurso" item-text="label" item-value="value" />
               </v-col>
 
-              <v-col cols="2">
+              <v-col>
                 <v-select dense v-model="filterData.tp_origem_curso" label="Origem do curso" :items="tpOrigemCurso" item-text="label" item-value="value" />
               </v-col>
 
@@ -237,15 +237,3 @@
     }
   }
 </script>
-
-<style scoped>
-  
-  .flex-basis-100 {
-    flex-basis: 100%;
-  }
-  .v-expansion-panel::before,
-  .v-sheet.v-card:not(.v-sheet--outlined) {
-    box-shadow: 0 0 10px 3px rgba(0, 0, 0, .075);
-  }
-
-</style>

@@ -13,16 +13,14 @@
           <v-form ref="form" lazy-validation>
             <v-row align="center">
 
-              <v-col cols="2">
+              <v-col>
                 <v-select dense v-model="filterData.tp_situacao_ava" label="Status do AVA" :items="statusAva" item-text="label" item-value="value" />
               </v-col>
 
-              <v-col cols="2">
+              <v-col>
                 <v-select dense v-model="filterData.tp_ava" label="Tipo de AVA" :items="tipoAva" item-text="label" item-value="value" />
               </v-col>
 
-            </v-row>
-            <v-row align="center">
               <v-col cols="4">
                 <v-text-field dense
                   v-model="filterData.tx_nome_ava"
@@ -243,15 +241,3 @@
     }
   }
 </script>
-
-<style scoped>
-  
-  .flex-basis-100 {
-    flex-basis: 100%;
-  }
-  .v-expansion-panel::before,
-  .v-sheet.v-card:not(.v-sheet--outlined) {
-    box-shadow: 0 0 10px 3px rgba(0, 0, 0, .075);
-  }
-
-</style>
