@@ -1,20 +1,19 @@
 <template>
-  
   <v-layout wrap>
 
     <h2>Cadastrar Curso</h2>
 
-    <v-card class="mx-auto" height="100%" width="100%" elevation="10">
+    <v-card width="100%" elevation="10">
       <v-container class="pa-5" fluid>
         <curso-form @update="update" :errors="errors">
           <template v-slot:buttons>
             <v-btn class="mr-4" @click="$router.push('/cursos')">
-              <v-icon style="padding-right: 10px">mdi-backup-restore</v-icon>
+              <v-icon class="mr-2">mdi-backup-restore</v-icon>
               Voltar
             </v-btn>
 
             <v-btn class="mr-4" color="primary" :loading="loading" @click="save()">
-              <v-icon class="mr-4">mdi-content-save</v-icon>
+              <v-icon class="mr-2">mdi-content-save</v-icon>
               Salvar
             </v-btn>
           </template>
@@ -28,8 +27,8 @@
         </v-snackbar>
       </v-container>
     </v-card>
+
   </v-layout>
-  
 </template>
 
 <script>
@@ -81,7 +80,3 @@
     }
   }
 </script>
-
-<style scoped>
-
-</style>

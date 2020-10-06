@@ -16,7 +16,7 @@
       </v-row>
       <v-row>
 
-        <v-col class="d-flex" cols="4" sm="6">
+        <v-col class="d-flex">
           <v-text-field
             v-model="dataResponse.tx_nome_ava"
             :error-messages="errorData.tx_nome_ava"
@@ -134,7 +134,3 @@
     }
   }
 </script>
-
-<style scoped>
-
-</style>

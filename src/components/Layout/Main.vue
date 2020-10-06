@@ -27,13 +27,6 @@
   };
 </script>
 
-<style>
-  /* TODO Este código deve ser renderizado em todas as telas do ambiente */
-  header.v-app-bar > .v-toolbar__content {
-    height: auto !important; 
-  }
-</style>
-
 <style scoped>
   header.v-app-bar {
     background-color: var(--v-white-base) !important;

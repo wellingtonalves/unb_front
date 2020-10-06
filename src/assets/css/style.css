@@ -1,0 +1,17 @@
+
+header.v-app-bar > .v-toolbar__content {
+	height: auto !important; 
+}
+h2 {
+  color: var(--v-primary-base);
+  font-size: 200%;
+  padding-bottom: 16px;
+  text-transform: uppercase;
+}
+.flex-basis-100 {
+  flex-basis: 100% !important;
+}
+.v-expansion-panel::before,
+.v-sheet.v-card:not(.v-sheet--outlined) {
+  box-shadow: 0 0 10px 3px rgba(0, 0, 0, .075);
+}
