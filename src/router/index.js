@@ -115,6 +115,51 @@ const routes = [
           },
         ],
       },
+      {
+        path: '/usuarios',
+        component: () => import('../components/Layout/RouterViewComponent.vue'),
+        children: [
+          {
+            path: '',
+            name: 'usuario',
+            component: () => import('../views/usuarios/Usuario.vue'),
+            meta: {
+              requiresAuth: true,
+              title: 'Usuario',
+              breadcrumb: [
+                {text: 'Home', disabled: false, href: '/'},
+                {text: 'Usuarios', disabled: true, href: '/usuarios'},
+              ],
+            },
+          },
+          {
+            path: '/usuario/create',
+            component: () => import('../views/usuarios/UsuarioCreate.vue'),
+            meta: {
+              title: 'Cadastrar usuario',
+              requiresAuth: true,
+              breadcrumb: [
+                {text: 'Home', disabled: false, href: '/'},
+                {text: 'Usuarios', disabled: false, href: '/usuarios'},
+                {text: 'Cadastrar usuario', disabled: true, href: '/usuarios'},
+              ],
+            },
+          },
+          {
+            path: '/usuario/:id/edit',
+            component: () => import('../views/usuarios/UsuarioEdit.vue'),
+            meta: {
+              title: 'Editar usuario',
+              requiresAuth: true,
+              breadcrumb: [
+                {text: 'Home', disabled: false, href: '/'},
+                {text: 'Usuarios', disabled: false, href: '/usuarios'},
+                {text: 'Editar usuario', disabled: true, href: '/usuarios'},
+              ],
+            },
+          },
+        ],
+      },
     ],
   },
 ];

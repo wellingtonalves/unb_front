@@ -45,7 +45,7 @@
             <v-list-item-title>Controle de acessos</v-list-item-title>
           </template>
 
-          <v-list-item link :to="'/usuario'" v-show="permission('USUARIO_LISTAR')">
+          <v-list-item link :to="'/usuarios'" v-show="permission('USUARIO_LISTAR')">
             <v-list-item-action style="padding-left: 14px;">
               <v-icon>mdi-account-plus</v-icon>
             </v-list-item-action>

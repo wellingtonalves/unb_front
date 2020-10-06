@@ -1,8 +1,6 @@
 <template>
   <v-layout wrap class="align-stretch">
 
-    <h2>AVA</h2>
-    
     <v-expansion-panels :value="0">
       <v-expansion-panel>
 
