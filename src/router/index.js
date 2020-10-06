@@ -125,10 +125,10 @@ const routes = [
             component: () => import('../views/usuarios/Usuario.vue'),
             meta: {
               requiresAuth: true,
-              title: 'Usuario',
+              title: 'Usuários',
               breadcrumb: [
                 {text: 'Home', disabled: false, href: '/'},
-                {text: 'Usuarios', disabled: true, href: '/usuarios'},
+                {text: 'Usuários', disabled: true, href: '/usuarios'},
               ],
             },
           },
@@ -136,12 +136,12 @@ const routes = [
             path: '/usuario/create',
             component: () => import('../views/usuarios/UsuarioCreate.vue'),
             meta: {
-              title: 'Cadastrar usuario',
+              title: 'Cadastrar usuário',
               requiresAuth: true,
               breadcrumb: [
                 {text: 'Home', disabled: false, href: '/'},
-                {text: 'Usuarios', disabled: false, href: '/usuarios'},
-                {text: 'Cadastrar usuario', disabled: true, href: '/usuarios'},
+                {text: 'Usuários', disabled: false, href: '/usuarios'},
+                {text: 'Cadastrar usuário', disabled: true, href: '/usuarios'},
               ],
             },
           },
@@ -149,12 +149,12 @@ const routes = [
             path: '/usuario/:id/edit',
             component: () => import('../views/usuarios/UsuarioEdit.vue'),
             meta: {
-              title: 'Editar usuario',
+              title: 'Editar usuário',
               requiresAuth: true,
               breadcrumb: [
                 {text: 'Home', disabled: false, href: '/'},
-                {text: 'Usuarios', disabled: false, href: '/usuarios'},
-                {text: 'Editar usuario', disabled: true, href: '/usuarios'},
+                {text: 'Usuários', disabled: false, href: '/usuarios'},
+                {text: 'Editar usuário', disabled: true, href: '/usuarios'},
               ],
             },
           },

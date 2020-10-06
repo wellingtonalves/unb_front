@@ -13,28 +13,25 @@
           <v-form ref="form" lazy-validation>
             <v-row align="center">
 
-              <v-col cols="6">
+              <v-col cols="2">
                 <v-text-field dense
                               v-model="filterData.tx_email_pessoa"
                               label="E-mail"
                 />
               </v-col>
 
-              <v-col cols="6">
+              <v-col cols="2">
                 <v-text-field dense
                               v-model="filterData.tx_nome_pessoa"
                               label="Nome"
                 />
               </v-col>
               
-            </v-row>
-
-            <v-row align="center">
-              <v-col cols="4">
+              <v-col>
                 <v-select dense v-model="filterData.id_perfil" label="Perfil" :items="perfil" item-text="tx_nome_perfil" item-value="id_perfil" />
               </v-col>
 
-              <v-col cols="4">
+              <v-col cols="2">
                 <v-text-field dense
                               v-model="filterData.nr_cpf"
                               label="CPF"
@@ -158,7 +155,7 @@
   import removeMask from "../../helpers/removeMask";
 
   export default {
-    name: "Usuario",
+    name: "Usuários",
     directives: {mask},
     mixins: [inputMask],
     data: () => ({
@@ -255,21 +252,3 @@
     }
   }
 </script>
-
-<style scoped>
-
-  h2 {
-    color: var(--v-primary-base);
-    font-size: 200%;
-    padding-bottom: 16px;
-    text-transform: uppercase;
-  }
-  .flex-basis-100 {
-    flex-basis: 100%;
-  }
-  .v-expansion-panel::before,
-  .v-sheet.v-card:not(.v-sheet--outlined) {
-    box-shadow: 0 0 10px 3px rgba(0, 0, 0, .075);
-  }
-
-</style>
