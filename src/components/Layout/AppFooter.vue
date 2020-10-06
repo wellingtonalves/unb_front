@@ -4,7 +4,7 @@
     <v-layout class="flex-column">
 
       <v-row>
-        <v-col cols="4">
+        <v-col cols="4" class="mr-8">
           <h2>EV.G | {{ $t('message.appFooter.portalUnico') }}</h2>
           <p class="subtitulo">{{ $t('message.appFooter.solucaoUnica') }}.</p>
 
@@ -128,6 +128,8 @@ footer h2 {
   font-size: 115%;
   font-weight: 600;
   margin-bottom: 8px;
+  padding-bottom: 0;
+  text-transform: none;
 }
 footer .subtitulo {
   line-height: 1.4em;

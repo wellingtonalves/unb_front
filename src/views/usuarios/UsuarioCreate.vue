@@ -7,12 +7,12 @@
         <usuario-form @update="update" :errors="errors">
           <template v-slot:buttons>
             <v-btn class="mr-4" @click="$router.push('/usuarios')">
-              <v-icon style="padding-right: 10px">mdi-backup-restore</v-icon>
+              <v-icon class="mr-2">mdi-backup-restore</v-icon>
               Voltar
             </v-btn>
 
             <v-btn class="mr-4" color="primary" :loading="loading" @click="save()">
-              <v-icon class="mr-4">mdi-content-save</v-icon>
+              <v-icon class="mr-2">mdi-content-save</v-icon>
               Salvar
             </v-btn>
           </template>
