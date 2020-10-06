@@ -4,35 +4,29 @@
       <v-row>
         <v-col class="d-flex" cols="4" sm="6">
           <v-text-field
-            v-model="dataResponse.tx_nome_curso"
-            :error-messages="errorData.tx_nome_curso"
+            v-model="dataResponse.tx_login_usuario"
+            :error-messages="errorData.tx_login_usuario"
             :rules="rules.required"
             outlined
-            label="Nome do Curso"
+            label="Login"
             required />
         </v-col>
         
         <v-col class="d-flex" cols="4" sm="6">
-          <v-text-field
-            v-model="dataResponse.qt_carga_horaria_minima"
-            :error-messages="errorData.qt_carga_horaria_minima"
-            :rules="rules.required"
-            outlined
-            type="number"
-            label="Carga horária mínima"
-            required />
+          <v-select v-model="dataResponse.id_situacao_usuario" :error-messages="errorData.id_situacao_usuario" :rules="rules.required"
+                    outlined label="Situação" :items="situacaoUsuario" item-text="tx_nome_situacao_usuario" item-value="id_situacao_usuario" />
         </v-col>
       </v-row>
 
       <v-row>
         <v-col class="d-flex" cols="4" sm="6">
-          <v-select v-model="dataResponse.tp_situacao_curso" :error-messages="errorData.tp_situacao_curso" :rules="rules.required"
-                    outlined label="Status do curso" :items="statusCurso" item-text="label" item-value="value" />
+          <v-select v-model="dataResponse.id_perfil" :error-messages="errorData.tp_situacao_curso" :rules="rules.required"
+                    outlined label="Perfil" :items="perfil" item-text="tx_nome_perfil" item-value="id_perfil" />
         </v-col>
 
         <v-col class="d-flex" cols="4" sm="6">
-          <v-select v-model="dataResponse.id_tematica_curso" :error-messages="errorData.id_tematica_curso" :rules="rules.required" 
-                    outlined label="Temática curso" :items="tematicaCurso" item-text="tx_nome_tematica_curso" item-value="id_tematica_curso" />
+          <v-select v-model="dataResponse.tp_sexo" :error-messages="errorData.tp_sexo" :rules="rules.required" 
+                    outlined label="Sexo" :items="tpSexo" item-text="label" item-value="value" />
         </v-col>
         
       </v-row>
@@ -126,15 +120,17 @@
       rules: {
         required: [v => !!v || 'Campo obrigatório'],
       },
-      statusCurso: [
+      situacaoUsuario: [],
+      perfil: [],
+      tpSexo: [
         {
-          label: 'ATIVO',
-          value: 'A'
+          label: 'Masculino',
+          value: 'M'
         },
         {
-          label: 'INATIVO',
-          value: 'I'
-        },
+          label: 'Feminino',
+          value: 'F'
+        }
       ],
       tpOrigemCurso: [
         'MIGRADO',
@@ -163,11 +159,21 @@
     },
     mounted() {
       this.getTematicaCurso();
+      this.getSituacaoUsuario();
+      this.getPerfil();
     },
     methods: {
       async getTematicaCurso() {
         const response = await get('/tematica-curso?pagination=false');
         this.tematicaCurso = response.data.data;
+      },
+      async getSituacaoUsuario() {
+        const response = await get('/situacao-usuario?pagination=false');
+        this.situacaoUsuario = response.data.data;
+      },
+      async getPerfil() {
+        const response = await get('/perfil?pagination=false');
+        this.perfil = response.data.data;
       },
       formatDate (date) {
         if (!date) return null

@@ -4,7 +4,7 @@
 
     <v-card class="mx-auto" height="100%" width="100%" elevation="10">
       <v-container class="pa-5" fluid>
-        <curso-form @update="update" :errors="errors">
+        <usuario-form @update="update" :errors="errors">
           <template v-slot:buttons>
             <v-btn class="mr-4" @click="$router.push('/usuarios')">
               <v-icon style="padding-right: 10px">mdi-backup-restore</v-icon>
@@ -16,7 +16,7 @@
               Salvar
             </v-btn>
           </template>
-        </curso-form>
+        </usuario-form>
         
         <v-snackbar v-model="snackbar.active" :color="snackbar.color" :timeout="snackbar.timeout">
           {{snackbar.text}}
