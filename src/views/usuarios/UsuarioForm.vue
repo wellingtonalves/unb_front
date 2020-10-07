@@ -33,17 +33,30 @@
 
       <v-row>
         <v-col class="d-flex" cols="4" sm="6">
-          <v-text-field
-            v-model="dataResponse.tx_url_video_curso"
-            :error-messages="errorData.tx_url_video_curso"
-            outlined
-            label="Url do vídeo do curso"
-            required />
+          <v-autocomplete v-model="dataResponse.sg_pais_nacionalidade" :error-messages="errorData.sg_pais_nacionalidade" :rules="rules.required"
+                    outlined label="País" :items="pais" item-text="tx_nome_pais" item-value="sg_pais" />
+        </v-col>
+
+<!--        TODO LOGICA PARA MOSTRAR E ESCONDER ESSE CAMPO-->
+<!--        <v-col class="d-flex" cols="4" sm="6" v-show="false">-->
+<!--          <v-text-field-->
+<!--            v-model="dataResponse.tx_login_usuario"-->
+<!--            :error-messages="errorData.tx_login_usuario"-->
+<!--            :rules="rules.required"-->
+<!--            outlined-->
+<!--            label="Passaporte"-->
+<!--            required-->
+<!--          />-->
+<!--        </v-col>-->
+
+        <v-col class="d-flex" cols="4" sm="6">
+          <v-autocomplete v-model="ufModel" :rules="rules.required" @change="getMunicipio()"
+                    :items="uf" outlined label="UF" item-text="tx_nome_uf" item-value="sg_uf" />
         </v-col>
 
         <v-col class="d-flex" cols="4" sm="6">
-          <v-select v-model="dataResponse.tp_origem_curso" :error-messages="errorData.tp_origem_curso" :rules="rules.required"
-                    :items="tpOrigemCurso" outlined label="Origem do curso" item-text="label" item-value="value" />
+          <v-autocomplete v-model="dataResponse.id_municipio_nascimento" :error-messages="errorData.id_municipio_nascimento" :rules="rules.required"
+                          :items="municipio" outlined label="Municipios" item-text="tx_nome_municipio" item-value="id_municipio" />
         </v-col>
       </v-row>
       
@@ -80,22 +93,6 @@
         </v-col>
       </v-row>
 
-      <v-row>
-        <v-col>
-          <span>Conteúdo programático</span>
-<!--          TODO - validar campo(deixar em vermelho) quando o conteudo não for preenchido-->
-          <ckeditor :editor="editor" v-model="dataResponse.tx_conteudo_programatico"></ckeditor>
-        </v-col>
-      </v-row>
-
-      <v-row>
-        <v-col>
-          <span>Apresentação</span>
-<!--          TODO - validar campo(deixar em vermelho) quando o conteudo não for preenchido-->
-          <ckeditor :editor="editor" v-model="dataResponse.tx_apresentacao"></ckeditor>
-        </v-col>
-      </v-row>
-
       <v-row class="mt-5" justify="center">
         <slot name="buttons"></slot>
       </v-row>
@@ -106,7 +103,6 @@
 
 <script>
   import {get} from "@/services/abstract.service";
-  import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
   
   export default {
     name: "UsuarioForm",
@@ -122,6 +118,10 @@
       },
       situacaoUsuario: [],
       perfil: [],
+      pais: [],
+      uf: [],
+      municipio: [],
+      ufModel: '',
       tpSexo: [
         {
           label: 'Masculino',
@@ -132,12 +132,7 @@
           value: 'F'
         }
       ],
-      tpOrigemCurso: [
-        'MIGRADO',
-        'ENAP'
-      ],
       tematicaCurso: [],
-      editor: ClassicEditor,
       dateFormatted: vm.formatDate(new Date().toISOString().substr(0, 10)),
       calendarPopUp: false,
     }),
@@ -161,6 +156,8 @@
       this.getTematicaCurso();
       this.getSituacaoUsuario();
       this.getPerfil();
+      this.getPais();
+      this.getUf();
     },
     methods: {
       async getTematicaCurso() {
@@ -174,6 +171,18 @@
       async getPerfil() {
         const response = await get('/perfil?pagination=false');
         this.perfil = response.data.data;
+      },
+      async getPais() {
+        const response = await get('/pais?pagination=false');
+        this.pais = response.data.data;
+      },
+      async getUf() {
+        const response = await get('/uf?pagination=false');
+        this.uf = response.data.data;
+      },
+      async getMunicipio() {
+        const response = await get(`/municipio?pagination=false&search=sg_uf:${this.ufModel}`);
+        this.municipio = response.data.data;
       },
       formatDate (date) {
         if (!date) return null
