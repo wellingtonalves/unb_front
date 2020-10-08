@@ -17,7 +17,7 @@
             <v-icon>mdi-home</v-icon>
           </v-list-item-action>
           <v-list-item-content>
-            <v-list-item-title>Home</v-list-item-title>
+            <v-list-item-title>Dashboard</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
 
@@ -46,7 +46,7 @@
           </template>
 
           <v-list-item link :to="'/usuarios'" v-show="permission('USUARIO_LISTAR')">
-            <v-list-item-action style="padding-left: 14px;">
+            <v-list-item-action>
               <v-icon>mdi-account-plus</v-icon>
             </v-list-item-action>
             <v-list-item-content>
@@ -55,7 +55,7 @@
           </v-list-item>
 
           <v-list-item link :to="'/perfil'" v-show="permission('PERFIL_LISTAR')">
-            <v-list-item-action style="padding-left: 14px;">
+            <v-list-item-action>
               <v-icon>mdi-account</v-icon>
             </v-list-item-action>
             <v-list-item-content>
@@ -75,7 +75,7 @@
 
         <v-row>
 
-          <v-col class="align-self-start" cols="2">
+          <v-col class="align-self-start">
 
             <h1><a href="https://www.escolavirtual.gov.br/" target="_blank">EV.G: Escola Virtual.Gov</a></h1>
 
@@ -106,14 +106,14 @@
                 </v-list-item-content>
               </v-list-item>
 
-              <v-list-item href="https://www.escolavirtual.gov.br/adesao-institucional">
+              <v-list-item href="/adesao-institucional">
                 <v-list-item-content>
                   <v-list-item-title>{{ $t('message.appBar.adesaoInstitucional.title') }}</v-list-item-title>
                   <v-list-item-subtitle>{{ $t('message.appBar.adesaoInstitucional.subtitle') }}</v-list-item-subtitle>
                 </v-list-item-content>
               </v-list-item>
 
-              <v-list-item href="https://www.escolavirtual.gov.br/validacao">
+              <v-list-item href="https://www.escolavirtual.gov.br/documentos/validacao">
                 <v-list-item-content>
                   <v-list-item-title>{{ $t('message.appBar.validacaoDocumentos.title') }}</v-list-item-title>
                   <v-list-item-subtitle>{{ $t('message.appBar.validacaoDocumentos.subtitle') }}</v-list-item-subtitle>
@@ -271,6 +271,8 @@
     width: 112px;
   }
   header.v-app-bar {
+    background-color: var(--v-white-base) !important;
+    box-shadow: 0 0 10px 0 rgba(55, 71, 79, .1) !important;
     height: auto !important;
   }
   header.v-app-bar .container {
@@ -329,6 +331,9 @@
   #main-nav .v-list-item__content:hover::after,
   #main-nav .v-list-item__content:hover::before {
     opacity: .25;
+  }
+  #main-nav .v-list-item__title {
+    font-weight: 300;
   }
   #main-nav .v-list-item__subtitle {
     color: var(--v-primary-base);

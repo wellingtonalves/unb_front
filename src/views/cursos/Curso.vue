@@ -14,17 +14,17 @@
             <v-row align="center">
 
               <v-col>
-                <v-select dense v-model="filterData.tp_situacao_curso" label="Status do curso" :items="statusCurso" item-text="label" item-value="value" />
+                <v-select dense v-model="filterData.tp_situacao_curso" label="Status" :items="statusCurso" item-text="label" item-value="value" />
               </v-col>
 
               <v-col>
-                <v-select dense v-model="filterData.tp_origem_curso" label="Origem do curso" :items="tpOrigemCurso" item-text="label" item-value="value" />
+                <v-select dense v-model="filterData.tp_origem_curso" label="Origem" :items="tpOrigemCurso" item-text="label" item-value="value" />
               </v-col>
 
               <v-col cols="4">
                 <v-text-field dense
                   v-model="filterData.tx_nome_curso"
-                  label="Nome do curso"
+                  label="Nome"
                   placeholder="Informe o nome do curso"
                 />
               </v-col>
