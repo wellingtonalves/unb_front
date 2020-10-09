@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-form lazy-validation ref="form" v-model="validForm">
+    <v-form  @submit.prevent="save" ref="form">
       <v-row>
         <v-col class="d-flex" cols="4" sm="6">
           <v-text-field
@@ -20,12 +20,53 @@
 
       <v-row>
         <v-col class="d-flex" cols="4" sm="6">
-          <v-select v-model="dataResponse.id_perfil" :error-messages="errorData.tp_situacao_curso" :rules="rules.required"
+          <v-text-field
+            v-model="dataResponse.pessoa.tx_nome_pessoa"
+            :error-messages="errorData['pessoa.tx_nome_pessoa']"
+            :rules="rules.required"
+            outlined
+            label="Nome"
+            required />
+        </v-col>
+
+        <v-col class="d-flex" cols="4" sm="6">
+          <v-text-field
+            v-model="dataResponse.pessoa.tx_nome_social"
+            outlined
+            label="Nome Social"
+            required />
+        </v-col>
+      </v-row>
+
+      <v-row>
+        <v-col class="d-flex" cols="4" sm="6">
+          <v-text-field
+            v-model="dataResponse.pessoa.tx_email_pessoa"
+            :error-messages="errorData['pessoa.tx_email_pessoa']"
+            :rules="rules.emailRules"
+            outlined
+            label="E-mail"
+            required />
+        </v-col>
+
+        <v-col class="d-flex" cols="4" sm="6">
+          <v-text-field
+            v-model="dataResponse.pessoa.tx_email_institucional"
+            :error-messages="errorData['pessoa.tx_email_institucional']"
+            outlined
+            label="E-mail institucional"
+            required />
+        </v-col>
+      </v-row>
+
+      <v-row>
+        <v-col class="d-flex" cols="4" sm="6">
+          <v-select v-model="dataResponse.id_perfil" :error-messages="errorData.id_perfil" :rules="rules.required"
                     outlined label="Perfil" :items="perfil" item-text="tx_nome_perfil" item-value="id_perfil" />
         </v-col>
 
         <v-col class="d-flex" cols="4" sm="6">
-          <v-select v-model="dataResponse.tp_sexo" :error-messages="errorData.tp_sexo" :rules="rules.required" 
+          <v-select v-model="dataResponse.pessoa.tp_sexo" :error-messages="errorData['pessoa.tp_sexo']" :rules="rules.required" 
                     outlined label="Sexo" :items="tpSexo" item-text="label" item-value="value" />
         </v-col>
         
@@ -33,29 +74,40 @@
 
       <v-row>
         <v-col class="d-flex" cols="4" sm="6">
-          <v-autocomplete v-model="dataResponse.sg_pais_nacionalidade" :error-messages="errorData.sg_pais_nacionalidade" :rules="rules.required"
-                    outlined label="País" :items="pais" item-text="tx_nome_pais" item-value="sg_pais" />
+          <v-autocomplete v-model="dataResponse.pessoa.sg_pais_nacionalidade" :error-messages="errorData['pessoa.sg_pais_nacionalidade']" :rules="rules.required"
+                    outlined label="País" :items="pais" item-text="tx_nome_pais" item-value="sg_pais" @change="checkPais()"/>
         </v-col>
 
-<!--        TODO LOGICA PARA MOSTRAR E ESCONDER ESSE CAMPO-->
-<!--        <v-col class="d-flex" cols="4" sm="6" v-show="false">-->
-<!--          <v-text-field-->
-<!--            v-model="dataResponse.tx_login_usuario"-->
-<!--            :error-messages="errorData.tx_login_usuario"-->
-<!--            :rules="rules.required"-->
-<!--            outlined-->
-<!--            label="Passaporte"-->
-<!--            required-->
-<!--          />-->
-<!--        </v-col>-->
+        <v-col class="d-flex" cols="4" sm="6" v-if="!this.isBrasileiro">
+          <v-text-field
+            v-model="dataResponse.pessoa.nr_passaporte"
+            :error-messages="errorData['pessoa.nr_passaporte']"
+            :rules="rules.required"
+            outlined
+            label="Passaporte"
+            required
+          />
+        </v-col>
 
-        <v-col class="d-flex" cols="4" sm="6">
+        <v-col class="d-flex" cols="4" sm="6" v-if="this.isBrasileiro">
+          <v-text-field
+            v-model="dataResponse.pessoa.nr_cpf"
+            :error-messages="errorData['pessoa.nr_cpf']"
+            :rules="rules.required"
+            v-mask="'###.###.###-##'"
+            outlined
+            label="CPF"
+            required
+          />
+        </v-col>
+
+        <v-col class="d-flex" cols="4" sm="6" v-if="this.isBrasileiro">
           <v-autocomplete v-model="ufModel" :rules="rules.required" @change="getMunicipio()"
                     :items="uf" outlined label="UF" item-text="tx_nome_uf" item-value="sg_uf" />
         </v-col>
 
-        <v-col class="d-flex" cols="4" sm="6">
-          <v-autocomplete v-model="dataResponse.id_municipio_nascimento" :error-messages="errorData.id_municipio_nascimento" :rules="rules.required"
+        <v-col class="d-flex" cols="4" sm="6" v-if="this.isBrasileiro">
+          <v-autocomplete v-model="dataResponse.pessoa.id_municipio_nascimento" :error-messages="errorData['pessoa.id_municipio_nascimento']" :rules="rules.required"
                           :items="municipio" outlined label="Municipios" item-text="tx_nome_municipio" item-value="id_municipio" />
         </v-col>
       </v-row>
@@ -74,23 +126,19 @@
             <template v-slot:activator="{ on, attrs }">
               <v-text-field
                 v-model="computedDateFormatted"
-                :error-messages="errorData.dt_lancamento"
+                :error-messages="errorData['pessoa.dt_nascimento']"
                 outlined
-                label="Data de lançamento"
+                label="Data de nascimento"
                 prepend-inner-icon="mdi-calendar"
                 readonly
                 v-bind="attrs"
                 v-on="on"
               ></v-text-field>
             </template>
-            <v-date-picker v-model="dataResponse.dt_lancamento" @input="calendarPopUp = false" locale="pt-BR" />
+            <v-date-picker v-model="dataResponse.pessoa.dt_nascimento" @input="calendarPopUp = false" locale="pt-BR" />
           </v-menu>
         </v-col>
-
-        <v-col>
-          <v-switch v-model="dataResponse.bl_destaque_curso" :error-messages="errorData.bl_destaque_curso"
-                    label="Curso em destaque ?" />
-        </v-col>
+        
       </v-row>
 
       <v-row class="mt-5" justify="center">
@@ -102,23 +150,36 @@
 </template>
 
 <script>
+  import {mask} from 'vue-the-mask';
   import {get} from "@/services/abstract.service";
   
   export default {
     name: "UsuarioForm",
     props: ['data', 'errors'],
+    directives: {mask},
     data: vm => ({
       validForm: false,
       dataResponse: {
-        dt_lancamento: new Date().toISOString().substr(0, 10) 
+        tp_metodo_autenticacao: 'local',
+        pessoa: {
+          dt_nascimento: new Date().toISOString().substr(0, 10)
+        },
       } || this.data,
-      errorData: {},
+      errorData: {
+        pessoa: {},
+      },
       rules: {
         required: [v => !!v || 'Campo obrigatório'],
+        emailRules: [
+          v => !!v || 'Campo obrigatório',
+          v => /.+@.+\..+/.test(v) || 'E-mail inválido.',
+          v => (v || '').indexOf(' ') < 0 || 'E-mail inválido.'
+        ],
       },
       situacaoUsuario: [],
       perfil: [],
       pais: [],
+      isBrasileiro: true,
       uf: [],
       municipio: [],
       ufModel: '',
@@ -132,13 +193,12 @@
           value: 'F'
         }
       ],
-      tematicaCurso: [],
       dateFormatted: vm.formatDate(new Date().toISOString().substr(0, 10)),
       calendarPopUp: false,
     }),
     computed: {
       computedDateFormatted () {
-        return this.formatDate(this.dataResponse.dt_lancamento)
+        return this.formatDate(this.dataResponse.pessoa.dt_nascimento)
       },
     },
     watch: {
@@ -147,6 +207,8 @@
       },
       errors: function (val) {
         this.errorData = val;
+        console.log('this.errorData')
+        console.log(this.errorData)
       },
       data: function (val) {
         this.dataResponse = val;
@@ -184,11 +246,21 @@
         const response = await get(`/municipio?pagination=false&search=sg_uf:${this.ufModel}`);
         this.municipio = response.data.data;
       },
+      checkPais() {
+        console.log(this.dataResponse.pessoa.sg_pais_nacionalidade);
+        this.isBrasileiro = this.dataResponse.pessoa.sg_pais_nacionalidade !== 'BR' ? false : true;
+      },
       formatDate (date) {
         if (!date) return null
 
         const [year, month, day] = date.split('-')
         return `${day}/${month}/${year}`
+      },
+      save($event) {
+        if (this.$refs.form.validate() === false) {
+          $event.preventDefault();
+          $event.stopPropagation();
+        }
       }
     }
   }

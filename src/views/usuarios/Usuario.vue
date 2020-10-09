@@ -92,7 +92,7 @@
             </template>
 
             <template v-slot:item.pessoa.nr_cpf="{ item }">
-              <td>{{item.pessoa.nr_cpf | maskCpfCnpj}}</td>
+              <td v-if="item.pessoa.nr_cpf">{{item.pessoa.nr_cpf | maskCpfCnpj}}</td>
             </template>
             
             <template v-slot:item.action="{ item }">
