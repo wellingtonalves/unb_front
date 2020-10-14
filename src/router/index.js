@@ -160,6 +160,51 @@ const routes = [
           },
         ],
       },
+      {
+        path: '/perfis',
+        component: () => import('../components/Layout/RouterViewComponent.vue'),
+        children: [
+          {
+            path: '',
+            name: 'perfil',
+            component: () => import('../views/perfis/Perfil.vue'),
+            meta: {
+              requiresAuth: true,
+              title: 'Perfis',
+              breadcrumb: [
+                {text: 'Home', disabled: false, href: '/'},
+                {text: 'Perfis', disabled: true, href: '/perfis'},
+              ],
+            },
+          },
+          {
+            path: '/perfil/create',
+            component: () => import('../views/perfis/PerfilCreate.vue'),
+            meta: {
+              title: 'Cadastrar perfil',
+              requiresAuth: true,
+              breadcrumb: [
+                {text: 'Home', disabled: false, href: '/'},
+                {text: 'Perfis', disabled: false, href: '/perfis'},
+                {text: 'Cadastrar perfil', disabled: true, href: '/perfis'},
+              ],
+            },
+          },
+          {
+            path: '/perfil/:id/edit',
+            component: () => import('../views/perfis/PerfilEdit.vue'),
+            meta: {
+              title: 'Editar perfil',
+              requiresAuth: true,
+              breadcrumb: [
+                {text: 'Home', disabled: false, href: '/'},
+                {text: 'Perfis', disabled: false, href: '/perfis'},
+                {text: 'Editar perfil', disabled: true, href: '/perfis'},
+              ],
+            },
+          },
+        ],
+      },
     ],
   },
 ];

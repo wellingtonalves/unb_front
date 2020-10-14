@@ -54,7 +54,7 @@
             </v-list-item-content>
           </v-list-item>
 
-          <v-list-item link :to="'/perfil'" v-show="permission('PERFIL_LISTAR')">
+          <v-list-item link :to="'/perfis'" v-show="permission('PERFIL_LISTAR')">
             <v-list-item-action style="padding-left: 14px;">
               <v-icon>mdi-account</v-icon>
             </v-list-item-action>
