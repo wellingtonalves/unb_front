@@ -39,6 +39,19 @@ const routes = [
         },
       },
       {
+        path: '/perguntas-frequentes',
+        name: 'Perguntas Frequentes',
+        component: () => import('../views/PerguntasFrequentes.vue'),
+        meta: {
+          requiresAuth: false,
+          title: 'Perguntas Frequentes',
+          breadcrumb: [
+            {text: 'Início', disabled: false, href: '/'},
+            {text: 'Perguntas Frequentes', disabled: true, href: '/perguntas-frequentes'},
+          ],
+        },
+      },
+      {
         path: '/cursos',
         component: () => import('../components/Layout/RouterViewComponent.vue'),
         children: [

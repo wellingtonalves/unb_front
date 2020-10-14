@@ -75,15 +75,11 @@
 
         <v-row>
 
-          <v-col class="align-self-start">
+          <v-col cols="9" class="align-self-start">
 
-            <h1><a href="https://www.escolavirtual.gov.br/" target="_blank">EV.G: Escola Virtual.Gov</a></h1>
+            <h1 class="mr-8 float-left"><a href="https://www.escolavirtual.gov.br/" target="_blank">EV.G: Escola Virtual.Gov</a></h1>
 
-          </v-col>
-
-          <v-col cols="8">
-
-            <v-list nav dense flat id="main-nav">
+            <v-list nav dense flat id="main-nav" class="d-none d-sm-flex float-left">
 
               <v-list-item href="https://www.escolavirtual.gov.br/catalogo">
                 <v-list-item-content>
@@ -120,12 +116,19 @@
                 </v-list-item-content>
               </v-list-item>
 
+              <v-list-item href="/perguntas-frequentes">
+                <v-list-item-content>
+                  <v-list-item-title>{{ $t('message.appBar.perguntasFrequentes.title') }}</v-list-item-title>
+                  <v-list-item-subtitle>{{ $t('message.appBar.perguntasFrequentes.subtitle') }}</v-list-item-subtitle>
+                </v-list-item-content>
+              </v-list-item>
+
             </v-list>
           </v-col>
 
-          <v-col class="d-flex justify-end align-center" cols="2">
+          <v-col cols="3" class="d-flex justify-end align-center">
 
-            <v-btn icon  title="Alterar idioma" @click="switchLocale()">
+            <v-btn icon title="Alterar idioma" class="top-button" @click="switchLocale()">
               <v-img
                 v-if="this.$i18n.locale === 'pt'"
                 alt="Idioma Português Brasileiro"
@@ -147,11 +150,11 @@
               />
             </v-btn>
 
-            <v-btn icon title="Notificações">
+            <v-btn icon title="Notificações" class="top-button">
               <v-icon>mdi-bell</v-icon>
             </v-btn>
 
-            <v-btn icon @click.stop="$vuetify.theme.dark = !$vuetify.theme.dark" title="Modo Noturno">
+            <v-btn icon title="Modo Noturno" class="top-button" @click.stop="$vuetify.theme.dark = !$vuetify.theme.dark">
               <v-icon v-if="$vuetify.theme.dark">mdi-invert-colors-off</v-icon>
               <v-icon v-else>mdi-invert-colors</v-icon>
             </v-btn>
@@ -284,12 +287,14 @@
     position: absolute;
   }
   nav.v-navigation-drawer {
+    background-color: var(--v-secondary-base);
     top: 94px !important;
   }
   nav.v-navigation-drawer .v-list > .v-list-item:not(:last-child) {
-    border-bottom: 1px solid var(--v-lightgrey-base);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
   }
   nav.v-navigation-drawer .v-list-item__title {
+    color: var(--v-white-base);
     font-size: .85rem;
   }
   #main-nav {
@@ -298,7 +303,8 @@
   #main-nav a {
     color: var(--v-black-base);
     float: left;
-    margin-right: 20px;
+    margin-right: 32px;
+    padding: 0;
     text-transform: uppercase;
   }
   #main-nav .v-list-item__content {
@@ -338,6 +344,10 @@
   #main-nav .v-list-item__subtitle {
     color: var(--v-primary-base);
     font-weight: 600;
+  }
+  .top-button {
+    height: 40px !important;
+    width: 40px !important;
   }
   @media (min-width: 1264px) {
     .v-main__wrap > .container {

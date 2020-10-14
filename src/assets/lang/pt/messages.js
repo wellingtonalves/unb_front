@@ -22,6 +22,10 @@ const pt = {
         title: 'Validação',
         subtitle: 'de Documentos',
       },
+      perguntasFrequentes: {
+        title: 'Perguntas',
+        subtitle: 'Frequentes',
+      },
     },
     appFooter: {
       portalUnico: 'Portal Único de Governo',

@@ -1,4 +1,6 @@
-.theme--light.v-application {
+.theme--light.v-application,
+.theme--light.v-card > .v-card__text,
+.theme--light.v-card .v-card__subtitle {
 	color: var(--v-secondary-base) !important;
 }
 header.v-app-bar > .v-toolbar__content {
@@ -26,23 +28,26 @@ h2 {
   padding: .75rem 1rem;
   text-transform: uppercase;
 }
-.box .d-flex {
-  flex-wrap: wrap;
-}
-.box .d-flex > div {
+.box .layout > div {
   flex-grow: 1;
   flex-shrink: 0;
   flex-basis: 300px;
   padding: 1.5rem;
 }
-.box .d-flex h5 {
+.box .layout h5 {
   color: var(--v-primary-base);
-  font-size: 110%;
+  font-size: 100%;
   font-weight: 300;
   text-transform: uppercase;
 }
 .flex-basis-100 {
   flex-basis: 100% !important;
+}
+.section.row {
+  margin-top: 2rem;
+}
+.section.row > .col:first-child {
+  padding-right: 3rem;
 }
 h3.subtitle {
 	font-size: 220%;
@@ -55,7 +60,73 @@ h3.subtitle {
   box-shadow: 0 0 10px 3px rgba(0, 0, 0, .075);
 }
 
-/* Components */
+/* Vuetify Layout Components */
+nav.v-navigation-drawer .v-list-item__action .v-icon,
+nav.v-navigation-drawer .v-list-item__icon .v-icon {
+  color: var(--v-contrast-base) !important;
+}
+
+/* Custom Layout Components */
+.count-items {
+	counter-reset: evg-counter;
+}
+.count-items > .v-card:before,
+.count-items > .v-expansion-panel button:before {
+  color: var(--v-contrast-base);
+  content: counter(evg-counter, decimal);
+  counter-increment: evg-counter;
+  display: inline-block;
+  float: left;
+  font-size: 150%;
+  font-weight: 700;
+  margin-right: 16px;
+  min-width: 25px;
+}
+.count-items > .v-card:before {
+  margin-left: 16px;
+  margin-top: 12px;
+}
+.count-items > .v-expansion-panel button:before {
+  background-color: transparent;
+  opacity: 1;
+  position: static;
+}
+.layout.evg-cards .v-card {
+	background-color: transparent;
+	border: 2px solid var(--v-primary-base);
+	border-radius: 0;
+	box-shadow: 0 0 0 !important;
+  padding: 8px;
+  word-break: break-word;
+}
+.layout.evg-cards .v-card + .v-card {
+	margin-top: 16px;
+}
+.layout.evg-cards .v-card__text {
+	font-size: 1rem;
+}
+.layout.evg-cards .v-card__text a {
+	color: var(--v-contrast-base);
+}
+.layout.evg-cards .v-card__text p:only-child {
+	margin-bottom: 0;
+}
+.evg-panels .v-expansion-panel {
+	background-color: transparent !important;
+	border: 2px solid var(--v-primary-base);
+	border-radius: 0 !important;
+}
+.evg-panels .v-expansion-panel + .v-expansion-panel {
+	margin-top: 8px;
+}
+.evg-panels .v-expansion-panel-header {
+	color: var(--v-secondary-base);
+	font-size: 1.2rem;
+  font-weight: 500;
+}
+.evg-panels .v-expansion-panel-content a {
+	color: var(--v-contrast-base);
+}
 .v-list.links-bordered {
   background-color: transparent !important;
   padding: 0 0 2em;
