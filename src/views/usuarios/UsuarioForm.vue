@@ -108,7 +108,7 @@
 
         <v-col class="d-flex" cols="4" sm="6" v-if="this.isBrasileiro">
           <v-autocomplete v-model="dataResponse.pessoa.id_municipio_nascimento" :error-messages="errorData['pessoa.id_municipio_nascimento']" :rules="rules.required"
-                          :items="municipio" outlined label="Municipios" item-text="tx_nome_municipio" item-value="id_municipio" />
+                          :items="municipio" outlined label="Municipios" item-text="tx_nome_municipio" item-value="id_municipio_nascimento" />
         </v-col>
       </v-row>
       
@@ -207,8 +207,6 @@
       },
       errors: function (val) {
         this.errorData = val;
-        console.log('this.errorData')
-        console.log(this.errorData)
       },
       data: function (val) {
         this.dataResponse = val;
@@ -220,6 +218,11 @@
       this.getPerfil();
       this.getPais();
       this.getUf();
+
+      //TODO - fazer o municiopio funcionar quando for editar.
+      // if (this.$route.params.id) {
+        // await this.getMunicipio(this.dataResponse.pessoa.id_municipio_nascimento);
+      // }
     },
     methods: {
       async getTematicaCurso() {
@@ -247,7 +250,6 @@
         this.municipio = response.data.data;
       },
       checkPais() {
-        console.log(this.dataResponse.pessoa.sg_pais_nacionalidade);
         this.isBrasileiro = this.dataResponse.pessoa.sg_pais_nacionalidade !== 'BR' ? false : true;
       },
       formatDate (date) {
