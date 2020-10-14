@@ -127,7 +127,7 @@
       <v-dialog v-model="dialogDelete" persistent max-width="500">
         <v-card>
           <v-card-title class="headline">Atenção!</v-card-title>
-          <v-card-text>Deseja excluir o registro <strong>{{dialogDeleteData.tx_nome_pessoa}}</strong> ?</v-card-text>
+          <v-card-text>Deseja excluir o registro <strong>{{dialogDeleteData.pessoa.tx_nome_pessoa}}</strong> ?</v-card-text>
           <v-card-actions>
             <v-spacer></v-spacer>
             <v-btn color="error" text @click="dialogDelete = false">Cancelar</v-btn>
@@ -176,7 +176,9 @@
       ],
       loading: false,
       dialogDelete: false,
-      dialogDeleteData: {},
+      dialogDeleteData: {
+        pessoa: {}
+      },
       snackbar: {
         active: false,
         color: '',
