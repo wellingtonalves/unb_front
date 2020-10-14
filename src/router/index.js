@@ -205,6 +205,55 @@ const routes = [
           },
         ],
       },
+      {
+        path: '/permissoes',
+        component: () => import('../components/Layout/RouterViewComponent.vue'),
+        children: [
+          {
+            path: '',
+            name: 'permissao',
+            component: () => import('../views/permissoes/Permissao.vue'),
+            meta: {
+              requiresAuth: true,
+              title: 'Permissões',
+              breadcrumb: [
+                {text: 'Home', disabled: false, href: '/'},
+                {text: 'Permissões', disabled: true, href: '/permissoes'},
+              ],
+            },
+          },
+          {
+            path: '/permissao/create',
+            component: () => import('../views/permissoes/PermissaoCreate.vue'),
+            meta: {
+              title: 'Cadastrar permissão',
+              requiresAuth: true,
+              breadcrumb: [
+                {text: 'Home', disabled: false, href: '/'},
+                {text: 'Permissões', disabled: false, href: '/permissoes'},
+                {
+                  text: 'Cadastrar permissão',
+                  disabled: true,
+                  href: '/permissoes',
+                },
+              ],
+            },
+          },
+          {
+            path: '/permissao/:id/edit',
+            component: () => import('../views/permissoes/PermissaoEdit.vue'),
+            meta: {
+              title: 'Editar permissão',
+              requiresAuth: true,
+              breadcrumb: [
+                {text: 'Home', disabled: false, href: '/'},
+                {text: 'Permissões', disabled: false, href: '/permissoes'},
+                {text: 'Editar permissão', disabled: true, href: '/permissoes'},
+              ],
+            },
+          },
+        ],
+      },
     ],
   },
 ];

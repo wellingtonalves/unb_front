@@ -63,6 +63,15 @@
             </v-list-item-content>
           </v-list-item>
 
+          <v-list-item link :to="'/permissoes'" v-show="permission('PERMISSAO_LISTAR')">
+            <v-list-item-action style="padding-left: 14px;">
+              <v-icon>mdi-account-lock</v-icon>
+            </v-list-item-action>
+            <v-list-item-content>
+              <v-list-item-title>Permissões</v-list-item-title>
+            </v-list-item-content>
+          </v-list-item>
+
         </v-list-group>
 
       </v-list>
