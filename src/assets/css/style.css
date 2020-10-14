@@ -44,10 +44,10 @@ h2 {
   flex-basis: 100% !important;
 }
 .section.row {
-  margin-top: 2rem;
+  margin-top: 48px;
 }
 .section.row > .col:first-child {
-  padding-right: 3rem;
+  padding-right: 48px;
 }
 h3.subtitle {
 	font-size: 220%;
@@ -67,6 +67,14 @@ nav.v-navigation-drawer .v-list-item__icon .v-icon {
 }
 
 /* Custom Layout Components */
+.columns {
+  -moz-column-gap: 40px;
+  -moz-columns: 3 260px;
+  -webkit-column-gap: 40px;
+  -webkit-columns: 3 260px;
+  column-gap: 40px;
+  columns: 3 260px;
+}
 .count-items {
 	counter-reset: evg-counter;
 }
@@ -96,8 +104,8 @@ nav.v-navigation-drawer .v-list-item__icon .v-icon {
 	border: 2px solid var(--v-primary-base);
 	border-radius: 0;
 	box-shadow: 0 0 0 !important;
-  padding: 8px;
-  word-break: break-word;
+	padding: 8px;
+	word-break: break-word;
 }
 .layout.evg-cards .v-card + .v-card {
 	margin-top: 16px;

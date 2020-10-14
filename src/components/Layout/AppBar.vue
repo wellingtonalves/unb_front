@@ -95,7 +95,7 @@
                 </v-list-item-content>
               </v-list-item>
 
-              <v-list-item href="https://www.escolavirtual.gov.br/conheca-a-escola">
+              <v-list-item href="/conheca-a-escola">
                 <v-list-item-content>
                   <v-list-item-title>{{ $t('message.appBar.conhecaEscola.title') }}</v-list-item-title>
                   <v-list-item-subtitle>{{ $t('message.appBar.conhecaEscola.subtitle') }}</v-list-item-subtitle>
@@ -150,13 +150,13 @@
               />
             </v-btn>
 
-            <v-btn icon title="Notificações" class="top-button">
-              <v-icon>mdi-bell</v-icon>
-            </v-btn>
-
             <v-btn icon title="Modo Noturno" class="top-button" @click.stop="$vuetify.theme.dark = !$vuetify.theme.dark">
               <v-icon v-if="$vuetify.theme.dark">mdi-invert-colors-off</v-icon>
               <v-icon v-else>mdi-invert-colors</v-icon>
+            </v-btn>
+
+            <v-btn icon title="Notificações" class="top-button">
+              <v-icon>mdi-bell</v-icon>
             </v-btn>
 
             <v-menu offset-y>

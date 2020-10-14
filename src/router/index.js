@@ -26,6 +26,19 @@ const routes = [
         },
       },
       {
+        path: '/conheca-a-escola',
+        name: 'Conheça a Escola',
+        component: () => import('../views/ConhecaEscola.vue'),
+        meta: {
+          requiresAuth: false,
+          title: 'Conheça a Escola',
+          breadcrumb: [
+            {text: 'Início', disabled: false, href: '/'},
+            {text: 'Conheça a Escola', disabled: true, href: '/conheca-a-escola'},
+          ],
+        },
+      },
+      {
         path: '/adesao-institucional',
         name: 'Adesão Institucional',
         component: () => import('../views/AdesaoInstitucional.vue'),

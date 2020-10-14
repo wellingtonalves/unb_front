@@ -4,7 +4,7 @@
     <v-layout class="flex-column">
 
       <v-row>
-        <v-col cols="4" class="mr-8">
+        <v-col cols="12" lg="4" class="mr-8">
           <h2>EV.G | {{ $t('message.appFooter.portalUnico') }}</h2>
           <p class="subtitulo">{{ $t('message.appFooter.solucaoUnica') }}.</p>
 
@@ -20,7 +20,7 @@
           
         </v-col>
 
-        <v-col cols="3">
+        <v-col cols="12" lg="3">
 
           <h3>{{ $t('message.appFooter.sobreEscola') }}</h3>
           <v-list dense flat>
@@ -50,7 +50,7 @@
 
             <v-list-item href="https://www.escolavirtual.gov.br/instituicoes-participantes">
               <v-list-item-content>
-                <v-list-item-title>{{ $t('message.appFooter.instituicaoParticipante') }}</v-list-item-title>
+                <v-list-item-title>{{ $t('message.appFooter.instituicoesParticipantes') }}</v-list-item-title>
               </v-list-item-content>
             </v-list-item>
 
@@ -64,7 +64,7 @@
 
         </v-col>
 
-        <v-col cols="3">
+        <v-col cols="12" lg="3">
 
           <h3>{{ $t('message.appFooter.utilidades') }}</h3>
           <v-list dense flat>
