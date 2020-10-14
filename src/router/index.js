@@ -122,7 +122,8 @@ const routes = [
           {
             path: '',
             name: 'usuario',
-            component: () => import('../views/usuarios/Usuario.vue'),
+            component: () =>
+              import('../views/controleAcesso/usuarios/Usuario.vue'),
             meta: {
               requiresAuth: true,
               title: 'Usuários',
@@ -134,7 +135,8 @@ const routes = [
           },
           {
             path: '/usuario/create',
-            component: () => import('../views/usuarios/UsuarioCreate.vue'),
+            component: () =>
+              import('../views/controleAcesso/usuarios/UsuarioCreate.vue'),
             meta: {
               title: 'Cadastrar usuário',
               requiresAuth: true,
@@ -147,7 +149,8 @@ const routes = [
           },
           {
             path: '/usuario/:id/edit',
-            component: () => import('../views/usuarios/UsuarioEdit.vue'),
+            component: () =>
+              import('../views/controleAcesso/usuarios/UsuarioEdit.vue'),
             meta: {
               title: 'Editar usuário',
               requiresAuth: true,
@@ -167,7 +170,8 @@ const routes = [
           {
             path: '',
             name: 'perfil',
-            component: () => import('../views/perfis/Perfil.vue'),
+            component: () =>
+              import('../views/controleAcesso/perfis/Perfil.vue'),
             meta: {
               requiresAuth: true,
               title: 'Perfis',
@@ -179,7 +183,8 @@ const routes = [
           },
           {
             path: '/perfil/create',
-            component: () => import('../views/perfis/PerfilCreate.vue'),
+            component: () =>
+              import('../views/controleAcesso/perfis/PerfilCreate.vue'),
             meta: {
               title: 'Cadastrar perfil',
               requiresAuth: true,
@@ -192,7 +197,8 @@ const routes = [
           },
           {
             path: '/perfil/:id/edit',
-            component: () => import('../views/perfis/PerfilEdit.vue'),
+            component: () =>
+              import('../views/controleAcesso/perfis/PerfilEdit.vue'),
             meta: {
               title: 'Editar perfil',
               requiresAuth: true,
@@ -212,7 +218,8 @@ const routes = [
           {
             path: '',
             name: 'permissao',
-            component: () => import('../views/permissoes/Permissao.vue'),
+            component: () =>
+              import('../views/controleAcesso/permissoes/Permissao.vue'),
             meta: {
               requiresAuth: true,
               title: 'Permissões',
@@ -224,7 +231,8 @@ const routes = [
           },
           {
             path: '/permissao/create',
-            component: () => import('../views/permissoes/PermissaoCreate.vue'),
+            component: () =>
+              import('../views/controleAcesso/permissoes/PermissaoCreate.vue'),
             meta: {
               title: 'Cadastrar permissão',
               requiresAuth: true,
@@ -241,7 +249,8 @@ const routes = [
           },
           {
             path: '/permissao/:id/edit',
-            component: () => import('../views/permissoes/PermissaoEdit.vue'),
+            component: () =>
+              import('../views/controleAcesso/permissoes/PermissaoEdit.vue'),
             meta: {
               title: 'Editar permissão',
               requiresAuth: true,

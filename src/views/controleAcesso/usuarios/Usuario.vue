@@ -151,8 +151,8 @@
   import inputMask from '@/filters';
   import {mask} from 'vue-the-mask';
   import {get} from "@/services/abstract.service";
-  import {remove} from "../../services/abstract.service";
-  import removeMask from "../../helpers/removeMask";
+  import {remove} from "../../../services/abstract.service";
+  import removeMask from "../../../helpers/removeMask";
 
   export default {
     name: "Usuario",
