@@ -355,8 +355,11 @@
     }
   }
   @media (max-width: 600px) {
+    header.v-app-bar .container {
+      padding: 0;
+    }
     h1 {
-      margin-left: 24px;
+      margin-left: 40px;
     }
     h1 a {
       height: 44px;

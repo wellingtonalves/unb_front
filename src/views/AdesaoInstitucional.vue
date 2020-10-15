@@ -3,15 +3,15 @@
 
     <v-row class="section">
       
-      <v-col cols="4">
+      <v-col cols="12" sm="4">
         <h3 class="subtitle">Como aderir à EV.G?</h3>
         <p>A adesão à Escola Virtual.Gov - EV.G se dá mediante assinatura de um Termo de Adesão ao Protocolo de Intenções.</p>
       </v-col>
 
-      <v-col cols="8">
+      <v-col cols="12" sm="8">
         <p>O Protocolo de Intenções EV.G formalizou o compromisso das instituições em estabelecer bases de cooperação técnica e operacional para capacitação e aperfeiçoamento de servidores públicos na modalidade a distância, mediante centralização dos serviços de hospedagem de cursos.</p>
 
-        <v-list class="d-flex links-bordered">
+        <v-list class="d-flex flex-wrap links-bordered">
 
           <v-list-item v-for="(item, i) in documentosImportantes" :key="i" :href="item.href">
             <v-list-item-icon>
@@ -45,12 +45,12 @@
 
     <v-row class="section">
 
-      <v-col cols="4">
+      <v-col cols="12" sm="4">
         <h3 class="subtitle">Quais as Modalidades de Adesão?</h3>
         <p>Há quatro modalidades de adesão para instituições interessadas em fazer parte da Escola Virtual de Governo, a  depender de suas necessidades e características.</p>
       </v-col>
 
-      <v-col cols="8">
+      <v-col cols="12" sm="8">
         <div class="box">
           <h4>Modalidades de Adesão</h4>
           <v-layout class="flex-wrap">
@@ -73,7 +73,7 @@
           </v-layout>
           <v-container text-center>
             <v-btn tile href="https://drive.google.com/file/d/1BsMFYwbMPEZEELbhFcsr86jkgQowdLQo/view?usp=sharing" class="primary">
-              Saiba mais sobre as modalidades de adesão
+              Saiba mais <span class="hidden-xs-only">sobre as modalidades de adesão</span>
               <v-icon right>
                 mdi-menu-right
               </v-icon>
@@ -86,11 +86,11 @@
 
     <v-row class="section">
 
-      <v-col cols="4">
+      <v-col cols="12" sm="4">
         <h3 class="subtitle">Conheça o Passo a Passo da Adesão</h3>
       </v-col>
 
-      <v-col cols="8">
+      <v-col cols="12" sm="8">
         <v-layout class="count-items evg-cards flex-wrap">
 
           <v-card>

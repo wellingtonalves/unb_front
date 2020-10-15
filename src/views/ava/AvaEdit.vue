@@ -1,7 +1,6 @@
 <template>
   <v-layout wrap>
 
-    <h2>Editar AVA</h2>
     <v-card class="mx-auto" height="100%" width="100%" elevation="10">
       <v-container class="pa-5" fluid>
         <ava-form @update="update" :data="data" :errors="errors">

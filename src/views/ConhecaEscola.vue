@@ -154,6 +154,9 @@ section.conheca-escola .featured:before {
 section.conheca-escola .featured strong {
   font-weight: 700;
 }
+section.servicos-oferecidos {
+  width: 100%;
+}
 section.servicos-oferecidos .v-card {
   background-color: transparent;
   box-shadow: 0 0 0;
@@ -237,6 +240,29 @@ section.servicos-oferecidos .v-card__actions .v-btn {
   section.conheca-escola .featured:after,
   section.conheca-escola .featured:before {
     display: none;
+  }
+  section.servicos-oferecidos .v-image {
+    margin-bottom: 16px;
+    margin-left: 0;
+    margin-right: 0;
+    width: 100%;
+  }
+  section.servicos-oferecidos .v-card:nth-child(odd) .v-card__title,
+  section.servicos-oferecidos .v-card:nth-child(odd) .v-card__subtitle,
+  section.servicos-oferecidos .v-card:nth-child(odd) .v-card__text {
+    text-align: left;
+  }
+  section.servicos-oferecidos .v-card__subtitle,
+  section.servicos-oferecidos .v-card__text {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+  section.servicos-oferecidos .v-card__subtitle {
+    font-size: 1.8rem;
+  }
+  section.servicos-oferecidos .v-card__subtitle::before {
+    left: 0 !important;
+    right: auto !important;
   }
 }
 </style>
