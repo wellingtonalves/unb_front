@@ -21,7 +21,7 @@
                 <v-select dense v-model="filterData.tp_origem_curso" label="Origem" :items="tpOrigemCurso" item-text="label" item-value="value" />
               </v-col>
 
-              <v-col cols="4">
+              <v-col cols="12" sm="4">
                 <v-text-field dense
                   v-model="filterData.tx_nome_curso"
                   label="Nome"
@@ -29,7 +29,7 @@
                 />
               </v-col>
 
-              <v-col class="d-flex justify-end" cols="4">
+              <v-col class="d-flex justify-end" cols="12" sm="4">
 
                 <v-btn color="primary" dark outlined rounded class="mb-8 mr-5" @click="filtrar()">
                   <v-icon>mdi-magnify</v-icon>

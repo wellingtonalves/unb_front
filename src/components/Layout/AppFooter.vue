@@ -116,7 +116,7 @@
 <style scoped>
 footer.v-footer {
   background-color: var(--v-lightgrey-base);
-  margin-top: 32px;
+  margin-top: 64px;
   padding: 6px 0;
 }
 footer .layout {

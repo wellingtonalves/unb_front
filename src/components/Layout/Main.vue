@@ -51,4 +51,9 @@
       /*max-width: 900px;*/
     }
   }
+  @media (max-width: 600px) {
+    main.v-main {
+      padding-top: 76px !important;
+    }
+  }
 </style>

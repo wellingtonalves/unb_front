@@ -263,6 +263,15 @@
 </style>
 
 <style scoped>
+  header.v-app-bar {
+    background-color: var(--v-white-base) !important;
+    box-shadow: 0 0 10px 0 rgba(55, 71, 79, .1) !important;
+    height: auto !important;
+  }
+  header.v-app-bar .container {
+    padding-bottom: 0;
+    padding-top: 0;
+  }
   h1 a {
     background-image: url(../../assets/logo.svg);
     background-position: 0 0;
@@ -272,15 +281,6 @@
     height: 62px;
     text-indent: -9000px;
     width: 112px;
-  }
-  header.v-app-bar {
-    background-color: var(--v-white-base) !important;
-    box-shadow: 0 0 10px 0 rgba(55, 71, 79, .1) !important;
-    height: auto !important;
-  }
-  header.v-app-bar .container {
-    padding-bottom: 0;
-    padding-top: 0;
   }
   header.v-app-bar button.v-app-bar__nav-icon {
     opacity: 0.75;
@@ -352,6 +352,18 @@
   @media (min-width: 1264px) {
     .v-main__wrap > .container {
       max-width: 900px;
+    }
+  }
+  @media (max-width: 600px) {
+    h1 {
+      margin-left: 24px;
+    }
+    h1 a {
+      height: 44px;
+      width: 80px;
+    }
+    nav.v-navigation-drawer {
+      top: 76px !important;
     }
   }
 </style>

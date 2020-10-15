@@ -1,8 +1,6 @@
 <template>
   <v-layout wrap>
 
-    <h2>Cadastrar Curso</h2>
-
     <v-card width="100%" elevation="10">
       <v-container class="pa-5" fluid>
         <curso-form @update="update" :errors="errors">

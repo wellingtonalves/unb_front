@@ -21,8 +21,8 @@
 
       <v-card>
         <v-img src="../assets/img/servicos-2.jpg"></v-img>
-        <v-card-title>Gestão Acadêmica</v-card-title>
-        <v-card-subtitle>Secretaria Virtual</v-card-subtitle>
+        <h4 class="v-card__title">Gestão Acadêmica</h4>
+        <h5 class="v-card__subtitle">Secretaria Virtual</h5>
 
         <v-card-text>
           Este é o coração da Escola Virtual.Gov! Por meio dela, instituições gerenciam seus cursos, a abertura de turmas e o andamento das inscrições. É o local onde servidores e cidadãos têm acesso ao catálogo unificado, calendário de turmas, histórico escolar e emissão de certificado. Tudo por meio de um acesso único e simplificado.
@@ -40,8 +40,8 @@
 
       <v-card>
         <v-img src="../assets/img/servicos-1.png"></v-img>
-        <v-card-title>Estatísticas</v-card-title>
-        <v-card-subtitle>Em Números</v-card-subtitle>
+        <h4 class="v-card__title">Estatísticas</h4>
+        <h5 class="v-card__subtitle">Em Números</h5>
 
         <v-card-text>
           Disponibiliza dados e informações relativas à capacitação de servidores públicos, temas de maior interesse, distribuição nacional das capacitações, entre outros indicadores, de forma aberta, tempestiva e dinâmica. O acesso facilitado a dados reais e precisos permite não apenas o controle social, mas também a análise de informações de acordo com as mais variadas necessidades.
@@ -59,8 +59,8 @@
 
       <v-card>
         <v-img src="../assets/img/servicos-mooc.jpg"></v-img>
-        <v-card-title>Ambiente Virtual</v-card-title>
-        <v-card-subtitle>MOOC</v-card-subtitle>
+        <h4 class="v-card__title">Ambiente Virtual</h4>
+        <h5 class="v-card__subtitle">MOOC</h5>
 
         <v-card-text>
           Seguindo as tendências educacionais mais recentes, a Escola Virtual.Gov oferece uma plataforma MOOC que sustenta a oferta de cursos de curta e média duração, abertos e gratuitos, como alternativa de formação mais aderente ao desenvolvimento rápido de competências para o trabalho.
@@ -78,8 +78,8 @@
 
       <v-card>
         <v-img src="../assets/img/servicos-3.png"></v-img>
-        <v-card-title>Ambiente Virtual</v-card-title>
-        <v-card-subtitle>SPOC</v-card-subtitle>
+        <h4 class="v-card__title">Ambiente Virtual</h4>
+        <h5 class="v-card__subtitle">SPOC</h5>
 
         <v-card-text>
           Voltado para grupos menores e personalizados, combina recursos e tecnologia virtual com engajamento pessoal entre professores e alunos. Suporta cursos oferecidos em formato misto, baseados na metodologia de “sala de aula invertida” ou “flipped classroom”.
@@ -170,8 +170,18 @@ section.servicos-oferecidos .v-image {
   width: 400px;
   z-index: 1;
 }
+section.servicos-oferecidos .v-card:nth-child(odd) .v-image {
+  float: right;
+  margin: 0 0 40px 40px;
+}
+section.servicos-oferecidos .v-card:nth-child(odd) .v-card__title,
+section.servicos-oferecidos .v-card:nth-child(odd) .v-card__subtitle,
+section.servicos-oferecidos .v-card:nth-child(odd) .v-card__text {
+  text-align: right;
+}
 section.servicos-oferecidos .v-card__title {
   color: var(--v-primary-base);
+  display: block;
   font-size: 1rem;
   font-weight: 500;
   padding: 0;
@@ -194,12 +204,23 @@ section.servicos-oferecidos .v-card__subtitle::before {
   left: 0;
   width: 60%;
 }
+section.servicos-oferecidos .v-card:nth-child(odd) .v-card__subtitle:before {
+    left: auto;
+    right: 0;
+}
 section.servicos-oferecidos .v-card__text {
   font-size: 1rem;
   padding-right: 160px;
 }
+section.servicos-oferecidos .v-card:nth-child(odd) .v-card__text {
+  padding-left: 160px;
+  padding-right: 0;
+} 
 section.servicos-oferecidos .v-card__actions {
   padding: 0;
+}
+section.servicos-oferecidos .v-card:nth-child(odd) .v-card__actions {
+  float: right;
 }
 section.servicos-oferecidos .v-card__actions .v-btn {
   background-color: var(--v-contrast-base) !important;
