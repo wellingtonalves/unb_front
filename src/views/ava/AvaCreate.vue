@@ -1,18 +1,16 @@
 <template>
-  <v-layout wrap class="align-stretch">
+  <v-layout wrap>
 
-    <h2>Cadastrar AVA</h2>
-
-    <v-card class="mx-auto" height="100%" width="100%" elevation="10">
+    <v-card width="100%" elevation="10">
       <v-container class="pa-5" fluid>
         <ava-form @update="update" :errors="errors">
           <template v-slot:buttons>
-            <v-btn class="mr-4" @click="$router.push('/ava')">
+            <v-btn class="mx-2" @click="$router.push('/ava')">
               <v-icon class="mr-2">mdi-backup-restore</v-icon>
               Voltar
             </v-btn>
 
-            <v-btn class="mr-4" color="primary" :loading="loading" @click="save()">
+            <v-btn class="mx-2" color="primary" :loading="loading" @click="save()">
               <v-icon class="mr-2">mdi-content-save</v-icon>
               Salvar
             </v-btn>
