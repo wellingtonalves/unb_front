@@ -29,14 +29,6 @@
 </script>
 
 <style scoped>
-  
-  h2 {
-    color: var(--v-primary-base);
-    font-size: 200%;
-    padding-bottom: 16px;
-    text-transform: uppercase;
-  }
-  
   header.v-app-bar {
     background-color: var(--v-white-base) !important;
     box-shadow: 0 0 10px 0 rgba(55,71,79,.1) !important;
@@ -57,6 +49,11 @@
   @media (min-width: 1264px) {
     .v-main__wrap > .container {
       /*max-width: 900px;*/
+    }
+  }
+  @media (max-width: 600px) {
+    main.v-main {
+      padding-top: 76px !important;
     }
   }
 </style>

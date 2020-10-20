@@ -26,6 +26,45 @@ const routes = [
         },
       },
       {
+        path: '/conheca-a-escola',
+        name: 'Conheça a Escola',
+        component: () => import('../views/ConhecaEscola.vue'),
+        meta: {
+          requiresAuth: false,
+          title: 'Conheça a Escola',
+          breadcrumb: [
+            {text: 'Início', disabled: false, href: '/'},
+            {text: 'Conheça a Escola', disabled: true, href: '/conheca-a-escola'},
+          ],
+        },
+      },
+      {
+        path: '/adesao-institucional',
+        name: 'Adesão Institucional',
+        component: () => import('../views/AdesaoInstitucional.vue'),
+        meta: {
+          requiresAuth: false,
+          title: 'Adesão Institucional',
+          breadcrumb: [
+            {text: 'Início', disabled: false, href: '/'},
+            {text: 'Adesão Institucional', disabled: true, href: '/adesao-institucional'},
+          ],
+        },
+      },
+      {
+        path: '/perguntas-frequentes',
+        name: 'Perguntas Frequentes',
+        component: () => import('../views/PerguntasFrequentes.vue'),
+        meta: {
+          requiresAuth: false,
+          title: 'Perguntas Frequentes',
+          breadcrumb: [
+            {text: 'Início', disabled: false, href: '/'},
+            {text: 'Perguntas Frequentes', disabled: true, href: '/perguntas-frequentes'},
+          ],
+        },
+      },
+      {
         path: '/cursos',
         component: () => import('../components/Layout/RouterViewComponent.vue'),
         children: [
@@ -35,9 +74,9 @@ const routes = [
             component: () => import('../views/cursos/Curso.vue'),
             meta: {
               requiresAuth: true,
-              title: 'Curso',
+              title: 'Cursos',
               breadcrumb: [
-                {text: 'Home', disabled: false, href: '/'},
+                {text: 'Dashboard', disabled: false, href: '/'},
                 {text: 'Cursos', disabled: true, href: '/cursos'},
               ],
             },
@@ -49,7 +88,7 @@ const routes = [
               title: 'Cadastrar curso',
               requiresAuth: true,
               breadcrumb: [
-                {text: 'Home', disabled: false, href: '/'},
+                {text: 'Dashboard', disabled: false, href: '/'},
                 {text: 'Cursos', disabled: false, href: '/cursos'},
                 {text: 'Cadastrar curso', disabled: true, href: '/cursos'},
               ],
@@ -62,7 +101,7 @@ const routes = [
               title: 'Editar curso',
               requiresAuth: true,
               breadcrumb: [
-                {text: 'Home', disabled: false, href: '/'},
+                {text: 'Dashboard', disabled: false, href: '/'},
                 {text: 'Cursos', disabled: false, href: '/cursos'},
                 {text: 'Editar curso', disabled: true, href: '/cursos'},
               ],
@@ -82,7 +121,7 @@ const routes = [
               requiresAuth: true,
               title: 'Ava',
               breadcrumb: [
-                {text: 'Home', disabled: false, href: '/'},
+                {text: 'Dashboard', disabled: false, href: '/'},
                 {text: 'Ava', disabled: true, href: '/ava'},
               ],
             },
@@ -94,7 +133,7 @@ const routes = [
               title: 'Cadastrar AVA',
               requiresAuth: true,
               breadcrumb: [
-                {text: 'Home', disabled: false, href: '/'},
+                {text: 'Dashboard', disabled: false, href: '/'},
                 {text: 'Ava', disabled: false, href: '/ava'},
                 {text: 'Cadastrar AVA', disabled: true, href: '/ava'},
               ],
@@ -107,7 +146,7 @@ const routes = [
               title: 'Editar AVA',
               requiresAuth: true,
               breadcrumb: [
-                {text: 'Home', disabled: false, href: '/'},
+                {text: 'Dashboard', disabled: false, href: '/'},
                 {text: 'AVA', disabled: false, href: '/ava'},
                 {text: 'Editar AVA', disabled: true, href: '/ava'},
               ],
@@ -128,7 +167,7 @@ const routes = [
               requiresAuth: true,
               title: 'Usuários',
               breadcrumb: [
-                {text: 'Home', disabled: false, href: '/'},
+                {text: 'Dashboard', disabled: false, href: '/'},
                 {text: 'Usuários', disabled: true, href: '/usuarios'},
               ],
             },
@@ -141,7 +180,7 @@ const routes = [
               title: 'Cadastrar usuário',
               requiresAuth: true,
               breadcrumb: [
-                {text: 'Home', disabled: false, href: '/'},
+                {text: 'Dashboard', disabled: false, href: '/'},
                 {text: 'Usuários', disabled: false, href: '/usuarios'},
                 {text: 'Cadastrar usuário', disabled: true, href: '/usuarios'},
               ],
@@ -155,7 +194,7 @@ const routes = [
               title: 'Editar usuário',
               requiresAuth: true,
               breadcrumb: [
-                {text: 'Home', disabled: false, href: '/'},
+                {text: 'Dashboard', disabled: false, href: '/'},
                 {text: 'Usuários', disabled: false, href: '/usuarios'},
                 {text: 'Editar usuário', disabled: true, href: '/usuarios'},
               ],

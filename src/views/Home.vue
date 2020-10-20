@@ -1,6 +1,7 @@
 <template>
-  <div class="home">
-  </div>
+  
+  <h3>Como Funciona</h3>
+  
 </template>
 
 <script>
