@@ -2,7 +2,7 @@
   <div>
     <v-form lazy-validation ref="form" v-model="validForm">
       <v-row>
-        <v-col class="d-flex" cols="4" sm="6">
+        <v-col cols="12">
           <v-text-field
             v-model="dataResponse.tx_nome_perfil"
             :error-messages="errorData.tx_nome_perfil"
@@ -13,11 +13,11 @@
         </v-col>
       </v-row>
       
-      <v-row>
+      <v-row class="items-selection-component">
         
-        <v-col>
+        <v-col cols="12" sm="4">
           <v-card raised elevation="10">
-            <v-card-title style="color: white; background-color: #283593; justify-content: center;">Permissões</v-card-title>
+            <v-card-title>Permissões</v-card-title>
             <v-data-table
               v-model="selected"
               :headers="headersPermissoes"
@@ -48,40 +48,29 @@
           </v-card>
         </v-col>
 
-        <v-col>
-          <v-col>
+        <v-col cols="12" sm="1" class="d-flex flex-column align-center justify-center">
 
-            <v-col>
-              <v-btn small class="mr-2" color="indigo" outlined fab @click="selecionarPermissoes()">
-                <v-icon>mdi-chevron-right</v-icon>
-              </v-btn>
-            </v-col>
+          <v-btn small class="my-2" color="primary" outlined fab @click="selecionarPermissoes()">
+            <v-icon>mdi-chevron-right</v-icon>
+          </v-btn>
 
-            <v-col>
-              <v-btn small class="mr-2" color="indigo" outlined fab @click="selecionarTodasPermissoes()">
-                <v-icon>mdi-chevron-double-right</v-icon>
-              </v-btn>
-            </v-col>
+          <v-btn small class="my-2" color="primary" outlined fab @click="selecionarTodasPermissoes()">
+            <v-icon>mdi-chevron-double-right</v-icon>
+          </v-btn>
+            
+          <v-btn small class="my-2" color="primary" outlined fab @click="removerPermissoes()">
+            <v-icon>mdi-chevron-left</v-icon>
+          </v-btn>
 
-            <v-col>
-              <v-btn small class="mr-2" color="indigo" outlined fab @click="removerPermissoes()">
-                <v-icon>mdi-chevron-left</v-icon>
-              </v-btn>
-            </v-col>
-
-            <v-col>
-              <v-btn small class="mr-2" color="indigo" outlined fab @click="removerTodasPermissoes()">
-                <v-icon>mdi-chevron-double-left</v-icon>
-              </v-btn>
-            </v-col>
-
-          </v-col>
+          <v-btn small class="my-2" color="primary" outlined fab @click="removerTodasPermissoes()">
+            <v-icon>mdi-chevron-double-left</v-icon>
+          </v-btn>
+            
         </v-col>
 
-        <v-col>
+        <v-col cols="12" sm="7">
           <v-card raised elevation="10">
-
-            <v-card-title style="color: white; background-color: #283593; justify-content: center;">Permissões selecionadas</v-card-title>
+            <v-card-title>Permissões selecionadas</v-card-title>
             <v-data-table
               v-model="selectedPermissoesSelecionada"
               :headers="headersAcaoSelecionada"
@@ -107,7 +96,6 @@
               </template>
 
             </v-data-table>
-            
           </v-card>
         </v-col>
         
@@ -227,3 +215,13 @@
     }
   }
 </script>
+
+<style scoped>
+.items-selection-component .v-card__title {
+  background-color: var(--v-primary-base);
+  color: var(--v-white-base);
+}
+.items-selection-component .v-data-table {
+  padding: 16px;
+}
+</style>
