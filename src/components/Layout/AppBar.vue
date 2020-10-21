@@ -77,7 +77,7 @@
 
           <v-col cols="9" class="align-self-start">
 
-            <h1 class="mr-8 float-left"><a href="https://www.escolavirtual.gov.br/" target="_blank">EV.G: Escola Virtual.Gov</a></h1>
+            <h1 class="mr-8 float-left"><a href="/">EV.G: Escola Virtual.Gov</a></h1>
 
             <v-list nav dense flat id="main-nav" class="d-none d-sm-flex float-left">
 

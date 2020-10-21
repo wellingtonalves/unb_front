@@ -84,23 +84,64 @@ nav.v-navigation-drawer .v-list-item__icon .v-icon {
   color: var(--v-contrast-base);
   content: counter(evg-counter, decimal);
   counter-increment: evg-counter;
-  display: inline-block;
-  float: left;
   font-size: 150%;
   font-weight: 700;
-  margin-right: 16px;
   min-width: 25px;
 }
 .count-items > .v-card:before {
-  margin-left: 16px;
   margin-top: 12px;
+  margin-left: 16px;
+  margin-right: 16px;
+  position: absolute;
 }
 .count-items > .v-expansion-panel button:before {
   background-color: transparent;
+  display: inline-block;
+  float: left;
+  margin-right: 16px;
+  min-width: 25px;
   opacity: 1;
   position: static;
 }
+.layout.evg-cards {
+	margin-left: -8px;
+	margin-right: -8px;
+}
 .layout.evg-cards .v-card {
+	background-color: transparent;
+	border: 2px solid var(--v-primary-base);
+	border-radius: 0;
+	box-shadow: 0 0 0 !important;
+	flex-flow: column;
+	flex-basis: 200px;
+	flex-grow: 1;
+	margin: 8px;
+	padding: 8px;
+}
+.layout.evg-cards .v-card__title {
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.375rem;
+  word-break: normal;
+}
+.layout.evg-cards.count-items .v-card__title {
+  padding-left: 48px;
+}
+.layout.evg-cards .v-card__text {
+	font-size: .8rem;
+	line-height: 1.2rem;
+	margin-top: -12px;
+}
+.layout.evg-cards .v-image {
+	align-self: flex-end;
+	margin: 16px;
+	width: calc(100% - 32px);
+}
+.layout.evg-cards .v-image__image {
+	background-position: center bottom !important;
+	background-size: contain;
+}
+.layout.evg-list .v-card {
 	background-color: transparent;
 	border: 2px solid var(--v-primary-base);
 	border-radius: 0;
@@ -108,16 +149,17 @@ nav.v-navigation-drawer .v-list-item__icon .v-icon {
 	padding: 8px;
 	word-break: break-word;
 }
-.layout.evg-cards .v-card + .v-card {
+.layout.evg-list .v-card + .v-card {
 	margin-top: 16px;
 }
-.layout.evg-cards .v-card__text {
+.layout.evg-list .v-card__text {
 	font-size: 1rem;
+	padding-left: 48px;
 }
-.layout.evg-cards .v-card__text a {
+.layout.evg-list .v-card__text a {
 	color: var(--v-contrast-base);
 }
-.layout.evg-cards .v-card__text p:only-child {
+.layout.evg-list .v-card__text p:only-child {
 	margin-bottom: 0;
 }
 .evg-panels .v-expansion-panel {
