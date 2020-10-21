@@ -287,14 +287,12 @@
     position: absolute;
   }
   nav.v-navigation-drawer {
-    background-color: var(--v-secondary-base);
     top: 94px !important;
   }
   nav.v-navigation-drawer .v-list > .v-list-item:not(:last-child) {
     border-bottom: 1px solid rgba(0, 0, 0, 0.1);
   }
   nav.v-navigation-drawer .v-list-item__title {
-    color: var(--v-white-base);
     font-size: .85rem;
   }
   #main-nav {

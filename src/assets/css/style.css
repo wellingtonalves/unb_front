@@ -62,10 +62,7 @@ h3.subtitle {
 }
 
 /* Vuetify Layout Components */
-nav.v-navigation-drawer .v-list-item__action .v-icon,
-nav.v-navigation-drawer .v-list-item__icon .v-icon {
-  color: var(--v-contrast-base) !important;
-}
+
 
 /* Custom Layout Components */
 .columns {
