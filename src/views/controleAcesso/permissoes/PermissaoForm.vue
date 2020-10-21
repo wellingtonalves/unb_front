@@ -2,7 +2,7 @@
   <div>
     <v-form lazy-validation ref="form" v-model="validForm">
       <v-row>
-        <v-col class="d-flex" cols="4" sm="6">
+        <v-col cols="12">
           <v-text-field
             v-model="dataResponse.tx_nome_permissao"
             :error-messages="errorData.tx_nome_permissao"
