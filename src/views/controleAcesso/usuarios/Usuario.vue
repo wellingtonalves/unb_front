@@ -92,7 +92,7 @@
             </template>
 
             <template v-slot:item.pessoa.nr_cpf="{ item }">
-              <td>{{item.pessoa.nr_cpf | maskCpfCnpj}}</td>
+              <td v-if="item.pessoa.nr_cpf">{{item.pessoa.nr_cpf | maskCpfCnpj}}</td>
             </template>
             
             <template v-slot:item.action="{ item }">
@@ -127,7 +127,7 @@
       <v-dialog v-model="dialogDelete" persistent max-width="500">
         <v-card>
           <v-card-title class="headline">Atenção!</v-card-title>
-          <v-card-text>Deseja excluir o registro <strong>{{dialogDeleteData.tx_nome_pessoa}}</strong> ?</v-card-text>
+          <v-card-text>Deseja excluir o registro <strong>{{dialogDeleteData.pessoa.tx_nome_pessoa}}</strong> ?</v-card-text>
           <v-card-actions>
             <v-spacer></v-spacer>
             <v-btn color="error" text @click="dialogDelete = false">Cancelar</v-btn>
@@ -151,8 +151,8 @@
   import inputMask from '@/filters';
   import {mask} from 'vue-the-mask';
   import {get} from "@/services/abstract.service";
-  import {remove} from "../../services/abstract.service";
-  import removeMask from "../../helpers/removeMask";
+  import {remove} from "../../../services/abstract.service";
+  import removeMask from "../../../helpers/removeMask";
 
   export default {
     name: "Usuario",
@@ -176,7 +176,9 @@
       ],
       loading: false,
       dialogDelete: false,
-      dialogDeleteData: {},
+      dialogDeleteData: {
+        pessoa: {}
+      },
       snackbar: {
         active: false,
         color: '',

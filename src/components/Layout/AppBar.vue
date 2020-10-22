@@ -54,12 +54,21 @@
             </v-list-item-content>
           </v-list-item>
 
-          <v-list-item link :to="'/perfil'" v-show="permission('PERFIL_LISTAR')">
+          <v-list-item link :to="'/perfis'" v-show="permission('PERFIL_LISTAR')">
             <v-list-item-action>
               <v-icon>mdi-account</v-icon>
             </v-list-item-action>
             <v-list-item-content>
               <v-list-item-title>Perfis</v-list-item-title>
+            </v-list-item-content>
+          </v-list-item>
+
+          <v-list-item link :to="'/permissoes'" v-show="permission('PERMISSAO_LISTAR')">
+            <v-list-item-action>
+              <v-icon>mdi-account-lock</v-icon>
+            </v-list-item-action>
+            <v-list-item-content>
+              <v-list-item-title>Permissões</v-list-item-title>
             </v-list-item-content>
           </v-list-item>
 

@@ -161,7 +161,8 @@ const routes = [
           {
             path: '',
             name: 'usuario',
-            component: () => import('../views/usuarios/Usuario.vue'),
+            component: () =>
+              import('../views/controleAcesso/usuarios/Usuario.vue'),
             meta: {
               requiresAuth: true,
               title: 'Usuários',
@@ -173,7 +174,8 @@ const routes = [
           },
           {
             path: '/usuario/create',
-            component: () => import('../views/usuarios/UsuarioCreate.vue'),
+            component: () =>
+              import('../views/controleAcesso/usuarios/UsuarioCreate.vue'),
             meta: {
               title: 'Cadastrar usuário',
               requiresAuth: true,
@@ -186,7 +188,8 @@ const routes = [
           },
           {
             path: '/usuario/:id/edit',
-            component: () => import('../views/usuarios/UsuarioEdit.vue'),
+            component: () =>
+              import('../views/controleAcesso/usuarios/UsuarioEdit.vue'),
             meta: {
               title: 'Editar usuário',
               requiresAuth: true,
@@ -194,6 +197,106 @@ const routes = [
                 {text: 'Dashboard', disabled: false, href: '/'},
                 {text: 'Usuários', disabled: false, href: '/usuarios'},
                 {text: 'Editar usuário', disabled: true, href: '/usuarios'},
+              ],
+            },
+          },
+        ],
+      },
+      {
+        path: '/perfis',
+        component: () => import('../components/Layout/RouterViewComponent.vue'),
+        children: [
+          {
+            path: '',
+            name: 'perfil',
+            component: () =>
+              import('../views/controleAcesso/perfis/Perfil.vue'),
+            meta: {
+              requiresAuth: true,
+              title: 'Perfis',
+              breadcrumb: [
+                {text: 'Home', disabled: false, href: '/'},
+                {text: 'Perfis', disabled: true, href: '/perfis'},
+              ],
+            },
+          },
+          {
+            path: '/perfil/create',
+            component: () =>
+              import('../views/controleAcesso/perfis/PerfilCreate.vue'),
+            meta: {
+              title: 'Cadastrar perfil',
+              requiresAuth: true,
+              breadcrumb: [
+                {text: 'Home', disabled: false, href: '/'},
+                {text: 'Perfis', disabled: false, href: '/perfis'},
+                {text: 'Cadastrar perfil', disabled: true, href: '/perfis'},
+              ],
+            },
+          },
+          {
+            path: '/perfil/:id/edit',
+            component: () =>
+              import('../views/controleAcesso/perfis/PerfilEdit.vue'),
+            meta: {
+              title: 'Editar perfil',
+              requiresAuth: true,
+              breadcrumb: [
+                {text: 'Home', disabled: false, href: '/'},
+                {text: 'Perfis', disabled: false, href: '/perfis'},
+                {text: 'Editar perfil', disabled: true, href: '/perfis'},
+              ],
+            },
+          },
+        ],
+      },
+      {
+        path: '/permissoes',
+        component: () => import('../components/Layout/RouterViewComponent.vue'),
+        children: [
+          {
+            path: '',
+            name: 'permissao',
+            component: () =>
+              import('../views/controleAcesso/permissoes/Permissao.vue'),
+            meta: {
+              requiresAuth: true,
+              title: 'Permissões',
+              breadcrumb: [
+                {text: 'Home', disabled: false, href: '/'},
+                {text: 'Permissões', disabled: true, href: '/permissoes'},
+              ],
+            },
+          },
+          {
+            path: '/permissao/create',
+            component: () =>
+              import('../views/controleAcesso/permissoes/PermissaoCreate.vue'),
+            meta: {
+              title: 'Cadastrar permissão',
+              requiresAuth: true,
+              breadcrumb: [
+                {text: 'Home', disabled: false, href: '/'},
+                {text: 'Permissões', disabled: false, href: '/permissoes'},
+                {
+                  text: 'Cadastrar permissão',
+                  disabled: true,
+                  href: '/permissoes',
+                },
+              ],
+            },
+          },
+          {
+            path: '/permissao/:id/edit',
+            component: () =>
+              import('../views/controleAcesso/permissoes/PermissaoEdit.vue'),
+            meta: {
+              title: 'Editar permissão',
+              requiresAuth: true,
+              breadcrumb: [
+                {text: 'Home', disabled: false, href: '/'},
+                {text: 'Permissões', disabled: false, href: '/permissoes'},
+                {text: 'Editar permissão', disabled: true, href: '/permissoes'},
               ],
             },
           },

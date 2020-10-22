@@ -3,9 +3,9 @@
 
     <v-card class="mx-auto" height="100%" width="100%" elevation="10">
       <v-container class="pa-5" fluid>
-        <curso-form @update="update" :data="data" :errors="errors">
+        <usuario-form @update="update" :data="data" :errors="errors">
           <template v-slot:buttons>
-            <v-btn class="mr-4" @click="$router.push('/cursos')">
+            <v-btn class="mr-4" @click="$router.push('/usuarios')">
               <v-icon class="mr-2">mdi-backup-restore</v-icon>
               Voltar
             </v-btn>
@@ -15,7 +15,7 @@
               Salvar
             </v-btn>
           </template>
-        </curso-form>
+        </usuario-form>
         
         <v-snackbar v-model="snackbar.active" :color="snackbar.color" :timeout="snackbar.timeout">
           {{snackbar.text}}
@@ -30,11 +30,11 @@
 </template>
 
 <script>
-  import CursoForm from "./UsuarioForm";
+  import UsuarioForm from "./UsuarioForm";
   import {get, update} from "@/services/abstract.service";
   export default {
-    name: "CursoCreate",
-    components: {CursoForm},
+    name: "UsuarioEdit",
+    components: {UsuarioForm},
     data: () => ({
       data: '',
       loading: false,
@@ -49,7 +49,7 @@
     watch: {
       'snackbar.active': function (val) {
         if (this.snackbar.color == 'success' && val == false) {
-          this.$router.push('/cursos');
+          this.$router.push('/usuarios');
         }
       }
     },
@@ -58,7 +58,7 @@
     },
     methods: {
       async getData() {
-        const response = await get(`curso/${this.$route.params.id}`);
+        const response = await get(`usuario/${this.$route.params.id}`);
         this.data = response.data.data;
       },
       update(data) {
@@ -66,7 +66,7 @@
       },
       async save() {
         this.loading = true;
-        const response = await update(`curso/${this.$route.params.id}`, this.data)
+        const response = await update(`usuario/${this.$route.params.id}`, this.data)
 
         this.loading = false;
         
