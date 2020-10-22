@@ -1,23 +1,21 @@
 <template>
   <v-layout wrap>
 
-    <h2>Editar Curso</h2>
-
-    <v-card class="mx-auto" height="100%" width="100%" elevation="10">
+    <v-card width="100%" elevation="10">
       <v-container class="pa-5" fluid>
-        <curso-form @update="update" :data="data" :errors="errors">
+        <ava-form @update="update" :errors="errors">
           <template v-slot:buttons>
-            <v-btn class="mr-4" @click="$router.push('/cursos')">
+            <v-btn class="mx-2" @click="$router.push('/ava')">
               <v-icon class="mr-2">mdi-backup-restore</v-icon>
               Voltar
             </v-btn>
 
-            <v-btn class="mr-4" color="primary" :loading="loading" @click="save()">
+            <v-btn class="mx-2" color="primary" :loading="loading" @click="save()">
               <v-icon class="mr-2">mdi-content-save</v-icon>
               Salvar
             </v-btn>
           </template>
-        </curso-form>
+        </ava-form>
         
         <v-snackbar v-model="snackbar.active" :color="snackbar.color" :timeout="snackbar.timeout">
           {{snackbar.text}}
@@ -32,11 +30,11 @@
 </template>
 
 <script>
-  import CursoForm from "./CursoForm";
-  import {get, update} from "@/services/abstract.service";
+  import AvaForm from "./AvaForm";
+  import {create} from "@/services/abstract.service";
   export default {
-    name: "CursoCreate",
-    components: {CursoForm},
+    name: "AvaCreate",
+    components: {AvaForm},
     data: () => ({
       data: '',
       loading: false,
@@ -51,24 +49,17 @@
     watch: {
       'snackbar.active': function (val) {
         if (this.snackbar.color == 'success' && val == false) {
-          this.$router.push('/cursos');
+          this.$router.push('/ava');
         }
       }
     },
-    async mounted() {
-      await this.getData();
-    },
     methods: {
-      async getData() {
-        const response = await get(`curso/${this.$route.params.id}`);
-        this.data = response.data.data;
-      },
       update(data) {
         this.data = data;
       },
       async save() {
         this.loading = true;
-        const response = await update(`curso/${this.$route.params.id}`, this.data)
+        const response = await create('ava', this.data)
 
         this.loading = false;
         

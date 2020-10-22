@@ -1,5 +1,5 @@
 <template>
-  <v-layout wrap>
+  <v-layout v-show="permission('AVA_LISTAR')" wrap class="align-stretch">
 
     <v-expansion-panels :value="0">
       <v-expansion-panel>
@@ -14,24 +14,32 @@
             <v-row align="center">
 
               <v-col>
-                <v-select dense v-model="filterData.tp_situacao_curso" label="Status" :items="statusCurso" item-text="label" item-value="value" />
+                <v-select dense v-model="filterData.tp_situacao_ava" label="Status" :items="statusAva" item-text="label" item-value="value" />
               </v-col>
 
               <v-col>
-                <v-select dense v-model="filterData.tp_origem_curso" label="Origem" :items="tpOrigemCurso" item-text="label" item-value="value" />
+                <v-select dense v-model="filterData.tp_ava" label="Tipo" :items="tipoAva" item-text="label" item-value="value" />
               </v-col>
 
               <v-col cols="12" sm="4">
                 <v-text-field dense
-                  v-model="filterData.tx_nome_curso"
+                  v-model="filterData.tx_nome_ava"
                   label="Nome"
-                  placeholder="Informe o nome do curso"
+                  placeholder="Informe o nome do AVA"
+                />
+              </v-col>
+
+              <v-col cols="12" sm="4">
+                <v-text-field dense
+                  v-model="filterData.tx_url"
+                  label="URL"
+                  placeholder="Informe a URL do AVA"
                 />
               </v-col>
 
               <v-col class="d-flex justify-end" cols="12" sm="4">
 
-                <v-btn color="primary" dark outlined rounded class="mb-8 mr-5" @click="filtrar()">
+                <v-btn v-show="permission('AVA_LISTAR')" color="primary" dark outlined rounded class="mb-8 mr-5" @click="filtrar()">
                   <v-icon>mdi-magnify</v-icon>
                   Pesquisar
                 </v-btn>
@@ -41,7 +49,6 @@
                   Limpar
                 </v-btn>
               </v-col>
-
             </v-row>
           </v-form>
 
@@ -64,8 +71,8 @@
             :single-expand="true"
             :expanded.sync="expanded"
             show-expand
-            item-key="id_curso"
-            sort-by="tx_nome_curso"
+            item-key="id_ava"
+            sort-by="tx_nome_ava"
             class="elevation-1"
             no-data-text="Nenhum registro encontrado."
             no-results-text="Nenhum registro encontrado."
@@ -73,18 +80,18 @@
 
             <template v-slot:top>
               <v-toolbar flat>
-                <v-toolbar-title>Listagem de Cursos</v-toolbar-title>
+                <v-toolbar-title>Listagem de AVA</v-toolbar-title>
                 <v-spacer></v-spacer>
 
-                <v-btn color="primary" dark outlined rounded @click="$router.push('/curso/create')">
+                <v-btn v-show="permission('AVA_INCLUIR')" color="primary" dark outlined rounded @click="$router.push('/ava/create')">
                   <v-icon>mdi-plus</v-icon>
                   Novo
                 </v-btn>
               </v-toolbar>
             </template>
 
-            <template v-slot:item.tp_situacao_curso="{ item }">
-              <p v-if="item.tp_situacao_curso == 'A'">Ativo</p>
+            <template v-slot:item.tp_situacao_ava="{ item }">
+              <p v-if="item.tp_situacao_ava == 'A'">Ativo</p>
               <p v-else>Inativo</p>
             </template>
 
@@ -92,7 +99,7 @@
 
               <v-tooltip bottom>
                 <template v-slot:activator="{ on }">
-                  <v-btn small color="primary" icon @click="$router.push(`/curso/${item.id_curso}/edit`)" v-on="on">
+                  <v-btn v-show="permission('AVA_EDITAR')" small color="primary" icon @click="$router.push(`/ava/${item.id_ava}/edit`)" v-on="on">
                     <v-icon>mdi-pencil</v-icon>
                   </v-btn>
                 </template>
@@ -101,19 +108,15 @@
 
               <v-tooltip bottom>
                 <template v-slot:activator="{ on }">
-                  <v-btn small color="error" icon @click="excluir(item)" v-on="on">
+                  <v-btn v-show="permission('AVA_EXCLUIR')" small color="error" icon @click="excluir(item)" v-on="on">
                     <v-icon>mdi-delete</v-icon>
                   </v-btn>
                 </template>
-                <span>Visualizar</span>
+                <span>Excluir</span>
               </v-tooltip>
 
             </template>
 
-            <template v-slot:expanded-item="{ headers, item }">
-              <td :colspan="headers.length"  v-html="item.tx_conteudo_programatico"></td>
-            </template>
-            
           </v-data-table>
 
         </v-card>
@@ -124,11 +127,11 @@
       <v-dialog v-model="dialogDelete" persistent max-width="500">
         <v-card>
           <v-card-title class="headline">Atenção!</v-card-title>
-          <v-card-text>Deseja excluir o registro <strong>{{dialogDeleteData.tx_nome_curso}}</strong> ?</v-card-text>
+          <v-card-text>Deseja excluir o registro <strong>{{dialogDeleteData.tx_nome_ava}}</strong> ?</v-card-text>
           <v-card-actions>
             <v-spacer></v-spacer>
             <v-btn color="error" text @click="dialogDelete = false">Cancelar</v-btn>
-            <v-btn color="primary" text @click="excluirItem(dialogDeleteData.id_curso)">Confirmar</v-btn>
+            <v-btn color="primary" text @click="excluirItem(dialogDeleteData.id_ava)">Confirmar</v-btn>
           </v-card-actions>
         </v-card>
       </v-dialog>
@@ -148,13 +151,14 @@
   import {get} from "@/services/abstract.service";
   import {filterFormat} from "@/helpers/filterFormat";
   import {remove} from "../../services/abstract.service";
+  import {checkPermission} from "@/helpers/checkPermission";
 
   export default {
-    name: "Curso",
+    name: "Ava",
     data: () => ({
       expanded: [],
       filterData: {},
-      statusCurso: [
+      statusAva: [
         {
           label: 'ATIVO',
           value: 'A'
@@ -164,19 +168,20 @@
           value: 'I'
         },
       ],
-      tpOrigemCurso: [
-        'MIGRADO',
-        'ENAP'
+      tipoAva: [
+        'MOODLE',
+        'CANVAS'
       ],
       data:  [],
       pagination: {},
       options: {},
       headers: [
-        {text: 'id', value: 'id_curso'},
-        {text: 'Curso', value: 'tx_nome_curso', align: 'start',},
-        {text: 'Carga Horaria Minima', value: 'qt_carga_horaria_minima', align: 'center',},
-        {text: 'Status', value: 'tp_situacao_curso'},
-        {text: 'Origem', value: 'tp_origem_curso'},
+        {text: 'ID', value: 'id_ava'},
+        {text: 'Tipo AVA', value: 'tp_ava', align: 'center',},
+        {text: 'Nome', value: 'tx_nome_ava', align: 'start',},
+        {text: 'URL', value: 'tx_url', align: 'center',},
+        {text: 'Token', value: 'tx_token', align: 'center',},
+        {text: 'Status', value: 'tp_situacao_ava'},
         {text: 'Ações', value: 'action', sortable: false},
       ],
       loading: false,
@@ -207,7 +212,7 @@
     methods: {
       async get(filter = '') {
         this.loading = true;
-        const response = await get('/curso' + filter);
+        const response = await get('/ava' + filter);
         this.pagination = response.data;
         this.data = response.data.data;
         this.loading = false;
@@ -225,7 +230,7 @@
         this.dialogDelete = true;
       },
       async excluirItem(id) {
-        const response = await remove(`/curso/${id}`);
+        const response = await remove(`/ava/${id}`);
         this.dialogDelete = false;
         
         this.snackbar.text = response.message;
@@ -233,7 +238,10 @@
         this.snackbar.active = true;
 
         await this.get();
-      }
+      },
+      permission(rule) {
+        return checkPermission(rule);
+      },
     }
   }
 </script>

@@ -1,6 +1,6 @@
 <template>
   <v-layout wrap>
-
+    
     <v-expansion-panels :value="0">
       <v-expansion-panel>
 
@@ -13,23 +13,33 @@
           <v-form ref="form" lazy-validation>
             <v-row align="center">
 
-              <v-col>
-                <v-select dense v-model="filterData.tp_situacao_curso" label="Status" :items="statusCurso" item-text="label" item-value="value" />
-              </v-col>
-
-              <v-col>
-                <v-select dense v-model="filterData.tp_origem_curso" label="Origem" :items="tpOrigemCurso" item-text="label" item-value="value" />
-              </v-col>
-
-              <v-col cols="12" sm="4">
+              <v-col cols="2">
                 <v-text-field dense
-                  v-model="filterData.tx_nome_curso"
-                  label="Nome"
-                  placeholder="Informe o nome do curso"
+                              v-model="filterData.tx_email_pessoa"
+                              label="E-mail"
                 />
               </v-col>
 
-              <v-col class="d-flex justify-end" cols="12" sm="4">
+              <v-col cols="2">
+                <v-text-field dense
+                              v-model="filterData.tx_nome_pessoa"
+                              label="Nome"
+                />
+              </v-col>
+              
+              <v-col>
+                <v-select dense v-model="filterData.id_perfil" label="Perfil" :items="perfil" item-text="tx_nome_perfil" item-value="id_perfil" />
+              </v-col>
+
+              <v-col cols="2">
+                <v-text-field dense
+                              v-model="filterData.nr_cpf"
+                              label="CPF"
+                              v-mask="'###.###.###-##'"
+                />
+              </v-col>
+
+              <v-col class="d-flex justify-end" cols="4">
 
                 <v-btn color="primary" dark outlined rounded class="mb-8 mr-5" @click="filtrar()">
                   <v-icon>mdi-magnify</v-icon>
@@ -41,8 +51,9 @@
                   Limpar
                 </v-btn>
               </v-col>
-
+              
             </v-row>
+            
           </v-form>
 
         </v-expansion-panel-content>
@@ -61,11 +72,8 @@
             :server-items-length="pagination.total"
             :items-per-page="15"
             :options.sync="options"
-            :single-expand="true"
-            :expanded.sync="expanded"
-            show-expand
-            item-key="id_curso"
-            sort-by="tx_nome_curso"
+            item-key="id_usuario"
+            sort-by="tx_nome_pessoa"
             class="elevation-1"
             no-data-text="Nenhum registro encontrado."
             no-results-text="Nenhum registro encontrado."
@@ -73,26 +81,25 @@
 
             <template v-slot:top>
               <v-toolbar flat>
-                <v-toolbar-title>Listagem de Cursos</v-toolbar-title>
+                <v-toolbar-title>Listagem de Usuários</v-toolbar-title>
                 <v-spacer></v-spacer>
 
-                <v-btn color="primary" dark outlined rounded @click="$router.push('/curso/create')">
+                <v-btn color="primary" dark outlined rounded @click="$router.push('/usuario/create')">
                   <v-icon>mdi-plus</v-icon>
                   Novo
                 </v-btn>
               </v-toolbar>
             </template>
 
-            <template v-slot:item.tp_situacao_curso="{ item }">
-              <p v-if="item.tp_situacao_curso == 'A'">Ativo</p>
-              <p v-else>Inativo</p>
+            <template v-slot:item.pessoa.nr_cpf="{ item }">
+              <td v-if="item.pessoa.nr_cpf">{{item.pessoa.nr_cpf | maskCpfCnpj}}</td>
             </template>
-
+            
             <template v-slot:item.action="{ item }">
 
               <v-tooltip bottom>
                 <template v-slot:activator="{ on }">
-                  <v-btn small color="primary" icon @click="$router.push(`/curso/${item.id_curso}/edit`)" v-on="on">
+                  <v-btn small color="primary" icon @click="$router.push(`/usuario/${item.id_usuario}/edit`)" v-on="on">
                     <v-icon>mdi-pencil</v-icon>
                   </v-btn>
                 </template>
@@ -109,10 +116,6 @@
               </v-tooltip>
 
             </template>
-
-            <template v-slot:expanded-item="{ headers, item }">
-              <td :colspan="headers.length"  v-html="item.tx_conteudo_programatico"></td>
-            </template>
             
           </v-data-table>
 
@@ -124,11 +127,11 @@
       <v-dialog v-model="dialogDelete" persistent max-width="500">
         <v-card>
           <v-card-title class="headline">Atenção!</v-card-title>
-          <v-card-text>Deseja excluir o registro <strong>{{dialogDeleteData.tx_nome_curso}}</strong> ?</v-card-text>
+          <v-card-text>Deseja excluir o registro <strong>{{dialogDeleteData.pessoa.tx_nome_pessoa}}</strong> ?</v-card-text>
           <v-card-actions>
             <v-spacer></v-spacer>
             <v-btn color="error" text @click="dialogDelete = false">Cancelar</v-btn>
-            <v-btn color="primary" text @click="excluirItem(dialogDeleteData.id_curso)">Confirmar</v-btn>
+            <v-btn color="primary" text @click="excluirItem(dialogDeleteData.id_usuario)">Confirmar</v-btn>
           </v-card-actions>
         </v-card>
       </v-dialog>
@@ -145,43 +148,37 @@
 </template>
 
 <script>
+  import inputMask from '@/filters';
+  import {mask} from 'vue-the-mask';
   import {get} from "@/services/abstract.service";
-  import {filterFormat} from "@/helpers/filterFormat";
-  import {remove} from "../../services/abstract.service";
+  import {remove} from "../../../services/abstract.service";
+  import removeMask from "../../../helpers/removeMask";
 
   export default {
-    name: "Curso",
+    name: "Usuario",
+    directives: {mask},
+    mixins: [inputMask],
     data: () => ({
       expanded: [],
       filterData: {},
-      statusCurso: [
-        {
-          label: 'ATIVO',
-          value: 'A'
-        },
-        {
-          label: 'INATIVO',
-          value: 'I'
-        },
-      ],
-      tpOrigemCurso: [
-        'MIGRADO',
-        'ENAP'
-      ],
+      perfil: [],
       data:  [],
       pagination: {},
       options: {},
       headers: [
-        {text: 'id', value: 'id_curso'},
-        {text: 'Curso', value: 'tx_nome_curso', align: 'start',},
-        {text: 'Carga Horaria Minima', value: 'qt_carga_horaria_minima', align: 'center',},
-        {text: 'Status', value: 'tp_situacao_curso'},
-        {text: 'Origem', value: 'tp_origem_curso'},
+        {text: 'id', value: 'id_usuario'},
+        {text: 'Nome', value: 'pessoa.tx_nome_pessoa', align: 'start'},
+        {text: 'CPF', value: 'pessoa.nr_cpf', align: 'center'},
+        {text: 'E-mail', value: 'pessoa.tx_email_pessoa', align: 'start'},
+        {text: 'Perfil', value: 'perfil.tx_nome_perfil', align: 'start'},
+        {text: 'Situação', value: 'situacao_usuario.tx_nome_situacao_usuario', align: 'start'},
         {text: 'Ações', value: 'action', sortable: false},
       ],
       loading: false,
       dialogDelete: false,
-      dialogDeleteData: {},
+      dialogDeleteData: {
+        pessoa: {}
+      },
       snackbar: {
         active: false,
         color: '',
@@ -190,6 +187,7 @@
     }),
     mounted() {
       this.get();
+      this.getPerfil();
     },
     watch: {
       options: {
@@ -207,13 +205,32 @@
     methods: {
       async get(filter = '') {
         this.loading = true;
-        const response = await get('/curso' + filter);
+        const response = await get('/usuario' + filter);
         this.pagination = response.data;
         this.data = response.data.data;
         this.loading = false;
       },
+      async getPerfil() {
+        const responsePerfil = await get('/perfil');
+        this.perfil = responsePerfil.data.data;
+      },
+      /**
+       * TODO - criar uma função dinamica para filtrar objetos com 2 níveis
+       * exemplo, esta na entidade usuario e preciso filtrar a entidade pessoa.
+       * @returns {Promise<void>}
+       */
       async filtrar() {
-        const filters = await filterFormat(this.filterData);
+        const removedMask = await removeMask(this.filterData);
+        const filters = JSON.stringify(removedMask)
+          .replace(/"/g, '')
+          .replace('{', '')
+          .replace('}', '')
+          .replace('}', '')
+          .replace('tx_email_pessoa', 'pessoa.tx_email_pessoa')
+          .replace('tx_nome_pessoa', 'pessoa.tx_nome_pessoa')
+          .replace('nr_cpf', 'pessoa.nr_cpf')
+          .replace(/,/g, ';');
+        
         await this.get('?search=' + filters + '&searchJoin=and');
       },
       limparFiltros() {
@@ -225,7 +242,7 @@
         this.dialogDelete = true;
       },
       async excluirItem(id) {
-        const response = await remove(`/curso/${id}`);
+        const response = await remove(`/usuario/${id}`);
         this.dialogDelete = false;
         
         this.snackbar.text = response.message;

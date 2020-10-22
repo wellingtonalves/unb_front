@@ -21,6 +21,10 @@ const en = {
         title: 'Document',
         subtitle: 'Validation',
       },
+      perguntasFrequentes: {
+        title: 'Commom',
+        subtitle: 'Questions',
+      },
     },
     appFooter: {
       portalUnico: 'Single Government Portal',

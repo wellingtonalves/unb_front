@@ -2,13 +2,16 @@
   <v-app>
     <AppBar />
     <v-main>
+      
       <v-container>
         <v-breadcrumbs :items="$route.meta.breadcrumb" divider="→" />
+        <h2>{{this.$route.meta.title}}</h2>
         <router-view />
+        <AppFooter />
       </v-container>
-    </v-main>
 
-    <AppFooter />
+    </v-main>
+    
   </v-app>
 </template>
 
@@ -25,13 +28,6 @@
   };
 </script>
 
-<style>
-  /* TODO Este código deve ser renderizado em todas as telas do ambiente */
-  header.v-app-bar > .v-toolbar__content {
-    height: auto !important; 
-  }
-</style>
-
 <style scoped>
   header.v-app-bar {
     background-color: var(--v-white-base) !important;
@@ -43,11 +39,21 @@
   }
   main.v-main {
     background-color: var(--v-lightgrey-base);
-    padding-top: 82px !important;
+    padding-top: 94px !important;
   }
   .v-breadcrumbs {
     padding-bottom: 0;
     padding-left: 0;
     padding-right: 0;
+  }
+  @media (min-width: 1264px) {
+    .v-main__wrap > .container {
+      /*max-width: 900px;*/
+    }
+  }
+  @media (max-width: 600px) {
+    main.v-main {
+      padding-top: 76px !important;
+    }
   }
 </style>

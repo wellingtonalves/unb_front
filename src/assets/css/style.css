@@ -1,0 +1,177 @@
+.theme--light.v-application,
+.theme--light.v-card > .v-card__text,
+.theme--light.v-card .v-card__subtitle {
+	color: var(--v-secondary-base) !important;
+}
+header.v-app-bar > .v-toolbar__content {
+	height: auto !important; 
+}
+h2 {
+  color: var(--v-primary-base);
+  font-size: 200%;
+  line-height: 1.2em;
+  padding-bottom: 16px;
+  text-transform: uppercase;
+}
+.box {
+  border: 2px solid var(--v-primary-base);
+  clear: both;
+  padding: 8px;
+  width: 100%;
+}
+.box > h4:first-child {
+  background-color: var(--v-lightgrey-base);
+  color: var(--v-primary-base);
+  display: table;
+  font-size: 1rem;
+  font-weight: 500;
+  margin: -20px auto 0;
+  padding: 0 16px;
+  text-transform: uppercase;
+}
+.box .layout > div {
+  flex-grow: 1;
+  flex-shrink: 0;
+  flex-basis: 300px;
+  padding: 16px;
+}
+.box .layout h5 {
+  color: var(--v-primary-base);
+  font-size: 1rem;
+  font-weight: 300;
+  text-transform: uppercase;
+}
+.flex-basis-100 {
+  flex-basis: 100% !important;
+}
+.section.row {
+  margin-top: 48px;
+}
+.section.row > .col:first-child {
+  padding-right: 48px;
+}
+h3.subtitle {
+	font-size: 220%;
+  font-weight: 800;
+  line-height: 1em;
+  margin-bottom: 1rem;
+}
+.v-expansion-panel::before,
+.v-sheet.v-card:not(.v-sheet--outlined) {
+  box-shadow: 0 0 10px 3px rgba(0, 0, 0, .075);
+}
+
+/* Vuetify Layout Components */
+nav.v-navigation-drawer .v-list-item__action .v-icon,
+nav.v-navigation-drawer .v-list-item__icon .v-icon {
+  color: var(--v-contrast-base) !important;
+}
+
+/* Custom Layout Components */
+.columns {
+  -moz-column-gap: 40px;
+  -moz-columns: 3 260px;
+  -webkit-column-gap: 40px;
+  -webkit-columns: 3 260px;
+  column-gap: 40px;
+  columns: 3 260px;
+}
+.count-items {
+	counter-reset: evg-counter;
+}
+.count-items > .v-card:before,
+.count-items > .v-expansion-panel button:before {
+  color: var(--v-contrast-base);
+  content: counter(evg-counter, decimal);
+  counter-increment: evg-counter;
+  display: inline-block;
+  float: left;
+  font-size: 150%;
+  font-weight: 700;
+  margin-right: 16px;
+  min-width: 25px;
+}
+.count-items > .v-card:before {
+  margin-left: 16px;
+  margin-top: 12px;
+}
+.count-items > .v-expansion-panel button:before {
+  background-color: transparent;
+  opacity: 1;
+  position: static;
+}
+.layout.evg-cards .v-card {
+	background-color: transparent;
+	border: 2px solid var(--v-primary-base);
+	border-radius: 0;
+	box-shadow: 0 0 0 !important;
+	padding: 8px;
+	word-break: break-word;
+}
+.layout.evg-cards .v-card + .v-card {
+	margin-top: 16px;
+}
+.layout.evg-cards .v-card__text {
+	font-size: 1rem;
+}
+.layout.evg-cards .v-card__text a {
+	color: var(--v-contrast-base);
+}
+.layout.evg-cards .v-card__text p:only-child {
+	margin-bottom: 0;
+}
+.evg-panels .v-expansion-panel {
+	background-color: transparent !important;
+	border: 2px solid var(--v-primary-base);
+	border-radius: 0 !important;
+}
+.evg-panels .v-expansion-panel + .v-expansion-panel {
+	margin-top: 8px;
+}
+.evg-panels .v-expansion-panel-header {
+	color: var(--v-secondary-base);
+	font-size: 1.2rem;
+  font-weight: 500;
+}
+.evg-panels .v-expansion-panel-content a {
+	color: var(--v-contrast-base);
+}
+.v-list.links-bordered {
+  background-color: transparent !important;
+  padding: 0 0 2em;
+  margin-left: -8px;
+  margin-right: -8px;
+}
+.v-list.links-bordered .v-list-item {
+  border: 2px solid var(--v-primary-base);
+  margin: 8px;
+  min-height: 42px;
+}
+.v-list.links-bordered .v-list-item:hover {
+  background-color: var(--v-secondary-base);
+  border-color: var(--v-secondary-base);
+  color: var(--v-white-base);
+}
+.v-list.links-bordered .v-icon,
+.v-list.links-bordered .v-list-item__title {
+  color: var(--v-primary-base);
+}
+.v-list.links-bordered .v-list-item:hover .v-icon,
+.v-list.links-bordered .v-list-item:hover .v-list-item__title {
+  color: var(--v-white-base);
+}
+.v-list.links-bordered .v-list-item__icon:first-child {
+  margin: 8px 16px 8px 0;
+}
+.v-list.links-bordered .v-list-icon {
+  margin: 12px 0;
+}
+.v-list.links-bordered .v-list-item__title {
+  font-weight: 500;
+}
+
+@media (max-width: 600px) {
+	.box .layout > div {
+		flex-basis: 100%;
+	}
+}
