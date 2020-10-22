@@ -15,7 +15,7 @@
       
       <v-row class="items-selection-component">
         
-        <v-col cols="12" sm="4">
+        <v-col cols="12" sm="5">
           <v-card raised elevation="10">
             <v-card-title>Permissões</v-card-title>
             <v-data-table
@@ -48,7 +48,7 @@
           </v-card>
         </v-col>
 
-        <v-col cols="12" sm="1" class="d-flex flex-column align-center justify-center">
+        <v-col cols="12" sm="2" class="d-flex flex-column align-center justify-center">
 
           <v-btn small class="my-2" color="primary" outlined fab @click="selecionarPermissoes()">
             <v-icon>mdi-chevron-right</v-icon>
@@ -68,7 +68,7 @@
             
         </v-col>
 
-        <v-col cols="12" sm="7">
+        <v-col cols="12" sm="5">
           <v-card raised elevation="10">
             <v-card-title>Permissões selecionadas</v-card-title>
             <v-data-table
