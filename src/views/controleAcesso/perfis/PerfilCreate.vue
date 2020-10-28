@@ -1,12 +1,11 @@
 <template>
-  
   <v-layout wrap>
 
-    <v-card class="mx-auto" height="100%" width="100%" elevation="10">
+    <v-card width="100%" elevation="10">
       <v-container class="pa-5" fluid>
-        <usuario-form @update="update" :errors="errors">
+        <perfil-form @update="update" :errors="errors">
           <template v-slot:buttons>
-            <v-btn class="mr-4" @click="$router.push('/usuarios')">
+            <v-btn class="mr-4" @click="$router.push('/perfis')">
               <v-icon class="mr-2">mdi-backup-restore</v-icon>
               Voltar
             </v-btn>
@@ -16,7 +15,7 @@
               Salvar
             </v-btn>
           </template>
-        </usuario-form>
+        </perfil-form>
         
         <v-snackbar v-model="snackbar.active" :color="snackbar.color" :timeout="snackbar.timeout">
           {{snackbar.text}}
@@ -26,16 +25,16 @@
         </v-snackbar>
       </v-container>
     </v-card>
+
   </v-layout>
-  
 </template>
 
 <script>
-  import UsuarioForm from "./UsuarioForm";
+  import PerfilForm from "./PerfilForm";
   import {create} from "@/services/abstract.service";
   export default {
-    name: "UsuarioCreate",
-    components: {UsuarioForm},
+    name: "PerfilCreate",
+    components: {PerfilForm},
     data: () => ({
       data: '',
       loading: false,
@@ -50,7 +49,7 @@
     watch: {
       'snackbar.active': function (val) {
         if (this.snackbar.color == 'success' && val == false) {
-          this.$router.push('/usuarios');
+          this.$router.push('/perfis');
         }
       }
     },
@@ -60,7 +59,7 @@
       },
       async save() {
         this.loading = true;
-        const response = await create('usuario', this.data)
+        const response = await create('perfil', this.data)
 
         this.loading = false;
         
@@ -79,7 +78,3 @@
     }
   }
 </script>
-
-<style scoped>
-
-</style>
