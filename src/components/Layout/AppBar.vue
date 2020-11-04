@@ -39,6 +39,15 @@
           </v-list-item-content>
         </v-list-item>
 
+        <v-list-item link :to="'/tarefas-agendadas/'" v-show="permission('TAREFA_AGENDADA_LISTAR')">
+          <v-list-item-action>
+            <v-icon>mdi-school-outline</v-icon>
+          </v-list-item-action>
+          <v-list-item-content>
+            <v-list-item-title>TAREFAS AGENDADAS</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+
         <v-list-group prepend-icon="mdi-account-settings" value="true" v-show="(permission('USUARIO_LISTAR') || permission('PERFIL_LISTAR'))">
 
           <template v-slot:activator>
