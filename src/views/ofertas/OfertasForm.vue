@@ -1,6 +1,6 @@
 <template>
-    <div>
-        <v-form lazy-validation ref="form" v-model="validForm">
+    <form-skeleton :loading="loading">
+        <v-form lazy-validation ref="form" v-show="!loading" v-model="validForm">
             <v-row>
 
                 <v-col class="d-flex" cols="12" sm="6">
@@ -310,16 +310,18 @@
             </v-row>
 
         </v-form>
-    </div>
+    </form-skeleton>
 </template>
 
 <script>
     import {get} from "@/services/abstract.service";
     import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+
     export default {
         name: "AvaForm",
         props: ['data', 'errors'],
         data: () => ({
+            loading: true,
             validForm: false,
             dataResponse: {} || this.data,
             errorData: {},
@@ -427,42 +429,43 @@
                 }
             }
         },
-        mounted() {
-            this.getTipoOferta();
-            this.getAva();
-            this.getCursos();
-            this.getModeloCertificado();
-            this.getParceiros();
-            this.getCertificadores();
+        async mounted() {
+            await this.getTipoOferta();
+            await this.getAva();
+            await this.getCursos();
+            await this.getModeloCertificado();
+            await this.getParceiros();
+            await this.getCertificadores();
+            this.loading = false
         },
         methods: {
-            getTipoOferta() {
-                get('/tipo-oferta?pagination=false').then(response => {
+            async getTipoOferta() {
+                return get('/tipo-oferta?pagination=false').then(response => {
                     this.tipoOferta = response.data.data
                 })
             },
-            getAva() {
-                get('/ava?pagination=false').then(response => {
+            async getAva() {
+                return get('/ava?pagination=false').then(response => {
                     this.ava = response.data.data
                 })
             },
-            getCursos() {
-                get('/curso?pagination=false').then(response => {
+            async getCursos() {
+                return get('/curso?pagination=false').then(response => {
                     this.cursos = response.data.data
                 })
             },
-            getModeloCertificado() {
-                get('/modelo-certificado?pagination=false').then(response => {
+            async getModeloCertificado() {
+                return get('/modelo-certificado?pagination=false').then(response => {
                     this.modeloCertificado = response.data.data
                 })
             },
-            getParceiros() {
-                get('/parceiros?pagination=false&search=id_tipo_parceiros:1').then(response => {
+            async getParceiros() {
+                return get('/parceiros?pagination=false&search=id_tipo_parceiros:1').then(response => {
                     this.parceiros = response.data.data
                 })
             },
-            getCertificadores() {
-                get('/parceiros?pagination=false&search=id_tipo_parceiros:2').then(response => {
+            async getCertificadores() {
+                return get('/parceiros?pagination=false&search=id_tipo_parceiros:2').then(response => {
                     this.certificadores = response.data.data
                 })
             },
