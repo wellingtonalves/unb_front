@@ -155,6 +155,51 @@ const routes = [
         ],
       },
       {
+        path: '/ofertas',
+        component: () => import('../components/Layout/RouterViewComponent.vue'),
+        children: [
+          {
+            path: '',
+            name: 'oferta',
+            component: () => import('../views/ofertas/Ofertas.vue'),
+            meta: {
+              requiresAuth: true,
+              title: 'Ofertas',
+              breadcrumb: [
+                {text: 'Dashboard', disabled: false, href: '/'},
+                {text: 'Ofertas', disabled: true, href: '/ofertas'},
+              ],
+            },
+          },
+          {
+            path: '/ofertas/create',
+            component: () => import('../views/ofertas/OfertasCreate.vue'),
+            meta: {
+              title: 'Cadastrar Oferta',
+              requiresAuth: true,
+              breadcrumb: [
+                {text: 'Dashboard', disabled: false, href: '/'},
+                {text: 'Ofertas', disabled: false, href: '/ofertas'},
+                {text: 'Cadastrar Oferta', disabled: true, href: '/ofertas'},
+              ],
+            },
+          },
+          {
+            path: '/ofertas/:id/edit',
+            component: () => import('../views/ofertas/OfertasEdit.vue'),
+            meta: {
+              title: 'Editar Oferta',
+              requiresAuth: true,
+              breadcrumb: [
+                {text: 'Dashboard', disabled: false, href: '/'},
+                {text: 'Ofertas', disabled: false, href: '/ofertas'},
+                {text: 'Editar Oferta', disabled: true, href: '/ofertas'},
+              ],
+            },
+          },
+        ],
+      },
+      {
         path: '/usuarios',
         component: () => import('../components/Layout/RouterViewComponent.vue'),
         children: [

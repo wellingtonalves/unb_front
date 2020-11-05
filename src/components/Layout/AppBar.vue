@@ -1,7 +1,7 @@
 <template>
 
   <v-layout>
-    
+
     <v-navigation-drawer
       v-model="drawerSettings.model"
       :clipped="true"
@@ -36,6 +36,15 @@
           </v-list-item-action>
           <v-list-item-content>
             <v-list-item-title>AVA</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+
+        <v-list-item link :to="'/ofertas/'" v-show="permission('OFERTA_LISTAR')">
+          <v-list-item-action>
+            <v-icon>mdi-school-outline</v-icon>
+          </v-list-item-action>
+          <v-list-item-content>
+            <v-list-item-title>Ofertas</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
 
@@ -212,15 +221,15 @@
 
       </v-container>
     </v-app-bar>
-    
+
   </v-layout>
-  
+
 </template>
 
 <script>
   import {logout} from '@/services/auth.service';
   import {checkPermission} from "@/helpers/checkPermission";
-  
+
   export default {
     name: "AppBar",
     data: () => ({
@@ -242,7 +251,7 @@
       //TODO - fazer tratamento quando der erro no login api
       async logout() {
         const response = await logout();
-        
+
         if (response.status === 200) {
           await this.$store.dispatch('logout').then(() => {
             this.$router.push('/login');
