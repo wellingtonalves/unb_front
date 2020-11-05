@@ -347,6 +347,51 @@ const routes = [
           },
         ],
       },
+      {
+        path: '/tarefas-agendadas',
+        component: () => import('../components/Layout/RouterViewComponent.vue'),
+        children: [
+          {
+            path: '',
+            name: 'tarefa-agendada',
+            component: () => import('../views/tarefas_agendadas/TarefaAgendada.vue'),
+            meta: {
+              requiresAuth: true,
+              title: 'Tarefas Agendadas',
+              breadcrumb: [
+                {text: 'Dashboard', disabled: false, href: '/'},
+                {text: 'Usuários', disabled: true, href: '/tarefa-agendada'},
+              ],
+            },
+          },
+          {
+            path: '/tarefa-agendada/create',
+            component: () => import('../views/tarefas_agendadas/TarefaAgendadaCreate.vue'),
+            meta: {
+              title: 'Cadastrar tarefa',
+              requiresAuth: true,
+              breadcrumb: [
+                {text: 'Dashboard', disabled: false, href: '/'},
+                {text: 'Tarefas Agendadas', disabled: false, href: '/tarefas-agendadas'},
+                {text: 'Cadastrar tarefa', disabled: true, href: '/tarefas-agendadas'},
+              ],
+            },
+          },
+          {
+            path: '/tarefa-agendada/:id/edit',
+            component: () => import('../views/tarefas_agendadas/TarefaAgendadaEdit.vue'),
+            meta: {
+              title: 'Editar tarefa',
+              requiresAuth: true,
+              breadcrumb: [
+                {text: 'Dashboard', disabled: false, href: '/'},
+                {text: 'Tarefas Agendadas', disabled: false, href: '/tarefas-agendadas'},
+                {text: 'Editar tarefa', disabled: true, href: '/tarefas-agendadas'},
+              ],
+            },
+          },
+        ],
+      },
     ],
   },
 ];
