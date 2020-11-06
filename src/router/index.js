@@ -200,6 +200,51 @@ const routes = [
         ],
       },
       {
+        path: '/programas',
+        component: () => import('../components/Layout/RouterViewComponent.vue'),
+        children: [
+          {
+            path: '',
+            name: 'oferta',
+            component: () => import('../views/programas/Programas.vue'),
+            meta: {
+              requiresAuth: true,
+              title: 'Programas',
+              breadcrumb: [
+                {text: 'Dashboard', disabled: false, href: '/'},
+                {text: 'Programas', disabled: true, href: '/programas'},
+              ],
+            },
+          },
+          {
+            path: '/programas/create',
+            component: () => import('../views/programas/ProgramasCreate.vue'),
+            meta: {
+              title: 'Cadastrar Programa',
+              requiresAuth: true,
+              breadcrumb: [
+                {text: 'Dashboard', disabled: false, href: '/'},
+                {text: 'Programas', disabled: false, href: '/programas'},
+                {text: 'Cadastrar Programa', disabled: true, href: '/programas'},
+              ],
+            },
+          },
+          {
+            path: '/programas/:id/edit',
+            component: () => import('../views/programas/ProgramasEdit.vue'),
+            meta: {
+              title: 'Editar Programa',
+              requiresAuth: true,
+              breadcrumb: [
+                {text: 'Dashboard', disabled: false, href: '/'},
+                {text: 'Programas', disabled: false, href: '/programas'},
+                {text: 'Editar Programa', disabled: true, href: '/programas'},
+              ],
+            },
+          },
+        ],
+      },
+      {
         path: '/usuarios',
         component: () => import('../components/Layout/RouterViewComponent.vue'),
         children: [

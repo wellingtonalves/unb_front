@@ -1,9 +1,9 @@
 <template>
   <v-layout wrap>
     <card-default>
-      <ofertas-form @update="update" :data="data" :errors="errors">
+      <programas-form @update="update" :data="data" :errors="errors">
         <template v-slot:buttons>
-          <v-btn class="mr-4" @click="$router.push('/ofertas')">
+          <v-btn class="mr-4" @click="$router.push('/programas')">
             <v-icon class="mr-2">mdi-backup-restore</v-icon>
             Voltar
           </v-btn>
@@ -13,7 +13,7 @@
             Salvar
           </v-btn>
         </template>
-      </ofertas-form>
+      </programas-form>
 
       <v-snackbar v-model="snackbar.active" :color="snackbar.color" :timeout="snackbar.timeout">
         {{snackbar.text}}
@@ -26,11 +26,11 @@
 </template>
 
 <script>
-  import OfertasForm from "./OfertasForm";
+  import ProgramasForm from "./ProgramasForm";
   import {get, update} from "@/services/abstract.service";
   export default {
-    name: "OfertasEdit",
-    components: {OfertasForm},
+    name: "ProgramasEdit",
+    components: {ProgramasForm},
     data: () => ({
       data: '',
       loading: false,
@@ -45,7 +45,7 @@
     watch: {
       'snackbar.active': function (val) {
         if (this.snackbar.color == 'success' && val == false) {
-          this.$router.push('/ofertas');
+          this.$router.push('/programas');
         }
       }
     },
@@ -54,7 +54,7 @@
     },
     methods: {
       async getData() {
-        const response = await get(`ofertas/${this.$route.params.id}`);
+        const response = await get(`programas/${this.$route.params.id}`);
         this.data = response.data.data;
       },
       update(data) {
@@ -62,7 +62,7 @@
       },
       async save() {
         this.loading = true;
-        const response = await update(`ofertas/${this.$route.params.id}`, this.data)
+        const response = await update(`programas/${this.$route.params.id}`, this.data)
 
         this.loading = false;
 
