@@ -16,7 +16,7 @@
                 <v-select dense v-model="filterData.id_ava" label="AVA" :items="ava" item-text="tx_nome_ava" item-value="id_ava" />
               </v-col>
               <v-col cols="12" sm="2">
-                <v-select dense v-model="filterData.id_tipo_oferta" label="Tipo de Oferta" :items="tipoOferta" item-text="tx_nome_tipo_oferta" item-value="id_tipo_oferta" />
+                <v-select dense v-model="filterData.id_tipo_oferta" label="Tipo" :items="tipoOferta" item-text="tx_nome_tipo_oferta" item-value="id_tipo_oferta" />
               </v-col>
               <v-col cols="12" sm="3">
                 <v-text-field dense
