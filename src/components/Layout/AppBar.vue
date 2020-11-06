@@ -1,7 +1,7 @@
 <template>
 
   <v-layout>
-    
+
     <v-navigation-drawer
       v-model="drawerSettings.model"
       :clipped="true"
@@ -39,6 +39,24 @@
           </v-list-item-content>
         </v-list-item>
 
+        <v-list-item link :to="'/tarefas-agendadas/'" v-show="permission('TAREFA_AGENDADA_LISTAR')">
+          <v-list-item-action>
+            <v-icon>mdi-school-outline</v-icon>
+          </v-list-item-action>
+          <v-list-item-content>
+            <v-list-item-title>TAREFAS AGENDADAS</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+
+        <v-list-item link :to="'/ofertas/'" v-show="permission('OFERTA_LISTAR')">
+          <v-list-item-action>
+            <v-icon>mdi-school-outline</v-icon>
+          </v-list-item-action>
+          <v-list-item-content>
+            <v-list-item-title>Ofertas</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+
         <v-list-group prepend-icon="mdi-account-settings" value="true" v-show="(permission('USUARIO_LISTAR') || permission('PERFIL_LISTAR'))">
 
           <template v-slot:activator>
@@ -54,12 +72,21 @@
             </v-list-item-content>
           </v-list-item>
 
-          <v-list-item link :to="'/perfil'" v-show="permission('PERFIL_LISTAR')">
+          <v-list-item link :to="'/perfis'" v-show="permission('PERFIL_LISTAR')">
             <v-list-item-action>
               <v-icon>mdi-account</v-icon>
             </v-list-item-action>
             <v-list-item-content>
               <v-list-item-title>Perfis</v-list-item-title>
+            </v-list-item-content>
+          </v-list-item>
+
+          <v-list-item link :to="'/permissoes'" v-show="permission('PERMISSAO_LISTAR')">
+            <v-list-item-action>
+              <v-icon>mdi-account-lock</v-icon>
+            </v-list-item-action>
+            <v-list-item-content>
+              <v-list-item-title>Permissões</v-list-item-title>
             </v-list-item-content>
           </v-list-item>
 
@@ -203,15 +230,15 @@
 
       </v-container>
     </v-app-bar>
-    
+
   </v-layout>
-  
+
 </template>
 
 <script>
   import {logout} from '@/services/auth.service';
   import {checkPermission} from "@/helpers/checkPermission";
-  
+
   export default {
     name: "AppBar",
     data: () => ({
@@ -233,7 +260,7 @@
       //TODO - fazer tratamento quando der erro no login api
       async logout() {
         const response = await logout();
-        
+
         if (response.status === 200) {
           await this.$store.dispatch('logout').then(() => {
             this.$router.push('/login');

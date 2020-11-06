@@ -1,0 +1,14 @@
+version: '3.5'
+services:
+  build:
+    container_name: secretaria-virtual-web
+    image: alexalexandre/web-vue
+    working_dir: /var/www
+    ports:
+      - 8080:8080
+    volumes:
+      - .:/var/www
+    entrypoint: [ "/bin/sh" , "./docker/entrypoint.sh" ]
+    command: yarn build:dev
+    tty: true
+    restart: on-failure
