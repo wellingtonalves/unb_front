@@ -318,7 +318,7 @@
     import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
     export default {
-        name: "AvaForm",
+        name: "OfertasForm",
         props: ['data', 'errors'],
         data: () => ({
             loading: true,
