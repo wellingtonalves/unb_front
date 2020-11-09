@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <v-form lazy-validation ref="form" v-model="validForm">
+  <form-skeleton :loading="loading">
+    <v-form lazy-validation ref="form" v-model="validForm" v-show="!loading">
       <v-row>
         <v-col class="d-flex" cols="12" sm="6">
           <v-text-field
@@ -107,7 +107,7 @@
       </v-row>
 
     </v-form>
-  </div>
+  </form-skeleton>
 </template>
 
 <script>
@@ -118,6 +118,7 @@
     name: "CursoForm",
     props: ['data', 'errors'],
     data: vm => ({
+      loading: true,
       validForm: false,
       dataResponse: {
         dt_lancamento: new Date().toISOString().substr(0, 10) 
@@ -161,8 +162,9 @@
         this.dataResponse = val;
       },
     },
-    mounted() {
-      this.getTematicaCurso();
+    async mounted() {
+      await this.getTematicaCurso();
+      this.loading = false
     },
     methods: {
       async getTematicaCurso() {
