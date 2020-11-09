@@ -30,6 +30,15 @@
           </v-list-item-content>
         </v-list-item>
 
+        <v-list-item link :to="'/ofertas/'" v-show="permission('OFERTA_LISTAR')">
+          <v-list-item-action>
+            <v-icon>mdi-format-list-bulleted-square</v-icon>
+          </v-list-item-action>
+          <v-list-item-content>
+            <v-list-item-title>Ofertas</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+
         <v-list-item link :to="'/ava/'" v-show="permission('AVA_LISTAR')">
           <v-list-item-action>
             <v-icon>mdi-school-outline</v-icon>
@@ -41,19 +50,10 @@
 
         <v-list-item link :to="'/tarefas-agendadas/'" v-show="permission('TAREFA_AGENDADA_LISTAR')">
           <v-list-item-action>
-            <v-icon>mdi-school-outline</v-icon>
+            <v-icon>mdi-briefcase-clock</v-icon>
           </v-list-item-action>
           <v-list-item-content>
-            <v-list-item-title>TAREFAS AGENDADAS</v-list-item-title>
-          </v-list-item-content>
-        </v-list-item>
-
-        <v-list-item link :to="'/ofertas/'" v-show="permission('OFERTA_LISTAR')">
-          <v-list-item-action>
-            <v-icon>mdi-school-outline</v-icon>
-          </v-list-item-action>
-          <v-list-item-content>
-            <v-list-item-title>Ofertas</v-list-item-title>
+            <v-list-item-title>Tarefas agendadas</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
 
@@ -65,7 +65,7 @@
 
           <v-list-item link :to="'/usuarios'" v-show="permission('USUARIO_LISTAR')">
             <v-list-item-action>
-              <v-icon>mdi-account-plus</v-icon>
+              <v-icon>mdi-account-multiple</v-icon>
             </v-list-item-action>
             <v-list-item-content>
               <v-list-item-title>Usuários</v-list-item-title>
@@ -74,7 +74,7 @@
 
           <v-list-item link :to="'/perfis'" v-show="permission('PERFIL_LISTAR')">
             <v-list-item-action>
-              <v-icon>mdi-account</v-icon>
+              <v-icon>mdi-account-box-multiple</v-icon>
             </v-list-item-action>
             <v-list-item-content>
               <v-list-item-title>Perfis</v-list-item-title>
@@ -83,7 +83,7 @@
 
           <v-list-item link :to="'/permissoes'" v-show="permission('PERMISSAO_LISTAR')">
             <v-list-item-action>
-              <v-icon>mdi-account-lock</v-icon>
+              <v-icon>mdi-account-details</v-icon>
             </v-list-item-action>
             <v-list-item-content>
               <v-list-item-title>Permissões</v-list-item-title>
@@ -104,7 +104,7 @@
 
           <v-col cols="9" class="align-self-start">
 
-            <h1 class="mr-8 float-left"><a href="https://www.escolavirtual.gov.br/" target="_blank">EV.G: Escola Virtual.Gov</a></h1>
+            <h1 class="mr-8 float-left"><a href="/">EV.G: Escola Virtual.Gov</a></h1>
 
             <v-list nav dense flat id="main-nav" class="d-none d-sm-flex float-left">
 
@@ -314,14 +314,12 @@
     position: absolute;
   }
   nav.v-navigation-drawer {
-    background-color: var(--v-secondary-base);
     top: 94px !important;
   }
   nav.v-navigation-drawer .v-list > .v-list-item:not(:last-child) {
     border-bottom: 1px solid rgba(0, 0, 0, 0.1);
   }
   nav.v-navigation-drawer .v-list-item__title {
-    color: var(--v-white-base);
     font-size: .85rem;
   }
   #main-nav {

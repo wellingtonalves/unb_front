@@ -213,6 +213,7 @@ const routes = [
               title: 'Usuários',
               breadcrumb: [
                 {text: 'Dashboard', disabled: false, href: '/'},
+                {text: 'Controle de acessos', disabled: true},
                 {text: 'Usuários', disabled: true, href: '/usuarios'},
               ],
             },
@@ -226,6 +227,7 @@ const routes = [
               requiresAuth: true,
               breadcrumb: [
                 {text: 'Dashboard', disabled: false, href: '/'},
+                {text: 'Controle de acessos', disabled: true},
                 {text: 'Usuários', disabled: false, href: '/usuarios'},
                 {text: 'Cadastrar usuário', disabled: true, href: '/usuarios'},
               ],
@@ -240,6 +242,7 @@ const routes = [
               requiresAuth: true,
               breadcrumb: [
                 {text: 'Dashboard', disabled: false, href: '/'},
+                {text: 'Controle de acessos', disabled: true},
                 {text: 'Usuários', disabled: false, href: '/usuarios'},
                 {text: 'Editar usuário', disabled: true, href: '/usuarios'},
               ],
@@ -260,7 +263,8 @@ const routes = [
               requiresAuth: true,
               title: 'Perfis',
               breadcrumb: [
-                {text: 'Home', disabled: false, href: '/'},
+                {text: 'Dashboard', disabled: false, href: '/'},
+                {text: 'Controle de acessos', disabled: true},
                 {text: 'Perfis', disabled: true, href: '/perfis'},
               ],
             },
@@ -273,7 +277,8 @@ const routes = [
               title: 'Cadastrar perfil',
               requiresAuth: true,
               breadcrumb: [
-                {text: 'Home', disabled: false, href: '/'},
+                {text: 'Dashboard', disabled: false, href: '/'},
+                {text: 'Controle de acessos', disabled: true},
                 {text: 'Perfis', disabled: false, href: '/perfis'},
                 {text: 'Cadastrar perfil', disabled: true, href: '/perfis'},
               ],
@@ -287,7 +292,8 @@ const routes = [
               title: 'Editar perfil',
               requiresAuth: true,
               breadcrumb: [
-                {text: 'Home', disabled: false, href: '/'},
+                {text: 'Dashboard', disabled: false, href: '/'},
+                {text: 'Controle de acessos', disabled: true},
                 {text: 'Perfis', disabled: false, href: '/perfis'},
                 {text: 'Editar perfil', disabled: true, href: '/perfis'},
               ],
@@ -308,7 +314,8 @@ const routes = [
               requiresAuth: true,
               title: 'Permissões',
               breadcrumb: [
-                {text: 'Home', disabled: false, href: '/'},
+                {text: 'Dashboard', disabled: false, href: '/'},
+                {text: 'Controle de acessos', disabled: true},
                 {text: 'Permissões', disabled: true, href: '/permissoes'},
               ],
             },
@@ -321,7 +328,8 @@ const routes = [
               title: 'Cadastrar permissão',
               requiresAuth: true,
               breadcrumb: [
-                {text: 'Home', disabled: false, href: '/'},
+                {text: 'Dashboard', disabled: false, href: '/'},
+                {text: 'Controle de acessos', disabled: true},
                 {text: 'Permissões', disabled: false, href: '/permissoes'},
                 {
                   text: 'Cadastrar permissão',
@@ -339,7 +347,8 @@ const routes = [
               title: 'Editar permissão',
               requiresAuth: true,
               breadcrumb: [
-                {text: 'Home', disabled: false, href: '/'},
+                {text: 'Dashboard', disabled: false, href: '/'},
+                {text: 'Controle de acessos', disabled: true},
                 {text: 'Permissões', disabled: false, href: '/permissoes'},
                 {text: 'Editar permissão', disabled: true, href: '/permissoes'},
               ],
@@ -360,7 +369,7 @@ const routes = [
               title: 'Tarefas Agendadas',
               breadcrumb: [
                 {text: 'Dashboard', disabled: false, href: '/'},
-                {text: 'Usuários', disabled: true, href: '/tarefa-agendada'},
+                {text: 'Tarefas Agendadas', disabled: true, href: '/tarefa-agendada'},
               ],
             },
           },
