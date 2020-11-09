@@ -58,9 +58,6 @@
             :server-items-length="pagination.total"
             :items-per-page="15"
             :options.sync="options"
-            :single-expand="true"
-            :expanded.sync="expanded"
-            show-expand
             item-key="id_programa"
             sort-by="tx_nome_programa"
             class="elevation-1"
