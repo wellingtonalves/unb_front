@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <v-form  @submit.prevent="save" ref="form">
+  <form-skeleton :loading="loading">
+    <v-form  @submit.prevent="save" ref="form" v-show="!loading">
       <v-row>
         <v-col class="d-flex" cols="4" sm="6">
           <v-text-field
@@ -146,7 +146,7 @@
       </v-row>
 
     </v-form>
-  </div>
+  </form-skeleton>
 </template>
 
 <script>
@@ -158,6 +158,7 @@
     props: ['data', 'errors'],
     directives: {mask},
     data: vm => ({
+      loading: true,
       validForm: false,
       dataResponse: {
         tp_metodo_autenticacao: 'local',
@@ -212,12 +213,14 @@
         this.dataResponse = val;
       },
     },
-    mounted() {
-      this.getTematicaCurso();
-      this.getSituacaoUsuario();
-      this.getPerfil();
-      this.getPais();
-      this.getUf();
+    async mounted() {
+      await this.getTematicaCurso();
+      await this.getSituacaoUsuario();
+      await this.getPerfil();
+      await this.getPais();
+      await this.getUf();
+      this.loading = false
+
 
       //TODO - fazer o municiopio funcionar quando for editar.
       // if (this.$route.params.id) {
