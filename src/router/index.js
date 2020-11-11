@@ -4,8 +4,7 @@ import VueRouter from 'vue-router';
 
 Vue.use(VueRouter);
 
-const routes = [
-  {
+const routes = [{
     path: '/login',
     name: 'login',
     component: () => import('../views/Login.vue'),
@@ -16,8 +15,7 @@ const routes = [
   {
     path: '',
     component: () => import('../components/Layout/Main.vue'),
-    children: [
-      {
+    children: [{
         path: '/',
         name: 'Home',
         component: () => import('../views/Home.vue'),
@@ -32,9 +30,16 @@ const routes = [
         meta: {
           requiresAuth: false,
           title: 'Conheça a Escola',
-          breadcrumb: [
-            {text: 'Início', disabled: false, href: '/'},
-            {text: 'Conheça a Escola', disabled: true, href: '/conheca-a-escola'},
+          breadcrumb: [{
+              text: 'Início',
+              disabled: false,
+              href: '/'
+            },
+            {
+              text: 'Conheça a Escola',
+              disabled: true,
+              href: '/conheca-a-escola'
+            },
           ],
         },
       },
@@ -45,9 +50,16 @@ const routes = [
         meta: {
           requiresAuth: false,
           title: 'Adesão Institucional',
-          breadcrumb: [
-            {text: 'Início', disabled: false, href: '/'},
-            {text: 'Adesão Institucional', disabled: true, href: '/adesao-institucional'},
+          breadcrumb: [{
+              text: 'Início',
+              disabled: false,
+              href: '/'
+            },
+            {
+              text: 'Adesão Institucional',
+              disabled: true,
+              href: '/adesao-institucional'
+            },
           ],
         },
       },
@@ -58,26 +70,68 @@ const routes = [
         meta: {
           requiresAuth: false,
           title: 'Perguntas Frequentes',
-          breadcrumb: [
-            {text: 'Início', disabled: false, href: '/'},
-            {text: 'Perguntas Frequentes', disabled: true, href: '/perguntas-frequentes'},
+          breadcrumb: [{
+              text: 'Início',
+              disabled: false,
+              href: '/'
+            },
+            {
+              text: 'Perguntas Frequentes',
+              disabled: true,
+              href: '/perguntas-frequentes'
+            },
           ],
         },
       },
       {
+        path: '/usuario',
+        component: () => import('../components/Layout/RouterViewComponent.vue'),
+        children: [{
+            path: '',
+            redirect: '/usuario/meus-dados'
+          },
+          {
+            path: '/usuario/meus-dados',
+            component: () =>
+              import('../views/usuario/Profile.vue'),
+            meta: {
+              requiresAuth: true,
+              title: 'Meu Dados',
+              breadcrumb: [{
+                  text: 'Início',
+                  disabled: false,
+                  href: '/'
+                },
+                {
+                  text: 'Meus Dados',
+                  disabled: true,
+                  href: '/meus-dados'
+                },
+              ],
+            },
+          }
+        ]
+      },
+      {
         path: '/cursos',
         component: () => import('../components/Layout/RouterViewComponent.vue'),
-        children: [
-          {
+        children: [{
             path: '',
             name: 'curso',
             component: () => import('../views/cursos/Curso.vue'),
             meta: {
               requiresAuth: true,
               title: 'Cursos',
-              breadcrumb: [
-                {text: 'Dashboard', disabled: false, href: '/'},
-                {text: 'Cursos', disabled: true, href: '/cursos'},
+              breadcrumb: [{
+                  text: 'Dashboard',
+                  disabled: false,
+                  href: '/'
+                },
+                {
+                  text: 'Cursos',
+                  disabled: true,
+                  href: '/cursos'
+                },
               ],
             },
           },
@@ -87,10 +141,21 @@ const routes = [
             meta: {
               title: 'Cadastrar curso',
               requiresAuth: true,
-              breadcrumb: [
-                {text: 'Dashboard', disabled: false, href: '/'},
-                {text: 'Cursos', disabled: false, href: '/cursos'},
-                {text: 'Cadastrar curso', disabled: true, href: '/cursos'},
+              breadcrumb: [{
+                  text: 'Dashboard',
+                  disabled: false,
+                  href: '/'
+                },
+                {
+                  text: 'Cursos',
+                  disabled: false,
+                  href: '/cursos'
+                },
+                {
+                  text: 'Cadastrar curso',
+                  disabled: true,
+                  href: '/cursos'
+                },
               ],
             },
           },
@@ -100,10 +165,21 @@ const routes = [
             meta: {
               title: 'Editar curso',
               requiresAuth: true,
-              breadcrumb: [
-                {text: 'Dashboard', disabled: false, href: '/'},
-                {text: 'Cursos', disabled: false, href: '/cursos'},
-                {text: 'Editar curso', disabled: true, href: '/cursos'},
+              breadcrumb: [{
+                  text: 'Dashboard',
+                  disabled: false,
+                  href: '/'
+                },
+                {
+                  text: 'Cursos',
+                  disabled: false,
+                  href: '/cursos'
+                },
+                {
+                  text: 'Editar curso',
+                  disabled: true,
+                  href: '/cursos'
+                },
               ],
             },
           },
@@ -112,17 +188,23 @@ const routes = [
       {
         path: '/ava',
         component: () => import('../components/Layout/RouterViewComponent.vue'),
-        children: [
-          {
+        children: [{
             path: '',
             name: 'ava',
             component: () => import('../views/ava/Ava.vue'),
             meta: {
               requiresAuth: true,
               title: 'Ava',
-              breadcrumb: [
-                {text: 'Dashboard', disabled: false, href: '/'},
-                {text: 'Ava', disabled: true, href: '/ava'},
+              breadcrumb: [{
+                  text: 'Dashboard',
+                  disabled: false,
+                  href: '/'
+                },
+                {
+                  text: 'Ava',
+                  disabled: true,
+                  href: '/ava'
+                },
               ],
             },
           },
@@ -132,10 +214,21 @@ const routes = [
             meta: {
               title: 'Cadastrar AVA',
               requiresAuth: true,
-              breadcrumb: [
-                {text: 'Dashboard', disabled: false, href: '/'},
-                {text: 'Ava', disabled: false, href: '/ava'},
-                {text: 'Cadastrar AVA', disabled: true, href: '/ava'},
+              breadcrumb: [{
+                  text: 'Dashboard',
+                  disabled: false,
+                  href: '/'
+                },
+                {
+                  text: 'Ava',
+                  disabled: false,
+                  href: '/ava'
+                },
+                {
+                  text: 'Cadastrar AVA',
+                  disabled: true,
+                  href: '/ava'
+                },
               ],
             },
           },
@@ -145,10 +238,21 @@ const routes = [
             meta: {
               title: 'Editar AVA',
               requiresAuth: true,
-              breadcrumb: [
-                {text: 'Dashboard', disabled: false, href: '/'},
-                {text: 'AVA', disabled: false, href: '/ava'},
-                {text: 'Editar AVA', disabled: true, href: '/ava'},
+              breadcrumb: [{
+                  text: 'Dashboard',
+                  disabled: false,
+                  href: '/'
+                },
+                {
+                  text: 'AVA',
+                  disabled: false,
+                  href: '/ava'
+                },
+                {
+                  text: 'Editar AVA',
+                  disabled: true,
+                  href: '/ava'
+                },
               ],
             },
           },
@@ -157,8 +261,7 @@ const routes = [
       {
         path: '/usuarios',
         component: () => import('../components/Layout/RouterViewComponent.vue'),
-        children: [
-          {
+        children: [{
             path: '',
             name: 'usuario',
             component: () =>
@@ -166,9 +269,16 @@ const routes = [
             meta: {
               requiresAuth: true,
               title: 'Usuários',
-              breadcrumb: [
-                {text: 'Dashboard', disabled: false, href: '/'},
-                {text: 'Usuários', disabled: true, href: '/usuarios'},
+              breadcrumb: [{
+                  text: 'Dashboard',
+                  disabled: false,
+                  href: '/'
+                },
+                {
+                  text: 'Usuários',
+                  disabled: true,
+                  href: '/usuarios'
+                },
               ],
             },
           },
@@ -179,10 +289,21 @@ const routes = [
             meta: {
               title: 'Cadastrar usuário',
               requiresAuth: true,
-              breadcrumb: [
-                {text: 'Dashboard', disabled: false, href: '/'},
-                {text: 'Usuários', disabled: false, href: '/usuarios'},
-                {text: 'Cadastrar usuário', disabled: true, href: '/usuarios'},
+              breadcrumb: [{
+                  text: 'Dashboard',
+                  disabled: false,
+                  href: '/'
+                },
+                {
+                  text: 'Usuários',
+                  disabled: false,
+                  href: '/usuarios'
+                },
+                {
+                  text: 'Cadastrar usuário',
+                  disabled: true,
+                  href: '/usuarios'
+                },
               ],
             },
           },
@@ -193,10 +314,21 @@ const routes = [
             meta: {
               title: 'Editar usuário',
               requiresAuth: true,
-              breadcrumb: [
-                {text: 'Dashboard', disabled: false, href: '/'},
-                {text: 'Usuários', disabled: false, href: '/usuarios'},
-                {text: 'Editar usuário', disabled: true, href: '/usuarios'},
+              breadcrumb: [{
+                  text: 'Dashboard',
+                  disabled: false,
+                  href: '/'
+                },
+                {
+                  text: 'Usuários',
+                  disabled: false,
+                  href: '/usuarios'
+                },
+                {
+                  text: 'Editar usuário',
+                  disabled: true,
+                  href: '/usuarios'
+                },
               ],
             },
           },
@@ -205,8 +337,7 @@ const routes = [
       {
         path: '/perfis',
         component: () => import('../components/Layout/RouterViewComponent.vue'),
-        children: [
-          {
+        children: [{
             path: '',
             name: 'perfil',
             component: () =>
@@ -214,9 +345,16 @@ const routes = [
             meta: {
               requiresAuth: true,
               title: 'Perfis',
-              breadcrumb: [
-                {text: 'Home', disabled: false, href: '/'},
-                {text: 'Perfis', disabled: true, href: '/perfis'},
+              breadcrumb: [{
+                  text: 'Home',
+                  disabled: false,
+                  href: '/'
+                },
+                {
+                  text: 'Perfis',
+                  disabled: true,
+                  href: '/perfis'
+                },
               ],
             },
           },
@@ -227,10 +365,21 @@ const routes = [
             meta: {
               title: 'Cadastrar perfil',
               requiresAuth: true,
-              breadcrumb: [
-                {text: 'Home', disabled: false, href: '/'},
-                {text: 'Perfis', disabled: false, href: '/perfis'},
-                {text: 'Cadastrar perfil', disabled: true, href: '/perfis'},
+              breadcrumb: [{
+                  text: 'Home',
+                  disabled: false,
+                  href: '/'
+                },
+                {
+                  text: 'Perfis',
+                  disabled: false,
+                  href: '/perfis'
+                },
+                {
+                  text: 'Cadastrar perfil',
+                  disabled: true,
+                  href: '/perfis'
+                },
               ],
             },
           },
@@ -241,10 +390,21 @@ const routes = [
             meta: {
               title: 'Editar perfil',
               requiresAuth: true,
-              breadcrumb: [
-                {text: 'Home', disabled: false, href: '/'},
-                {text: 'Perfis', disabled: false, href: '/perfis'},
-                {text: 'Editar perfil', disabled: true, href: '/perfis'},
+              breadcrumb: [{
+                  text: 'Home',
+                  disabled: false,
+                  href: '/'
+                },
+                {
+                  text: 'Perfis',
+                  disabled: false,
+                  href: '/perfis'
+                },
+                {
+                  text: 'Editar perfil',
+                  disabled: true,
+                  href: '/perfis'
+                },
               ],
             },
           },
@@ -253,8 +413,7 @@ const routes = [
       {
         path: '/permissoes',
         component: () => import('../components/Layout/RouterViewComponent.vue'),
-        children: [
-          {
+        children: [{
             path: '',
             name: 'permissao',
             component: () =>
@@ -262,9 +421,16 @@ const routes = [
             meta: {
               requiresAuth: true,
               title: 'Permissões',
-              breadcrumb: [
-                {text: 'Home', disabled: false, href: '/'},
-                {text: 'Permissões', disabled: true, href: '/permissoes'},
+              breadcrumb: [{
+                  text: 'Home',
+                  disabled: false,
+                  href: '/'
+                },
+                {
+                  text: 'Permissões',
+                  disabled: true,
+                  href: '/permissoes'
+                },
               ],
             },
           },
@@ -275,9 +441,16 @@ const routes = [
             meta: {
               title: 'Cadastrar permissão',
               requiresAuth: true,
-              breadcrumb: [
-                {text: 'Home', disabled: false, href: '/'},
-                {text: 'Permissões', disabled: false, href: '/permissoes'},
+              breadcrumb: [{
+                  text: 'Home',
+                  disabled: false,
+                  href: '/'
+                },
+                {
+                  text: 'Permissões',
+                  disabled: false,
+                  href: '/permissoes'
+                },
                 {
                   text: 'Cadastrar permissão',
                   disabled: true,
@@ -293,10 +466,21 @@ const routes = [
             meta: {
               title: 'Editar permissão',
               requiresAuth: true,
-              breadcrumb: [
-                {text: 'Home', disabled: false, href: '/'},
-                {text: 'Permissões', disabled: false, href: '/permissoes'},
-                {text: 'Editar permissão', disabled: true, href: '/permissoes'},
+              breadcrumb: [{
+                  text: 'Home',
+                  disabled: false,
+                  href: '/'
+                },
+                {
+                  text: 'Permissões',
+                  disabled: false,
+                  href: '/permissoes'
+                },
+                {
+                  text: 'Editar permissão',
+                  disabled: true,
+                  href: '/permissoes'
+                },
               ],
             },
           },
