@@ -1,7 +1,7 @@
 <template>
   <div>
     <form-skeleton :loading="loading">
-      <v-form lazy-validation ref="form" v-model="validForm">
+      <v-form lazy-validation ref="form" v-show="!loading" v-model="validForm">
         <v-row>
           
           <v-col class="d-flex" cols="12" sm="6">
