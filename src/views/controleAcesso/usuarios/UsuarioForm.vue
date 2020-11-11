@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <v-form @submit.prevent="save" ref="form">
+  <form-skeleton :loading="loading">
+    <v-form @submit.prevent="save" ref="form" v-show="!loading">
       <v-row>
         <v-col v-if="!isProfile" class="d-flex" cols="4" sm="6">
           <v-text-field
@@ -190,7 +190,7 @@
         <slot name="buttons"></slot>
       </v-row>
     </v-form>
-  </div>
+  </form-skeleton>
 </template>
 
 <script>
@@ -202,6 +202,7 @@ export default {
   props: ['data', 'errors', 'view', 'userData'],
   directives: {mask},
   data: vm => ({
+    loading: true,
     validForm: false,
     dataResponse:
       {
@@ -260,16 +261,18 @@ export default {
       this.dataResponse = val;
     },
   },
-  mounted() {
-    this.getPais();
-    this.getUf();
+
+  async mounted() {
+    await this.getPais();
+    await this.getUf();
     if (!this.isProfile) {
-      this.getTematicaCurso();
-      this.getSituacaoUsuario();
-      this.getPerfil();
+      await this.getTematicaCurso();
+      await this.getSituacaoUsuario();
+      await this.getPerfil();
     } else {
       this.dataResponse = this.userData;
     }
+    this.loading = false
     console.log('userData', this.userData);
     //TODO - fazer o municiopio funcionar quando for editar.
     // if (this.$route.params.id) {

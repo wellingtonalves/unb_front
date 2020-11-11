@@ -83,6 +83,7 @@ const routes = [{
           ],
         },
       },
+
       {
         path: '/usuario',
         component: () => import('../components/Layout/RouterViewComponent.vue'),
@@ -259,6 +260,152 @@ const routes = [{
         ],
       },
       {
+        path: '/ofertas',
+        component: () => import('../components/Layout/RouterViewComponent.vue'),
+        children: [{
+            path: '',
+            name: 'oferta',
+            component: () => import('../views/ofertas/Ofertas.vue'),
+            meta: {
+              requiresAuth: true,
+              title: 'Ofertas',
+              breadcrumb: [{
+                  text: 'Dashboard',
+                  disabled: false,
+                  href: '/'
+                },
+                {
+                  text: 'Ofertas',
+                  disabled: true,
+                  href: '/ofertas'
+                },
+              ],
+            },
+          },
+          {
+            path: '/ofertas/create',
+            component: () => import('../views/ofertas/OfertasCreate.vue'),
+            meta: {
+              title: 'Cadastrar Oferta',
+              requiresAuth: true,
+              breadcrumb: [{
+                  text: 'Dashboard',
+                  disabled: false,
+                  href: '/'
+                },
+                {
+                  text: 'Ofertas',
+                  disabled: false,
+                  href: '/ofertas'
+                },
+                {
+                  text: 'Cadastrar Oferta',
+                  disabled: true,
+                  href: '/ofertas'
+                },
+              ],
+            },
+          },
+          {
+            path: '/ofertas/:id/edit',
+            component: () => import('../views/ofertas/OfertasEdit.vue'),
+            meta: {
+              title: 'Editar Oferta',
+              requiresAuth: true,
+              breadcrumb: [{
+                  text: 'Dashboard',
+                  disabled: false,
+                  href: '/'
+                },
+                {
+                  text: 'Ofertas',
+                  disabled: false,
+                  href: '/ofertas'
+                },
+                {
+                  text: 'Editar Oferta',
+                  disabled: true,
+                  href: '/ofertas'
+                },
+              ],
+            },
+          },
+        ],
+      },
+      {
+        path: '/programas',
+        component: () => import('../components/Layout/RouterViewComponent.vue'),
+        children: [{
+            path: '',
+            name: 'oferta',
+            component: () => import('../views/programas/Programas.vue'),
+            meta: {
+              requiresAuth: true,
+              title: 'Programas',
+              breadcrumb: [{
+                  text: 'Dashboard',
+                  disabled: false,
+                  href: '/'
+                },
+                {
+                  text: 'Programas',
+                  disabled: true,
+                  href: '/programas'
+                },
+              ],
+            },
+          },
+          {
+            path: '/programas/create',
+            component: () => import('../views/programas/ProgramasCreate.vue'),
+            meta: {
+              title: 'Cadastrar Programa',
+              requiresAuth: true,
+              breadcrumb: [{
+                  text: 'Dashboard',
+                  disabled: false,
+                  href: '/'
+                },
+                {
+                  text: 'Programas',
+                  disabled: false,
+                  href: '/programas'
+                },
+                {
+                  text: 'Cadastrar Programa',
+                  disabled: true,
+                  href: '/programas'
+                },
+              ],
+            },
+          },
+          {
+            path: '/programas/:id/edit',
+            component: () => import('../views/programas/ProgramasEdit.vue'),
+            meta: {
+              title: 'Editar Programa',
+              requiresAuth: true,
+              breadcrumb: [{
+                  text: 'Dashboard',
+                  disabled: false,
+                  href: '/'
+                },
+                {
+                  text: 'Programas',
+                  disabled: false,
+                  href: '/programas'
+                },
+                {
+                  text: 'Editar Programa',
+                  disabled: true,
+                  href: '/programas'
+                },
+              ],
+            },
+          },
+        ],
+      },
+      {
         path: '/usuarios',
         component: () => import('../components/Layout/RouterViewComponent.vue'),
         children: [{
@@ -273,6 +420,10 @@ const routes = [{
                   text: 'Dashboard',
                   disabled: false,
                   href: '/'
+                },
+                {
+                  text: 'Controle de acessos',
+                  disabled: true
                 },
                 {
                   text: 'Usuários',
@@ -293,6 +444,10 @@ const routes = [{
                   text: 'Dashboard',
                   disabled: false,
                   href: '/'
+                },
+                {
+                  text: 'Controle de acessos',
+                  disabled: true
                 },
                 {
                   text: 'Usuários',
@@ -318,6 +473,10 @@ const routes = [{
                   text: 'Dashboard',
                   disabled: false,
                   href: '/'
+                },
+                {
+                  text: 'Controle de acessos',
+                  disabled: true
                 },
                 {
                   text: 'Usuários',
@@ -346,9 +505,13 @@ const routes = [{
               requiresAuth: true,
               title: 'Perfis',
               breadcrumb: [{
-                  text: 'Home',
+                  text: 'Dashboard',
                   disabled: false,
                   href: '/'
+                },
+                {
+                  text: 'Controle de acessos',
+                  disabled: true
                 },
                 {
                   text: 'Perfis',
@@ -366,9 +529,13 @@ const routes = [{
               title: 'Cadastrar perfil',
               requiresAuth: true,
               breadcrumb: [{
-                  text: 'Home',
+                  text: 'Dashboard',
                   disabled: false,
                   href: '/'
+                },
+                {
+                  text: 'Controle de acessos',
+                  disabled: true
                 },
                 {
                   text: 'Perfis',
@@ -391,9 +558,13 @@ const routes = [{
               title: 'Editar perfil',
               requiresAuth: true,
               breadcrumb: [{
-                  text: 'Home',
+                  text: 'Dashboard',
                   disabled: false,
                   href: '/'
+                },
+                {
+                  text: 'Controle de acessos',
+                  disabled: true
                 },
                 {
                   text: 'Perfis',
@@ -422,9 +593,13 @@ const routes = [{
               requiresAuth: true,
               title: 'Permissões',
               breadcrumb: [{
-                  text: 'Home',
+                  text: 'Dashboard',
                   disabled: false,
                   href: '/'
+                },
+                {
+                  text: 'Controle de acessos',
+                  disabled: true
                 },
                 {
                   text: 'Permissões',
@@ -442,9 +617,13 @@ const routes = [{
               title: 'Cadastrar permissão',
               requiresAuth: true,
               breadcrumb: [{
-                  text: 'Home',
+                  text: 'Dashboard',
                   disabled: false,
                   href: '/'
+                },
+                {
+                  text: 'Controle de acessos',
+                  disabled: true
                 },
                 {
                   text: 'Permissões',
@@ -467,9 +646,13 @@ const routes = [{
               title: 'Editar permissão',
               requiresAuth: true,
               breadcrumb: [{
-                  text: 'Home',
+                  text: 'Dashboard',
                   disabled: false,
                   href: '/'
+                },
+                {
+                  text: 'Controle de acessos',
+                  disabled: true
                 },
                 {
                   text: 'Permissões',
@@ -480,6 +663,79 @@ const routes = [{
                   text: 'Editar permissão',
                   disabled: true,
                   href: '/permissoes'
+                },
+              ],
+            },
+          },
+        ],
+      },
+      {
+        path: '/tarefas-agendadas',
+        component: () => import('../components/Layout/RouterViewComponent.vue'),
+        children: [{
+            path: '',
+            name: 'tarefa-agendada',
+            component: () => import('../views/tarefas_agendadas/TarefaAgendada.vue'),
+            meta: {
+              requiresAuth: true,
+              title: 'Tarefas Agendadas',
+              breadcrumb: [{
+                  text: 'Dashboard',
+                  disabled: false,
+                  href: '/'
+                },
+                {
+                  text: 'Tarefas Agendadas',
+                  disabled: true,
+                  href: '/tarefa-agendada'
+                },
+              ],
+            },
+          },
+          {
+            path: '/tarefa-agendada/create',
+            component: () => import('../views/tarefas_agendadas/TarefaAgendadaCreate.vue'),
+            meta: {
+              title: 'Cadastrar tarefa',
+              requiresAuth: true,
+              breadcrumb: [{
+                  text: 'Dashboard',
+                  disabled: false,
+                  href: '/'
+                },
+                {
+                  text: 'Tarefas Agendadas',
+                  disabled: false,
+                  href: '/tarefas-agendadas'
+                },
+                {
+                  text: 'Cadastrar tarefa',
+                  disabled: true,
+                  href: '/tarefas-agendadas'
+                },
+              ],
+            },
+          },
+          {
+            path: '/tarefa-agendada/:id/edit',
+            component: () => import('../views/tarefas_agendadas/TarefaAgendadaEdit.vue'),
+            meta: {
+              title: 'Editar tarefa',
+              requiresAuth: true,
+              breadcrumb: [{
+                  text: 'Dashboard',
+                  disabled: false,
+                  href: '/'
+                },
+                {
+                  text: 'Tarefas Agendadas',
+                  disabled: false,
+                  href: '/tarefas-agendadas'
+                },
+                {
+                  text: 'Editar tarefa',
+                  disabled: true,
+                  href: '/tarefas-agendadas'
                 },
               ],
             },

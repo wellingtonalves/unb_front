@@ -1,11 +1,11 @@
 <template>
   <v-layout wrap>
 
-    <card-default>
+    <v-card class="mx-auto" height="100%" width="100%" elevation="10">
       <v-container class="pa-5" fluid>
-        <perfil-form @update="update" :data="data" :errors="errors">
+        <tarefa-agendada-form @update="update" :data="data" :errors="errors">
           <template v-slot:buttons>
-            <v-btn class="mr-4" @click="$router.push('/perfis')">
+            <v-btn class="mr-4" @click="$router.push('/tarefas-agendadas')">
               <v-icon class="mr-2">mdi-backup-restore</v-icon>
               Voltar
             </v-btn>
@@ -15,7 +15,7 @@
               Salvar
             </v-btn>
           </template>
-        </perfil-form>
+        </tarefa-agendada-form>
         
         <v-snackbar v-model="snackbar.active" :color="snackbar.color" :timeout="snackbar.timeout">
           {{snackbar.text}}
@@ -24,17 +24,17 @@
           </v-btn>
         </v-snackbar>
       </v-container>
-    </card-default>
+    </v-card>
 
   </v-layout>
 </template>
 
 <script>
-  import PerfilForm from "./PerfilForm";
+  import TarefaAgendadaForm from "./TarefaAgendadaForm";
   import {get, update} from "@/services/abstract.service";
   export default {
-    name: "PerfilCreate",
-    components: {PerfilForm},
+    name: "TarefaAgendadaCreate",
+    components: {TarefaAgendadaForm},
     data: () => ({
       data: '',
       loading: false,
@@ -49,7 +49,7 @@
     watch: {
       'snackbar.active': function (val) {
         if (this.snackbar.color == 'success' && val == false) {
-          this.$router.push('/perfis');
+          this.$router.push('/tarefas-agendadas');
         }
       }
     },
@@ -58,7 +58,7 @@
     },
     methods: {
       async getData() {
-        const response = await get(`perfil/${this.$route.params.id}`);
+        const response = await get(`tarefa-agendada/${this.$route.params.id}`);
         this.data = response.data.data;
       },
       update(data) {
@@ -66,7 +66,7 @@
       },
       async save() {
         this.loading = true;
-        const response = await update(`perfil/${this.$route.params.id}`, this.data)
+        const response = await update(`tarefa-agendada/${this.$route.params.id}`, this.data)
 
         this.loading = false;
         

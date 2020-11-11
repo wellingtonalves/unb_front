@@ -27,12 +27,39 @@
           </v-list-item-content>
         </v-list-item>
 
+        <v-list-item link :to="'/ofertas/'" v-show="permission('OFERTA_LISTAR')">
+          <v-list-item-action>
+            <v-icon>mdi-format-list-bulleted-square</v-icon>
+          </v-list-item-action>
+          <v-list-item-content>
+            <v-list-item-title>Ofertas</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+
         <v-list-item link :to="'/ava/'" v-show="permission('AVA_LISTAR')">
           <v-list-item-action>
             <v-icon>mdi-school-outline</v-icon>
           </v-list-item-action>
           <v-list-item-content>
             <v-list-item-title>AVA</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+
+        <v-list-item link :to="'/tarefas-agendadas/'" v-show="permission('TAREFA_AGENDADA_LISTAR')">
+          <v-list-item-action>
+            <v-icon>mdi-briefcase-clock</v-icon>
+          </v-list-item-action>
+          <v-list-item-content>
+            <v-list-item-title>Tarefas agendadas</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+
+        <v-list-item link :to="'/programas/'" v-show="permission('PROGRAMA_LISTAR')">
+          <v-list-item-action>
+            <v-icon>mdi-school-outline</v-icon>
+          </v-list-item-action>
+          <v-list-item-content>
+            <v-list-item-title>Programas</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
 
@@ -47,7 +74,7 @@
 
           <v-list-item link :to="'/usuarios'" v-show="permission('USUARIO_LISTAR')">
             <v-list-item-action>
-              <v-icon>mdi-account-plus</v-icon>
+              <v-icon>mdi-account-multiple</v-icon>
             </v-list-item-action>
             <v-list-item-content>
               <v-list-item-title>Usuários</v-list-item-title>
@@ -56,7 +83,7 @@
 
           <v-list-item link :to="'/perfis'" v-show="permission('PERFIL_LISTAR')">
             <v-list-item-action>
-              <v-icon>mdi-account</v-icon>
+              <v-icon>mdi-account-box-multiple</v-icon>
             </v-list-item-action>
             <v-list-item-content>
               <v-list-item-title>Perfis</v-list-item-title>
@@ -65,7 +92,7 @@
 
           <v-list-item link :to="'/permissoes'" v-show="permission('PERMISSAO_LISTAR')">
             <v-list-item-action>
-              <v-icon>mdi-account-lock</v-icon>
+              <v-icon>mdi-account-details</v-icon>
             </v-list-item-action>
             <v-list-item-content>
               <v-list-item-title>Permissões</v-list-item-title>
@@ -81,7 +108,7 @@
         <v-row>
           <v-col cols="9" class="align-self-start">
             <h1 class="mr-8 float-left">
-              <a href="https://www.escolavirtual.gov.br/" target="_blank">EV.G: Escola Virtual.Gov</a>
+              <a href="/">EV.G: Escola Virtual.Gov</a>
             </h1>
 
             <v-list nav dense flat id="main-nav" class="d-none d-sm-flex float-left">
@@ -238,8 +265,6 @@ export default {
   }),
   methods: {
     permission(rule) {
-        let call =  checkPermission(rule);
-        console.log('call', call)
       return checkPermission(rule);
     },
     //TODO - fazer tratamento quando der erro no login api
@@ -263,6 +288,8 @@ export default {
   },
 };
 </script>
+
+
 
 <style>
 nav.v-navigation-drawer .v-list-item__action,
@@ -373,6 +400,39 @@ nav.v-navigation-drawer .v-list-item__title {
 }
 @media (max-width: 600px) {
   header.v-app-bar .container {
+    padding-bottom: 0;
+    padding-top: 0;
+  }
+  h1 a {
+    background-image: url(../../assets/logo.svg);
+    background-position: 0 0;
+    background-repeat: no-repeat;
+    background-size: contain;
+    display: block;
+    height: 62px;
+    text-indent: -9000px;
+    width: 112px;
+  }
+  header.v-app-bar button.v-app-bar__nav-icon {
+    opacity: 0.75;
+    position: absolute;
+  }
+  nav.v-navigation-drawer {
+    top: 94px !important;
+  }
+  nav.v-navigation-drawer .v-list > .v-list-item:not(:last-child) {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  }
+  nav.v-navigation-drawer .v-list-item__title {
+    font-size: 0.85rem;
+  }
+  #main-nav {
+    background-color: transparent;
+  }
+  #main-nav a {
+    color: var(--v-black-base);
+    float: left;
+    margin-right: 32px;
     padding: 0;
   }
   h1 {

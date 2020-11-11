@@ -1,9 +1,7 @@
 <template>
   <v-layout wrap>
 
-    <h2>Editar Curso</h2>
-
-    <v-card class="mx-auto" height="100%" width="100%" elevation="10">
+    <card-default>
       <v-container class="pa-5" fluid>
         <curso-form @update="update" :data="data" :errors="errors">
           <template v-slot:buttons>
@@ -26,7 +24,7 @@
           </v-btn>
         </v-snackbar>
       </v-container>
-    </v-card>
+    </card-default>
 
   </v-layout>
 </template>

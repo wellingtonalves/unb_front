@@ -91,7 +91,7 @@
       </v-col>
 
       <v-col cols="12" sm="8">
-        <v-layout class="count-items evg-cards flex-wrap">
+        <v-layout class="count-items evg-list flex-wrap">
 
           <v-card>
             <v-card-text>

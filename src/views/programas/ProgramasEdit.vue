@@ -1,40 +1,36 @@
 <template>
   <v-layout wrap>
-
     <card-default>
-      <v-container class="pa-5" fluid>
-        <perfil-form @update="update" :data="data" :errors="errors">
-          <template v-slot:buttons>
-            <v-btn class="mr-4" @click="$router.push('/perfis')">
-              <v-icon class="mr-2">mdi-backup-restore</v-icon>
-              Voltar
-            </v-btn>
-
-            <v-btn class="mr-4" color="primary" :loading="loading" @click="save()">
-              <v-icon class="mr-2">mdi-content-save</v-icon>
-              Salvar
-            </v-btn>
-          </template>
-        </perfil-form>
-        
-        <v-snackbar v-model="snackbar.active" :color="snackbar.color" :timeout="snackbar.timeout">
-          {{snackbar.text}}
-          <v-btn text @click.stop="snackbar.active = false">
-            Fechar
+      <programas-form @update="update" :data="data" :errors="errors">
+        <template v-slot:buttons>
+          <v-btn class="mr-4" @click="$router.push('/programas')">
+            <v-icon class="mr-2">mdi-backup-restore</v-icon>
+            Voltar
           </v-btn>
-        </v-snackbar>
-      </v-container>
-    </card-default>
 
+          <v-btn class="mr-4" color="primary" :loading="loading" @click="save()">
+            <v-icon class="mr-2">mdi-content-save</v-icon>
+            Salvar
+          </v-btn>
+        </template>
+      </programas-form>
+
+      <v-snackbar v-model="snackbar.active" :color="snackbar.color" :timeout="snackbar.timeout">
+        {{snackbar.text}}
+        <v-btn text @click.stop="snackbar.active = false">
+          Fechar
+        </v-btn>
+      </v-snackbar>
+    </card-default>
   </v-layout>
 </template>
 
 <script>
-  import PerfilForm from "./PerfilForm";
+  import ProgramasForm from "./ProgramasForm";
   import {get, update} from "@/services/abstract.service";
   export default {
-    name: "PerfilCreate",
-    components: {PerfilForm},
+    name: "ProgramasEdit",
+    components: {ProgramasForm},
     data: () => ({
       data: '',
       loading: false,
@@ -49,7 +45,7 @@
     watch: {
       'snackbar.active': function (val) {
         if (this.snackbar.color == 'success' && val == false) {
-          this.$router.push('/perfis');
+          this.$router.push('/programas');
         }
       }
     },
@@ -58,7 +54,7 @@
     },
     methods: {
       async getData() {
-        const response = await get(`perfil/${this.$route.params.id}`);
+        const response = await get(`programas/${this.$route.params.id}`);
         this.data = response.data.data;
       },
       update(data) {
@@ -66,10 +62,10 @@
       },
       async save() {
         this.loading = true;
-        const response = await update(`perfil/${this.$route.params.id}`, this.data)
+        const response = await update(`programas/${this.$route.params.id}`, this.data)
 
         this.loading = false;
-        
+
         if (response.errors) {
           this.errors = response.errors;
           this.snackbar.text = response.message;

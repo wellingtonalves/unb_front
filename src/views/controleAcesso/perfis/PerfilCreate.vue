@@ -1,7 +1,7 @@
 <template>
   <v-layout wrap>
 
-    <v-card width="100%" elevation="10">
+    <card-default>
       <v-container class="pa-5" fluid>
         <perfil-form @update="update" :errors="errors">
           <template v-slot:buttons>
@@ -24,7 +24,7 @@
           </v-btn>
         </v-snackbar>
       </v-container>
-    </v-card>
+    </card-default>
 
   </v-layout>
 </template>

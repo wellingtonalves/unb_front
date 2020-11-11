@@ -1,40 +1,40 @@
 <template>
   <v-layout wrap>
 
-    <card-default>
+    <v-card width="100%" elevation="10">
       <v-container class="pa-5" fluid>
-        <perfil-form @update="update" :data="data" :errors="errors">
+        <tarefa-agendada-form @update="update" :errors="errors">
           <template v-slot:buttons>
-            <v-btn class="mr-4" @click="$router.push('/perfis')">
+            <v-btn class="mx-2" @click="$router.push('/tarefas-agendadas')">
               <v-icon class="mr-2">mdi-backup-restore</v-icon>
               Voltar
             </v-btn>
 
-            <v-btn class="mr-4" color="primary" :loading="loading" @click="save()">
+            <v-btn class="mx-2" color="primary" :loading="loading" @click="save()">
               <v-icon class="mr-2">mdi-content-save</v-icon>
               Salvar
             </v-btn>
           </template>
-        </perfil-form>
+        </tarefa-agendada-form>
         
         <v-snackbar v-model="snackbar.active" :color="snackbar.color" :timeout="snackbar.timeout">
           {{snackbar.text}}
-          <v-btn text @click.stop="snackbar.active = false">
+          <v-btn text @click.stop="form.active = false">
             Fechar
           </v-btn>
         </v-snackbar>
       </v-container>
-    </card-default>
+    </v-card>
 
   </v-layout>
 </template>
 
 <script>
-  import PerfilForm from "./PerfilForm";
-  import {get, update} from "@/services/abstract.service";
+  import TarefaAgendadaForm from "./TarefaAgendadaForm";
+  import {create} from "@/services/abstract.service";
   export default {
-    name: "PerfilCreate",
-    components: {PerfilForm},
+    name: "TarefaAgendadaCreate",
+    components: {TarefaAgendadaForm},
     data: () => ({
       data: '',
       loading: false,
@@ -49,24 +49,17 @@
     watch: {
       'snackbar.active': function (val) {
         if (this.snackbar.color == 'success' && val == false) {
-          this.$router.push('/perfis');
+          this.$router.push('/tarefas-agendadas');
         }
       }
     },
-    async mounted() {
-      await this.getData();
-    },
     methods: {
-      async getData() {
-        const response = await get(`perfil/${this.$route.params.id}`);
-        this.data = response.data.data;
-      },
       update(data) {
         this.data = data;
       },
       async save() {
         this.loading = true;
-        const response = await update(`perfil/${this.$route.params.id}`, this.data)
+        const response = await create('tarefa-agendada', this.data)
 
         this.loading = false;
         

@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <v-form lazy-validation ref="form" v-model="validForm">
+  <form-skeleton :loading="loading">
+    <v-form lazy-validation ref="form" v-model="validForm" v-show="!loading">
       <v-row>
         <v-col cols="12">
           <v-text-field
@@ -106,7 +106,7 @@
       </v-row>
 
     </v-form>
-  </div>
+  </form-skeleton>
 </template>
 
 <script>
@@ -116,6 +116,7 @@
     name: "PerfilForm",
     props: ['data', 'errors'],
     data: () => ({
+      loading: true,
       validForm: false,
       dataResponse: {
         permissao: []
@@ -165,6 +166,7 @@
       async getPermissao() {
         const response = await get('/permissao?pagination=false');
         this.permissoes = response.data.data;
+        this.loading = false
       },
       selecionarPermissoes() {
         this.selected.map(obj => {

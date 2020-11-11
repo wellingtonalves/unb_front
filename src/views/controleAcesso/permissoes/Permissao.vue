@@ -21,7 +21,7 @@
 
             <template v-slot:top>
               <v-toolbar flat>
-                <v-toolbar-title>Listagem de Perfis</v-toolbar-title>
+                <v-toolbar-title>Listagem de Permissões</v-toolbar-title>
                 <v-spacer></v-spacer>
 
                 <v-btn color="primary" dark outlined rounded @click="$router.push('/permissao/create')">
