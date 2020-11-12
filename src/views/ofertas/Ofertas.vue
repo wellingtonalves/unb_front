@@ -11,7 +11,7 @@
         <v-expansion-panel-content>
 
           <v-form ref="form" lazy-validation>
-            <v-row align="center">
+            <v-row>
               <v-col cols="12" sm="2">
                 <v-select dense v-model="filterData.id_ava" label="AVA" :items="ava" item-text="tx_nome_ava" item-value="id_ava" />
               </v-col>
@@ -35,9 +35,7 @@
               <v-col cols="12" sm="2">
                 <v-select dense v-model="filterData.tp_situacao_oferta" label="Situação" :items="situacaoOferta" item-text="label" item-value="value" />
               </v-col>
-            </v-row>
-            <v-row>
-              <v-col class="d-flex" cols="12" sm="4">
+              <v-col class="d-flex" cols="12" sm="2">
 
                 <v-btn color="primary" dark outlined rounded class="mb-8 mr-5" @click="filtrar()">
                   <v-icon>mdi-magnify</v-icon>

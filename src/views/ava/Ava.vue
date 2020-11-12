@@ -11,17 +11,17 @@
         <v-expansion-panel-content>
 
           <v-form ref="form" lazy-validation>
-            <v-row align="center">
+            <v-row>
 
-              <v-col>
+              <v-col cols="12" sm="2">
                 <v-select dense v-model="filterData.tp_situacao_ava" label="Status" :items="statusAva" item-text="label" item-value="value" />
               </v-col>
 
-              <v-col>
+              <v-col cols="12" sm="2">
                 <v-select dense v-model="filterData.tp_ava" label="Tipo" :items="tipoAva" item-text="label" item-value="value" />
               </v-col>
 
-              <v-col cols="12" sm="4">
+              <v-col cols="12" sm="3">
                 <v-text-field dense
                   v-model="filterData.tx_nome_ava"
                   label="Nome"
@@ -29,7 +29,7 @@
                 />
               </v-col>
 
-              <v-col cols="12" sm="4">
+              <v-col cols="12" sm="3">
                 <v-text-field dense
                   v-model="filterData.tx_url"
                   label="URL"

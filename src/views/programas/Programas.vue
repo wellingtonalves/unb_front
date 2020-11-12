@@ -12,22 +12,20 @@
 
           <v-form ref="form" lazy-validation>
             <v-row align="center">
-              <v-col cols="12" sm="6">
+              <v-col cols="12" sm="3">
                 <v-text-field dense
                               v-model="filterData.tx_nome_programa"
                               label="Nome do Programa"
                               placeholder="Informe o nome do Programa"
                 />
               </v-col>
-              <v-col cols="12" sm="3">
+              <v-col cols="12" sm="2">
                 <v-select dense v-model="filterData.tp_situacao_programa" label="Situação" :items="situacaoPrograma" item-text="label" item-value="value" />
               </v-col>
-              <v-col cols="12" sm="3">
+              <v-col cols="12" sm="2">
                 <v-select dense v-model="filterData.bl_programa_destaque" label="Destaque" :items="statusDestaque" item-text="label" item-value="value" />
               </v-col>
-            </v-row>
-            <v-row>
-              <v-col class="d-flex" cols="12" sm="4">
+              <v-col class="d-flex" cols="12" sm="2">
 
                 <v-btn color="primary" dark outlined rounded class="mb-8 mr-5" @click="filtrar()">
                   <v-icon>mdi-magnify</v-icon>
