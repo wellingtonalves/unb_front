@@ -5,8 +5,11 @@
         Filtros
       </v-expansion-panel-header>
       <v-expansion-panel-content>
-        <slot></slot>
+        <v-form ref="form" lazy-validation>
         <v-row>
+
+          <slot></slot>
+
           <v-col class="d-flex" cols="12" sm="4">
             <v-btn color="primary" dark outlined rounded class="mb-8 mr-5" @click="filtrar()">
               <v-icon>mdi-magnify</v-icon>
@@ -17,7 +20,9 @@
               Limpar
             </v-btn>
           </v-col>
+
         </v-row>
+        </v-form>
       </v-expansion-panel-content>
     </v-expansion-panel>
   </v-expansion-panels>

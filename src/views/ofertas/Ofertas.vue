@@ -2,46 +2,44 @@
   <v-layout wrap class="align-stretch">
 
     <filter-expansion-panel @filtrar="filtrar" @resetar="limparFiltros()">
-      <v-form ref="form" lazy-validation>
-        <v-row>
-          <v-col cols="12" sm="2">
-            <v-select dense v-model="filterData.id_ava" label="AVA" no-data-text="Nenhum registro encontrado."
-                      :items="ava" item-text="tx_nome_ava" item-value="id_ava"/>
-          </v-col>
-          <v-col cols="12" sm="2">
-            <v-select dense v-model="filterData.id_tipo_oferta" label="Tipo"
-                      no-data-text="Nenhum registro encontrado." :items="tipoOferta" item-text="tx_nome_tipo_oferta"
-                      item-value="id_tipo_oferta"/>
-          </v-col>
-          <v-col cols="12" sm="3">
-            <v-text-field dense
-                          v-model="filterData.tx_nome_oferta"
-                          label="Nome da Oferta"
-                          placeholder="Informe o nome da Oferta"
-            />
-          </v-col>
-          <v-col cols="12" sm="3">
-            <v-autocomplete
-              v-model="filterData.id_curso"
-              :items="cursos"
-              :loading="loadingCursos"
-              :search-input.sync="getCursos"
-              color="white"
-              hide-selected
-              dense
-              no-data-text="Nenhum registro encontrado."
-              item-text="tx_nome_curso"
-              item-value="id_curso"
-              label="Nome do Curso"
-              placeholder="Informe o nome do Curso"
-            ></v-autocomplete>
-          </v-col>
-          <v-col cols="12" sm="2">
-            <v-select dense v-model="filterData.tp_situacao_oferta" no-data-text="Nenhum registro encontrado."
-                      label="Situação" :items="situacaoOferta" item-text="label" item-value="value"/>
-          </v-col>
-        </v-row>
-      </v-form>
+      
+      <v-col cols="12" sm="2">
+        <v-select dense v-model="filterData.id_ava" label="AVA" no-data-text="Nenhum registro encontrado."
+                  :items="ava" item-text="tx_nome_ava" item-value="id_ava"/>
+      </v-col>
+      <v-col cols="12" sm="2">
+        <v-select dense v-model="filterData.id_tipo_oferta" label="Tipo"
+                  no-data-text="Nenhum registro encontrado." :items="tipoOferta" item-text="tx_nome_tipo_oferta"
+                  item-value="id_tipo_oferta"/>
+      </v-col>
+      <v-col cols="12" sm="3">
+        <v-text-field dense
+                      v-model="filterData.tx_nome_oferta"
+                      label="Nome da Oferta"
+                      placeholder="Informe o nome da Oferta"
+        />
+      </v-col>
+      <v-col cols="12" sm="3">
+        <v-autocomplete
+          v-model="filterData.id_curso"
+          :items="cursos"
+          :loading="loadingCursos"
+          :search-input.sync="getCursos"
+          color="white"
+          hide-selected
+          dense
+          no-data-text="Nenhum registro encontrado."
+          item-text="tx_nome_curso"
+          item-value="id_curso"
+          label="Nome do Curso"
+          placeholder="Informe o nome do Curso"
+        ></v-autocomplete>
+      </v-col>
+      <v-col cols="12" sm="2">
+        <v-select dense v-model="filterData.tp_situacao_oferta" no-data-text="Nenhum registro encontrado."
+                  label="Situação" :items="situacaoOferta" item-text="label" item-value="value"/>
+      </v-col>
+
     </filter-expansion-panel>
 
     <v-row class="flex-basis-100">
