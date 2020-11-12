@@ -8,7 +8,7 @@
         <v-form ref="form" lazy-validation>
         <v-row>
 
-          <slot></slot>
+          <slot name="filterExpansionPanel"></slot>
 
           <v-col class="d-flex" cols="12" sm="4">
             <v-btn color="primary" dark outlined rounded class="mb-8 mr-5" @click="filtrar()">

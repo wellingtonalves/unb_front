@@ -2,27 +2,29 @@
   <v-layout v-show="permission('TAREFA_AGENDADA_LISTAR')" wrap class="align-stretch">
 
     <filter-expansion-panel @filtrar="filtrar" @resetar="limparFiltros()">
+      <template v-slot:filterExpansionPanel>
+        
+        <v-col cols="12" sm="2">
+          <v-select dense v-model="filterData.tp_situacao_tarefa_agendada" label="Status" :items="statusTarefaAgendada" item-text="label" item-value="value" />
+        </v-col>
 
-      <v-col cols="12" sm="2">
-        <v-select dense v-model="filterData.tp_situacao_tarefa_agendada" label="Status" :items="statusTarefaAgendada" item-text="label" item-value="value" />
-      </v-col>
+        <v-col cols="12" sm="3">
+          <v-text-field dense
+                        v-model="filterData.tx_nome_tarefa_agendada"
+                        label="Nome"
+                        placeholder="Informe o nome da tarefa"
+          />
+        </v-col>
 
-      <v-col cols="12" sm="3">
-        <v-text-field dense
-          v-model="filterData.tx_nome_tarefa_agendada"
-          label="Nome"
-          placeholder="Informe o nome da tarefa"
-        />
-      </v-col>
-
-      <v-col cols="12" sm="3">
-        <v-text-field dense
-          v-model="filterData.tx_nome_comando"
-          label="Comando"
-          placeholder="Informe o comando da tarefa"
-        />
-      </v-col>
-
+        <v-col cols="12" sm="3">
+          <v-text-field dense
+                        v-model="filterData.tx_nome_comando"
+                        label="Comando"
+                        placeholder="Informe o comando da tarefa"
+          />
+        </v-col>
+        
+      </template>
     </filter-expansion-panel>
 
     <v-row class="flex-basis-100">
@@ -36,9 +38,6 @@
             :server-items-length="pagination.total"
             :items-per-page="15"
             :options.sync="options"
-            :single-expand="true"
-            :expanded.sync="expanded"
-            show-expand
             item-key="id_tarefa_agendada"
             sort-by="tx_nome_tarefa_agendada"
             class="elevation-1"

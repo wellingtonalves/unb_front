@@ -2,33 +2,35 @@
   <v-layout wrap>
     
     <filter-expansion-panel @filtrar="filtrar" @resetar="limparFiltros()">
+      <template v-slot:filterExpansionPanel>
+        
+        <v-col cols="12" sm="3">
+          <v-text-field dense
+                        v-model="filterData.tx_email_pessoa"
+                        label="E-mail"
+          />
+        </v-col>
 
-      <v-col cols="12" sm="3">
-        <v-text-field dense
-                      v-model="filterData.tx_email_pessoa"
-                      label="E-mail"
-        />
-      </v-col>
+        <v-col cols="12" sm="3">
+          <v-text-field dense
+                        v-model="filterData.tx_nome_pessoa"
+                        label="Nome"
+          />
+        </v-col>
 
-      <v-col cols="12" sm="3">
-        <v-text-field dense
-                      v-model="filterData.tx_nome_pessoa"
-                      label="Nome"
-        />
-      </v-col>
-      
-      <v-col cols="12" sm="2">
-        <v-select dense v-model="filterData.id_perfil" label="Perfil" :items="perfil" item-text="tx_nome_perfil" item-value="id_perfil" />
-      </v-col>
+        <v-col cols="12" sm="2">
+          <v-select dense v-model="filterData.id_perfil" label="Perfil" :items="perfil" item-text="tx_nome_perfil" item-value="id_perfil" />
+        </v-col>
 
-      <v-col cols="12" sm="3">
-        <v-text-field dense
-                      v-model="filterData.nr_cpf"
-                      label="CPF"
-                      v-mask="'###.###.###-##'"
-        />
-      </v-col>
-
+        <v-col cols="12" sm="3">
+          <v-text-field dense
+                        v-model="filterData.nr_cpf"
+                        label="CPF"
+                        v-mask="'###.###.###-##'"
+          />
+        </v-col>
+        
+      </template>
     </filter-expansion-panel>
 
     <v-row class="flex-basis-100">

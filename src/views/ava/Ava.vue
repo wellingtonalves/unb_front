@@ -2,30 +2,33 @@
   <v-layout v-show="permission('AVA_LISTAR')" wrap class="align-stretch">
 
     <filter-expansion-panel @filtrar="filtrar" @resetar="limparFiltros()">
+      
+      <template v-slot:filterExpansionPanel>
+        <v-col cols="12" sm="2">
+          <v-select dense v-model="filterData.tp_situacao_ava" label="Status" :items="statusAva" item-text="label" item-value="value" />
+        </v-col>
 
-      <v-col cols="12" sm="2">
-        <v-select dense v-model="filterData.tp_situacao_ava" label="Status" :items="statusAva" item-text="label" item-value="value" />
-      </v-col>
+        <v-col cols="12" sm="2">
+          <v-select dense v-model="filterData.tp_ava" label="Tipo" :items="tipoAva" item-text="label" item-value="value" />
+        </v-col>
 
-      <v-col cols="12" sm="2">
-        <v-select dense v-model="filterData.tp_ava" label="Tipo" :items="tipoAva" item-text="label" item-value="value" />
-      </v-col>
+        <v-col cols="12" sm="3">
+          <v-text-field dense
+                        v-model="filterData.tx_nome_ava"
+                        label="Nome"
+                        placeholder="Informe o nome do AVA"
+          />
+        </v-col>
 
-      <v-col cols="12" sm="3">
-        <v-text-field dense
-          v-model="filterData.tx_nome_ava"
-          label="Nome"
-          placeholder="Informe o nome do AVA"
-        />
-      </v-col>
-
-      <v-col cols="12" sm="3">
-        <v-text-field dense
-          v-model="filterData.tx_url"
-          label="URL"
-          placeholder="Informe a URL do AVA"
-        />
-      </v-col>
+        <v-col cols="12" sm="3">
+          <v-text-field dense
+                        v-model="filterData.tx_url"
+                        label="URL"
+                        placeholder="Informe a URL do AVA"
+          />
+        </v-col>
+        
+      </template>
 
     </filter-expansion-panel>
 
@@ -40,9 +43,6 @@
             :server-items-length="pagination.total"
             :items-per-page="15"
             :options.sync="options"
-            :single-expand="true"
-            :expanded.sync="expanded"
-            show-expand
             item-key="id_ava"
             sort-by="tx_nome_ava"
             class="elevation-1"
