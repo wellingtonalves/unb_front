@@ -1,65 +1,35 @@
 <template>
   <v-layout wrap>
     
-    <v-expansion-panels :value="0">
-      <v-expansion-panel>
+    <filter-expansion-panel @filtrar="filtrar" @resetar="limparFiltros()">
 
-        <v-expansion-panel-header>
-          Filtros
-        </v-expansion-panel-header>
+      <v-col cols="12" sm="3">
+        <v-text-field dense
+                      v-model="filterData.tx_email_pessoa"
+                      label="E-mail"
+        />
+      </v-col>
 
-        <v-expansion-panel-content>
+      <v-col cols="12" sm="3">
+        <v-text-field dense
+                      v-model="filterData.tx_nome_pessoa"
+                      label="Nome"
+        />
+      </v-col>
+      
+      <v-col cols="12" sm="2">
+        <v-select dense v-model="filterData.id_perfil" label="Perfil" :items="perfil" item-text="tx_nome_perfil" item-value="id_perfil" />
+      </v-col>
 
-          <v-form ref="form" lazy-validation>
-            <v-row align="center">
+      <v-col cols="12" sm="3">
+        <v-text-field dense
+                      v-model="filterData.nr_cpf"
+                      label="CPF"
+                      v-mask="'###.###.###-##'"
+        />
+      </v-col>
 
-              <v-col cols="2">
-                <v-text-field dense
-                              v-model="filterData.tx_email_pessoa"
-                              label="E-mail"
-                />
-              </v-col>
-
-              <v-col cols="2">
-                <v-text-field dense
-                              v-model="filterData.tx_nome_pessoa"
-                              label="Nome"
-                />
-              </v-col>
-              
-              <v-col>
-                <v-select dense v-model="filterData.id_perfil" label="Perfil" :items="perfil" item-text="tx_nome_perfil" item-value="id_perfil" />
-              </v-col>
-
-              <v-col cols="2">
-                <v-text-field dense
-                              v-model="filterData.nr_cpf"
-                              label="CPF"
-                              v-mask="'###.###.###-##'"
-                />
-              </v-col>
-
-              <v-col class="d-flex justify-end" cols="4">
-
-                <v-btn color="primary" dark outlined rounded class="mb-8 mr-5" @click="filtrar()">
-                  <v-icon>mdi-magnify</v-icon>
-                  Pesquisar
-                </v-btn>
-
-                <v-btn color="primary" dark outlined rounded class="mb-8" @click="limparFiltros()">
-                  <v-icon>mdi-magnify-close</v-icon>
-                  Limpar
-                </v-btn>
-              </v-col>
-              
-            </v-row>
-            
-          </v-form>
-
-        </v-expansion-panel-content>
-
-      </v-expansion-panel>
-    </v-expansion-panels>
+    </filter-expansion-panel>
 
     <v-row class="flex-basis-100">
       <v-col cols="12">

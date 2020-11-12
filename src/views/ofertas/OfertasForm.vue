@@ -258,18 +258,18 @@
                             type="number"
                             label="Nota mínima"/>
                 </v-col>
-                <v-col class="d-flex">
+                <v-col>
                     <v-select v-model="dataResponse.tp_situacao_oferta" :error-messages="errorData.tp_situacao_oferta"
                               :rules="rules.required"
                               outlined label="Situação da Oferta" :items="situacaoOferta" item-text="label"
                               item-value="value"/>
                 </v-col>
-                <v-col class="d-flex">
+                <v-col>
                     <v-select v-model="dataResponse.tp_tipo_turma" :error-messages="errorData.tp_tipo_turma"
                               outlined label="Status da Oferta" :items="statusOferta" item-text="label"
                               item-value="value"/>
                 </v-col>
-                <v-col class="d-flex">
+                <v-col>
                     <v-select v-model="dataResponse.id_parceiros" :error-messages="errorData.id_parceiros"
                               outlined label="Conteudista" :items="parceiros" item-text="tx_nome_parceiros"
                               item-value="id_parceiros"/>

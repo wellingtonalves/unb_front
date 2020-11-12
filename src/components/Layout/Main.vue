@@ -3,7 +3,7 @@
     <AppBar />
     <v-main>
       
-      <v-container>
+      <v-container fluid>
         <v-breadcrumbs :items="$route.meta.breadcrumb" divider="→" />
         <h2>{{this.$route.meta.title}}</h2>
         <router-view />
@@ -45,11 +45,6 @@
     padding-bottom: 0;
     padding-left: 0;
     padding-right: 0;
-  }
-  @media (min-width: 1264px) {
-    .v-main__wrap > .container {
-      /*max-width: 900px;*/
-    }
   }
   @media (max-width: 600px) {
     main.v-main {

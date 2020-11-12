@@ -1,61 +1,33 @@
 <template>
   <v-layout v-show="permission('AVA_LISTAR')" wrap class="align-stretch">
 
-    <v-expansion-panels :value="0">
-      <v-expansion-panel>
+    <filter-expansion-panel @filtrar="filtrar" @resetar="limparFiltros()">
 
-        <v-expansion-panel-header>
-          Filtros
-        </v-expansion-panel-header>
+      <v-col cols="12" sm="2">
+        <v-select dense v-model="filterData.tp_situacao_ava" label="Status" :items="statusAva" item-text="label" item-value="value" />
+      </v-col>
 
-        <v-expansion-panel-content>
+      <v-col cols="12" sm="2">
+        <v-select dense v-model="filterData.tp_ava" label="Tipo" :items="tipoAva" item-text="label" item-value="value" />
+      </v-col>
 
-          <v-form ref="form" lazy-validation>
-            <v-row align="center">
+      <v-col cols="12" sm="3">
+        <v-text-field dense
+          v-model="filterData.tx_nome_ava"
+          label="Nome"
+          placeholder="Informe o nome do AVA"
+        />
+      </v-col>
 
-              <v-col>
-                <v-select dense v-model="filterData.tp_situacao_ava" label="Status" :items="statusAva" item-text="label" item-value="value" />
-              </v-col>
+      <v-col cols="12" sm="3">
+        <v-text-field dense
+          v-model="filterData.tx_url"
+          label="URL"
+          placeholder="Informe a URL do AVA"
+        />
+      </v-col>
 
-              <v-col>
-                <v-select dense v-model="filterData.tp_ava" label="Tipo" :items="tipoAva" item-text="label" item-value="value" />
-              </v-col>
-
-              <v-col cols="12" sm="4">
-                <v-text-field dense
-                  v-model="filterData.tx_nome_ava"
-                  label="Nome"
-                  placeholder="Informe o nome do AVA"
-                />
-              </v-col>
-
-              <v-col cols="12" sm="4">
-                <v-text-field dense
-                  v-model="filterData.tx_url"
-                  label="URL"
-                  placeholder="Informe a URL do AVA"
-                />
-              </v-col>
-
-              <v-col class="d-flex justify-end" cols="12" sm="4">
-
-                <v-btn v-show="permission('AVA_LISTAR')" color="primary" dark outlined rounded class="mb-8 mr-5" @click="filtrar()">
-                  <v-icon>mdi-magnify</v-icon>
-                  Pesquisar
-                </v-btn>
-
-                <v-btn color="primary" dark outlined rounded class="mb-8" @click="limparFiltros()">
-                  <v-icon>mdi-magnify-close</v-icon>
-                  Limpar
-                </v-btn>
-              </v-col>
-            </v-row>
-          </v-form>
-
-        </v-expansion-panel-content>
-
-      </v-expansion-panel>
-    </v-expansion-panels>
+    </filter-expansion-panel>
 
     <v-row class="flex-basis-100">
       <v-col cols="12">
