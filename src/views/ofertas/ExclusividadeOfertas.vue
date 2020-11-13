@@ -4,7 +4,7 @@
       
       <h3>
         Oferta: 
-        {{data.tx_nome_curso + " ( " + data.tx_nome_oferta + " )"}}
+        {{oferta.tx_nome_curso + " ( " + oferta.tx_nome_oferta + " )"}}
       </h3>
       
       <exclusividade-ofertas-form @update="update" :data="data" :errors="errors">
@@ -33,13 +33,14 @@
 
 <script>
   import ExclusividadeOfertasForm from "./ExclusividadeOfertasForm";
-  import {get, update} from "@/services/abstract.service";
+  import {get, create} from "@/services/abstract.service";
   export default {
     name: "ExclusividadeOfertas",
     components: {ExclusividadeOfertasForm},
     data: () => ({
       data: '',
       loading: false,
+      oferta: {},
       errors: [],
       snackbar: {
         active: false,
@@ -56,19 +57,20 @@
       }
     },
     async mounted() {
-      await this.getData();
+      await this.getOferta();
     },
     methods: {
-      async getData() {
+      async getOferta() {
         const response = await get(`ofertas/${this.$route.params.id}`);
-        this.data = response.data.data;
+        this.oferta = response.data.data;
       },
       update(data) {
         this.data = data;
       },
       async save() {
         this.loading = true;
-        const response = await update(`ofertas/${this.$route.params.id}`, this.data)
+        this.data.id_oferta = this.$route.params.id;
+        const response = await create(`exclusividade-oferta`, this.data)
 
         this.loading = false;
 
