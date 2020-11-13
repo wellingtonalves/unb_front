@@ -59,12 +59,9 @@
         this.data = data;
       },
       async save() {
-        console.log(this.data)
         this.loading = true;
         const response = await create('usuario', this.data);
 
-        console.log('response');
-        console.log(response.errors);
         this.loading = false;
         
         if (response.errors) {

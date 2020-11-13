@@ -28,9 +28,7 @@
         </v-col>
         
       </v-row>
-
       
-
       <v-row>
         <v-btn class="mr-4" @click="$router.push('/ofertas')">
           <v-icon class="mr-2">mdi-backup-restore</v-icon>

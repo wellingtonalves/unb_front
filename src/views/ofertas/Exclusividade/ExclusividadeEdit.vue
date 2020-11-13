@@ -67,8 +67,6 @@
       },
       async getExclusividadeOferta() {
         const response = await get(`exclusividade-oferta/${this.$route.params.id_exclusividade}`);
-        console.log('exclusividade')
-        console.log(response)
         this.exclusividade = response.data.data;
       },
       update(exclusividade) {
@@ -76,8 +74,6 @@
       },
       async save() {
         this.loading = true;
-        console.log('editar - form');
-        console.log(this.exclusividade);
         const response = await update(`exclusividade-oferta/${this.exclusividade.id_exclusividade_oferta}`, this.exclusividade)
 
         this.loading = false;
