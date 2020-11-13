@@ -273,7 +273,7 @@ const routes = [
         children: [
           {
             path: '',
-            name: 'oferta',
+            name: 'programa',
             component: () => import('../views/programas/Programas.vue'),
             meta: {
               requiresAuth: true,
