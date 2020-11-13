@@ -94,10 +94,10 @@ const routes = [{
           {
             path: '/usuario/meus-dados',
             component: () =>
-              import('../views/usuario/Profile.vue'),
+              import('../views/meus_dados/PerfilPersist.vue'),
             meta: {
               requiresAuth: true,
-              title: 'Meu Dados',
+              title: 'Meus Dados',
               breadcrumb: [{
                   text: 'Início',
                   disabled: false,
@@ -106,7 +106,27 @@ const routes = [{
                 {
                   text: 'Meus Dados',
                   disabled: true,
-                  href: '/meus-dados'
+                  href: '/usuario/meus-dados'
+                },
+              ],
+            },
+          },
+          {
+            path: '/usuario/meus-dados/:view',
+            component: () =>
+              import('../views/meus_dados/PerfilPersist.vue'),
+            meta: {
+              requiresAuth: true,
+              title: 'Alterar Email',
+              breadcrumb: [{
+                  text: 'Início',
+                  disabled: false,
+                  href: '/'
+                },
+                {
+                  text: 'Alterar Email',
+                  disabled: true,
+                  href: '/usuario/meus-dados/alterar_email'
                 },
               ],
             },

@@ -2,7 +2,7 @@
   <form-skeleton :loading="loading">
     <v-form @submit.prevent="save" ref="form" v-show="!loading">
       <v-row>
-        <v-col v-if="!isProfile" class="d-flex" cols="4" sm="6">
+        <v-col v-if="!isProfile && !pageEmail" class="d-flex" cols="4" sm="6">
           <v-text-field
             v-model="dataResponse.tx_login_usuario"
             :error-messages="errorData.tx_login_usuario"
@@ -13,7 +13,7 @@
           />
         </v-col>
 
-        <v-col v-if="!isProfile" class="d-flex" cols="4" sm="6">
+        <v-col v-if="!isProfile && !pageEmail" class="d-flex" cols="4" sm="6">
           <v-select
             v-model="dataResponse.id_situacao_usuario"
             :error-messages="errorData.id_situacao_usuario"
@@ -26,7 +26,7 @@
           />
         </v-col>
 
-        <v-col class="d-flex" cols="4" sm="6">
+        <v-col v-if="!pageEmail" class="d-flex" cols="4" sm="6">
           <v-text-field
             v-model="dataResponse.pessoa.tx_nome_pessoa"
             :error-messages="errorData['pessoa.tx_nome_pessoa']"
@@ -37,7 +37,7 @@
           />
         </v-col>
 
-        <v-col class="d-flex" cols="4" sm="6">
+        <v-col v-if="!pageEmail" class="d-flex" cols="4" sm="6">
           <v-text-field
             v-model="dataResponse.pessoa.tx_nome_social"
             outlined
@@ -57,7 +57,17 @@
           />
         </v-col>
 
-        <v-col class="d-flex" cols="4" sm="6">
+        <v-col v-if="pageEmail" class="d-flex" cols="4" sm="6">
+          <v-text-field
+            v-model="confirm_email"
+            :rules="[compareEmail]"
+            outlined
+            label="Confirme o novo E-mail"
+            required
+          />
+        </v-col>
+
+        <v-col v-if="!pageEmail" class="d-flex" cols="4" sm="6">
           <v-text-field
             v-model="dataResponse.pessoa.tx_email_institucional"
             :error-messages="errorData['pessoa.tx_email_institucional']"
@@ -67,7 +77,7 @@
           />
         </v-col>
 
-        <v-col v-if="isProfile" class="d-flex" cols="4" sm="6">
+        <v-col v-if="!isProfile && !pageEmail" class="d-flex" cols="4" sm="6">
           <v-select
             v-model="dataResponse.id_perfil"
             :error-messages="errorData.id_perfil"
@@ -80,7 +90,7 @@
           />
         </v-col>
 
-        <v-col class="d-flex" cols="4" sm="6">
+        <v-col v-if="!pageEmail" class="d-flex" cols="4" sm="6">
           <v-select
             v-model="dataResponse.pessoa.tp_sexo"
             :error-messages="errorData['pessoa.tp_sexo']"
@@ -93,7 +103,7 @@
           />
         </v-col>
 
-        <v-col class="d-flex" cols="4" sm="6">
+        <v-col v-if="!pageEmail" class="d-flex" cols="4" sm="6">
           <v-autocomplete
             v-model="dataResponse.pessoa.sg_pais_nacionalidade"
             :error-messages="errorData['pessoa.sg_pais_nacionalidade']"
@@ -107,7 +117,7 @@
           />
         </v-col>
 
-        <v-col class="d-flex" cols="4" sm="6" v-if="!this.isBrasileiro">
+        <v-col class="d-flex" cols="4" sm="6" v-if="!this.isBrasileiro && !pageEmail">
           <v-text-field
             v-model="dataResponse.pessoa.nr_passaporte"
             :error-messages="errorData['pessoa.nr_passaporte']"
@@ -118,7 +128,7 @@
           />
         </v-col>
 
-        <v-col class="d-flex" cols="4" sm="6" v-if="this.isBrasileiro">
+        <v-col class="d-flex" cols="4" sm="6" v-if="this.isBrasileiro && !pageEmail">
           <v-text-field
             v-model="dataResponse.pessoa.nr_cpf"
             :error-messages="errorData['pessoa.nr_cpf']"
@@ -130,7 +140,7 @@
           />
         </v-col>
 
-        <v-col class="d-flex" cols="4" sm="6" v-if="this.isBrasileiro">
+        <v-col class="d-flex" cols="4" sm="6" v-if="this.isBrasileiro && !pageEmail">
           <v-autocomplete
             v-model="ufModel"
             :rules="rules.required"
@@ -143,7 +153,7 @@
           />
         </v-col>
 
-        <v-col class="d-flex" cols="4" sm="6" v-if="this.isBrasileiro">
+        <v-col class="d-flex" cols="4" sm="6" v-if="this.isBrasileiro && !pageEmail">
           <v-autocomplete
             v-model="dataResponse.pessoa.id_municipio_nascimento"
             :error-messages="errorData['pessoa.id_municipio_nascimento']"
@@ -156,7 +166,7 @@
           />
         </v-col>
 
-        <v-col class="d-flex" cols="4" sm="6">
+        <v-col class="d-flex" cols="4" sm="6" v-if="!pageEmail">
           <v-menu
             v-model="calendarPopUp"
             :close-on-content-click="false"
@@ -241,13 +251,33 @@ export default {
     ],
     dateFormatted: vm.formatDate(new Date().toISOString().substr(0, 10)),
     calendarPopUp: false,
+    confirm_email: '',
   }),
   computed: {
     computedDateFormatted() {
       return this.formatDate(this.dataResponse.pessoa.dt_nascimento);
     },
+    compareEmail() {
+      return this.dataResponse.pessoa.tx_email_pessoa === this.confirm_email
+        ? true
+        : 'O e-mail inserido não corresponde ao anterior!';
+    },
     isProfile() {
-      return this.view;
+      return (
+        this.$route.meta.title === 'Meus Dados' && !this.emailOrPasswordPage
+      );
+    },
+    pageEmail() {
+      return this.view === 'alterar_email';
+    },
+    pagePassword() {
+      return this.view === 'pwd';
+    },
+    emailOrPasswordPage() {
+      return ['alterar_email', 'pwd'].includes(this.view);
+    },
+    loadIf() {
+      return !this.isProfile && !this.emailOrPasswordPage;
     },
   },
   watch: {
@@ -263,23 +293,27 @@ export default {
   },
 
   async mounted() {
-    await this.getPais();
-    await this.getUf();
-    if (!this.isProfile) {
-      await this.getTematicaCurso();
-      await this.getSituacaoUsuario();
-      await this.getPerfil();
-    } else {
-      this.dataResponse = this.userData;
-    }
-    this.loading = false
-    console.log('userData', this.userData);
+    console.log(' this.view', this.view, 'route', this.$route);
+    await this.loadItems();
     //TODO - fazer o municiopio funcionar quando for editar.
     // if (this.$route.params.id) {
     // await this.getMunicipio(this.dataResponse.pessoa.id_municipio_nascimento);
     // }
   },
   methods: {
+    async loadItems() {
+      await this.getPais();
+      await this.getUf();
+      if (this.loadIf) {
+        await this.getTematicaCurso();
+        await this.getSituacaoUsuario();
+        await this.getPerfil();
+      } else {
+        this.dataResponse = this.userData;
+      }
+      this.loading = false;
+      console.log('userData', this.userData);
+    },
     async getTematicaCurso() {
       const response = await get('/tematica-curso?pagination=false');
       this.tematicaCurso = response.data.data;

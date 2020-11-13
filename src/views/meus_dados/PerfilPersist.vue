@@ -2,19 +2,10 @@
   <v-layout wrap>
     <v-card class="mx-auto" height="100%" width="100%" elevation="10">
       <v-container class="pa-5" fluid>
-        <usuario-form
-          @update="update"
-          :user-data="userData"
-          :errors="errors"
-          :view="1"
-        >
+        <usuario-form @update="receiveData" :user-data="userData" :errors="errors" :view="typePage">
           <template v-slot:buttons>
-            <v-btn class="mr-4" @click="$router.push('/usuarios')">
-              <v-icon class="mr-2">mdi-backup-restore</v-icon>Voltar
-            </v-btn>
-
             <v-btn class="mr-4" color="primary" :loading="loading" @click="save()">
-              <v-icon class="mr-2">mdi-content-save</v-icon>Salvar
+              <v-icon class="mr-2">mdi-content-save</v-icon>Alterar Dados
             </v-btn>
           </template>
         </usuario-form>
@@ -41,14 +32,15 @@ export default {
       text: '',
       timeout: 5000,
     },
+    perfil: {},
   }),
-  mounted() {
-      console.log('.user', this.$store.state.user)
-  },
   computed: {
     userData() {
       return this.$store.state.user;
     },
+    typePage() {
+      return this.$route.params.view;
+    }
   },
   watch: {
     'snackbar.active': function(val) {
@@ -58,14 +50,14 @@ export default {
     },
   },
   methods: {
-    update(data) {
-      this.data = data;
+    receiveData(data) {
+      this.perfil = data;
     },
     async save() {
       this.loading = true;
       const response = await update(
-        `usuario/${this.$route.params.id}`,
-        this.data
+        `usuario/${this.userData.id_usuario}`,
+        this.perfil
       );
 
       this.loading = false;
