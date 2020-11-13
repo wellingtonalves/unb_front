@@ -22,7 +22,8 @@
         </v-col>
 
         <v-col>
-          <v-btn outlined color="error" v-show="permission('EXCLUSIVIDADE_EXCLUIR')">
+          <v-btn outlined color="error" v-show="permission('EXCLUSIVIDADE_EXCLUIR')" 
+                 @click="excluir()">
             Remover exclusividade
           </v-btn>
         </v-col>
@@ -36,6 +37,20 @@
         </v-btn>
       </v-row>
 
+      <v-row justify="center">
+        <v-dialog v-model="dialogDelete" persistent max-width="500">
+          <v-card>
+            <v-card-title class="headline">Atenção!</v-card-title>
+            <v-card-text>Deseja remover a exclusividade desta oferta ?</v-card-text>
+            <v-card-actions>
+              <v-spacer></v-spacer>
+              <v-btn color="error" text @click="dialogDelete = false">Cancelar</v-btn>
+              <v-btn color="primary" text @click="excluirItem(oferta.exclusividade.id_exclusividade_oferta)">Confirmar</v-btn>
+            </v-card-actions>
+          </v-card>
+        </v-dialog>
+      </v-row>
+
       <v-snackbar v-model="snackbar.active" :color="snackbar.color" :timeout="snackbar.timeout">
         {{snackbar.text}}
         <v-btn text @click.stop="snackbar.active = false">
@@ -47,7 +62,7 @@
 </template>
 
 <script>
-  import {get, create} from "@/services/abstract.service";
+  import {get, create, remove} from "@/services/abstract.service";
   import {checkPermission} from "@/helpers/checkPermission";
   export default {
     name: "Exclusividade",
@@ -56,6 +71,7 @@
       loading: false,
       oferta: {},
       errors: [],
+      dialogDelete: false,
       snackbar: {
         active: false,
         color: '',
@@ -101,6 +117,17 @@
 
         this.snackbar.text = response.data.message;
         this.snackbar.color = response.data.messageType;
+        this.snackbar.active = true;
+      },
+      excluir() {
+        this.dialogDelete = true;
+      },
+      async excluirItem(id) {
+        const response = await remove(`/exclusividade-oferta/${id}`);
+        this.dialogDelete = false;
+
+        this.snackbar.text = response.message;
+        this.snackbar.color = response.messageType;
         this.snackbar.active = true;
       }
     }
