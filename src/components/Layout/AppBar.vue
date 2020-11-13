@@ -107,7 +107,8 @@
 
     <v-app-bar :clipped-left="true" app>
       <v-app-bar-nav-icon @click.stop="drawerSettings.model = !drawerSettings.model"/>
-      <v-container>
+      
+      <v-container fluid>
 
         <v-row>
 
@@ -319,6 +320,7 @@
     width: 112px;
   }
   header.v-app-bar button.v-app-bar__nav-icon {
+    margin-left: 0 !important;
     opacity: 0.75;
     position: absolute;
   }
@@ -382,11 +384,6 @@
   .top-button {
     height: 40px !important;
     width: 40px !important;
-  }
-  @media (min-width: 1264px) {
-    .v-main__wrap > .container {
-      max-width: 900px;
-    }
   }
   @media (max-width: 600px) {
     header.v-app-bar .container {
