@@ -79,6 +79,20 @@
 
             <template v-slot:item.action="{ item }">
 
+              <div v-if="item.exclusividade">
+                <v-btn v-show="permission('OFERTA_EDITAR')" small color="primary" outlined
+                       @click="$router.push(`/ofertas/${item.id_oferta}/edit`)">
+                  Gerenciar Exclusividade
+                </v-btn>
+              </div>
+              <div v-else>
+                <v-btn v-show="permission('EXCLUSIVIDADE_OFERTA_INCLUIR')" small color="primary" outlined
+                       @click="$router.push(`/ofertas/${item.id_oferta}/exclusividade`)">
+                  Tornar Exclusiva
+                </v-btn>
+              </div>
+              
+              
               <v-tooltip bottom>
                 <template v-slot:activator="{ on }">
                   <v-btn v-show="permission('OFERTA_EDITAR')" small color="primary" icon

@@ -34,7 +34,11 @@ const routes = [
           title: 'Conheça a Escola',
           breadcrumb: [
             {text: 'Início', disabled: false, href: '/'},
-            {text: 'Conheça a Escola', disabled: true, href: '/conheca-a-escola'},
+            {
+              text: 'Conheça a Escola',
+              disabled: true,
+              href: '/conheca-a-escola',
+            },
           ],
         },
       },
@@ -47,7 +51,11 @@ const routes = [
           title: 'Adesão Institucional',
           breadcrumb: [
             {text: 'Início', disabled: false, href: '/'},
-            {text: 'Adesão Institucional', disabled: true, href: '/adesao-institucional'},
+            {
+              text: 'Adesão Institucional',
+              disabled: true,
+              href: '/adesao-institucional',
+            },
           ],
         },
       },
@@ -60,7 +68,11 @@ const routes = [
           title: 'Perguntas Frequentes',
           breadcrumb: [
             {text: 'Início', disabled: false, href: '/'},
-            {text: 'Perguntas Frequentes', disabled: true, href: '/perguntas-frequentes'},
+            {
+              text: 'Perguntas Frequentes',
+              disabled: true,
+              href: '/perguntas-frequentes',
+            },
           ],
         },
       },
@@ -197,6 +209,24 @@ const routes = [
               ],
             },
           },
+          {
+            path: '/ofertas/:id/exclusividade',
+            component: () =>
+              import('../views/ofertas/ExclusividadeOfertas.vue'),
+            meta: {
+              title: 'Exclusividade Oferta',
+              requiresAuth: true,
+              breadcrumb: [
+                {text: 'Dashboard', disabled: false, href: '/'},
+                {text: 'Ofertas', disabled: false, href: '/ofertas'},
+                {
+                  text: 'Exclusividade Oferta',
+                  disabled: true,
+                  href: '/ofertas',
+                },
+              ],
+            },
+          },
         ],
       },
       {
@@ -225,7 +255,11 @@ const routes = [
               breadcrumb: [
                 {text: 'Dashboard', disabled: false, href: '/'},
                 {text: 'Programas', disabled: false, href: '/programas'},
-                {text: 'Cadastrar Programa', disabled: true, href: '/programas'},
+                {
+                  text: 'Cadastrar Programa',
+                  disabled: true,
+                  href: '/programas',
+                },
               ],
             },
           },
@@ -408,39 +442,62 @@ const routes = [
           {
             path: '',
             name: 'tarefa-agendada',
-            component: () => import('../views/tarefas_agendadas/TarefaAgendada.vue'),
+            component: () =>
+              import('../views/tarefas_agendadas/TarefaAgendada.vue'),
             meta: {
               requiresAuth: true,
               title: 'Tarefas Agendadas',
               breadcrumb: [
                 {text: 'Dashboard', disabled: false, href: '/'},
-                {text: 'Tarefas Agendadas', disabled: true, href: '/tarefa-agendada'},
+                {
+                  text: 'Tarefas Agendadas',
+                  disabled: true,
+                  href: '/tarefa-agendada',
+                },
               ],
             },
           },
           {
             path: '/tarefa-agendada/create',
-            component: () => import('../views/tarefas_agendadas/TarefaAgendadaCreate.vue'),
+            component: () =>
+              import('../views/tarefas_agendadas/TarefaAgendadaCreate.vue'),
             meta: {
               title: 'Cadastrar tarefa',
               requiresAuth: true,
               breadcrumb: [
                 {text: 'Dashboard', disabled: false, href: '/'},
-                {text: 'Tarefas Agendadas', disabled: false, href: '/tarefas-agendadas'},
-                {text: 'Cadastrar tarefa', disabled: true, href: '/tarefas-agendadas'},
+                {
+                  text: 'Tarefas Agendadas',
+                  disabled: false,
+                  href: '/tarefas-agendadas',
+                },
+                {
+                  text: 'Cadastrar tarefa',
+                  disabled: true,
+                  href: '/tarefas-agendadas',
+                },
               ],
             },
           },
           {
             path: '/tarefa-agendada/:id/edit',
-            component: () => import('../views/tarefas_agendadas/TarefaAgendadaEdit.vue'),
+            component: () =>
+              import('../views/tarefas_agendadas/TarefaAgendadaEdit.vue'),
             meta: {
               title: 'Editar tarefa',
               requiresAuth: true,
               breadcrumb: [
                 {text: 'Dashboard', disabled: false, href: '/'},
-                {text: 'Tarefas Agendadas', disabled: false, href: '/tarefas-agendadas'},
-                {text: 'Editar tarefa', disabled: true, href: '/tarefas-agendadas'},
+                {
+                  text: 'Tarefas Agendadas',
+                  disabled: false,
+                  href: '/tarefas-agendadas',
+                },
+                {
+                  text: 'Editar tarefa',
+                  disabled: true,
+                  href: '/tarefas-agendadas',
+                },
               ],
             },
           },
