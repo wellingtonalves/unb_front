@@ -9,7 +9,7 @@
       
       <exclusividade-form @update="update" :data="exclusividade" :errors="errors">
         <template v-slot:buttons>
-          <v-btn class="mr-4" @click="$router.push('/ofertas')">
+          <v-btn class="mr-4" @click="$router.push(`/ofertas/${oferta.id_oferta}/gerenciar-exclusividade`)">
             <v-icon class="mr-2">mdi-backup-restore</v-icon>
             Voltar
           </v-btn>

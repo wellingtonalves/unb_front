@@ -29,6 +29,50 @@
         </v-col>
         
       </v-row>
+
+
+      <v-row class="flex-basis-100">
+        <v-col cols="12">
+          <v-card>
+
+            <v-data-table
+              :headers="headersValorExclusividade"
+              :items="valorExclusividade"
+              :loading="loading"
+              item-key="id_valor_exclusividade_oferta"
+              sort-by="valor_exclusividade"
+              class="elevation-1"
+              no-data-text="Nenhum registro encontrado."
+              no-results-text="Nenhum registro encontrado."
+              loading-text="Aguarde, estamos carregando os dados.">
+
+              <template v-slot:top>
+                <v-toolbar flat>
+                  <v-toolbar-title>Listagem de Valores para exclusividade da oferta.</v-toolbar-title>
+                </v-toolbar>
+              </template>
+
+              <template v-slot:item.action="{ item }">
+
+                <v-tooltip bottom>
+                  <template v-slot:activator="{ on }">
+                    <v-btn v-show="permission('OFERTA_EXCLUIR')" small color="error" icon @click="excluir(item)"
+                           v-on="on">
+                      <v-icon>mdi-delete</v-icon>
+                    </v-btn>
+                  </template>
+                  <span>Excluir</span>
+                </v-tooltip>
+
+              </template>
+
+            </v-data-table>
+
+          </v-card>
+        </v-col>
+      </v-row>
+      
+      
       
       <v-row>
         <v-btn class="mr-4" @click="$router.push('/ofertas')">
@@ -70,6 +114,12 @@
       data: [],
       loading: false,
       oferta: {},
+      valorExclusividade: [],
+      headersValorExclusividade: [
+        {text: 'ID', value: 'id_valor_exclusividade_oferta'},
+        {text: 'Valor', value: 'valor_exclusividade'},
+        {text: 'Ações', value: 'action', sortable: false},
+      ],
       errors: [],
       dialogDelete: false,
       snackbar: {
@@ -96,6 +146,8 @@
       async getOferta() {
         const response = await get(`ofertas/${this.$route.params.id}`);
         this.oferta = response.data.data;
+        this.valorExclusividade = response.data.data.exclusividade.valor_exclusividade;
+        console.log(this.valorExclusividade)
       },
       update(data) {
         this.data = data;
