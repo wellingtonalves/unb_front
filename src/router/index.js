@@ -212,7 +212,7 @@ const routes = [
           {
             path: '/ofertas/:id/exclusividade',
             component: () =>
-              import('../views/ofertas/ExclusividadeOfertas.vue'),
+              import('../views/ofertas/Exclusividade/Exclusividade.vue'),
             meta: {
               title: 'Exclusividade Oferta',
               requiresAuth: true,
@@ -227,6 +227,44 @@ const routes = [
               ],
             },
           },
+          {
+            path: '/ofertas/:id/exclusividade/:id_exclusividade/edit',
+            component: () =>
+              import('../views/ofertas/Exclusividade/ExclusividadeEdit.vue'),
+            meta: {
+              title: 'Editar Exclusividade Oferta',
+              requiresAuth: true,
+              breadcrumb: [
+                {text: 'Dashboard', disabled: false, href: '/'},
+                {text: 'Ofertas', disabled: false, href: '/ofertas'},
+                {
+                  text: 'Editar Exclusividade Oferta',
+                  disabled: true,
+                  href: '/ofertas',
+                },
+              ],
+            },
+          },
+          {
+            path: '/ofertas/:id/gerenciar-exclusividade',
+            component: () =>
+              import(
+                '../views/ofertas/Exclusividade/GerenciarExclusividade.vue'
+              ),
+            meta: {
+              title: 'Gerenciar Exclusividade Oferta',
+              requiresAuth: true,
+              breadcrumb: [
+                {text: 'Dashboard', disabled: false, href: '/'},
+                {text: 'Ofertas', disabled: false, href: '/ofertas'},
+                {
+                  text: 'Gerenciar Exclusividade Oferta',
+                  disabled: true,
+                  href: '/ofertas',
+                },
+              ],
+            },
+          },
         ],
       },
       {
@@ -235,7 +273,7 @@ const routes = [
         children: [
           {
             path: '',
-            name: 'oferta',
+            name: 'programa',
             component: () => import('../views/programas/Programas.vue'),
             meta: {
               requiresAuth: true,

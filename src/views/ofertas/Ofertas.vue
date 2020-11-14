@@ -81,7 +81,7 @@
 
               <div v-if="item.exclusividade">
                 <v-btn v-show="permission('OFERTA_EDITAR')" small color="primary" outlined
-                       @click="$router.push(`/ofertas/${item.id_oferta}/edit`)">
+                       @click="$router.push(`/ofertas/${item.id_oferta}/gerenciar-exclusividade`)">
                   Gerenciar Exclusividade
                 </v-btn>
               </div>

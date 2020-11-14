@@ -7,9 +7,9 @@
         {{oferta.tx_nome_curso + " ( " + oferta.tx_nome_oferta + " )"}}
       </h3>
       
-      <exclusividade-ofertas-form @update="update" :data="data" :errors="errors">
+      <exclusividade-form @update="update" :data="exclusividade" :errors="errors">
         <template v-slot:buttons>
-          <v-btn class="mr-4" @click="$router.push('/ofertas')">
+          <v-btn class="mr-4" @click="$router.push(`/ofertas/${oferta.id_oferta}/gerenciar-exclusividade`)">
             <v-icon class="mr-2">mdi-backup-restore</v-icon>
             Voltar
           </v-btn>
@@ -19,7 +19,7 @@
             Salvar
           </v-btn>
         </template>
-      </exclusividade-ofertas-form>
+      </exclusividade-form>
 
       <v-snackbar v-model="snackbar.active" :color="snackbar.color" :timeout="snackbar.timeout">
         {{snackbar.text}}
@@ -32,15 +32,15 @@
 </template>
 
 <script>
-  import ExclusividadeOfertasForm from "./ExclusividadeOfertasForm";
-  import {get, create} from "@/services/abstract.service";
+  import ExclusividadeForm from "./ExclusividadeForm";
+  import {get, update} from "@/services/abstract.service";
   export default {
-    name: "ExclusividadeOfertas",
-    components: {ExclusividadeOfertasForm},
+    name: "ExclusividadeEdit",
+    components: {ExclusividadeForm},
     data: () => ({
-      data: '',
       loading: false,
       oferta: {},
+      exclusividade: '',
       errors: [],
       snackbar: {
         active: false,
@@ -58,19 +58,23 @@
     },
     async mounted() {
       await this.getOferta();
+      await this.getExclusividadeOferta();
     },
     methods: {
       async getOferta() {
         const response = await get(`ofertas/${this.$route.params.id}`);
         this.oferta = response.data.data;
       },
-      update(data) {
-        this.data = data;
+      async getExclusividadeOferta() {
+        const response = await get(`exclusividade-oferta/${this.$route.params.id_exclusividade}`);
+        this.exclusividade = response.data.data;
+      },
+      update(exclusividade) {
+        this.exclusividade = exclusividade;
       },
       async save() {
         this.loading = true;
-        this.data.id_oferta = this.$route.params.id;
-        const response = await create(`exclusividade-oferta`, this.data)
+        const response = await update(`exclusividade-oferta/${this.exclusividade.id_exclusividade_oferta}`, this.exclusividade)
 
         this.loading = false;
 

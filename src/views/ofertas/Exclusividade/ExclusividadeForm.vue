@@ -41,7 +41,7 @@
   import {get} from "@/services/abstract.service";
 
   export default {
-    name: "ExclusividadeOfertasForm",
+    name: "ExclusividadeForm",
     props: ['data', 'errors'],
     data: () => ({
       loading: true,
