@@ -147,7 +147,6 @@
         const response = await get(`ofertas/${this.$route.params.id}`);
         this.oferta = response.data.data;
         this.valorExclusividade = response.data.data.exclusividade.valor_exclusividade;
-        console.log(this.valorExclusividade)
       },
       update(data) {
         this.data = data;
