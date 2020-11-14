@@ -11,7 +11,7 @@
       </v-container>
 
     </v-main>
-    
+    <snack-bar-component/>    
   </v-app>
 </template>
 

@@ -2,9 +2,9 @@
   <v-layout wrap class="align-stretch">
 
     <filter-expansion-panel @filtrar="filtrar" @resetar="limparFiltros()">
-      
+
       <template v-slot:filterExpansionPanel>
-        
+
         <v-col cols="12" sm="2">
           <v-select dense v-model="filterData.id_ava" label="AVA" no-data-text="Nenhum registro encontrado."
                     :items="ava" item-text="tx_nome_ava" item-value="id_ava"/>
@@ -41,7 +41,7 @@
           <v-select dense v-model="filterData.tp_situacao_oferta" no-data-text="Nenhum registro encontrado."
                     label="Situação" :items="situacaoOferta" item-text="label" item-value="value"/>
         </v-col>
-        
+
       </template>
 
     </filter-expansion-panel>
@@ -91,8 +91,8 @@
                   Tornar Exclusiva
                 </v-btn>
               </div>
-              
-              
+
+
               <v-tooltip bottom>
                 <template v-slot:activator="{ on }">
                   <v-btn v-show="permission('OFERTA_EDITAR')" small color="primary" icon
@@ -121,27 +121,7 @@
       </v-col>
     </v-row>
 
-    <v-row justify="center">
-      <v-dialog v-model="dialogDelete" persistent max-width="500">
-        <v-card>
-          <v-card-title class="headline">Atenção!</v-card-title>
-          <v-card-text>Deseja excluir o registro <strong>{{ dialogDeleteData.tx_nome_oferta }}</strong> ?</v-card-text>
-          <v-card-actions>
-            <v-spacer></v-spacer>
-            <v-btn color="error" text @click="dialogDelete = false">Cancelar</v-btn>
-            <v-btn color="primary" text @click="excluirItem(dialogDeleteData.id_oferta)">Confirmar</v-btn>
-          </v-card-actions>
-        </v-card>
-      </v-dialog>
-    </v-row>
-
-    <v-snackbar v-model="snackbar.active" :color="snackbar.color" :timeout="5000">
-      {{ snackbar.text }}
-      <v-btn text @click.stop="snackbar.active = false">
-        Fechar
-      </v-btn>
-    </v-snackbar>
-
+    <dialog-delete-component :text="dialogDeleteData.tx_nome_oferta" v-model="dialogDelete" @excluir="excluirItem(dialogDeleteData.id_oferta)"></dialog-delete-component>
   </v-layout>
 </template>
 
@@ -182,17 +162,12 @@ export default {
       {text: 'ID Curso', value: 'id_curso'},
       {text: 'Nome da Oferta', value: 'tx_nome_oferta', align: 'start',},
       {text: 'Situação', value: 'tp_situacao_oferta'},
-      {text: 'Total de Ofertas', value: 'total_ofertas'},
+      {text: 'Total de Inscrições', value: 'total_inscricoes'},
       {text: 'Ações', value: 'action', sortable: false},
     ],
     loading: false,
     dialogDelete: false,
     dialogDeleteData: {},
-    snackbar: {
-      active: false,
-      color: '',
-      text: ''
-    },
     tipoOferta: [],
     ava: [],
     loadingCursos: false,
@@ -248,12 +223,8 @@ export default {
       this.dialogDelete = true;
     },
     async excluirItem(id) {
-      const response = await remove(`/ofertas/${id}`);
+      await remove(`/ofertas/${id}`);
       this.dialogDelete = false;
-
-      this.snackbar.text = response.message;
-      this.snackbar.color = response.messageType;
-      this.snackbar.active = true;
 
       await this.get();
     },
