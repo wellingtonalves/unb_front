@@ -14,70 +14,45 @@
           </v-btn>
         </template>
       </programas-form>
-
-      <v-snackbar v-model="snackbar.active" :color="snackbar.color" :timeout="snackbar.timeout">
-        {{snackbar.text}}
-        <v-btn text @click.stop="snackbar.active = false">
-          Fechar
-        </v-btn>
-      </v-snackbar>
     </card-default>
   </v-layout>
 </template>
 
 <script>
-  import ProgramasForm from "./ProgramasForm";
-  import {get, update} from "@/services/abstract.service";
-  export default {
-    name: "ProgramasEdit",
-    components: {ProgramasForm},
-    data: () => ({
-      data: '',
-      loading: false,
-      errors: [],
-      snackbar: {
-        active: false,
-        color: '',
-        text: '',
-        timeout: 5000
-      },
-    }),
-    watch: {
-      'snackbar.active': function (val) {
-        if (this.snackbar.color == 'success' && val == false) {
-          this.$router.push('/programas');
-        }
-      }
+import ProgramasForm from "./ProgramasForm";
+import {get, update} from "@/services/abstract.service";
+
+export default {
+  name: "ProgramasEdit",
+  components: {ProgramasForm},
+  data: () => ({
+    data: '',
+    loading: false,
+    errors: [],
+  }),
+  async mounted() {
+    await this.getData();
+  },
+  methods: {
+    async getData() {
+      const response = await get(`programas/${this.$route.params.id}`);
+      this.data = response.data.data;
     },
-    async mounted() {
-      await this.getData();
+    update(data) {
+      this.data = data;
     },
-    methods: {
-      async getData() {
-        const response = await get(`programas/${this.$route.params.id}`);
-        this.data = response.data.data;
-      },
-      update(data) {
-        this.data = data;
-      },
-      async save() {
-        this.loading = true;
-        const response = await update(`programas/${this.$route.params.id}`, this.data)
+    async save() {
+      this.loading = true;
+      const response = await update(`programas/${this.$route.params.id}`, this.data)
 
-        this.loading = false;
+      this.loading = false;
 
-        if (response.errors) {
-          this.errors = response.errors;
-          this.snackbar.text = response.message;
-          this.snackbar.color = response.messageType;
-          this.snackbar.active = true;
-          return ;
-        }
-
-        this.snackbar.text = response.data.message;
-        this.snackbar.color = response.data.messageType;
-        this.snackbar.active = true;
+      if (response.errors) {
+        this.errors = response.errors;
+        return false
       }
+      this.$router.push('/programas');
     }
   }
+}
 </script>

@@ -30,6 +30,9 @@ const mutations = {
     state.userRole = permissoes;
     localStorage.setItem('userRole', JSON.stringify(permissoes));
   },
+  SET_SNACKBAR(state, data = {}) {
+    state.snackbar = data
+  }
 };
 
 export default mutations;
