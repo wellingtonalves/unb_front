@@ -39,6 +39,7 @@
               :headers="headersValorExclusividade"
               :items="valorExclusividade"
               :loading="loading"
+              :search="searchValorExclusividade"
               item-key="id_valor_exclusividade_oferta"
               sort-by="valor_exclusividade"
               class="elevation-1"
@@ -49,6 +50,14 @@
               <template v-slot:top>
                 <v-toolbar flat>
                   <v-toolbar-title>Listagem de Valores para exclusividade da oferta.</v-toolbar-title>
+                  <v-spacer></v-spacer>
+                  <v-text-field
+                    v-model="searchValorExclusividade"
+                    append-icon="mdi-magnify"
+                    label="Procurar"
+                    single-line
+                    hide-details
+                  ></v-text-field>
                 </v-toolbar>
               </template>
 
@@ -120,6 +129,7 @@
         {text: 'Valor', value: 'valor_exclusividade'},
         {text: 'Ações', value: 'action', sortable: false},
       ],
+      searchValorExclusividade: '',
       errors: [],
       dialogDelete: false,
       snackbar: {
