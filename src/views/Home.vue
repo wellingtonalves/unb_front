@@ -1,9 +1,96 @@
 <template>
   <v-layout wrap>
 
-    <h3>Como Funciona</h3>
+    <h2 class="featured">Cursos <strong>em Destaque</strong></h2>
 
-    <v-layout class="evg-cards count-items flex-wrap">
+    <v-layout class="course-cards flex-wrap justify-center">
+
+      <v-card class="d-flex">
+        <div>
+          <v-img src="https://cdn.evg.gov.br/cursos/234_EVG/banner.svg" alt="Logo do Curso Inovação Social para o Aperfeiçoamento de Políticas Públicas"></v-img>
+          <p class="nome-tematica" data-paleta-bg="9" title="Gestão de Políticas Públicas">Gestão de Políticas Públicas</p>
+          <p class="nome-oferta">Curso Aberto</p>
+          <h3 class="v-card__title"><a href="https://www.escolavirtual.gov.br/curso/258">Inovação Social para o Aperfeiçoamento de Políticas Públicas</a></h3>
+        </div>
+        <dl>
+             <dt>Conteudista:</dt>
+             <dd>TCU</dd>
+            <dt>Carga Horária:</dt>
+            <dd>20h</dd>
+        </dl>
+        <div class="action-bar d-flex">
+            <v-btn tile outlined color="primary" class="ma-2" href="https://www.escolavirtual.gov.br/curso/258/">
+              <v-icon>mdi-information</v-icon>
+              <span class="d-sr-only">Saiba mais</span>
+            </v-btn>
+            <v-btn tile color="contrast" class="ma-2" href="https://www.escolavirtual.gov.br/secretaria/inscricao/5437">
+              Inscreva-se
+              <v-icon right>
+                mdi-menu-right
+              </v-icon>
+            </v-btn>
+        </div>
+      </v-card>
+
+      <v-card class="d-flex">
+        <div>
+          <v-img src="https://cdn.evg.gov.br/cursos/258_EVG/banner.svg" alt="Logo do Curso Inovação Social para o Aperfeiçoamento de Políticas Públicas"></v-img>
+          <p class="nome-tematica" data-paleta-bg="9" title="Gestão de Políticas Públicas">Gestão de Políticas Públicas</p>
+          <p class="nome-oferta">Curso Aberto</p>
+          <h3 class="v-card__title"><a href="https://www.escolavirtual.gov.br/curso/258">Planejamento Governamental</a></h3>
+        </div>
+        <dl>
+             <dt>Conteudista:</dt>
+             <dd>TCU</dd>
+            <dt>Carga Horária:</dt>
+            <dd>20h</dd>
+        </dl>
+        <div class="action-bar d-flex">
+            <v-btn tile outlined color="primary" class="ma-2" href="https://www.escolavirtual.gov.br/curso/258/">
+              <v-icon>mdi-information</v-icon>
+              <span class="d-sr-only">Saiba mais</span>
+            </v-btn>
+            <v-btn tile color="contrast" class="ma-2" href="https://www.escolavirtual.gov.br/secretaria/inscricao/5437">
+              Inscreva-se
+              <v-icon right>
+                mdi-menu-right
+              </v-icon>
+            </v-btn>
+        </div>
+      </v-card>
+
+      <v-card class="d-flex">
+        <div>
+          <v-img src="https://cdn.evg.gov.br/cursos/258_EVG/banner.svg" alt="Logo do Curso Inovação Social para o Aperfeiçoamento de Políticas Públicas"></v-img>
+          <p class="nome-tematica" data-paleta-bg="9" title="Gestão de Políticas Públicas">Gestão de Políticas Públicas</p>
+          <p class="nome-oferta">Curso Aberto</p>
+          <h3 class="v-card__title"><a href="https://www.escolavirtual.gov.br/curso/258">Inovação Social para o Aperfeiçoamento de Políticas Públicas</a></h3>
+        </div>
+        <dl>
+             <dt>Conteudista:</dt>
+             <dd>TCU</dd>
+            <dt>Carga Horária:</dt>
+            <dd>20h</dd>
+        </dl>
+        <div class="action-bar d-flex">
+            <v-btn tile outlined color="primary" class="ma-2" href="https://www.escolavirtual.gov.br/curso/258/">
+              <v-icon>mdi-information</v-icon>
+              <span class="d-sr-only">Saiba mais</span>
+            </v-btn>
+            <v-btn tile color="contrast" class="ma-2" href="https://www.escolavirtual.gov.br/secretaria/inscricao/5437">
+              Inscreva-se
+              <v-icon right>
+                mdi-menu-right
+              </v-icon>
+            </v-btn>
+        </div>
+      </v-card>
+
+    </v-layout>
+
+    <h2 class="featured mt-16">Como a escola <strong>funciona</strong></h2>
+
+    <v-layout class="evg-cards count-items flex-wrap justify-center">
 
       <v-card class="d-flex">
         <v-card-title>Escolha um curso pelo <strong>Catálogo de Cursos</strong> ou pela sugestão da página inicial.</v-card-title>
