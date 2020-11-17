@@ -20,13 +20,7 @@
           </v-btn>
         </template>
       </exclusividade-form>
-
-      <v-snackbar v-model="snackbar.active" :color="snackbar.color" :timeout="snackbar.timeout">
-        {{snackbar.text}}
-        <v-btn text @click.stop="snackbar.active = false">
-          Fechar
-        </v-btn>
-      </v-snackbar>
+      
     </card-default>
   </v-layout>
 </template>
@@ -49,13 +43,7 @@
         timeout: 5000
       },
     }),
-    watch: {
-      'snackbar.active': function (val) {
-        if (this.snackbar.color == 'success' && val == false) {
-          this.$router.push('/ofertas');
-        }
-      }
-    },
+    watch: {},
     async mounted() {
       await this.getOferta();
       await this.getExclusividadeOferta();
@@ -75,20 +63,14 @@
       async save() {
         this.loading = true;
         const response = await update(`exclusividade-oferta/${this.exclusividade.id_exclusividade_oferta}`, this.exclusividade)
-
         this.loading = false;
 
         if (response.errors) {
           this.errors = response.errors;
-          this.snackbar.text = response.message;
-          this.snackbar.color = response.messageType;
-          this.snackbar.active = true;
-          return ;
+          return false
         }
 
-        this.snackbar.text = response.data.message;
-        this.snackbar.color = response.data.messageType;
-        this.snackbar.active = true;
+        this.$router.push('/ofertas');
       }
     }
   }
