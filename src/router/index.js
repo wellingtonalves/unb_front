@@ -265,6 +265,27 @@ const routes = [
               ],
             },
           },
+          {
+            path:
+              '/ofertas/:id/gerenciar-exclusividade/:id_exclusividade/create',
+            component: () =>
+              import(
+                '../views/ofertas/Exclusividade/GerenciarExclusividadeCreate.vue'
+              ),
+            meta: {
+              title: 'Adicionar valores',
+              requiresAuth: true,
+              breadcrumb: [
+                {text: 'Dashboard', disabled: false, href: '/'},
+                {text: 'Ofertas', disabled: false, href: '/ofertas'},
+                {
+                  text: 'Adicionar valores',
+                  disabled: true,
+                  href: '/ofertas',
+                },
+              ],
+            },
+          },
         ],
       },
       {

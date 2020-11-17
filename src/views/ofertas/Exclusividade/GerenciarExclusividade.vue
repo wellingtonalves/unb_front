@@ -9,7 +9,8 @@
       
       <v-row>
         <v-col>
-          <v-btn outlined color="primary">
+          <v-btn outlined color="primary" v-show="permission('EXCLUSIVIDADE_EDITAR')"
+                 @click="$router.push(`/ofertas/${oferta.id_oferta}/gerenciar-exclusividade/${oferta.exclusividade.id_exclusividade_oferta}/create`)">
             Adicionar Regra
           </v-btn>
         </v-col>
@@ -49,7 +50,7 @@
 
               <template v-slot:top>
                 <v-toolbar flat>
-                  <v-toolbar-title>Listagem de Valores para exclusividade da oferta.</v-toolbar-title>
+                  <v-toolbar-title>Valores cadastrados</v-toolbar-title>
                   <v-spacer></v-spacer>
                   <v-text-field
                     v-model="searchValorExclusividade"
@@ -65,7 +66,7 @@
 
                 <v-tooltip bottom>
                   <template v-slot:activator="{ on }">
-                    <v-btn v-show="permission('OFERTA_EXCLUIR')" small color="error" icon @click="excluir(item)"
+                    <v-btn v-show="permission('VALOR_EXCLUSIVIDADE_EXCLUIR')" small color="error" icon @click="confirmarExcluirValorExclusividade(item)"
                            v-on="on">
                       <v-icon>mdi-delete</v-icon>
                     </v-btn>
@@ -80,8 +81,6 @@
           </v-card>
         </v-col>
       </v-row>
-      
-      
       
       <v-row>
         <v-btn class="mr-4" @click="$router.push('/ofertas')">
@@ -104,21 +103,21 @@
         </v-dialog>
       </v-row>
 
-      <v-snackbar v-model="snackbar.active" :color="snackbar.color" :timeout="snackbar.timeout">
-        {{snackbar.text}}
-        <v-btn text @click.stop="snackbar.active = false">
-          Fechar
-        </v-btn>
-      </v-snackbar>
+      <dialog-delete-component 
+        :text="dialogValorExclusividadeDeleteData.valor_exclusividade" 
+        v-model="dialogValorExclusividadeDelete" 
+        @excluir="excluirValorExclusividade(dialogValorExclusividadeDeleteData.id_valor_exclusividade_oferta)" />
+      
     </card-default>
   </v-layout>
 </template>
 
 <script>
-  import {get, create, remove} from "@/services/abstract.service";
+  import {get, remove} from "@/services/abstract.service";
   import {checkPermission} from "@/helpers/checkPermission";
+  
   export default {
-    name: "Exclusividade",
+    name: "GerenciarExclusividade",
     data: () => ({
       data: [],
       loading: false,
@@ -132,20 +131,10 @@
       searchValorExclusividade: '',
       errors: [],
       dialogDelete: false,
-      snackbar: {
-        active: false,
-        color: '',
-        text: '',
-        timeout: 5000
-      },
+      dialogValorExclusividadeDelete: false,
+      dialogValorExclusividadeDeleteData: {},
     }),
-    watch: {
-      'snackbar.active': function (val) {
-        if (this.snackbar.color == 'success' && val == false) {
-          this.$router.push('/ofertas');
-        }
-      }
-    },
+    watch: {},
     async mounted() {
       await this.getOferta();
     },
@@ -158,38 +147,22 @@
         this.oferta = response.data.data;
         this.valorExclusividade = response.data.data.exclusividade.valor_exclusividade;
       },
-      update(data) {
-        this.data = data;
-      },
-      async save() {
-        this.loading = true;
-        this.data.id_oferta = this.$route.params.id;
-        const response = await create(`exclusividade-oferta`, this.data)
-
-        this.loading = false;
-
-        if (response.errors) {
-          this.errors = response.errors;
-          this.snackbar.text = response.message;
-          this.snackbar.color = response.messageType;
-          this.snackbar.active = true;
-          return ;
-        }
-
-        this.snackbar.text = response.data.message;
-        this.snackbar.color = response.data.messageType;
-        this.snackbar.active = true;
-      },
       excluir() {
         this.dialogDelete = true;
       },
       async excluirItem(id) {
-        const response = await remove(`/exclusividade-oferta/${id}`);
+        await remove(`/exclusividade-oferta/${id}`);
         this.dialogDelete = false;
-
-        this.snackbar.text = response.message;
-        this.snackbar.color = response.messageType;
-        this.snackbar.active = true;
+        this.$router.go(-1);
+      },
+      confirmarExcluirValorExclusividade(item) {
+        this.dialogValorExclusividadeDeleteData = item;
+        this.dialogValorExclusividadeDelete = true;
+      },
+      async excluirValorExclusividade(id) {
+        await remove(`/valor-exclusividade-oferta/${id}`);
+        this.dialogValorExclusividadeDelete = false;
+        await this.getOferta();
       }
     }
   }
