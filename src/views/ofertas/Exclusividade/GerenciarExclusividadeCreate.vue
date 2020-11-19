@@ -17,11 +17,17 @@
               label="Valor"
               required
               v-model="valor_exclusividade"
+              :error-messages="errors.valor_exclusividade"
             />
           </v-row>
 
           <v-row>
-            <v-file-input label="Carregar arquivo"  outlined dense v-model="anexo"/>
+            <v-file-input label="Carregar arquivo" 
+                          outlined 
+                          dense 
+                          v-model="anexo"
+                          :error-messages="errors.anexo"
+            />
           </v-row>
 
         </v-form>
@@ -40,7 +46,7 @@
           <p>Exemplo:</p>
 
           <v-list>
-            <v-list-item v-for="(item, i) in ValoresExemplosEmail" :key="i">
+            <v-list-item v-for="(item, i) in valoresExemplo" :key="i">
               <v-list-item-content>
                 <v-list-item-title v-text="item.text" />
               </v-list-item-content>
@@ -78,25 +84,58 @@
       loading: false,
       oferta: {},
       valor_exclusividade: '',
+      tipoExclusividade: null,
       anexo: null,
       formData: new FormData(),
       errors: [],
-      ValoresExemplosEmail: [
+      valoresExemplo: [],
+      valoresExemplosEmail: [
         {text: 'enap.gov.br'},
         {text: 'tcu.com.br'},
         {text: 'gmail.com'},
         {text: 'outlook.com'},
       ],
+      valoresExemplosCpf: [
+        {text: '12345678910'},
+        {text: '93413498002'},
+        {text: '36265229036'},
+        {text: '04762183067'},
+      ],
+      valoresExemplosMisto: [
+        {text: 'enap.gov.br'},
+        {text: 'tcu.com.br'},
+        {text: 'gmail.com'},
+        {text: 'outlook.com'},
+        {text: '12345678910'},
+        {text: '93413498002'},
+        {text: '36265229036'},
+        {text: '04762183067'},
+      ],
     }),
     watch: {},
     async mounted() {
       await this.getOferta();
+      this.verificarTipoExclusividade();
+      this.loadingOferta = false;
     },
     methods: {
       async getOferta() {
         const response = await get(`ofertas/${this.$route.params.id}`);
         this.oferta = response.data.data;
-        this.loadingOferta = false;
+        this.tipoExclusividade = this.oferta.exclusividade.id_tipo_exclusividade_oferta;
+      },
+      verificarTipoExclusividade() {
+        this.valoresExemplo = this.valoresExemplosEmail;
+        
+        if (this.tipoExclusividade == 2) {
+          this.valoresExemplo = this.valoresExemplosCpf;
+          return;
+        }
+
+        if (this.tipoExclusividade == 3) {
+          this.valoresExemplo = this.valoresExemplosMisto;
+          return;
+        }
       },
       async save() {
         this.loading = true;
