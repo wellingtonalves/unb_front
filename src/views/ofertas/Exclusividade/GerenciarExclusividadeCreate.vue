@@ -25,6 +25,7 @@
             <v-file-input label="Carregar arquivo" 
                           outlined 
                           dense 
+                          accept=".csv"
                           v-model="anexo"
                           :error-messages="errors.anexo"
             />
@@ -53,7 +54,7 @@
             </v-list-item>
           </v-list>
 
-          <p>Baixe o arquivo de Exemplo: aqui</p>
+          <p>Baixe o arquivo de Exemplo: <a :href="arquivoDownload" download>aqui</a></p>
         </div>
 
         <v-row class="mt-5" justify="center">
@@ -88,6 +89,7 @@
       anexo: null,
       formData: new FormData(),
       errors: [],
+      arquivoDownload: '',
       valoresExemplo: [],
       valoresExemplosEmail: [
         {text: 'enap.gov.br'},
@@ -126,34 +128,26 @@
       },
       verificarTipoExclusividade() {
         this.valoresExemplo = this.valoresExemplosEmail;
+        this.arquivoDownload = '/arquivos/exemplo_emails.csv';
         
         if (this.tipoExclusividade == 2) {
           this.valoresExemplo = this.valoresExemplosCpf;
+          this.arquivoDownload = '/arquivos/exemplo_cpfs.csv'
           return;
         }
 
         if (this.tipoExclusividade == 3) {
           this.valoresExemplo = this.valoresExemplosMisto;
+          this.arquivoDownload = '/arquivos/exemplo_misto.csv'
           return;
         }
       },
       async save() {
         this.loading = true;
-        console.log('id_exclusividade_oferta');
-        console.log(this.$route.params.id_exclusividade);
-        
-        if (this.anexo) {
-          console.log('ANEXO');
-          this.loading = false;
-          return false;
-        }
-
-        console.log('SEM ANEXO');
-        this.data.id_exclusividade_oferta = this.$route.params.id_exclusividade;
-        this.data.valor_exclusividade = this.valor_exclusividade;
-        
-        const response = await create('valor-exclusividade-oferta', this.data);
+        const idExclusividadeOferta = this.$route.params.id_exclusividade;
+        const response = await this.montarForm(idExclusividadeOferta);
         this.loading = false;
+        
         if (response.errors) {
           this.errors = response.errors;
           return false
@@ -161,6 +155,23 @@
         
         this.$router.go(-1);
         
+      },
+      async montarForm(idExclusividadeOferta) {
+        if (this.anexo) {
+          console.log('ANEXO');
+
+          this.formData.append('id_exclusividade_oferta', idExclusividadeOferta);
+          this.formData.append('anexo', this.anexo);
+          const response = await create('valor-exclusividade-oferta', this.formData);
+          return response;
+        }
+
+        console.log('SEM ANEXO');
+        this.data.id_exclusividade_oferta = idExclusividadeOferta;
+        this.data.valor_exclusividade = this.valor_exclusividade;
+
+        const response = await create('valor-exclusividade-oferta', this.data);
+        return response;
       }
     }
   }
