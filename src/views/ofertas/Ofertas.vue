@@ -164,8 +164,6 @@ export default {
     pagination: {},
     options: {},
     headers: [
-      {text: 'ID', value: 'id_oferta'},
-      {text: 'ID Curso', value: 'id_curso'},
       {text: 'Nome da Oferta', value: 'tx_nome_oferta', align: 'start',},
       {text: 'Situação', value: 'tp_situacao_oferta'},
       {text: 'Total de Inscrições', value: 'total_inscricoes'},
