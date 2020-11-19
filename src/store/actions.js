@@ -9,6 +9,9 @@ const actions = {
   async logout({commit}) {
     commit('LOGOUT');
   },
+  async setSnackbar({commit}, data = {}) {
+    commit('SET_SNACKBAR', data);
+  },
 
   //TODO - tratamento para erro, status diferente de 200
   async getUserData({commit}) {

@@ -1,7 +1,7 @@
 .theme--light.v-application,
 .theme--light.v-card > .v-card__text,
 .theme--light.v-card .v-card__subtitle {
-	color: var(--v-secondary-base) !important;
+  color: var(--v-secondary-base) !important;
 }
 header.v-app-bar > .v-toolbar__content {
   height: auto !important;
@@ -10,10 +10,21 @@ header.v-app-bar > .v-toolbar__content {
 }
 h2 {
   color: var(--v-primary-base);
-  font-size: 200%;
+  font-size: 2rem;
   line-height: 1.2em;
+  padding-top: 4px;
   padding-bottom: 16px;
   text-transform: uppercase;
+}
+h2.featured {
+  color: var(--v-secondary-base);
+  font-size: 1.6rem;
+  font-weight: 300;
+}
+h2.featured strong {
+  color: var(--v-primary-base);
+  display: block;
+  font-weight: 900;
 }
 .box {
   border: 2px solid var(--v-primary-base);
@@ -53,7 +64,7 @@ h2 {
   padding-right: 48px;
 }
 h3.subtitle {
-	font-size: 220%;
+  font-size: 220%;
   font-weight: 800;
   line-height: 1em;
   margin-bottom: 1rem;
@@ -78,7 +89,7 @@ div.container {
   columns: 3 260px;
 }
 .count-items {
-	counter-reset: evg-counter;
+  counter-reset: evg-counter;
 }
 .count-items > .v-card:before,
 .count-items > .v-expansion-panel button:before {
@@ -104,20 +115,107 @@ div.container {
   opacity: 1;
   position: static;
 }
+.layout.course-cards {
+  margin-left: -8px;
+  margin-right: -8px;
+}
+.layout.course-cards .v-card {
+  background-color: var(--v-white-base);
+  border-radius: 0;
+  box-shadow: 0 0 10px 3px rgba(0,0,0,.075) !important;
+  flex-direction: column;
+  flex-basis: 200px;
+  flex-grow: 0;
+  margin: 8px;
+}
+.layout.course-cards .v-card > div:first-child {
+  flex: 1 1 auto;
+}
+.layout.course-cards .nome-tematica {
+  background-color: var(--v-primary-base);
+  border-radius: 0 5px 5px 0;
+  color: var(--v-white-base);
+  font-size: .8rem;
+  margin-bottom: 0;
+  padding: 4px 10px !important;
+  position: absolute;
+  left: -5px;
+  top: 5px;
+  text-transform: uppercase;
+}
+.layout.course-cards .nome-oferta {
+  background-color: var(--v-secondary-base);
+  border-radius: 0 5px 5px 0;
+  color: var(--v-white-base);
+  font-size: .8rem;
+  margin-bottom: 0;
+  padding: 2px 10px !important;
+  position: absolute;
+  left: -5px;
+  top: 35px;
+  text-transform: none;
+}
+.layout.course-cards .v-card__title {
+  font-size: 1.3rem;
+  font-weight: 400;
+  line-height: 1.2em;
+  margin-top: 0;
+  padding-bottom: 5px;
+  padding-top: 20px;
+  text-transform: uppercase;
+  word-break: break-word;
+}
+.layout.course-cards .v-card__title a {
+  color: var(--v-secondary-base);
+  text-decoration: none;
+}
+.layout.course-cards .v-card__title a:hover {
+  text-decoration: underline;
+}
+.layout.course-cards dl {
+  display: inline-block;
+  padding: 16px;
+}
+.layout.course-cards dt {
+  clear: left;
+  color: var(--v-darkgrey-base);
+  font-size: .8rem;
+  font-weight: 300;
+  line-height: 1em;
+}
+.layout.course-cards dd {
+  color: var(--v-secondary-base);
+  float: left;
+  font-size: .9rem;
+  line-height: 1.3em;
+  margin-right: 5px;
+}
+.layout.course-cards dd + dt {
+  padding-top: 8px;
+}
+.layout.course-cards .action-bar {
+  padding: 8px;
+}
+.layout.course-cards .action-bar .v-btn {
+  border-width: 2px;
+}
+.layout.course-cards .action-bar .v-btn.contrast {
+  color: var(--v-white-base);
+}
 .layout.evg-cards {
-	margin-left: -8px;
-	margin-right: -8px;
+  margin-left: -8px;
+  margin-right: -8px;
 }
 .layout.evg-cards .v-card {
-	background-color: transparent;
-	border: 2px solid var(--v-primary-base);
-	border-radius: 0;
-	box-shadow: 0 0 0 !important;
-	flex-flow: column;
-	flex-basis: 200px;
-	flex-grow: 1;
-	margin: 8px;
-	padding: 8px;
+  background-color: transparent;
+  border: 2px solid var(--v-primary-base);
+  border-radius: 0;
+  box-shadow: 0 0 0 !important;
+  flex-flow: column;
+  flex-basis: 200px;
+  flex-grow: 0;
+  margin: 8px;
+  padding: 8px;
 }
 .layout.evg-cards .v-card__title {
   font-size: 1rem;
@@ -129,55 +227,55 @@ div.container {
   padding-left: 48px;
 }
 .layout.evg-cards .v-card__text {
-	font-size: .8rem;
-	line-height: 1.2rem;
-	margin-top: -12px;
+  font-size: .8rem;
+  line-height: 1.2rem;
+  margin-top: -12px;
 }
 .layout.evg-cards .v-image {
-	align-self: flex-end;
-	margin: 16px;
-	width: calc(100% - 32px);
+  align-self: flex-end;
+  margin: 16px;
+  width: calc(100% - 32px);
 }
 .layout.evg-cards .v-image__image {
-	background-position: center bottom !important;
-	background-size: contain;
+  background-position: center bottom !important;
+  background-size: contain;
 }
 .layout.evg-list .v-card {
-	background-color: transparent;
-	border: 2px solid var(--v-primary-base);
-	border-radius: 0;
-	box-shadow: 0 0 0 !important;
-	padding: 8px;
-	word-break: break-word;
+  background-color: transparent;
+  border: 2px solid var(--v-primary-base);
+  border-radius: 0;
+  box-shadow: 0 0 0 !important;
+  padding: 8px;
+  word-break: break-word;
 }
 .layout.evg-list .v-card + .v-card {
-	margin-top: 16px;
+  margin-top: 16px;
 }
 .layout.evg-list .v-card__text {
-	font-size: 1rem;
-	padding-left: 48px;
+  font-size: 1rem;
+  padding-left: 48px;
 }
 .layout.evg-list .v-card__text a {
-	color: var(--v-contrast-base);
+  color: var(--v-contrast-base);
 }
 .layout.evg-list .v-card__text p:only-child {
-	margin-bottom: 0;
+  margin-bottom: 0;
 }
 .evg-panels .v-expansion-panel {
-	background-color: transparent !important;
-	border: 2px solid var(--v-primary-base);
-	border-radius: 0 !important;
+  background-color: transparent !important;
+  border: 2px solid var(--v-primary-base);
+  border-radius: 0 !important;
 }
 .evg-panels .v-expansion-panel + .v-expansion-panel {
-	margin-top: 8px;
+  margin-top: 8px;
 }
 .evg-panels .v-expansion-panel-header {
-	color: var(--v-secondary-base);
-	font-size: 1.2rem;
+  color: var(--v-secondary-base);
+  font-size: 1.2rem;
   font-weight: 500;
 }
 .evg-panels .v-expansion-panel-content a {
-	color: var(--v-contrast-base);
+  color: var(--v-contrast-base);
 }
 .v-list.links-bordered {
   background-color: transparent !important;
@@ -214,10 +312,10 @@ div.container {
 }
 
 @media (max-width: 600px) {
-	.box .layout > div {
-		flex-basis: 100%;
-	}
-	div.container {
-	  padding: 12px;
-	}
+  .box .layout > div {
+    flex-basis: 100%;
+  }
+  div.container {
+    padding: 12px;
+  }
 }

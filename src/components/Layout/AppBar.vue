@@ -325,7 +325,7 @@
     position: absolute;
   }
   nav.v-navigation-drawer {
-    top: 94px !important;
+    top: 86px !important;
   }
   nav.v-navigation-drawer .v-list > .v-list-item:not(:last-child) {
     border-bottom: 1px solid rgba(0, 0, 0, 0.1);
@@ -335,6 +335,8 @@
   }
   #main-nav {
     background-color: transparent;
+    padding-top: 4px;
+    padding-bottom: 4px;
   }
   #main-nav a {
     color: var(--v-black-base);
