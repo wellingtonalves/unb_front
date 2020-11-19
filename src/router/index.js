@@ -214,13 +214,13 @@ const routes = [
             component: () =>
               import('../views/ofertas/Exclusividade/Exclusividade.vue'),
             meta: {
-              title: 'Exclusividade Oferta',
+              title: 'Tornar Oferta Exclusiva',
               requiresAuth: true,
               breadcrumb: [
                 {text: 'Dashboard', disabled: false, href: '/'},
                 {text: 'Ofertas', disabled: false, href: '/ofertas'},
                 {
-                  text: 'Exclusividade Oferta',
+                  text: 'Tornar Oferta Exclusiva',
                   disabled: true,
                   href: '/ofertas',
                 },
@@ -232,13 +232,13 @@ const routes = [
             component: () =>
               import('../views/ofertas/Exclusividade/ExclusividadeEdit.vue'),
             meta: {
-              title: 'Editar Exclusividade Oferta',
+              title: 'Editar Exclusividade da Oferta',
               requiresAuth: true,
               breadcrumb: [
                 {text: 'Dashboard', disabled: false, href: '/'},
                 {text: 'Ofertas', disabled: false, href: '/ofertas'},
                 {
-                  text: 'Editar Exclusividade Oferta',
+                  text: 'Editar Exclusividade da Oferta',
                   disabled: true,
                   href: '/ofertas',
                 },
@@ -252,13 +252,13 @@ const routes = [
                 '../views/ofertas/Exclusividade/GerenciarExclusividade.vue'
               ),
             meta: {
-              title: 'Gerenciar Exclusividade Oferta',
+              title: 'Gerenciar Exclusividade da Oferta',
               requiresAuth: true,
               breadcrumb: [
                 {text: 'Dashboard', disabled: false, href: '/'},
                 {text: 'Ofertas', disabled: false, href: '/ofertas'},
                 {
-                  text: 'Gerenciar Exclusividade Oferta',
+                  text: 'Gerenciar Exclusividade da Oferta',
                   disabled: true,
                   href: '/ofertas',
                 },

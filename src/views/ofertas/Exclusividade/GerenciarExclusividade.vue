@@ -5,12 +5,12 @@
       <form-skeleton :loading="loading" />
       
       <div v-show="!loading">
-        <h3>
+        <h3 class="subheading">
           Oferta:
-          {{oferta.tx_nome_curso + " ( " + oferta.tx_nome_oferta + " )"}}
+          <strong>{{oferta.tx_nome_curso + " ( " + oferta.tx_nome_oferta + " )"}}</strong>
         </h3>
 
-        <v-row>
+        <v-row class="d-flex justify-end">
           <v-col>
             <v-btn outlined color="primary" v-show="permission('EXCLUSIVIDADE_EDITAR')"
                    @click="$router.push(`/ofertas/${oferta.id_oferta}/gerenciar-exclusividade/${oferta.exclusividade.id_exclusividade_oferta}/create`)">
@@ -19,7 +19,7 @@
           </v-col>
 
           <v-col>
-            <v-btn outlined color="accent" v-show="permission('EXCLUSIVIDADE_EDITAR')"
+            <v-btn outlined color="primary" v-show="permission('EXCLUSIVIDADE_EDITAR')"
                    @click="$router.push(`/ofertas/${oferta.id_oferta}/exclusividade/${oferta.exclusividade.id_exclusividade_oferta}/edit`)">
               Editar
             </v-btn>
