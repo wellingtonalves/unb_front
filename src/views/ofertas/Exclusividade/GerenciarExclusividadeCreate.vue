@@ -151,7 +151,6 @@
       },
       async montarForm(idExclusividadeOferta) {
         if (this.anexo) {
-          console.log('ANEXO');
 
           this.formData.append('id_exclusividade_oferta', idExclusividadeOferta);
           this.formData.append('anexo', this.anexo);
@@ -159,7 +158,6 @@
           return response;
         }
 
-        console.log('SEM ANEXO');
         this.data.id_exclusividade_oferta = idExclusividadeOferta;
         this.data.valor_exclusividade = this.valor_exclusividade;
 
