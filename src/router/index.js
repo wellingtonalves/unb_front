@@ -212,15 +212,75 @@ const routes = [
           {
             path: '/ofertas/:id/exclusividade',
             component: () =>
-              import('../views/ofertas/ExclusividadeOfertas.vue'),
+              import('../views/ofertas/Exclusividade/Exclusividade.vue'),
             meta: {
-              title: 'Exclusividade Oferta',
+              title: 'Tornar Oferta Exclusiva',
               requiresAuth: true,
               breadcrumb: [
                 {text: 'Dashboard', disabled: false, href: '/'},
                 {text: 'Ofertas', disabled: false, href: '/ofertas'},
                 {
-                  text: 'Exclusividade Oferta',
+                  text: 'Tornar Oferta Exclusiva',
+                  disabled: true,
+                  href: '/ofertas',
+                },
+              ],
+            },
+          },
+          {
+            path: '/ofertas/:id/exclusividade/:id_exclusividade/edit',
+            component: () =>
+              import('../views/ofertas/Exclusividade/ExclusividadeEdit.vue'),
+            meta: {
+              title: 'Editar Exclusividade da Oferta',
+              requiresAuth: true,
+              breadcrumb: [
+                {text: 'Dashboard', disabled: false, href: '/'},
+                {text: 'Ofertas', disabled: false, href: '/ofertas'},
+                {
+                  text: 'Editar Exclusividade da Oferta',
+                  disabled: true,
+                  href: '/ofertas',
+                },
+              ],
+            },
+          },
+          {
+            path: '/ofertas/:id/gerenciar-exclusividade',
+            component: () =>
+              import(
+                '../views/ofertas/Exclusividade/GerenciarExclusividade.vue'
+              ),
+            meta: {
+              title: 'Gerenciar Exclusividade da Oferta',
+              requiresAuth: true,
+              breadcrumb: [
+                {text: 'Dashboard', disabled: false, href: '/'},
+                {text: 'Ofertas', disabled: false, href: '/ofertas'},
+                {
+                  text: 'Gerenciar Exclusividade da Oferta',
+                  disabled: true,
+                  href: '/ofertas',
+                },
+              ],
+            },
+          },
+          {
+            path:
+              '/ofertas/:id/gerenciar-exclusividade/:id_exclusividade/create',
+            component: () =>
+              import(
+                '../views/ofertas/Exclusividade/GerenciarExclusividadeCreate.vue'
+              ),
+            meta: {
+              title: 'Adicionar valores',
+              requiresAuth: true,
+              breadcrumb: [
+                {text: 'Dashboard', disabled: false, href: '/'},
+                {text: 'Ofertas', disabled: false, href: '/ofertas'},
+                {text: 'Gerenciar Exclusividade da Oferta', disabled: true, href: '/'},
+                {
+                  text: 'Adicionar valores',
                   disabled: true,
                   href: '/ofertas',
                 },
@@ -235,7 +295,7 @@ const routes = [
         children: [
           {
             path: '',
-            name: 'oferta',
+            name: 'programa',
             component: () => import('../views/programas/Programas.vue'),
             meta: {
               requiresAuth: true,

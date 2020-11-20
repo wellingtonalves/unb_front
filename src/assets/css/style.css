@@ -63,6 +63,17 @@ h2.featured strong {
 .section.row > .col:first-child {
   padding-right: 48px;
 }
+h3.subheading {
+  color: var(--v-secondary-base);
+  font-size: 1.1rem;
+  font-weight: 300;
+  line-height: 1em;
+  margin-top: -8px;
+  margin-bottom: 16px;
+}
+h3.subheading strong {
+  font-weight: 800;
+}
 h3.subtitle {
   font-size: 220%;
   font-weight: 800;
@@ -80,6 +91,19 @@ div.container {
 }
 
 /* Custom Layout Components */
+.action-buttons {
+  min-width: 80px !important;
+  padding: 4px;
+}
+.action-buttons > * {
+  margin: 4px;
+}
+.action-buttons .v-btn > .v-btn__content .v-icon {
+  font-size: 16px;
+}
+.action-buttons .v-btn:not(.v-btn--icon) > .v-btn__content .v-icon {
+  margin-right: 8px;
+}
 .columns {
   -moz-column-gap: 40px;
   -moz-columns: 3 260px;

@@ -79,39 +79,45 @@
 
             <template v-slot:item.action="{ item }">
 
-              <div v-if="item.exclusividade">
-                <v-btn v-show="permission('OFERTA_EDITAR')" small color="primary" outlined
-                       @click="$router.push(`/ofertas/${item.id_oferta}/edit`)">
-                  Gerenciar Exclusividade
-                </v-btn>
-              </div>
-              <div v-else>
-                <v-btn v-show="permission('EXCLUSIVIDADE_OFERTA_INCLUIR')" small color="primary" outlined
-                       @click="$router.push(`/ofertas/${item.id_oferta}/exclusividade`)">
-                  Tornar Exclusiva
-                </v-btn>
-              </div>
+              <v-layout wrap class="action-buttons">
 
-
-              <v-tooltip bottom>
-                <template v-slot:activator="{ on }">
-                  <v-btn v-show="permission('OFERTA_EDITAR')" small color="primary" icon
-                         @click="$router.push(`/ofertas/${item.id_oferta}/edit`)" v-on="on">
-                    <v-icon>mdi-pencil</v-icon>
+                <div v-if="item.exclusividade">
+                  <v-btn small outlined tile v-show="permission('OFERTA_EDITAR')" color="primary"
+                         @click="$router.push(`/ofertas/${item.id_oferta}/gerenciar-exclusividade`)">
+                         <v-icon>mdi-cog</v-icon>
+                    Gerenciar Exclusividade
                   </v-btn>
-                </template>
-                <span>Editar</span>
-              </v-tooltip>
-
-              <v-tooltip bottom>
-                <template v-slot:activator="{ on }">
-                  <v-btn v-show="permission('OFERTA_EXCLUIR')" small color="error" icon @click="excluir(item)"
-                         v-on="on">
-                    <v-icon>mdi-delete</v-icon>
+                </div>
+                <div v-else>
+                  <v-btn small outlined tile v-show="permission('EXCLUSIVIDADE_OFERTA_INCLUIR')" color="primary" 
+                         @click="$router.push(`/ofertas/${item.id_oferta}/exclusividade`)">
+                         <v-icon>mdi-thumb-up</v-icon>
+                    Tornar Exclusiva
                   </v-btn>
-                </template>
-                <span>Excluir</span>
-              </v-tooltip>
+                </div>
+
+                <v-tooltip bottom>
+                  <template v-slot:activator="{ on }">
+                    <v-btn small tile outlined icon v-show="permission('OFERTA_EDITAR')" color="primary"
+                           @click="$router.push(`/ofertas/${item.id_oferta}/edit`)" v-on="on">
+                      <v-icon>mdi-pencil</v-icon>
+                      <span class="d-sr-only">Editar</span>
+                    </v-btn>
+                  </template>
+                  <span>Editar</span>
+                </v-tooltip>
+
+                <v-tooltip bottom>
+                  <template v-slot:activator="{ on }">
+                    <v-btn small tile outlined icon v-show="permission('OFERTA_EXCLUIR')" color="error" @click="excluir(item)" v-on="on">
+                      <v-icon>mdi-delete</v-icon>
+                      <span class="d-sr-only">Excluir</span>
+                    </v-btn>
+                  </template>
+                  <span>Excluir</span>
+                </v-tooltip>
+
+              </v-layout>
 
             </template>
 
@@ -158,8 +164,6 @@ export default {
     pagination: {},
     options: {},
     headers: [
-      {text: 'ID', value: 'id_oferta'},
-      {text: 'ID Curso', value: 'id_curso'},
       {text: 'Nome da Oferta', value: 'tx_nome_oferta', align: 'start',},
       {text: 'Situação', value: 'tp_situacao_oferta'},
       {text: 'Total de Inscrições', value: 'total_inscricoes'},
