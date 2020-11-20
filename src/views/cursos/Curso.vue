@@ -65,23 +65,27 @@
 
             <template v-slot:item.action="{ item }">
 
-              <v-tooltip bottom>
-                <template v-slot:activator="{ on }">
-                  <v-btn small color="primary" icon @click="$router.push(`/curso/${item.id_curso}/edit`)" v-on="on">
-                    <v-icon>mdi-pencil</v-icon>
-                  </v-btn>
-                </template>
-                <span>Editar</span>
-              </v-tooltip>
+              <v-layout wrap class="action-buttons">
 
-              <v-tooltip bottom>
-                <template v-slot:activator="{ on }">
-                  <v-btn small color="error" icon @click="excluir(item)" v-on="on">
-                    <v-icon>mdi-delete</v-icon>
-                  </v-btn>
-                </template>
-                <span>Visualizar</span>
-              </v-tooltip>
+                <v-tooltip bottom>
+                  <template v-slot:activator="{ on }">
+                    <v-btn small tile outlined icon color="primary" @click="$router.push(`/curso/${item.id_curso}/edit`)" v-on="on">
+                      <v-icon>mdi-pencil</v-icon>
+                    </v-btn>
+                  </template>
+                  <span>Editar</span>
+                </v-tooltip>
+
+                <v-tooltip bottom>
+                  <template v-slot:activator="{ on }">
+                    <v-btn small tile outlined icon color="error" @click="excluir(item)" v-on="on">
+                      <v-icon>mdi-delete</v-icon>
+                    </v-btn>
+                  </template>
+                  <span>Excluir</span>
+                </v-tooltip>
+
+              </v-layout>
 
             </template>
 

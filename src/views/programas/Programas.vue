@@ -66,25 +66,29 @@
 
             <template v-slot:item.action="{ item }">
 
-              <v-tooltip bottom>
-                <template v-slot:activator="{ on }">
-                  <v-btn v-show="permission('PROGRAMA_EDITAR')" small color="primary" icon
-                         @click="$router.push(`/programas/${item.id_programa}/edit`)" v-on="on">
-                    <v-icon>mdi-pencil</v-icon>
-                  </v-btn>
-                </template>
-                <span>Editar</span>
-              </v-tooltip>
+              <v-layout wrap class="action-buttons">
 
-              <v-tooltip bottom>
-                <template v-slot:activator="{ on }">
-                  <v-btn v-show="permission('PROGRAMA_EXCLUIR')" small color="error" icon @click="excluir(item)"
-                         v-on="on">
-                    <v-icon>mdi-delete</v-icon>
-                  </v-btn>
-                </template>
-                <span>Excluir</span>
-              </v-tooltip>
+                <v-tooltip bottom>
+                  <template v-slot:activator="{ on }">
+                    <v-btn small tile outlined icon v-show="permission('PROGRAMA_EDITAR')" color="primary"
+                           @click="$router.push(`/programas/${item.id_programa}/edit`)" v-on="on">
+                      <v-icon>mdi-pencil</v-icon>
+                    </v-btn>
+                  </template>
+                  <span>Editar</span>
+                </v-tooltip>
+
+                <v-tooltip bottom>
+                  <template v-slot:activator="{ on }">
+                    <v-btn small tile outlined icon v-show="permission('PROGRAMA_EXCLUIR')" color="error" @click="excluir(item)"
+                           v-on="on">
+                      <v-icon>mdi-delete</v-icon>
+                    </v-btn>
+                  </template>
+                  <span>Excluir</span>
+                </v-tooltip>
+
+              </v-layout>
 
             </template>
 

@@ -278,6 +278,7 @@ const routes = [
               breadcrumb: [
                 {text: 'Dashboard', disabled: false, href: '/'},
                 {text: 'Ofertas', disabled: false, href: '/ofertas'},
+                {text: 'Gerenciar Exclusividade da Oferta', disabled: true, href: '/'},
                 {
                   text: 'Adicionar valores',
                   disabled: true,

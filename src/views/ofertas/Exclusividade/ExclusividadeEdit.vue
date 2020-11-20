@@ -1,11 +1,12 @@
 <template>
   <v-layout wrap>
+    
+    <h3 class="subheading">
+      Oferta: 
+      <strong>{{oferta.tx_nome_curso + " ( " + oferta.tx_nome_oferta + " )"}}</strong>
+    </h3>
+
     <card-default>
-      
-      <h3>
-        Oferta: 
-        {{oferta.tx_nome_curso + " ( " + oferta.tx_nome_oferta + " )"}}
-      </h3>
       
       <exclusividade-form @update="update" :data="exclusividade" :errors="errors">
         <template v-slot:buttons>

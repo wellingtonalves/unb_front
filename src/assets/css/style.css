@@ -65,10 +65,11 @@ h2.featured strong {
 }
 h3.subheading {
   color: var(--v-secondary-base);
-  font-size: 1.25rem;
+  font-size: 1.1rem;
   font-weight: 300;
   line-height: 1em;
-  margin-bottom: 1rem;
+  margin-top: -8px;
+  margin-bottom: 16px;
 }
 h3.subheading strong {
   font-weight: 800;
@@ -91,6 +92,7 @@ div.container {
 
 /* Custom Layout Components */
 .action-buttons {
+  min-width: 80px !important;
   padding: 4px;
 }
 .action-buttons > * {

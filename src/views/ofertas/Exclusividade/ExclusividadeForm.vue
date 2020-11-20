@@ -15,9 +15,6 @@
                           no-data-text="Nenhum resgistro encontrado."/>
         </v-col>
 
-      </v-row>
-      <v-row>
-
         <v-col>
           <v-textarea
             v-model="dataResponse.tx_descricao_exclusividade"
@@ -27,6 +24,7 @@
             label="Descrição"
             required/>
         </v-col>
+
       </v-row>
 
       <v-row class="mt-5" justify="center">
