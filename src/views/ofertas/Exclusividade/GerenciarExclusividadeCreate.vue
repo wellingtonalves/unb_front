@@ -39,18 +39,15 @@
           <h3>Atenção!</h3>
           <p>Caso queira adicionar um arquivo com os critérios, siga o seguinte padrão:</p>
           <v-divider class="mb-3"></v-divider>
-          <p>Formato do Arquivo: <strong>csv</strong></p>
-          <p>Separado por: <strong>',' (Vírgula)</strong></p>
-          <p>Primeira Célula (OBRIGATORIAMENTE), com o texto:<strong> 'valores'</strong></p>
-          <p>Exemplo:</p>
-          <v-list>
-            <v-list-item v-for="(item, i) in valoresExemplo" :key="i">
-              <v-list-item-content>
-                <v-list-item-title v-text="item.text" />
-              </v-list-item-content>
-            </v-list-item>
-          </v-list>
-
+          <p class="mb-1">Formato do Arquivo: <strong>csv</strong></p>
+          <p class="mb-1">Separado por: <strong>',' (Vírgula)</strong></p>
+          <p class="mb-1">Primeira Célula (OBRIGATORIAMENTE), com o texto:<strong> 'valores'</strong></p>
+          <p class="mb-1">Exemplo:</p>
+          <ul class="mb-6">
+            <li v-for="(item, i) in valoresExemplo" :key="i">
+              {{ item.text }}
+            </li>
+          </ul>
           <p>Você pode <a :href="arquivoDownload" download>baixar o arquivo de Exemplo</a>.</p>
         </v-alert>
 
