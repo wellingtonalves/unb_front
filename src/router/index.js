@@ -4,6 +4,38 @@ import VueRouter from 'vue-router';
 
 Vue.use(VueRouter);
 
+const menuInicio = "Início",
+      menuDashboard = "Dashboard",
+      menuCursos = "Cursos",
+      menuCadastrarCurso = "Cadastrar Curso",
+      menuEditarCurso = "Editar Curso",
+      menuAVA = "AVA",
+      menuCadastrarAVA = "Cadastrar AVA",
+      menuEditarAVA = "Editar AVA",
+      menuOfertas = "Ofertas",
+      menuCadastrarOferta = "Cadastrar Oferta",
+      menuEditarOferta = "Editar Oferta",
+      menuTornarOfertaExclusiva = 'Tornar Oferta Exclusiva',
+      menuEditarExclusividadeOferta = 'Editar Exclusividade da Oferta',
+      menuGerenciarExclusividadeOferta = 'Gerenciar Exclusividade da Oferta',
+      menuAdicionarValores = 'Adicionar Valores',
+      menuProgramas = "Programas",
+      menuCadastrarPrograma = "Cadastrar Programa",
+      menuEditarPrograma = "Editar Programa",
+      menuUsuarios = "Usuários",
+      menuCadastrarUsuario = "Cadastrar Usuário",
+      menuEditarUsuario = "Editar Usuário",
+      menuPerfis = "Perfis",
+      menuCadastrarPerfil = "Cadastrar Perfil",
+      menuEditarPerfil = "Editar Perfil",
+      menuPermissoes = "Permissões",
+      menuCadastrarPermissao = "Cadastrar Permissão",
+      menuEditarPermissao = "Editar Permissão",
+      menuTarefasAgendadas = "Tarefas Agendadas",
+      menuCadastrarTarefa = "Cadastrar Tarefa",
+      menuEditarTarefa = "Editar Tarefa",
+      menuControleAcessos = "Controle de Acessos";
+
 const routes = [
   {
     path: '/login',
@@ -19,7 +51,7 @@ const routes = [
     children: [
       {
         path: '/',
-        name: 'Home',
+        name: menuInicio,
         component: () => import('../views/Home.vue'),
         meta: {
           requiresAuth: true,
@@ -33,7 +65,7 @@ const routes = [
           requiresAuth: false,
           title: 'Conheça a Escola',
           breadcrumb: [
-            {text: 'Início', disabled: false, href: '/'},
+            {text: menuInicio, disabled: false, href: '/'},
             {
               text: 'Conheça a Escola',
               disabled: true,
@@ -50,7 +82,7 @@ const routes = [
           requiresAuth: false,
           title: 'Adesão Institucional',
           breadcrumb: [
-            {text: 'Início', disabled: false, href: '/'},
+            {text: menuInicio, disabled: false, href: '/'},
             {
               text: 'Adesão Institucional',
               disabled: true,
@@ -67,7 +99,7 @@ const routes = [
           requiresAuth: false,
           title: 'Perguntas Frequentes',
           breadcrumb: [
-            {text: 'Início', disabled: false, href: '/'},
+            {text: menuInicio, disabled: false, href: '/'},
             {
               text: 'Perguntas Frequentes',
               disabled: true,
@@ -86,10 +118,10 @@ const routes = [
             component: () => import('../views/cursos/Curso.vue'),
             meta: {
               requiresAuth: true,
-              title: 'Cursos',
+              title: menuCursos,
               breadcrumb: [
-                {text: 'Dashboard', disabled: false, href: '/'},
-                {text: 'Cursos', disabled: true, href: '/cursos'},
+                {text: menuDashboard, disabled: false, href: '/'},
+                {text: menuCursos, disabled: true, href: '/cursos'},
               ],
             },
           },
@@ -97,12 +129,12 @@ const routes = [
             path: '/curso/create',
             component: () => import('../views/cursos/CursoCreate.vue'),
             meta: {
-              title: 'Cadastrar curso',
+              title: menuCadastrarCurso,
               requiresAuth: true,
               breadcrumb: [
-                {text: 'Dashboard', disabled: false, href: '/'},
-                {text: 'Cursos', disabled: false, href: '/cursos'},
-                {text: 'Cadastrar curso', disabled: true, href: '/cursos'},
+                {text: menuDashboard, disabled: false, href: '/'},
+                {text: menuCursos, disabled: false, href: '/cursos'},
+                {text: menuCadastrarCurso, disabled: true, href: '/cursos'},
               ],
             },
           },
@@ -110,12 +142,12 @@ const routes = [
             path: '/curso/:id/edit',
             component: () => import('../views/cursos/CursoEdit.vue'),
             meta: {
-              title: 'Editar curso',
+              title: menuEditarCurso,
               requiresAuth: true,
               breadcrumb: [
-                {text: 'Dashboard', disabled: false, href: '/'},
-                {text: 'Cursos', disabled: false, href: '/cursos'},
-                {text: 'Editar curso', disabled: true, href: '/cursos'},
+                {text: menuDashboard, disabled: false, href: '/'},
+                {text: menuCursos, disabled: false, href: '/cursos'},
+                {text: menuEditarCurso, disabled: true},
               ],
             },
           },
@@ -131,10 +163,10 @@ const routes = [
             component: () => import('../views/ava/Ava.vue'),
             meta: {
               requiresAuth: true,
-              title: 'Ava',
+              title: menuAVA,
               breadcrumb: [
-                {text: 'Dashboard', disabled: false, href: '/'},
-                {text: 'Ava', disabled: true, href: '/ava'},
+                {text: menuDashboard, disabled: false, href: '/'},
+                {text: menuAVA, disabled: true, href: '/ava'},
               ],
             },
           },
@@ -142,12 +174,12 @@ const routes = [
             path: '/ava/create',
             component: () => import('../views/ava/AvaCreate.vue'),
             meta: {
-              title: 'Cadastrar AVA',
+              title: menuCadastrarAVA,
               requiresAuth: true,
               breadcrumb: [
-                {text: 'Dashboard', disabled: false, href: '/'},
-                {text: 'Ava', disabled: false, href: '/ava'},
-                {text: 'Cadastrar AVA', disabled: true, href: '/ava'},
+                {text: menuDashboard, disabled: false, href: '/'},
+                {text: menuAVA, disabled: false, href: '/ava'},
+                {text: menuCadastrarAVA, disabled: true, href: '/ava'},
               ],
             },
           },
@@ -155,12 +187,12 @@ const routes = [
             path: '/ava/:id/edit',
             component: () => import('../views/ava/AvaEdit.vue'),
             meta: {
-              title: 'Editar AVA',
+              title: menuEditarAVA,
               requiresAuth: true,
               breadcrumb: [
-                {text: 'Dashboard', disabled: false, href: '/'},
-                {text: 'AVA', disabled: false, href: '/ava'},
-                {text: 'Editar AVA', disabled: true, href: '/ava'},
+                {text: menuDashboard, disabled: false, href: '/'},
+                {text: menuAVA, disabled: false, href: '/ava'},
+                {text: menuEditarAVA, disabled: true, href: '/ava'},
               ],
             },
           },
@@ -176,10 +208,10 @@ const routes = [
             component: () => import('../views/ofertas/Ofertas.vue'),
             meta: {
               requiresAuth: true,
-              title: 'Ofertas',
+              title: menuOfertas,
               breadcrumb: [
-                {text: 'Dashboard', disabled: false, href: '/'},
-                {text: 'Ofertas', disabled: true, href: '/ofertas'},
+                {text: menuDashboard, disabled: false, href: '/'},
+                {text: menuOfertas, disabled: true, href: '/ofertas'},
               ],
             },
           },
@@ -187,12 +219,12 @@ const routes = [
             path: '/ofertas/create',
             component: () => import('../views/ofertas/OfertasCreate.vue'),
             meta: {
-              title: 'Cadastrar Oferta',
+              title: menuCadastrarOferta,
               requiresAuth: true,
               breadcrumb: [
-                {text: 'Dashboard', disabled: false, href: '/'},
-                {text: 'Ofertas', disabled: false, href: '/ofertas'},
-                {text: 'Cadastrar Oferta', disabled: true, href: '/ofertas'},
+                {text: menuDashboard, disabled: false, href: '/'},
+                {text: menuOfertas, disabled: false, href: '/ofertas'},
+                {text: menuCadastrarOferta, disabled: true, href: '/ofertas'},
               ],
             },
           },
@@ -200,12 +232,12 @@ const routes = [
             path: '/ofertas/:id/edit',
             component: () => import('../views/ofertas/OfertasEdit.vue'),
             meta: {
-              title: 'Editar Oferta',
+              title: menuEditarOferta,
               requiresAuth: true,
               breadcrumb: [
-                {text: 'Dashboard', disabled: false, href: '/'},
-                {text: 'Ofertas', disabled: false, href: '/ofertas'},
-                {text: 'Editar Oferta', disabled: true, href: '/ofertas'},
+                {text: menuDashboard, disabled: false, href: '/'},
+                {text: menuOfertas, disabled: false, href: '/ofertas'},
+                {text: menuEditarOferta, disabled: true, href: '/ofertas'},
               ],
             },
           },
@@ -214,16 +246,12 @@ const routes = [
             component: () =>
               import('../views/ofertas/Exclusividade/Exclusividade.vue'),
             meta: {
-              title: 'Tornar Oferta Exclusiva',
+              title: menuTornarOfertaExclusiva,
               requiresAuth: true,
               breadcrumb: [
-                {text: 'Dashboard', disabled: false, href: '/'},
-                {text: 'Ofertas', disabled: false, href: '/ofertas'},
-                {
-                  text: 'Tornar Oferta Exclusiva',
-                  disabled: true,
-                  href: '/ofertas',
-                },
+                {text: menuDashboard, disabled: false, href: '/'},
+                {text: menuOfertas, disabled: false, href: '/ofertas'},
+                {text: menuTornarOfertaExclusiva, disabled: true},
               ],
             },
           },
@@ -232,16 +260,12 @@ const routes = [
             component: () =>
               import('../views/ofertas/Exclusividade/ExclusividadeEdit.vue'),
             meta: {
-              title: 'Editar Exclusividade da Oferta',
+              title: menuEditarExclusividadeOferta,
               requiresAuth: true,
               breadcrumb: [
-                {text: 'Dashboard', disabled: false, href: '/'},
-                {text: 'Ofertas', disabled: false, href: '/ofertas'},
-                {
-                  text: 'Editar Exclusividade da Oferta',
-                  disabled: true,
-                  href: '/ofertas',
-                },
+                {text: menuDashboard, disabled: false, href: '/'},
+                {text: menuOfertas, disabled: false, href: '/ofertas'},
+                {text: menuEditarExclusividadeOferta, disabled: true},
               ],
             },
           },
@@ -252,16 +276,12 @@ const routes = [
                 '../views/ofertas/Exclusividade/GerenciarExclusividade.vue'
               ),
             meta: {
-              title: 'Gerenciar Exclusividade da Oferta',
+              title: menuGerenciarExclusividadeOferta,
               requiresAuth: true,
               breadcrumb: [
-                {text: 'Dashboard', disabled: false, href: '/'},
-                {text: 'Ofertas', disabled: false, href: '/ofertas'},
-                {
-                  text: 'Gerenciar Exclusividade da Oferta',
-                  disabled: true,
-                  href: '/ofertas',
-                },
+                {text: menuDashboard, disabled: false, href: '/'},
+                {text: menuOfertas, disabled: false, href: '/ofertas'},
+                {text: menuGerenciarExclusividadeOferta, disabled: true},
               ],
             },
           },
@@ -273,17 +293,13 @@ const routes = [
                 '../views/ofertas/Exclusividade/GerenciarExclusividadeCreate.vue'
               ),
             meta: {
-              title: 'Adicionar valores',
+              title: menuAdicionarValores,
               requiresAuth: true,
               breadcrumb: [
-                {text: 'Dashboard', disabled: false, href: '/'},
-                {text: 'Ofertas', disabled: false, href: '/ofertas'},
-                {text: 'Gerenciar Exclusividade da Oferta', disabled: true, href: '/'},
-                {
-                  text: 'Adicionar valores',
-                  disabled: true,
-                  href: '/ofertas',
-                },
+                {text: menuDashboard, disabled: false, href: '/'},
+                {text: menuOfertas, disabled: false, href: '/ofertas'},
+                {text: menuGerenciarExclusividadeOferta, disabled: true},
+                {text: menuAdicionarValores, disabled: true},
               ],
             },
           },
@@ -299,10 +315,10 @@ const routes = [
             component: () => import('../views/programas/Programas.vue'),
             meta: {
               requiresAuth: true,
-              title: 'Programas',
+              title: menuProgramas,
               breadcrumb: [
-                {text: 'Dashboard', disabled: false, href: '/'},
-                {text: 'Programas', disabled: true, href: '/programas'},
+                {text: menuDashboard, disabled: false, href: '/'},
+                {text: menuProgramas, disabled: true, href: '/programas'},
               ],
             },
           },
@@ -310,13 +326,13 @@ const routes = [
             path: '/programas/create',
             component: () => import('../views/programas/ProgramasCreate.vue'),
             meta: {
-              title: 'Cadastrar Programa',
+              title: menuCadastrarPrograma,
               requiresAuth: true,
               breadcrumb: [
-                {text: 'Dashboard', disabled: false, href: '/'},
-                {text: 'Programas', disabled: false, href: '/programas'},
+                {text: menuDashboard, disabled: false, href: '/'},
+                {text: menuProgramas, disabled: false, href: '/programas'},
                 {
-                  text: 'Cadastrar Programa',
+                  text: menuCadastrarPrograma,
                   disabled: true,
                   href: '/programas',
                 },
@@ -327,12 +343,12 @@ const routes = [
             path: '/programas/:id/edit',
             component: () => import('../views/programas/ProgramasEdit.vue'),
             meta: {
-              title: 'Editar Programa',
+              title: menuEditarPrograma,
               requiresAuth: true,
               breadcrumb: [
-                {text: 'Dashboard', disabled: false, href: '/'},
-                {text: 'Programas', disabled: false, href: '/programas'},
-                {text: 'Editar Programa', disabled: true, href: '/programas'},
+                {text: menuDashboard, disabled: false, href: '/'},
+                {text: menuProgramas, disabled: false, href: '/programas'},
+                {text: menuEditarPrograma, disabled: true, href: '/programas'},
               ],
             },
           },
@@ -349,11 +365,11 @@ const routes = [
               import('../views/controleAcesso/usuarios/Usuario.vue'),
             meta: {
               requiresAuth: true,
-              title: 'Usuários',
+              title: menuUsuarios,
               breadcrumb: [
-                {text: 'Dashboard', disabled: false, href: '/'},
-                {text: 'Controle de acessos', disabled: true},
-                {text: 'Usuários', disabled: true, href: '/usuarios'},
+                {text: menuDashboard, disabled: false, href: '/'},
+                {text: menuControleAcessos, disabled: true},
+                {text: menuUsuarios, disabled: true, href: '/usuarios'},
               ],
             },
           },
@@ -362,13 +378,13 @@ const routes = [
             component: () =>
               import('../views/controleAcesso/usuarios/UsuarioCreate.vue'),
             meta: {
-              title: 'Cadastrar usuário',
+              title: menuCadastrarUsuario,
               requiresAuth: true,
               breadcrumb: [
-                {text: 'Dashboard', disabled: false, href: '/'},
-                {text: 'Controle de acessos', disabled: true},
-                {text: 'Usuários', disabled: false, href: '/usuarios'},
-                {text: 'Cadastrar usuário', disabled: true, href: '/usuarios'},
+                {text: menuDashboard, disabled: false, href: '/'},
+                {text: menuControleAcessos, disabled: true},
+                {text: menuUsuarios, disabled: false, href: '/usuarios'},
+                {text: menuCadastrarUsuario, disabled: true, href: '/usuarios'},
               ],
             },
           },
@@ -377,13 +393,13 @@ const routes = [
             component: () =>
               import('../views/controleAcesso/usuarios/UsuarioEdit.vue'),
             meta: {
-              title: 'Editar usuário',
+              title: menuEditarUsuario,
               requiresAuth: true,
               breadcrumb: [
-                {text: 'Dashboard', disabled: false, href: '/'},
-                {text: 'Controle de acessos', disabled: true},
-                {text: 'Usuários', disabled: false, href: '/usuarios'},
-                {text: 'Editar usuário', disabled: true, href: '/usuarios'},
+                {text: menuDashboard, disabled: false, href: '/'},
+                {text: menuControleAcessos, disabled: true},
+                {text: menuUsuarios, disabled: false, href: '/usuarios'},
+                {text: menuEditarUsuario, disabled: true, href: '/usuarios'},
               ],
             },
           },
@@ -400,11 +416,11 @@ const routes = [
               import('../views/controleAcesso/perfis/Perfil.vue'),
             meta: {
               requiresAuth: true,
-              title: 'Perfis',
+              title: menuPerfis,
               breadcrumb: [
-                {text: 'Dashboard', disabled: false, href: '/'},
-                {text: 'Controle de acessos', disabled: true},
-                {text: 'Perfis', disabled: true, href: '/perfis'},
+                {text: menuDashboard, disabled: false, href: '/'},
+                {text: menuControleAcessos, disabled: true},
+                {text: menuPerfis, disabled: true, href: '/perfis'},
               ],
             },
           },
@@ -413,13 +429,13 @@ const routes = [
             component: () =>
               import('../views/controleAcesso/perfis/PerfilCreate.vue'),
             meta: {
-              title: 'Cadastrar perfil',
+              title: menuCadastrarPerfil,
               requiresAuth: true,
               breadcrumb: [
-                {text: 'Dashboard', disabled: false, href: '/'},
-                {text: 'Controle de acessos', disabled: true},
-                {text: 'Perfis', disabled: false, href: '/perfis'},
-                {text: 'Cadastrar perfil', disabled: true, href: '/perfis'},
+                {text: menuDashboard, disabled: false, href: '/'},
+                {text: menuControleAcessos, disabled: true},
+                {text: menuPerfis, disabled: false, href: '/perfis'},
+                {text: menuCadastrarPerfil, disabled: true, href: '/perfis'},
               ],
             },
           },
@@ -428,13 +444,13 @@ const routes = [
             component: () =>
               import('../views/controleAcesso/perfis/PerfilEdit.vue'),
             meta: {
-              title: 'Editar perfil',
+              title: menuEditarPerfil,
               requiresAuth: true,
               breadcrumb: [
-                {text: 'Dashboard', disabled: false, href: '/'},
-                {text: 'Controle de acessos', disabled: true},
-                {text: 'Perfis', disabled: false, href: '/perfis'},
-                {text: 'Editar perfil', disabled: true, href: '/perfis'},
+                {text: menuDashboard, disabled: false, href: '/'},
+                {text: menuControleAcessos, disabled: true},
+                {text: menuPerfis, disabled: false, href: '/perfis'},
+                {text: menuEditarPerfil, disabled: true, href: '/perfis'},
               ],
             },
           },
@@ -451,11 +467,11 @@ const routes = [
               import('../views/controleAcesso/permissoes/Permissao.vue'),
             meta: {
               requiresAuth: true,
-              title: 'Permissões',
+              title: menuPermissoes,
               breadcrumb: [
-                {text: 'Dashboard', disabled: false, href: '/'},
-                {text: 'Controle de acessos', disabled: true},
-                {text: 'Permissões', disabled: true, href: '/permissoes'},
+                {text: menuDashboard, disabled: false, href: '/'},
+                {text: menuControleAcessos, disabled: true},
+                {text: menuPermissoes, disabled: true, href: '/permissoes'},
               ],
             },
           },
@@ -464,17 +480,13 @@ const routes = [
             component: () =>
               import('../views/controleAcesso/permissoes/PermissaoCreate.vue'),
             meta: {
-              title: 'Cadastrar permissão',
+              title: menuCadastrarPermissao,
               requiresAuth: true,
               breadcrumb: [
-                {text: 'Dashboard', disabled: false, href: '/'},
-                {text: 'Controle de acessos', disabled: true},
-                {text: 'Permissões', disabled: false, href: '/permissoes'},
-                {
-                  text: 'Cadastrar permissão',
-                  disabled: true,
-                  href: '/permissoes',
-                },
+                {text: menuDashboard, disabled: false, href: '/'},
+                {text: menuControleAcessos, disabled: true},
+                {text: menuPermissoes, disabled: false, href: '/permissoes'},
+                {text: menuCadastrarPermissao, disabled: true},
               ],
             },
           },
@@ -483,13 +495,13 @@ const routes = [
             component: () =>
               import('../views/controleAcesso/permissoes/PermissaoEdit.vue'),
             meta: {
-              title: 'Editar permissão',
+              title: menuEditarPermissao,
               requiresAuth: true,
               breadcrumb: [
-                {text: 'Dashboard', disabled: false, href: '/'},
-                {text: 'Controle de acessos', disabled: true},
-                {text: 'Permissões', disabled: false, href: '/permissoes'},
-                {text: 'Editar permissão', disabled: true, href: '/permissoes'},
+                {text: menuDashboard, disabled: false, href: '/'},
+                {text: menuControleAcessos, disabled: true},
+                {text: menuPermissoes, disabled: false, href: '/permissoes'},
+                {text: menuEditarPermissao, disabled: true},
               ],
             },
           },
@@ -506,11 +518,11 @@ const routes = [
               import('../views/tarefas_agendadas/TarefaAgendada.vue'),
             meta: {
               requiresAuth: true,
-              title: 'Tarefas Agendadas',
+              title: menuTarefasAgendadas,
               breadcrumb: [
-                {text: 'Dashboard', disabled: false, href: '/'},
+                {text: menuDashboard, disabled: false, href: '/'},
                 {
-                  text: 'Tarefas Agendadas',
+                  text: menuTarefasAgendadas,
                   disabled: true,
                   href: '/tarefa-agendada',
                 },
@@ -522,17 +534,17 @@ const routes = [
             component: () =>
               import('../views/tarefas_agendadas/TarefaAgendadaCreate.vue'),
             meta: {
-              title: 'Cadastrar tarefa',
+              title: menuCadastrarTarefa,
               requiresAuth: true,
               breadcrumb: [
-                {text: 'Dashboard', disabled: false, href: '/'},
+                {text: menuDashboard, disabled: false, href: '/'},
                 {
-                  text: 'Tarefas Agendadas',
+                  text: menuTarefasAgendadas,
                   disabled: false,
                   href: '/tarefas-agendadas',
                 },
                 {
-                  text: 'Cadastrar tarefa',
+                  text: menuCadastrarTarefa,
                   disabled: true,
                   href: '/tarefas-agendadas',
                 },
@@ -544,17 +556,17 @@ const routes = [
             component: () =>
               import('../views/tarefas_agendadas/TarefaAgendadaEdit.vue'),
             meta: {
-              title: 'Editar tarefa',
+              title: menuEditarTarefa,
               requiresAuth: true,
               breadcrumb: [
-                {text: 'Dashboard', disabled: false, href: '/'},
+                {text: menuDashboard, disabled: false, href: '/'},
                 {
-                  text: 'Tarefas Agendadas',
+                  text: menuTarefasAgendadas,
                   disabled: false,
                   href: '/tarefas-agendadas',
                 },
                 {
-                  text: 'Editar tarefa',
+                  text: menuEditarTarefa,
                   disabled: true,
                   href: '/tarefas-agendadas',
                 },
