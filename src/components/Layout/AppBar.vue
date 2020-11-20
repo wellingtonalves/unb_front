@@ -255,12 +255,12 @@ export default {
       {
         text: 'Alterar e-mail',
         icon: 'mdi-email',
-        to: 'meus-dados/alterar_email',
+        to: 'usuario/meus-dados/alterar_email',
       },
       {
         text: 'Alterar senha',
         icon: 'mdi-lock',
-        to: 'meus-dados/alterar_senha',
+        to: 'usuario/meus-dados/alterar_senha',
       },
     ],
     user: JSON.parse(localStorage.getItem('user')),
@@ -285,7 +285,7 @@ export default {
         : (this.$i18n.locale = 'pt');
     },
     toRedirect(path) {
-      this.$router.push(`/usuario/${path}`);
+      this.$router.push(`/${path}`);
     },
   },
 };

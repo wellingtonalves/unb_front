@@ -30,8 +30,11 @@ const routes = [{
         meta: {
           requiresAuth: false,
           title: 'Conheça a Escola',
-          breadcrumb: [
-            {text: 'Início', disabled: false, href: '/'},
+          breadcrumb: [{
+              text: 'Início',
+              disabled: false,
+              href: '/'
+            },
             {
               text: 'Conheça a Escola',
               disabled: true,
@@ -47,8 +50,11 @@ const routes = [{
         meta: {
           requiresAuth: false,
           title: 'Adesão Institucional',
-          breadcrumb: [
-            {text: 'Início', disabled: false, href: '/'},
+          breadcrumb: [{
+              text: 'Início',
+              disabled: false,
+              href: '/'
+            },
             {
               text: 'Adesão Institucional',
               disabled: true,
@@ -64,8 +70,11 @@ const routes = [{
         meta: {
           requiresAuth: false,
           title: 'Perguntas Frequentes',
-          breadcrumb: [
-            {text: 'Início', disabled: false, href: '/'},
+          breadcrumb: [{
+              text: 'Início',
+              disabled: false,
+              href: '/'
+            },
             {
               text: 'Perguntas Frequentes',
               disabled: true,
@@ -76,16 +85,13 @@ const routes = [{
       },
 
       {
-        path: '/usuario',
+        path: '/meus-dados',
         component: () => import('../components/Layout/RouterViewComponent.vue'),
         children: [{
             path: '',
-            redirect: '/usuario/meus-dados'
-          },
-          {
-            path: '/usuario/meus-dados',
+            name: 'usuario',
             component: () =>
-              import('../views/meus_dados/PerfilPersist.vue'),
+              import('../views/meusDados/MeusDadosEdit.vue'),
             meta: {
               requiresAuth: true,
               title: 'Meus Dados',
@@ -97,15 +103,16 @@ const routes = [{
                 {
                   text: 'Meus Dados',
                   disabled: true,
-                  href: '/usuario/meus-dados'
+                  href: '/meus-dados'
                 },
               ],
             },
           },
           {
-            path: '/usuario/meus-dados/:view',
+            path: '/usuario/meus-dados/alterar_email',
+            name: 'alterar_email',
             component: () =>
-              import('../views/meus_dados/PerfilPersist.vue'),
+              import('../views/meusDados/MeusDadosEdit.vue'),
             meta: {
               requiresAuth: true,
               title: 'Alterar Email',
@@ -118,6 +125,27 @@ const routes = [{
                   text: 'Alterar Email',
                   disabled: true,
                   href: '/usuario/meus-dados/alterar_email'
+                }
+              ],
+            },
+          },
+          {
+            path: '/usuario/meus-dados/alterar_senha',
+            name: 'alterar_senha',
+            component: () =>
+              import('../views/meusDados/MeusDadosEdit.vue'),
+            meta: {
+              requiresAuth: true,
+              title: 'Alterar Senha',
+              breadcrumb: [{
+                  text: 'Início',
+                  disabled: false,
+                  href: '/'
+                },
+                {
+                  text: 'Alterar Senha',
+                  disabled: true,
+                  href: '/usuario/meus-dados/alterar_senha'
                 },
               ],
             },
@@ -348,9 +376,16 @@ const routes = [{
             meta: {
               title: 'Exclusividade Oferta',
               requiresAuth: true,
-              breadcrumb: [
-                {text: 'Dashboard', disabled: false, href: '/'},
-                {text: 'Ofertas', disabled: false, href: '/ofertas'},
+              breadcrumb: [{
+                  text: 'Dashboard',
+                  disabled: false,
+                  href: '/'
+                },
+                {
+                  text: 'Ofertas',
+                  disabled: false,
+                  href: '/ofertas'
+                },
                 {
                   text: 'Exclusividade Oferta',
                   disabled: true,
@@ -390,9 +425,16 @@ const routes = [{
             meta: {
               title: 'Cadastrar Programa',
               requiresAuth: true,
-              breadcrumb: [
-                {text: 'Dashboard', disabled: false, href: '/'},
-                {text: 'Programas', disabled: false, href: '/programas'},
+              breadcrumb: [{
+                  text: 'Dashboard',
+                  disabled: false,
+                  href: '/'
+                },
+                {
+                  text: 'Programas',
+                  disabled: false,
+                  href: '/programas'
+                },
                 {
                   text: 'Cadastrar Programa',
                   disabled: true,
@@ -702,8 +744,11 @@ const routes = [{
             meta: {
               requiresAuth: true,
               title: 'Tarefas Agendadas',
-              breadcrumb: [
-                {text: 'Dashboard', disabled: false, href: '/'},
+              breadcrumb: [{
+                  text: 'Dashboard',
+                  disabled: false,
+                  href: '/'
+                },
                 {
                   text: 'Tarefas Agendadas',
                   disabled: true,
@@ -719,8 +764,11 @@ const routes = [{
             meta: {
               title: 'Cadastrar tarefa',
               requiresAuth: true,
-              breadcrumb: [
-                {text: 'Dashboard', disabled: false, href: '/'},
+              breadcrumb: [{
+                  text: 'Dashboard',
+                  disabled: false,
+                  href: '/'
+                },
                 {
                   text: 'Tarefas Agendadas',
                   disabled: false,
@@ -741,8 +789,11 @@ const routes = [{
             meta: {
               title: 'Editar tarefa',
               requiresAuth: true,
-              breadcrumb: [
-                {text: 'Dashboard', disabled: false, href: '/'},
+              breadcrumb: [{
+                  text: 'Dashboard',
+                  disabled: false,
+                  href: '/'
+                },
                 {
                   text: 'Tarefas Agendadas',
                   disabled: false,

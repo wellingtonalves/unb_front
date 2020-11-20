@@ -2,13 +2,13 @@
   <v-layout wrap>
     <v-card class="mx-auto" height="100%" width="100%" elevation="10">
       <v-container class="pa-5" fluid>
-        <usuario-form @update="receiveData" :user-data="userData" :errors="errors" :view="typePage">
+        <meus-dados-form @update="receiveData" :user-data="userData" :errors="errors">
           <template v-slot:buttons>
             <v-btn class="mr-4" color="primary" :loading="loading" @click="save()">
               <v-icon class="mr-2">mdi-content-save</v-icon>Alterar Dados
             </v-btn>
           </template>
-        </usuario-form>
+        </meus-dados-form>
 
         <v-snackbar v-model="snackbar.active" :color="snackbar.color" :timeout="snackbar.timeout">
           {{snackbar.text}}
@@ -19,11 +19,12 @@
   </v-layout>
 </template>
 <script>
-import UsuarioForm from '../controleAcesso/usuarios/UsuarioForm';
-import {update} from '@/services/abstract.service';
+import MeusDadosForm from './MeusDadosForm.vue';
+import {get, update} from '@/services/abstract.service';
 export default {
-  components: {UsuarioForm},
+  components: {MeusDadosForm},
   data: () => ({
+    data: {},
     loading: false,
     errors: [],
     snackbar: {
@@ -32,32 +33,28 @@ export default {
       text: '',
       timeout: 5000,
     },
-    perfil: {},
   }),
   computed: {
     userData() {
       return this.$store.state.user;
     },
-    typePage() {
-      return this.$route.params.view;
-    }
   },
-  watch: {
-    'snackbar.active': function(val) {
-      if (this.snackbar.color == 'success' && val == false) {
-        this.$router.push('/usuarios');
-      }
-    },
+  async mounted() {
+    await this.getData();
   },
   methods: {
     receiveData(data) {
-      this.perfil = data;
+      this.data = data;
+    },
+    async getData() {
+      const response = await get(`usuario/${this.userData.id_usuario}`);
+      this.data = response.data.data;
     },
     async save() {
       this.loading = true;
       const response = await update(
         `usuario/${this.userData.id_usuario}`,
-        this.perfil
+        this.data
       );
 
       this.loading = false;
