@@ -1,51 +1,48 @@
 <template>
   <v-layout wrap>
+
+    <h3 class="subheading">
+      Oferta:
+      <strong>{{oferta.tx_nome_curso + " ( " + oferta.tx_nome_oferta + " )"}}</strong>
+    </h3>
+
     <card-default>
 
       <form-skeleton :loading="loadingOferta" />
 
       <div v-show="!loadingOferta">
-        <h3>
-          Oferta:
-          {{oferta.tx_nome_curso + " ( " + oferta.tx_nome_oferta + " )"}}
-        </h3>
-
+        
         <v-form lazy-validation ref="form">
           <v-row>
-            <v-text-field
-              outlined
-              label="Valor"
-              required
-              v-model="valor_exclusividade"
-              :error-messages="errors.valor_exclusividade"
-            />
+            <v-col>
+              <v-text-field
+                outlined
+                label="Valor"
+                required
+                v-model="valor_exclusividade"
+                :error-messages="errors.valor_exclusividade"
+              />
+            </v-col>
+            <v-col>
+              <v-file-input label="Carregar arquivo" 
+                            outlined 
+                            dense 
+                            accept=".csv"
+                            v-model="anexo"
+                            :error-messages="errors.anexo"
+              />
+            </v-col>
           </v-row>
-
-          <v-row>
-            <v-file-input label="Carregar arquivo" 
-                          outlined 
-                          dense 
-                          accept=".csv"
-                          v-model="anexo"
-                          :error-messages="errors.anexo"
-            />
-          </v-row>
-
         </v-form>
 
-        <div>
-          <v-alert text color="warning">
-                <span>
-                    <strong>Atenção!</strong>
-                    Caso queira adicionar um arquivo com os critérios, siga o seguinte padrão:
-                </span>
-          </v-alert>
-
-          <p>Formato do Arquivo: <span style="color: red">csv</span></p>
-          <p>Separado por: <span style="color: red">',' (Vírgula)</span></p>
-          <p>Primeira Célula <span style="color: red">(OBRIGATORIAMENTE)</span>, com o texto:<span style="color: red"> 'valores'</span></p>
+        <v-alert text icon="mdi-information" color="warning">
+          <h3>Atenção!</h3>
+          <p>Caso queira adicionar um arquivo com os critérios, siga o seguinte padrão:</p>
+          <v-divider class="mb-3"></v-divider>
+          <p>Formato do Arquivo: <strong>csv</strong></p>
+          <p>Separado por: <strong>',' (Vírgula)</strong></p>
+          <p>Primeira Célula (OBRIGATORIAMENTE), com o texto:<strong> 'valores'</strong></p>
           <p>Exemplo:</p>
-
           <v-list>
             <v-list-item v-for="(item, i) in valoresExemplo" :key="i">
               <v-list-item-content>
@@ -54,8 +51,8 @@
             </v-list-item>
           </v-list>
 
-          <p>Baixe o arquivo de Exemplo: <a :href="arquivoDownload" download>aqui</a></p>
-        </div>
+          <p>Você pode <a :href="arquivoDownload" download>baixar o arquivo de Exemplo</a>.</p>
+        </v-alert>
 
         <v-row class="mt-5" justify="center">
           <v-btn class="mx-2" @click="$router.go(-1)">
@@ -69,7 +66,6 @@
           </v-btn>
         </v-row>
       </div>
-
       
     </card-default>
   </v-layout>
