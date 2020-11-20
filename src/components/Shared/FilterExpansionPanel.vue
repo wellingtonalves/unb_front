@@ -1,5 +1,5 @@
 <template>
-  <v-expansion-panels :value="0">
+  <v-expansion-panels>
     <v-expansion-panel>
       <v-expansion-panel-header>
         Filtros
@@ -11,11 +11,11 @@
             <slot name="filterExpansionPanel"></slot>
 
             <v-col class="d-flex" cols="12" sm="4">
-              <v-btn color="primary" dark outlined rounded class="mb-8 mr-5" @click="filtrar()">
+              <v-btn dark outlined rounded color="primary" class="mr-5" @click="filtrar()">
                 <v-icon>mdi-magnify</v-icon>
                 Pesquisar
               </v-btn>
-              <v-btn color="primary" dark outlined rounded class="mb-8" @click="resetar()">
+              <v-btn dark outlined rounded color="primary" @click="resetar()">
                 <v-icon>mdi-magnify-close</v-icon>
                 Limpar
               </v-btn>

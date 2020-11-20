@@ -12,9 +12,14 @@
       <v-row>
         <v-col cols="12">
 
-          <v-toolbar>
+          <v-toolbar color="elevation-1">
             <v-toolbar-title class="d-sr-only">Ações</v-toolbar-title>
             <v-spacer></v-spacer>
+            <v-btn outlined class="ma-1" @click="$router.push('/ofertas')">
+              <v-icon class="mr-2">mdi-backup-restore</v-icon>
+              Voltar
+            </v-btn>
+
             <v-btn outlined color="primary" v-show="permission('EXCLUSIVIDADE_EDITAR')"
                @click="$router.push(`/ofertas/${oferta.id_oferta}/gerenciar-exclusividade/${oferta.exclusividade.id_exclusividade_oferta}/create`)" class="ma-1">
               Adicionar Valor
@@ -77,13 +82,6 @@
           </v-data-table>
 
         </v-col>
-      </v-row>
-
-      <v-row class="mt-5" justify="center">
-        <v-btn class="mr-4" @click="$router.push('/ofertas')">
-          <v-icon class="mr-2">mdi-backup-restore</v-icon>
-          Voltar
-        </v-btn>
       </v-row>
 
       <v-row justify="center">

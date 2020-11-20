@@ -59,8 +59,8 @@
             </template>
 
             <template v-slot:item.tp_situacao_curso="{ item }">
-              <p v-if="item.tp_situacao_curso == 'A'">Ativo</p>
-              <p v-else>Inativo</p>
+              <span v-if="item.tp_situacao_curso == 'A'">Ativo</span>
+              <span v-else>Inativo</span>
             </template>
 
             <template v-slot:item.action="{ item }">
@@ -90,7 +90,10 @@
             </template>
 
             <template v-slot:expanded-item="{ headers, item }">
-              <td :colspan="headers.length"  v-html="item.tx_conteudo_programatico"></td>
+              <td :colspan="headers.length">
+                <h4 class="mt-4">Conteúdo Programático:</h4>
+                <div class="mb-4" v-html="item.tx_conteudo_programatico"></div>
+              </td>
             </template>
             
           </v-data-table>
