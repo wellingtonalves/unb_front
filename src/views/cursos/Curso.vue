@@ -59,34 +59,41 @@
             </template>
 
             <template v-slot:item.tp_situacao_curso="{ item }">
-              <p v-if="item.tp_situacao_curso == 'A'">Ativo</p>
-              <p v-else>Inativo</p>
+              <span v-if="item.tp_situacao_curso == 'A'">Ativo</span>
+              <span v-else>Inativo</span>
             </template>
 
             <template v-slot:item.action="{ item }">
 
-              <v-tooltip bottom>
-                <template v-slot:activator="{ on }">
-                  <v-btn small color="primary" icon @click="$router.push(`/curso/${item.id_curso}/edit`)" v-on="on">
-                    <v-icon>mdi-pencil</v-icon>
-                  </v-btn>
-                </template>
-                <span>Editar</span>
-              </v-tooltip>
+              <v-layout wrap class="action-buttons">
 
-              <v-tooltip bottom>
-                <template v-slot:activator="{ on }">
-                  <v-btn small color="error" icon @click="excluir(item)" v-on="on">
-                    <v-icon>mdi-delete</v-icon>
-                  </v-btn>
-                </template>
-                <span>Visualizar</span>
-              </v-tooltip>
+                <v-tooltip bottom>
+                  <template v-slot:activator="{ on }">
+                    <v-btn small tile outlined icon color="primary" @click="$router.push(`/curso/${item.id_curso}/edit`)" v-on="on">
+                      <v-icon>mdi-pencil</v-icon>
+                    </v-btn>
+                  </template>
+                  <span>Editar</span>
+                </v-tooltip>
+
+                <v-tooltip bottom>
+                  <template v-slot:activator="{ on }">
+                    <v-btn small tile outlined icon color="error" @click="excluir(item)" v-on="on">
+                      <v-icon>mdi-delete</v-icon>
+                    </v-btn>
+                  </template>
+                  <span>Excluir</span>
+                </v-tooltip>
+
+              </v-layout>
 
             </template>
 
             <template v-slot:expanded-item="{ headers, item }">
-              <td :colspan="headers.length"  v-html="item.tx_conteudo_programatico"></td>
+              <td :colspan="headers.length">
+                <h4 class="mt-4">Conteúdo Programático:</h4>
+                <div class="mb-4" v-html="item.tx_conteudo_programatico"></div>
+              </td>
             </template>
             
           </v-data-table>
