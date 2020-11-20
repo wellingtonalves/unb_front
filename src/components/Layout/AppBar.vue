@@ -103,8 +103,10 @@
     </v-navigation-drawer>
 
     <v-app-bar :clipped-left="true" app>
-      <v-app-bar-nav-icon @click.stop="drawerSettings.model = !drawerSettings.model" />
-      <v-container>
+      <v-app-bar-nav-icon @click.stop="drawerSettings.model = !drawerSettings.model"/>
+      
+      <v-container fluid>
+
         <v-row>
           <v-col cols="9" class="align-self-start">
             <h1 class="mr-8 float-left">
@@ -414,11 +416,12 @@ nav.v-navigation-drawer .v-list-item__title {
     width: 112px;
   }
   header.v-app-bar button.v-app-bar__nav-icon {
+    margin-left: 0 !important;
     opacity: 0.75;
     position: absolute;
   }
   nav.v-navigation-drawer {
-    top: 94px !important;
+    top: 86px !important;
   }
   nav.v-navigation-drawer .v-list > .v-list-item:not(:last-child) {
     border-bottom: 1px solid rgba(0, 0, 0, 0.1);
@@ -428,6 +431,8 @@ nav.v-navigation-drawer .v-list-item__title {
   }
   #main-nav {
     background-color: transparent;
+    padding-top: 4px;
+    padding-bottom: 4px;
   }
   #main-nav a {
     color: var(--v-black-base);
@@ -438,12 +443,58 @@ nav.v-navigation-drawer .v-list-item__title {
   h1 {
     margin-left: 40px;
   }
-  h1 a {
-    height: 44px;
-    width: 80px;
+  #main-nav .v-list-item__content::after,
+  #main-nav .v-list-item__content::before {
+    background-color: var(--v-primary-base);
+    content: "";
+    height: 2px;
+    min-height: 2px;
+    opacity: 0;
+    position: absolute;
+    left: 0;
+    width: 100%;
+    -webkit-transition: opacity .3s,-webkit-transform .6s;
+    -moz-transition: opacity .3s,-moz-transform .6s;
+    transition: opacity .3s,transform .6s;
+    -webkit-transform: translateY(10px);
+    -moz-transform: translateY(10px);
+    transform: translateY(10px);
   }
-  nav.v-navigation-drawer {
-    top: 76px !important;
+  #main-nav .v-list-item__content::after {
+    bottom: 10px;
+  }
+  #main-nav .v-list-item__content::before {
+    top: -10px;
+  }
+  #main-nav .v-list-item__content:hover::after,
+  #main-nav .v-list-item__content:hover::before {
+    opacity: .25;
+  }
+  #main-nav .v-list-item__title {
+    font-weight: 300;
+  }
+  #main-nav .v-list-item__subtitle {
+    color: var(--v-primary-base);
+    font-weight: 600;
+  }
+  .top-button {
+    height: 40px !important;
+    width: 40px !important;
+  }
+  @media (max-width: 600px) {
+    header.v-app-bar .container {
+      padding: 0;
+    }
+    h1 {
+      margin-left: 40px;
+    }
+    h1 a {
+      height: 44px;
+      width: 80px;
+    }
+    nav.v-navigation-drawer {
+      top: 76px !important;
+    }
   }
 }
 </style>

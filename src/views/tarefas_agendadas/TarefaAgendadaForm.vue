@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <v-form lazy-validation ref="form" v-model="validForm">
+  <form-skeleton :loading="loading">
+    <v-form lazy-validation ref="form" v-show="!loading" v-model="validForm">
       <v-row>
         <v-col class="d-flex">
           <v-text-field
@@ -97,7 +97,7 @@
       </v-row>
 
     </v-form>
-  </div>
+  </form-skeleton>
 </template>
 
 <script>
@@ -107,6 +107,7 @@
     name: "TarefaAgendadaForm",
     props: ['data', 'errors'],
     data: () => ({
+      loading: true,
       validForm: false,
       dataResponse: {} || this.data,
       errorData: {},
@@ -137,13 +138,15 @@
         this.dataResponse = val;
       },
     },
-    mounted() {
-      this.getAva();
+    async mounted() {
+      await this.getAva();
+      this.loading = false
     },
     methods: {
       async getAva() {
-        const response = await get('/ava?pagination=false&orderBy=tx_nome_ava');
-        this.ava = response.data.data;
+        return get('/ava?pagination=false&orderBy=tx_nome_ava').then(response => {
+          this.ava = response.data.data;
+        })
       }
     }
   }

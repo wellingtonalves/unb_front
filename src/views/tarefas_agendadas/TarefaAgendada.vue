@@ -1,57 +1,31 @@
 <template>
   <v-layout v-show="permission('TAREFA_AGENDADA_LISTAR')" wrap class="align-stretch">
 
-    <v-expansion-panels :value="0">
-      <v-expansion-panel>
+    <filter-expansion-panel @filtrar="filtrar" @resetar="limparFiltros()">
+      <template v-slot:filterExpansionPanel>
+        
+        <v-col cols="12" sm="2">
+          <v-select dense v-model="filterData.tp_situacao_tarefa_agendada" label="Status" :items="statusTarefaAgendada" item-text="label" item-value="value" />
+        </v-col>
 
-        <v-expansion-panel-header>
-          Filtros
-        </v-expansion-panel-header>
+        <v-col cols="12" sm="3">
+          <v-text-field dense
+                        v-model="filterData.tx_nome_tarefa_agendada"
+                        label="Nome"
+                        placeholder="Informe o nome da tarefa"
+          />
+        </v-col>
 
-        <v-expansion-panel-content>
-
-          <v-form ref="form" lazy-validation>
-            <v-row align="center">
-
-              <v-col>
-                <v-select dense v-model="filterData.tp_situacao_tarefa_agendada" label="Status" :items="statusTarefaAgendada" item-text="label" item-value="value" />
-              </v-col>
-
-              <v-col cols="12" sm="4">
-                <v-text-field dense
-                  v-model="filterData.tx_nome_tarefa_agendada"
-                  label="Nome"
-                  placeholder="Informe o nome da tarefa"
-                />
-              </v-col>
-
-              <v-col cols="12" sm="4">
-                <v-text-field dense
-                  v-model="filterData.tx_nome_comando"
-                  label="Comando"
-                  placeholder="Informe o comando da tarefa"
-                />
-              </v-col>
-
-              <v-col class="d-flex justify-end" cols="12" sm="4">
-
-                <v-btn v-show="permission('TAREFA_AGENDADA_LISTAR')" color="primary" dark outlined rounded class="mb-8 mr-5" @click="filtrar()">
-                  <v-icon>mdi-magnify</v-icon>
-                  Pesquisar
-                </v-btn>
-
-                <v-btn color="primary" dark outlined rounded class="mb-8" @click="limparFiltros()">
-                  <v-icon>mdi-magnify-close</v-icon>
-                  Limpar
-                </v-btn>
-              </v-col>
-            </v-row>
-          </v-form>
-
-        </v-expansion-panel-content>
-
-      </v-expansion-panel>
-    </v-expansion-panels>
+        <v-col cols="12" sm="3">
+          <v-text-field dense
+                        v-model="filterData.tx_nome_comando"
+                        label="Comando"
+                        placeholder="Informe o comando da tarefa"
+          />
+        </v-col>
+        
+      </template>
+    </filter-expansion-panel>
 
     <v-row class="flex-basis-100">
       <v-col cols="12">
@@ -64,9 +38,6 @@
             :server-items-length="pagination.total"
             :items-per-page="15"
             :options.sync="options"
-            :single-expand="true"
-            :expanded.sync="expanded"
-            show-expand
             item-key="id_tarefa_agendada"
             sort-by="tx_nome_tarefa_agendada"
             class="elevation-1"
