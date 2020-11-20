@@ -4,37 +4,37 @@ import VueRouter from 'vue-router';
 
 Vue.use(VueRouter);
 
-const menuInicio = "Início",
-      menuDashboard = "Dashboard",
-      menuCursos = "Cursos",
-      menuCadastrarCurso = "Cadastrar Curso",
-      menuEditarCurso = "Editar Curso",
-      menuAVA = "AVA",
-      menuCadastrarAVA = "Cadastrar AVA",
-      menuEditarAVA = "Editar AVA",
-      menuOfertas = "Ofertas",
-      menuCadastrarOferta = "Cadastrar Oferta",
-      menuEditarOferta = "Editar Oferta",
-      menuTornarOfertaExclusiva = 'Tornar Oferta Exclusiva',
-      menuEditarExclusividadeOferta = 'Editar Exclusividade da Oferta',
-      menuGerenciarExclusividadeOferta = 'Gerenciar Exclusividade da Oferta',
-      menuAdicionarValores = 'Adicionar Valores',
-      menuProgramas = "Programas",
-      menuCadastrarPrograma = "Cadastrar Programa",
-      menuEditarPrograma = "Editar Programa",
-      menuUsuarios = "Usuários",
-      menuCadastrarUsuario = "Cadastrar Usuário",
-      menuEditarUsuario = "Editar Usuário",
-      menuPerfis = "Perfis",
-      menuCadastrarPerfil = "Cadastrar Perfil",
-      menuEditarPerfil = "Editar Perfil",
-      menuPermissoes = "Permissões",
-      menuCadastrarPermissao = "Cadastrar Permissão",
-      menuEditarPermissao = "Editar Permissão",
-      menuTarefasAgendadas = "Tarefas Agendadas",
-      menuCadastrarTarefa = "Cadastrar Tarefa",
-      menuEditarTarefa = "Editar Tarefa",
-      menuControleAcessos = "Controle de Acessos";
+const menuInicio = 'Início',
+  menuDashboard = 'Dashboard',
+  menuCursos = 'Cursos',
+  menuCadastrarCurso = 'Cadastrar Curso',
+  menuEditarCurso = 'Editar Curso',
+  menuAVA = 'AVA',
+  menuCadastrarAVA = 'Cadastrar AVA',
+  menuEditarAVA = 'Editar AVA',
+  menuOfertas = 'Ofertas',
+  menuCadastrarOferta = 'Cadastrar Oferta',
+  menuEditarOferta = 'Editar Oferta',
+  menuTornarOfertaExclusiva = 'Tornar Oferta Exclusiva',
+  menuEditarExclusividadeOferta = 'Editar Exclusividade da Oferta',
+  menuGerenciarExclusividadeOferta = 'Gerenciar Exclusividade da Oferta',
+  menuAdicionarValores = 'Adicionar Valores',
+  menuProgramas = 'Programas',
+  menuCadastrarPrograma = 'Cadastrar Programa',
+  menuEditarPrograma = 'Editar Programa',
+  menuUsuarios = 'Usuários',
+  menuCadastrarUsuario = 'Cadastrar Usuário',
+  menuEditarUsuario = 'Editar Usuário',
+  menuPerfis = 'Perfis',
+  menuCadastrarPerfil = 'Cadastrar Perfil',
+  menuEditarPerfil = 'Editar Perfil',
+  menuPermissoes = 'Permissões',
+  menuCadastrarPermissao = 'Cadastrar Permissão',
+  menuEditarPermissao = 'Editar Permissão',
+  menuTarefasAgendadas = 'Tarefas Agendadas',
+  menuCadastrarTarefa = 'Cadastrar Tarefa',
+  menuEditarTarefa = 'Editar Tarefa',
+  menuControleAcessos = 'Controle de Acessos';
 
 const routes = [
   {
@@ -48,7 +48,8 @@ const routes = [
   {
     path: '',
     component: () => import('../components/Layout/Main.vue'),
-    children: [{
+    children: [
+      {
         path: '/',
         name: menuInicio,
         component: () => import('../views/Home.vue'),
@@ -111,75 +112,77 @@ const routes = [
       {
         path: '/meus-dados',
         component: () => import('../components/Layout/RouterViewComponent.vue'),
-        children: [{
+        children: [
+          {
             path: '',
             name: 'usuario',
-            component: () =>
-              import('../views/meusDados/MeusDadosEdit.vue'),
+            component: () => import('../views/meusDados/MeusDadosEdit.vue'),
             meta: {
               requiresAuth: true,
               title: 'Meus Dados',
-              breadcrumb: [{
+              breadcrumb: [
+                {
                   text: 'Início',
                   disabled: false,
-                  href: '/'
+                  href: '/',
                 },
                 {
                   text: 'Meus Dados',
                   disabled: true,
-                  href: '/meus-dados'
+                  href: '/meus-dados',
                 },
               ],
             },
           },
           {
-            path: '/usuario/meus-dados/alterar_email',
-            name: 'alterar_email',
-            component: () =>
-              import('../views/meusDados/MeusDadosEdit.vue'),
+            path: '/meus-dados/alterar_email',
+            name: 'Alterar Email',
+            component: () => import('../views/meusDados/MeusDadosEdit.vue'),
             meta: {
               requiresAuth: true,
               title: 'Alterar Email',
-              breadcrumb: [{
+              breadcrumb: [
+                {
                   text: 'Início',
                   disabled: false,
-                  href: '/'
+                  href: '/',
                 },
                 {
                   text: 'Alterar Email',
                   disabled: true,
-                  href: '/usuario/meus-dados/alterar_email'
-                }
+                  href: '/meus-dados/alterar_email',
+                },
               ],
             },
           },
           {
-            path: '/usuario/meus-dados/alterar_senha',
-            name: 'alterar_senha',
-            component: () =>
-              import('../views/meusDados/MeusDadosEdit.vue'),
+            path: '/meus-dados/alterar-senha',
+            name: 'Alterar Senha',
+            component: () => import('../views/meusDados/MeusDadosEdit.vue'),
             meta: {
               requiresAuth: true,
               title: 'Alterar Senha',
-              breadcrumb: [{
+              breadcrumb: [
+                {
                   text: 'Início',
                   disabled: false,
-                  href: '/'
+                  href: '/',
                 },
                 {
                   text: 'Alterar Senha',
                   disabled: true,
-                  href: '/usuario/meus-dados/alterar_senha'
+                  href: '/meus-dados/alterar_senha',
                 },
               ],
             },
-          }
-        ]
+          },
+        ],
       },
       {
         path: '/cursos',
         component: () => import('../components/Layout/RouterViewComponent.vue'),
-        children: [{
+        children: [
+          {
             path: '',
             name: 'curso',
             component: () => import('../views/cursos/Curso.vue'),
@@ -223,7 +226,8 @@ const routes = [
       {
         path: '/ava',
         component: () => import('../components/Layout/RouterViewComponent.vue'),
-        children: [{
+        children: [
+          {
             path: '',
             name: 'ava',
             component: () => import('../views/ava/Ava.vue'),
@@ -267,7 +271,8 @@ const routes = [
       {
         path: '/ofertas',
         component: () => import('../components/Layout/RouterViewComponent.vue'),
-        children: [{
+        children: [
+          {
             path: '',
             name: 'oferta',
             component: () => import('../views/ofertas/Ofertas.vue'),
@@ -373,7 +378,8 @@ const routes = [
       {
         path: '/programas',
         component: () => import('../components/Layout/RouterViewComponent.vue'),
-        children: [{
+        children: [
+          {
             path: '',
             name: 'programa',
             component: () => import('../views/programas/Programas.vue'),
@@ -421,7 +427,8 @@ const routes = [
       {
         path: '/usuarios',
         component: () => import('../components/Layout/RouterViewComponent.vue'),
-        children: [{
+        children: [
+          {
             path: '',
             name: 'usuario',
             component: () =>
@@ -471,7 +478,8 @@ const routes = [
       {
         path: '/perfis',
         component: () => import('../components/Layout/RouterViewComponent.vue'),
-        children: [{
+        children: [
+          {
             path: '',
             name: 'perfil',
             component: () =>
@@ -521,7 +529,8 @@ const routes = [
       {
         path: '/permissoes',
         component: () => import('../components/Layout/RouterViewComponent.vue'),
-        children: [{
+        children: [
+          {
             path: '',
             name: 'permissao',
             component: () =>
@@ -571,7 +580,8 @@ const routes = [
       {
         path: '/tarefas-agendadas',
         component: () => import('../components/Layout/RouterViewComponent.vue'),
-        children: [{
+        children: [
+          {
             path: '',
             name: 'tarefa-agendada',
             component: () =>
