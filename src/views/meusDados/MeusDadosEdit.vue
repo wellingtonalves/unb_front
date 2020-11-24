@@ -2,7 +2,7 @@
   <v-layout wrap>
     <v-card class="mx-auto" height="100%" width="100%" elevation="10">
       <v-container class="pa-5" fluid>
-        <meus-dados-form @update="receiveData" :user-data="userData" :errors="errors">
+        <meus-dados-form @update="receiveData" ref="userForm" :user-data="data" :errors="errors">
           <template v-slot:buttons>
             <v-btn class="mr-4" color="primary" :loading="loading" @click="save()">
               <v-icon class="mr-2">mdi-content-save</v-icon>Alterar Dados
@@ -42,6 +42,7 @@ export default {
       });
     },
     async save() {
+      if(!this.$refs.userForm.formValid()) return;
       this.loading = true;
       const response = await update(`usuario/${this.userData.id_usuario}`, this.data);
       this.loading = false;

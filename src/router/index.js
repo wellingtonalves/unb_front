@@ -115,7 +115,7 @@ const routes = [
         children: [
           {
             path: '',
-            name: 'usuario',
+            name: 'meus-dados',
             component: () => import('../views/meusDados/MeusDadosEdit.vue'),
             meta: {
               requiresAuth: true,
@@ -135,8 +135,8 @@ const routes = [
             },
           },
           {
-            path: '/meus-dados/alterar_email',
-            name: 'Alterar Email',
+            path: '/meus-dados/alterar-email',
+            name: 'alterar-email',
             component: () => import('../views/meusDados/MeusDadosEdit.vue'),
             meta: {
               requiresAuth: true,
@@ -150,14 +150,14 @@ const routes = [
                 {
                   text: 'Alterar Email',
                   disabled: true,
-                  href: '/meus-dados/alterar_email',
+                  href: '/meus-dados/alterar-email',
                 },
               ],
             },
           },
           {
             path: '/meus-dados/alterar-senha',
-            name: 'Alterar Senha',
+            name: 'alterar-senha',
             component: () => import('../views/meusDados/MeusDadosEdit.vue'),
             meta: {
               requiresAuth: true,
@@ -171,7 +171,7 @@ const routes = [
                 {
                   text: 'Alterar Senha',
                   disabled: true,
-                  href: '/meus-dados/alterar_senha',
+                  href: '/meus-dados/alterar-senha',
                 },
               ],
             },

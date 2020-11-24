@@ -1,7 +1,7 @@
 <template>
   <form-skeleton :loading="loading">
     <v-form @submit.prevent="save" ref="form" v-show="!loading">
-      <v-row>
+      <v-row v-if="dataResponse.pessoa">
         <v-col v-if="!emailOrPasswordPage" class="d-flex" cols="4" sm="6">
           <v-text-field
             v-model="dataResponse.pessoa.tx_nome_pessoa"
@@ -49,6 +49,7 @@
             :error-messages="errorData['pessoa.password']"
             :rules="rules.required"
             outlined
+            type="password"
             label="Digite a Nova Senha"
             required
           />
@@ -59,6 +60,7 @@
             v-model="confirm_password"
             :rules="[comparePasswords]"
             outlined
+            type="password"
             label="Confirme a Nova Senha"
             required
           />
@@ -126,7 +128,7 @@
 
         <v-col class="d-flex" cols="4" sm="6" v-if="this.isBrasileiro && !emailOrPasswordPage">
           <v-autocomplete
-            v-model="ufModel"
+            v-model="dataResponse.pessoa.sg_uf"
             :rules="rules.required"
             @change="getMunicipio()"
             :items="uf"
@@ -146,7 +148,7 @@
             outlined
             label="Municipios"
             item-text="tx_nome_municipio"
-            item-value="id_municipio_nascimento"
+            item-value="id_municipio"
           />
         </v-col>
 
@@ -193,18 +195,12 @@ import {get} from '@/services/abstract.service';
 
 export default {
   name: 'UsuarioForm',
-  props: ['data', 'errors', 'userData'],
+  props: ['userData', 'errors'],
   directives: {mask},
   data: vm => ({
     loading: true,
     validForm: false,
-    dataResponse:
-      {
-        tp_metodo_autenticacao: 'local',
-        pessoa: {
-          dt_nascimento: new Date().toISOString().substr(0, 10),
-        },
-      } || this.data,
+    dataResponse: {},
     errorData: {
       pessoa: {},
     },
@@ -222,7 +218,6 @@ export default {
     isBrasileiro: true,
     uf: [],
     municipio: [],
-    ufModel: '',
     tpSexo: [
       {
         label: 'Masculino',
@@ -254,17 +249,17 @@ export default {
         : 'As senhas não combinam !';
     },
     isProfile() {
-      return this.current === 'usuario';
+      return this.current === 'meus-dados';
     },
     pageEmail() {
-      return this.current === 'alterar_email';
+      return this.current === 'alterar-email';
     },
     pagePwd() {
-      return this.current === 'alterar_senha';
+      return this.current === 'alterar-senha';
     },
     emailOrPasswordPage() {
       return this.pageEmail || this.pagePwd;
-    }
+    },
   },
   watch: {
     dataResponse: function(val) {
@@ -273,15 +268,16 @@ export default {
     errors: function(val) {
       this.errorData = val;
     },
-    data: function(val) {
+    userData: function(val) {
       this.dataResponse = val;
     },
     $route(val) {
-      this.current = val.name;
-    },
+      this.checkRoute(val.name);
+    }
   },
 
-  async mounted() {
+  async created() {
+    this.loading = true;
     await this.loadItems();
     //TODO - fazer o municiopio funcionar quando for editar.
     // if (this.$route.params.id) {
@@ -289,6 +285,10 @@ export default {
     // }
   },
   methods: {
+    checkRoute(val) {
+      this.current = val || this.$route.name;
+      this.$refs.form.resetValidation();
+    },
     async loadItems() {
       await this.getPais();
       await this.getUf();
@@ -296,11 +296,10 @@ export default {
         await this.getTematicaCurso();
         await this.getSituacaoUsuario();
         await this.getPerfil();
-      } else {
-        this.dataResponse = this.userData;
       }
+      this.dataResponse = this.userData;
       this.loading = false;
-      console.log('dataResponse', this.dataResponse);
+      this.checkRoute();
     },
     async getTematicaCurso() {
       const response = await get('/tematica-curso?pagination=false');
@@ -324,7 +323,7 @@ export default {
     },
     async getMunicipio() {
       const response = await get(
-        `/municipio?pagination=false&search=sg_uf:${this.ufModel}`
+        `/municipio?pagination=false&search=sg_uf:${this.dataResponse.pessoa.sg_uf}`
       );
       this.municipio = response.data.data;
     },
@@ -339,11 +338,14 @@ export default {
       return `${day}/${month}/${year}`;
     },
     save($event) {
-      if (this.$refs.form.validate() === false) {
+      if (!this.formValid) {
         $event.preventDefault();
         $event.stopPropagation();
       }
     },
+    formValid() {
+      return this.$refs.form.validate();
+    }
   },
 };
 </script>

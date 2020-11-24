@@ -255,12 +255,12 @@ export default {
       {
         text: 'Alterar e-mail',
         icon: 'mdi-email',
-        to: 'usuario/meus-dados/alterar_email',
+        to: 'meus-dados/alterar-email',
       },
       {
         text: 'Alterar senha',
         icon: 'mdi-lock',
-        to: 'usuario/meus-dados/alterar_senha',
+        to: 'meus-dados/alterar-senha',
       },
     ],
     user: JSON.parse(localStorage.getItem('user')),
