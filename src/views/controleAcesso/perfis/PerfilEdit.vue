@@ -1,6 +1,5 @@
 <template>
   <v-layout wrap>
-
     <card-default>
       <v-container class="pa-5" fluid>
         <perfil-form @update="update" :data="data" :errors="errors">
@@ -16,16 +15,8 @@
             </v-btn>
           </template>
         </perfil-form>
-        
-        <v-snackbar v-model="snackbar.active" :color="snackbar.color" :timeout="snackbar.timeout">
-          {{snackbar.text}}
-          <v-btn text @click.stop="snackbar.active = false">
-            Fechar
-          </v-btn>
-        </v-snackbar>
       </v-container>
     </card-default>
-
   </v-layout>
 </template>
 
@@ -33,26 +24,13 @@
   import PerfilForm from "./PerfilForm";
   import {get, update} from "@/services/abstract.service";
   export default {
-    name: "PerfilCreate",
+    name: "PerfilEdit",
     components: {PerfilForm},
     data: () => ({
       data: '',
       loading: false,
       errors: [],
-      snackbar: {
-        active: false,
-        color: '',
-        text: '',
-        timeout: 5000
-      },
     }),
-    watch: {
-      'snackbar.active': function (val) {
-        if (this.snackbar.color == 'success' && val == false) {
-          this.$router.push('/perfis');
-        }
-      }
-    },
     async mounted() {
       await this.getData();
     },
@@ -66,21 +44,14 @@
       },
       async save() {
         this.loading = true;
-        const response = await update(`perfil/${this.$route.params.id}`, this.data)
-
+        const response = await update(`perfil/${this.$route.params.id}`, this.data);
         this.loading = false;
         
         if (response.errors) {
           this.errors = response.errors;
-          this.snackbar.text = response.message;
-          this.snackbar.color = response.messageType;
-          this.snackbar.active = true;
-          return ;
+          return false;
         }
-
-        this.snackbar.text = response.data.message;
-        this.snackbar.color = response.data.messageType;
-        this.snackbar.active = true;
+        this.$router.push('/perfis');
       }
     }
   }
