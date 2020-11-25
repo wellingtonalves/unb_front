@@ -99,26 +99,7 @@
       </v-col>
     </v-row>
 
-    <v-row justify="center">
-      <v-dialog v-model="dialogDelete" persistent max-width="500">
-        <v-card>
-          <v-card-title class="headline">Atenção!</v-card-title>
-          <v-card-text>Deseja excluir o registro <strong>{{dialogDeleteData.pessoa.tx_nome_pessoa}}</strong> ?</v-card-text>
-          <v-card-actions>
-            <v-spacer></v-spacer>
-            <v-btn color="error" text @click="dialogDelete = false">Cancelar</v-btn>
-            <v-btn color="primary" text @click="excluirItem(dialogDeleteData.id_usuario)">Confirmar</v-btn>
-          </v-card-actions>
-        </v-card>
-      </v-dialog>
-    </v-row>
-
-    <v-snackbar v-model="snackbar.active" :color="snackbar.color" :timeout="5000">
-      {{snackbar.text}}
-      <v-btn text @click.stop="snackbar.active = false">
-        Fechar
-      </v-btn>
-    </v-snackbar>
+    <dialog-delete-component :text="dialogDeleteData.pessoa.tx_nome_pessoa" v-model="dialogDelete" @excluir="excluirItem(dialogDeleteData.id_usuario)" />
 
   </v-layout>
 </template>
@@ -154,11 +135,6 @@
       dialogDelete: false,
       dialogDeleteData: {
         pessoa: {}
-      },
-      snackbar: {
-        active: false,
-        color: '',
-        text: ''
       }
     }),
     mounted() {
@@ -218,13 +194,8 @@
         this.dialogDelete = true;
       },
       async excluirItem(id) {
-        const response = await remove(`/usuario/${id}`);
+        await remove(`/usuario/${id}`);
         this.dialogDelete = false;
-        
-        this.snackbar.text = response.message;
-        this.snackbar.color = response.messageType;
-        this.snackbar.active = true;
-
         await this.get();
       }
     }

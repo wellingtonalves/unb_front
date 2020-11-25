@@ -40,7 +40,7 @@ export default {
       this.loading = false;
       if (response.errors) {
         this.errors = response.errors;
-        return false
+        return false;
       }
       this.$router.push('/ofertas');
     }

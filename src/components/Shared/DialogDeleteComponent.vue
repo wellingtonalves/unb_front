@@ -6,8 +6,8 @@
         <v-card-text>Deseja excluir o registro <strong>{{ text }}</strong> ?</v-card-text>
         <v-card-actions>
           <v-spacer></v-spacer>
-          <v-btn color="error" text @click="() => this.$emit('input', false)">Cancelar</v-btn>
           <v-btn color="primary" text @click="excluir()">Confirmar</v-btn>
+          <v-btn color="error" text @click="() => this.$emit('input', false)">Cancelar</v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>
