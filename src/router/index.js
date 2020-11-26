@@ -1,40 +1,9 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 import store from '@/store';
+import {ROUTER_CONSTANTS} from './router.constants';
 
 Vue.use(VueRouter);
-
-const menuInicio = "Início",
-      menuDashboard = "Dashboard",
-      menuCursos = "Cursos",
-      menuCadastrarCurso = "Cadastrar Curso",
-      menuEditarCurso = "Editar Curso",
-      menuAVA = "AVA",
-      menuCadastrarAVA = "Cadastrar AVA",
-      menuEditarAVA = "Editar AVA",
-      menuOfertas = "Ofertas",
-      menuCadastrarOferta = "Cadastrar Oferta",
-      menuEditarOferta = "Editar Oferta",
-      menuTornarOfertaExclusiva = 'Tornar Oferta Exclusiva',
-      menuEditarExclusividadeOferta = 'Editar Exclusividade da Oferta',
-      menuGerenciarExclusividadeOferta = 'Gerenciar Exclusividade da Oferta',
-      menuAdicionarValores = 'Adicionar Valores',
-      menuProgramas = "Programas",
-      menuCadastrarPrograma = "Cadastrar Programa",
-      menuEditarPrograma = "Editar Programa",
-      menuUsuarios = "Usuários",
-      menuCadastrarUsuario = "Cadastrar Usuário",
-      menuEditarUsuario = "Editar Usuário",
-      menuPerfis = "Perfis",
-      menuCadastrarPerfil = "Cadastrar Perfil",
-      menuEditarPerfil = "Editar Perfil",
-      menuPermissoes = "Permissões",
-      menuCadastrarPermissao = "Cadastrar Permissão",
-      menuEditarPermissao = "Editar Permissão",
-      menuTarefasAgendadas = "Tarefas Agendadas",
-      menuCadastrarTarefa = "Cadastrar Tarefa",
-      menuEditarTarefa = "Editar Tarefa",
-      menuControleAcessos = "Controle de Acessos";
 
 const routes = [
   {
@@ -51,8 +20,16 @@ const routes = [
     children: [
       {
         path: '/',
-        name: menuInicio,
+        name: ROUTER_CONSTANTS.menuInicio,
         component: () => import('../views/Home.vue'),
+        meta: {
+          requiresAuth: false,
+        },
+      },
+      {
+        path: '/dashboard',
+        name: ROUTER_CONSTANTS.menuDashboard,
+        component: () => import('../views/Dashboard.vue'),
         meta: {
           requiresAuth: false,
         },
@@ -65,7 +42,7 @@ const routes = [
           requiresAuth: false,
           title: 'Conheça a Escola',
           breadcrumb: [
-            {text: menuInicio, disabled: false, href: '/'},
+            {text: ROUTER_CONSTANTS.menuCursos, disabled: false, href: '/'},
             {
               text: 'Conheça a Escola',
               disabled: true,
@@ -82,7 +59,7 @@ const routes = [
           requiresAuth: false,
           title: 'Adesão Institucional',
           breadcrumb: [
-            {text: menuInicio, disabled: false, href: '/'},
+            {text: ROUTER_CONSTANTS.menuCursos, disabled: false, href: '/'},
             {
               text: 'Adesão Institucional',
               disabled: true,
@@ -99,7 +76,7 @@ const routes = [
           requiresAuth: false,
           title: 'Perguntas Frequentes',
           breadcrumb: [
-            {text: menuInicio, disabled: false, href: '/'},
+            {text: ROUTER_CONSTANTS.menuCursos, disabled: false, href: '/'},
             {
               text: 'Perguntas Frequentes',
               disabled: true,
@@ -118,10 +95,18 @@ const routes = [
             component: () => import('../views/cursos/Curso.vue'),
             meta: {
               requiresAuth: true,
-              title: menuCursos,
+              title: ROUTER_CONSTANTS.menuCursos,
               breadcrumb: [
-                {text: menuDashboard, disabled: false, href: '/'},
-                {text: menuCursos, disabled: true, href: '/cursos'},
+                {
+                  text: ROUTER_CONSTANTS.menuDashboard,
+                  disabled: false,
+                  href: '/',
+                },
+                {
+                  text: ROUTER_CONSTANTS.menuCursos,
+                  disabled: true,
+                  href: '/cursos',
+                },
               ],
             },
           },
@@ -129,12 +114,24 @@ const routes = [
             path: '/curso/create',
             component: () => import('../views/cursos/CursoCreate.vue'),
             meta: {
-              title: menuCadastrarCurso,
+              title: ROUTER_CONSTANTS.menuCadastrarCurso,
               requiresAuth: true,
               breadcrumb: [
-                {text: menuDashboard, disabled: false, href: '/'},
-                {text: menuCursos, disabled: false, href: '/cursos'},
-                {text: menuCadastrarCurso, disabled: true, href: '/cursos'},
+                {
+                  text: ROUTER_CONSTANTS.menuDashboard,
+                  disabled: false,
+                  href: '/',
+                },
+                {
+                  text: ROUTER_CONSTANTS.menuCursos,
+                  disabled: false,
+                  href: '/cursos',
+                },
+                {
+                  text: ROUTER_CONSTANTS.menuCadastrarCurso,
+                  disabled: true,
+                  href: '/cursos',
+                },
               ],
             },
           },
@@ -142,12 +139,20 @@ const routes = [
             path: '/curso/:id/edit',
             component: () => import('../views/cursos/CursoEdit.vue'),
             meta: {
-              title: menuEditarCurso,
+              title: ROUTER_CONSTANTS.menuEditarCurso,
               requiresAuth: true,
               breadcrumb: [
-                {text: menuDashboard, disabled: false, href: '/'},
-                {text: menuCursos, disabled: false, href: '/cursos'},
-                {text: menuEditarCurso, disabled: true},
+                {
+                  text: ROUTER_CONSTANTS.menuDashboard,
+                  disabled: false,
+                  href: '/',
+                },
+                {
+                  text: ROUTER_CONSTANTS.menuCursos,
+                  disabled: false,
+                  href: '/cursos',
+                },
+                {text: ROUTER_CONSTANTS.menuEditarCurso, disabled: true},
               ],
             },
           },
@@ -163,10 +168,14 @@ const routes = [
             component: () => import('../views/ava/Ava.vue'),
             meta: {
               requiresAuth: true,
-              title: menuAVA,
+              title: ROUTER_CONSTANTS.menuAVA,
               breadcrumb: [
-                {text: menuDashboard, disabled: false, href: '/'},
-                {text: menuAVA, disabled: true, href: '/ava'},
+                {
+                  text: ROUTER_CONSTANTS.menuDashboard,
+                  disabled: false,
+                  href: '/',
+                },
+                {text: ROUTER_CONSTANTS.menuAVA, disabled: true, href: '/ava'},
               ],
             },
           },
@@ -174,12 +183,20 @@ const routes = [
             path: '/ava/create',
             component: () => import('../views/ava/AvaCreate.vue'),
             meta: {
-              title: menuCadastrarAVA,
+              title: ROUTER_CONSTANTS.menuCadastrarAVA,
               requiresAuth: true,
               breadcrumb: [
-                {text: menuDashboard, disabled: false, href: '/'},
-                {text: menuAVA, disabled: false, href: '/ava'},
-                {text: menuCadastrarAVA, disabled: true, href: '/ava'},
+                {
+                  text: ROUTER_CONSTANTS.menuDashboard,
+                  disabled: false,
+                  href: '/',
+                },
+                {text: ROUTER_CONSTANTS.menuAVA, disabled: false, href: '/ava'},
+                {
+                  text: ROUTER_CONSTANTS.menuCadastrarAVA,
+                  disabled: true,
+                  href: '/ava',
+                },
               ],
             },
           },
@@ -187,12 +204,20 @@ const routes = [
             path: '/ava/:id/edit',
             component: () => import('../views/ava/AvaEdit.vue'),
             meta: {
-              title: menuEditarAVA,
+              title: ROUTER_CONSTANTS.menuEditarAVA,
               requiresAuth: true,
               breadcrumb: [
-                {text: menuDashboard, disabled: false, href: '/'},
-                {text: menuAVA, disabled: false, href: '/ava'},
-                {text: menuEditarAVA, disabled: true, href: '/ava'},
+                {
+                  text: ROUTER_CONSTANTS.menuDashboard,
+                  disabled: false,
+                  href: '/',
+                },
+                {text: ROUTER_CONSTANTS.menuAVA, disabled: false, href: '/ava'},
+                {
+                  text: ROUTER_CONSTANTS.menuEditarAVA,
+                  disabled: true,
+                  href: '/ava',
+                },
               ],
             },
           },
@@ -208,10 +233,18 @@ const routes = [
             component: () => import('../views/ofertas/Ofertas.vue'),
             meta: {
               requiresAuth: true,
-              title: menuOfertas,
+              title: ROUTER_CONSTANTS.menuOfertas,
               breadcrumb: [
-                {text: menuDashboard, disabled: false, href: '/'},
-                {text: menuOfertas, disabled: true, href: '/ofertas'},
+                {
+                  text: ROUTER_CONSTANTS.menuDashboard,
+                  disabled: false,
+                  href: '/',
+                },
+                {
+                  text: ROUTER_CONSTANTS.menuOfertas,
+                  disabled: true,
+                  href: '/ofertas',
+                },
               ],
             },
           },
@@ -219,12 +252,24 @@ const routes = [
             path: '/ofertas/create',
             component: () => import('../views/ofertas/OfertasCreate.vue'),
             meta: {
-              title: menuCadastrarOferta,
+              title: ROUTER_CONSTANTS.menuCadastrarOferta,
               requiresAuth: true,
               breadcrumb: [
-                {text: menuDashboard, disabled: false, href: '/'},
-                {text: menuOfertas, disabled: false, href: '/ofertas'},
-                {text: menuCadastrarOferta, disabled: true, href: '/ofertas'},
+                {
+                  text: ROUTER_CONSTANTS.menuDashboard,
+                  disabled: false,
+                  href: '/',
+                },
+                {
+                  text: ROUTER_CONSTANTS.menuOfertas,
+                  disabled: false,
+                  href: '/ofertas',
+                },
+                {
+                  text: ROUTER_CONSTANTS.menuCadastrarOferta,
+                  disabled: true,
+                  href: '/ofertas',
+                },
               ],
             },
           },
@@ -232,12 +277,24 @@ const routes = [
             path: '/ofertas/:id/edit',
             component: () => import('../views/ofertas/OfertasEdit.vue'),
             meta: {
-              title: menuEditarOferta,
+              title: ROUTER_CONSTANTS.menuEditarOferta,
               requiresAuth: true,
               breadcrumb: [
-                {text: menuDashboard, disabled: false, href: '/'},
-                {text: menuOfertas, disabled: false, href: '/ofertas'},
-                {text: menuEditarOferta, disabled: true, href: '/ofertas'},
+                {
+                  text: ROUTER_CONSTANTS.menuDashboard,
+                  disabled: false,
+                  href: '/',
+                },
+                {
+                  text: ROUTER_CONSTANTS.menuOfertas,
+                  disabled: false,
+                  href: '/ofertas',
+                },
+                {
+                  text: ROUTER_CONSTANTS.menuEditarOferta,
+                  disabled: true,
+                  href: '/ofertas',
+                },
               ],
             },
           },
@@ -246,12 +303,23 @@ const routes = [
             component: () =>
               import('../views/ofertas/Exclusividade/Exclusividade.vue'),
             meta: {
-              title: menuTornarOfertaExclusiva,
+              title: ROUTER_CONSTANTS.menuTornarOfertaExclusiva,
               requiresAuth: true,
               breadcrumb: [
-                {text: menuDashboard, disabled: false, href: '/'},
-                {text: menuOfertas, disabled: false, href: '/ofertas'},
-                {text: menuTornarOfertaExclusiva, disabled: true},
+                {
+                  text: ROUTER_CONSTANTS.menuDashboard,
+                  disabled: false,
+                  href: '/',
+                },
+                {
+                  text: ROUTER_CONSTANTS.menuOfertas,
+                  disabled: false,
+                  href: '/ofertas',
+                },
+                {
+                  text: ROUTER_CONSTANTS.menuTornarOfertaExclusiva,
+                  disabled: true,
+                },
               ],
             },
           },
@@ -260,12 +328,23 @@ const routes = [
             component: () =>
               import('../views/ofertas/Exclusividade/ExclusividadeEdit.vue'),
             meta: {
-              title: menuEditarExclusividadeOferta,
+              title: ROUTER_CONSTANTS.menuEditarExclusividadeOferta,
               requiresAuth: true,
               breadcrumb: [
-                {text: menuDashboard, disabled: false, href: '/'},
-                {text: menuOfertas, disabled: false, href: '/ofertas'},
-                {text: menuEditarExclusividadeOferta, disabled: true},
+                {
+                  text: ROUTER_CONSTANTS.menuDashboard,
+                  disabled: false,
+                  href: '/',
+                },
+                {
+                  text: ROUTER_CONSTANTS.menuOfertas,
+                  disabled: false,
+                  href: '/ofertas',
+                },
+                {
+                  text: ROUTER_CONSTANTS.menuEditarExclusividadeOferta,
+                  disabled: true,
+                },
               ],
             },
           },
@@ -276,12 +355,23 @@ const routes = [
                 '../views/ofertas/Exclusividade/GerenciarExclusividade.vue'
               ),
             meta: {
-              title: menuGerenciarExclusividadeOferta,
+              title: ROUTER_CONSTANTS.menuGerenciarExclusividadeOferta,
               requiresAuth: true,
               breadcrumb: [
-                {text: menuDashboard, disabled: false, href: '/'},
-                {text: menuOfertas, disabled: false, href: '/ofertas'},
-                {text: menuGerenciarExclusividadeOferta, disabled: true},
+                {
+                  text: ROUTER_CONSTANTS.menuDashboard,
+                  disabled: false,
+                  href: '/',
+                },
+                {
+                  text: ROUTER_CONSTANTS.menuOfertas,
+                  disabled: false,
+                  href: '/ofertas',
+                },
+                {
+                  text: ROUTER_CONSTANTS.menuGerenciarExclusividadeOferta,
+                  disabled: true,
+                },
               ],
             },
           },
@@ -293,13 +383,24 @@ const routes = [
                 '../views/ofertas/Exclusividade/GerenciarExclusividadeCreate.vue'
               ),
             meta: {
-              title: menuAdicionarValores,
+              title: ROUTER_CONSTANTS.menuAdicionarValores,
               requiresAuth: true,
               breadcrumb: [
-                {text: menuDashboard, disabled: false, href: '/'},
-                {text: menuOfertas, disabled: false, href: '/ofertas'},
-                {text: menuGerenciarExclusividadeOferta, disabled: true},
-                {text: menuAdicionarValores, disabled: true},
+                {
+                  text: ROUTER_CONSTANTS.menuDashboard,
+                  disabled: false,
+                  href: '/',
+                },
+                {
+                  text: ROUTER_CONSTANTS.menuOfertas,
+                  disabled: false,
+                  href: '/ofertas',
+                },
+                {
+                  text: ROUTER_CONSTANTS.menuGerenciarExclusividadeOferta,
+                  disabled: true,
+                },
+                {text: ROUTER_CONSTANTS.menuAdicionarValores, disabled: true},
               ],
             },
           },
@@ -315,10 +416,18 @@ const routes = [
             component: () => import('../views/programas/Programas.vue'),
             meta: {
               requiresAuth: true,
-              title: menuProgramas,
+              title: ROUTER_CONSTANTS.menuProgramas,
               breadcrumb: [
-                {text: menuDashboard, disabled: false, href: '/'},
-                {text: menuProgramas, disabled: true, href: '/programas'},
+                {
+                  text: ROUTER_CONSTANTS.menuDashboard,
+                  disabled: false,
+                  href: '/',
+                },
+                {
+                  text: ROUTER_CONSTANTS.menuProgramas,
+                  disabled: true,
+                  href: '/programas',
+                },
               ],
             },
           },
@@ -326,13 +435,21 @@ const routes = [
             path: '/programas/create',
             component: () => import('../views/programas/ProgramasCreate.vue'),
             meta: {
-              title: menuCadastrarPrograma,
+              title: ROUTER_CONSTANTS.menuCadastrarPrograma,
               requiresAuth: true,
               breadcrumb: [
-                {text: menuDashboard, disabled: false, href: '/'},
-                {text: menuProgramas, disabled: false, href: '/programas'},
                 {
-                  text: menuCadastrarPrograma,
+                  text: ROUTER_CONSTANTS.menuDashboard,
+                  disabled: false,
+                  href: '/',
+                },
+                {
+                  text: ROUTER_CONSTANTS.menuProgramas,
+                  disabled: false,
+                  href: '/programas',
+                },
+                {
+                  text: ROUTER_CONSTANTS.menuCadastrarPrograma,
                   disabled: true,
                   href: '/programas',
                 },
@@ -343,12 +460,24 @@ const routes = [
             path: '/programas/:id/edit',
             component: () => import('../views/programas/ProgramasEdit.vue'),
             meta: {
-              title: menuEditarPrograma,
+              title: ROUTER_CONSTANTS.menuEditarPrograma,
               requiresAuth: true,
               breadcrumb: [
-                {text: menuDashboard, disabled: false, href: '/'},
-                {text: menuProgramas, disabled: false, href: '/programas'},
-                {text: menuEditarPrograma, disabled: true, href: '/programas'},
+                {
+                  text: ROUTER_CONSTANTS.menuDashboard,
+                  disabled: false,
+                  href: '/',
+                },
+                {
+                  text: ROUTER_CONSTANTS.menuProgramas,
+                  disabled: false,
+                  href: '/programas',
+                },
+                {
+                  text: ROUTER_CONSTANTS.menuEditarPrograma,
+                  disabled: true,
+                  href: '/programas',
+                },
               ],
             },
           },
@@ -365,11 +494,19 @@ const routes = [
               import('../views/controleAcesso/usuarios/Usuario.vue'),
             meta: {
               requiresAuth: true,
-              title: menuUsuarios,
+              title: ROUTER_CONSTANTS.menuUsuarios,
               breadcrumb: [
-                {text: menuDashboard, disabled: false, href: '/'},
-                {text: menuControleAcessos, disabled: true},
-                {text: menuUsuarios, disabled: true, href: '/usuarios'},
+                {
+                  text: ROUTER_CONSTANTS.menuDashboard,
+                  disabled: false,
+                  href: '/',
+                },
+                {text: ROUTER_CONSTANTS.menuControleAcessos, disabled: true},
+                {
+                  text: ROUTER_CONSTANTS.menuUsuarios,
+                  disabled: true,
+                  href: '/usuarios',
+                },
               ],
             },
           },
@@ -378,13 +515,25 @@ const routes = [
             component: () =>
               import('../views/controleAcesso/usuarios/UsuarioCreate.vue'),
             meta: {
-              title: menuCadastrarUsuario,
+              title: ROUTER_CONSTANTS.menuCadastrarUsuario,
               requiresAuth: true,
               breadcrumb: [
-                {text: menuDashboard, disabled: false, href: '/'},
-                {text: menuControleAcessos, disabled: true},
-                {text: menuUsuarios, disabled: false, href: '/usuarios'},
-                {text: menuCadastrarUsuario, disabled: true, href: '/usuarios'},
+                {
+                  text: ROUTER_CONSTANTS.menuDashboard,
+                  disabled: false,
+                  href: '/',
+                },
+                {text: ROUTER_CONSTANTS.menuControleAcessos, disabled: true},
+                {
+                  text: ROUTER_CONSTANTS.menuUsuarios,
+                  disabled: false,
+                  href: '/usuarios',
+                },
+                {
+                  text: ROUTER_CONSTANTS.menuCadastrarUsuario,
+                  disabled: true,
+                  href: '/usuarios',
+                },
               ],
             },
           },
@@ -393,13 +542,25 @@ const routes = [
             component: () =>
               import('../views/controleAcesso/usuarios/UsuarioEdit.vue'),
             meta: {
-              title: menuEditarUsuario,
+              title: ROUTER_CONSTANTS.menuEditarUsuario,
               requiresAuth: true,
               breadcrumb: [
-                {text: menuDashboard, disabled: false, href: '/'},
-                {text: menuControleAcessos, disabled: true},
-                {text: menuUsuarios, disabled: false, href: '/usuarios'},
-                {text: menuEditarUsuario, disabled: true, href: '/usuarios'},
+                {
+                  text: ROUTER_CONSTANTS.menuDashboard,
+                  disabled: false,
+                  href: '/',
+                },
+                {text: ROUTER_CONSTANTS.menuControleAcessos, disabled: true},
+                {
+                  text: ROUTER_CONSTANTS.menuUsuarios,
+                  disabled: false,
+                  href: '/usuarios',
+                },
+                {
+                  text: ROUTER_CONSTANTS.menuEditarUsuario,
+                  disabled: true,
+                  href: '/usuarios',
+                },
               ],
             },
           },
@@ -416,11 +577,19 @@ const routes = [
               import('../views/controleAcesso/perfis/Perfil.vue'),
             meta: {
               requiresAuth: true,
-              title: menuPerfis,
+              title: ROUTER_CONSTANTS.menuPerfis,
               breadcrumb: [
-                {text: menuDashboard, disabled: false, href: '/'},
-                {text: menuControleAcessos, disabled: true},
-                {text: menuPerfis, disabled: true, href: '/perfis'},
+                {
+                  text: ROUTER_CONSTANTS.menuDashboard,
+                  disabled: false,
+                  href: '/',
+                },
+                {text: ROUTER_CONSTANTS.menuControleAcessos, disabled: true},
+                {
+                  text: ROUTER_CONSTANTS.menuPerfis,
+                  disabled: true,
+                  href: '/perfis',
+                },
               ],
             },
           },
@@ -429,13 +598,25 @@ const routes = [
             component: () =>
               import('../views/controleAcesso/perfis/PerfilCreate.vue'),
             meta: {
-              title: menuCadastrarPerfil,
+              title: ROUTER_CONSTANTS.menuCadastrarPerfil,
               requiresAuth: true,
               breadcrumb: [
-                {text: menuDashboard, disabled: false, href: '/'},
-                {text: menuControleAcessos, disabled: true},
-                {text: menuPerfis, disabled: false, href: '/perfis'},
-                {text: menuCadastrarPerfil, disabled: true, href: '/perfis'},
+                {
+                  text: ROUTER_CONSTANTS.menuDashboard,
+                  disabled: false,
+                  href: '/',
+                },
+                {text: ROUTER_CONSTANTS.menuControleAcessos, disabled: true},
+                {
+                  text: ROUTER_CONSTANTS.menuPerfis,
+                  disabled: false,
+                  href: '/perfis',
+                },
+                {
+                  text: ROUTER_CONSTANTS.menuCadastrarPerfil,
+                  disabled: true,
+                  href: '/perfis',
+                },
               ],
             },
           },
@@ -444,13 +625,25 @@ const routes = [
             component: () =>
               import('../views/controleAcesso/perfis/PerfilEdit.vue'),
             meta: {
-              title: menuEditarPerfil,
+              title: ROUTER_CONSTANTS.menuEditarPerfil,
               requiresAuth: true,
               breadcrumb: [
-                {text: menuDashboard, disabled: false, href: '/'},
-                {text: menuControleAcessos, disabled: true},
-                {text: menuPerfis, disabled: false, href: '/perfis'},
-                {text: menuEditarPerfil, disabled: true, href: '/perfis'},
+                {
+                  text: ROUTER_CONSTANTS.menuDashboard,
+                  disabled: false,
+                  href: '/',
+                },
+                {text: ROUTER_CONSTANTS.menuControleAcessos, disabled: true},
+                {
+                  text: ROUTER_CONSTANTS.menuPerfis,
+                  disabled: false,
+                  href: '/perfis',
+                },
+                {
+                  text: ROUTER_CONSTANTS.menuEditarPerfil,
+                  disabled: true,
+                  href: '/perfis',
+                },
               ],
             },
           },
@@ -467,11 +660,19 @@ const routes = [
               import('../views/controleAcesso/permissoes/Permissao.vue'),
             meta: {
               requiresAuth: true,
-              title: menuPermissoes,
+              title: ROUTER_CONSTANTS.menuPermissoes,
               breadcrumb: [
-                {text: menuDashboard, disabled: false, href: '/'},
-                {text: menuControleAcessos, disabled: true},
-                {text: menuPermissoes, disabled: true, href: '/permissoes'},
+                {
+                  text: ROUTER_CONSTANTS.menuDashboard,
+                  disabled: false,
+                  href: '/',
+                },
+                {text: ROUTER_CONSTANTS.menuControleAcessos, disabled: true},
+                {
+                  text: ROUTER_CONSTANTS.menuPermissoes,
+                  disabled: true,
+                  href: '/permissoes',
+                },
               ],
             },
           },
@@ -480,13 +681,21 @@ const routes = [
             component: () =>
               import('../views/controleAcesso/permissoes/PermissaoCreate.vue'),
             meta: {
-              title: menuCadastrarPermissao,
+              title: ROUTER_CONSTANTS.menuCadastrarPermissao,
               requiresAuth: true,
               breadcrumb: [
-                {text: menuDashboard, disabled: false, href: '/'},
-                {text: menuControleAcessos, disabled: true},
-                {text: menuPermissoes, disabled: false, href: '/permissoes'},
-                {text: menuCadastrarPermissao, disabled: true},
+                {
+                  text: ROUTER_CONSTANTS.menuDashboard,
+                  disabled: false,
+                  href: '/',
+                },
+                {text: ROUTER_CONSTANTS.menuControleAcessos, disabled: true},
+                {
+                  text: ROUTER_CONSTANTS.menuPermissoes,
+                  disabled: false,
+                  href: '/permissoes',
+                },
+                {text: ROUTER_CONSTANTS.menuCadastrarPermissao, disabled: true},
               ],
             },
           },
@@ -495,13 +704,21 @@ const routes = [
             component: () =>
               import('../views/controleAcesso/permissoes/PermissaoEdit.vue'),
             meta: {
-              title: menuEditarPermissao,
+              title: ROUTER_CONSTANTS.menuEditarPermissao,
               requiresAuth: true,
               breadcrumb: [
-                {text: menuDashboard, disabled: false, href: '/'},
-                {text: menuControleAcessos, disabled: true},
-                {text: menuPermissoes, disabled: false, href: '/permissoes'},
-                {text: menuEditarPermissao, disabled: true},
+                {
+                  text: ROUTER_CONSTANTS.menuDashboard,
+                  disabled: false,
+                  href: '/',
+                },
+                {text: ROUTER_CONSTANTS.menuControleAcessos, disabled: true},
+                {
+                  text: ROUTER_CONSTANTS.menuPermissoes,
+                  disabled: false,
+                  href: '/permissoes',
+                },
+                {text: ROUTER_CONSTANTS.menuEditarPermissao, disabled: true},
               ],
             },
           },
@@ -518,11 +735,15 @@ const routes = [
               import('../views/tarefas_agendadas/TarefaAgendada.vue'),
             meta: {
               requiresAuth: true,
-              title: menuTarefasAgendadas,
+              title: ROUTER_CONSTANTS.menuTarefasAgendadas,
               breadcrumb: [
-                {text: menuDashboard, disabled: false, href: '/'},
                 {
-                  text: menuTarefasAgendadas,
+                  text: ROUTER_CONSTANTS.menuDashboard,
+                  disabled: false,
+                  href: '/',
+                },
+                {
+                  text: ROUTER_CONSTANTS.menuTarefasAgendadas,
                   disabled: true,
                   href: '/tarefa-agendada',
                 },
@@ -534,17 +755,21 @@ const routes = [
             component: () =>
               import('../views/tarefas_agendadas/TarefaAgendadaCreate.vue'),
             meta: {
-              title: menuCadastrarTarefa,
+              title: ROUTER_CONSTANTS.menuCadastrarTarefa,
               requiresAuth: true,
               breadcrumb: [
-                {text: menuDashboard, disabled: false, href: '/'},
                 {
-                  text: menuTarefasAgendadas,
+                  text: ROUTER_CONSTANTS.menuDashboard,
+                  disabled: false,
+                  href: '/',
+                },
+                {
+                  text: ROUTER_CONSTANTS.menuTarefasAgendadas,
                   disabled: false,
                   href: '/tarefas-agendadas',
                 },
                 {
-                  text: menuCadastrarTarefa,
+                  text: ROUTER_CONSTANTS.menuCadastrarTarefa,
                   disabled: true,
                   href: '/tarefas-agendadas',
                 },
@@ -556,17 +781,21 @@ const routes = [
             component: () =>
               import('../views/tarefas_agendadas/TarefaAgendadaEdit.vue'),
             meta: {
-              title: menuEditarTarefa,
+              title: ROUTER_CONSTANTS.menuEditarTarefa,
               requiresAuth: true,
               breadcrumb: [
-                {text: menuDashboard, disabled: false, href: '/'},
                 {
-                  text: menuTarefasAgendadas,
+                  text: ROUTER_CONSTANTS.menuDashboard,
+                  disabled: false,
+                  href: '/',
+                },
+                {
+                  text: ROUTER_CONSTANTS.menuTarefasAgendadas,
                   disabled: false,
                   href: '/tarefas-agendadas',
                 },
                 {
-                  text: menuEditarTarefa,
+                  text: ROUTER_CONSTANTS.menuEditarTarefa,
                   disabled: true,
                   href: '/tarefas-agendadas',
                 },
@@ -593,7 +822,10 @@ router.beforeEach(async (to, from, next) => {
   }
 
   await new Promise(resolve => {
-    if (store.getters.isAuthenticated === false && !localStorage.getItem('token')) {
+    if (
+      store.getters.isAuthenticated === false &&
+      !localStorage.getItem('token')
+    ) {
       next('/');
       return;
     }
@@ -604,13 +836,18 @@ router.beforeEach(async (to, from, next) => {
     resolve();
   });
 
-  await new Promise( () => {
-    store.dispatch('setAuthenticated', {access_token: localStorage.getItem('token')}).then(() => {
-      next();
-    }).catch(() => {
-      next('/');
-    })
-  })
+  await new Promise(() => {
+    store
+      .dispatch('setAuthenticated', {
+        access_token: localStorage.getItem('token'),
+      })
+      .then(() => {
+        next();
+      })
+      .catch(() => {
+        next('/');
+      });
+  });
 });
 
 export default router;

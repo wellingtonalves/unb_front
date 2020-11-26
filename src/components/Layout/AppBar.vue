@@ -12,7 +12,7 @@
     >
 
       <v-list dense>
-        <v-list-item link :to="'/'">
+        <v-list-item link :to="'/dashboard'">
           <v-list-item-action>
             <v-icon>mdi-home</v-icon>
           </v-list-item-action>
