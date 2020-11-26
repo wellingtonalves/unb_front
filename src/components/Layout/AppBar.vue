@@ -253,7 +253,6 @@ export default {
       model: null,
       clipped: true,
     },
-    user: JSON.parse(localStorage.getItem('user')),
     dropdownMenu: [
       {text: 'Meus dados', icon: 'mdi-home'},
       {text: 'Alterar e-mail', icon: 'mdi-email'},
@@ -264,7 +263,6 @@ export default {
     permission(rule) {
       return checkPermission(rule);
     },
-    //TODO - fazer tratamento quando der erro no login api
     switchLocale() {
       this.$i18n.locale === 'pt' ? this.$i18n.locale = 'en' : this.$i18n.locale = 'pt';
     },
@@ -279,7 +277,7 @@ export default {
     },
   },
   computed: {
-    ...mapGetters(['isAuthenticated'])
+    ...mapGetters(['isAuthenticated', 'user'])
   },
 }
 </script>
