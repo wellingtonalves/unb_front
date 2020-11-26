@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
-// import store from '@/store';
+import store from '@/store';
 
 Vue.use(VueRouter);
 
@@ -515,23 +515,30 @@ const router = new VueRouter({
 
 router.beforeEach(async (to, from, next) => {
   const requiresAuth = to.meta.requiresAuth;
-
   if (!requiresAuth) {
     next();
     return;
   }
 
   await new Promise(resolve => {
-    // if (store.getters.isAuthenticated === 'false') {
-    //TODO - trocar pra linha de cima
-    if (localStorage.getItem('isAuthenticated') === 'false') {
+    if (store.getters.isAuthenticated === false && !localStorage.getItem('token')) {
       next('/login');
       return;
     }
-
+    if (store.getters.isAuthenticated === true) {
+      next();
+      return;
+    }
     resolve();
-    next();
   });
+
+  await new Promise( () => {
+    store.dispatch('setAuthenticated', {access_token: localStorage.getItem('token')}).then(() => {
+      next();
+    }).catch(() => {
+      next('/login');
+    })
+  })
 });
 
 export default router;

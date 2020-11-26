@@ -8,7 +8,7 @@ const state = {
     color: '',
     text: '',
     timeout: 2000
-  }
+  },
 };
 
 export default state;
