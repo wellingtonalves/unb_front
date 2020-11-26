@@ -273,7 +273,8 @@ export default {
     },
     $route(val) {
       this.checkRoute(val.name);
-    }
+      this.resetAnotherFields();
+    },
   },
 
   async created() {
@@ -285,9 +286,14 @@ export default {
     // }
   },
   methods: {
-    checkRoute(val) {
-      this.current = val || this.$route.name;
+    resetAnotherFields() {
+      this.confirm_email = '';
+      this.confirm_password = '';
+      delete this.dataResponse.tx_senha_usuario;
       this.$refs.form.resetValidation();
+    },
+    checkRoute(val) {
+      return (this.current = val || this.$route.name);
     },
     async loadItems() {
       await this.getPais();
@@ -300,6 +306,7 @@ export default {
       this.dataResponse = this.userData;
       this.loading = false;
       this.checkRoute();
+      this.$refs.form.resetValidation();
     },
     async getTematicaCurso() {
       const response = await get('/tematica-curso?pagination=false');
@@ -345,7 +352,7 @@ export default {
     },
     formValid() {
       return this.$refs.form.validate();
-    }
+    },
   },
 };
 </script>
