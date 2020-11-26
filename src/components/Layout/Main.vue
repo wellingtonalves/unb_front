@@ -3,8 +3,8 @@
     <AppBar />
     <v-main>
       
-      <v-container fluid>
-        <v-breadcrumbs :items="$route.meta.breadcrumb" divider="→" />
+      <v-container :fluid="isAuthenticated === true">
+        <v-breadcrumbs v-if="isAuthenticated === true" :items="$route.meta.breadcrumb" divider="→" />
         <h2>{{this.$route.meta.title}}</h2>
         <router-view />
         <AppFooter />
@@ -18,6 +18,7 @@
 <script>
   import AppBar from './AppBar';
   import AppFooter from './AppFooter';
+  import {mapGetters} from "vuex";
 
   export default {
     name: 'Main',
@@ -25,6 +26,9 @@
     data: () => ({
       //
     }),
+    computed: {
+      ...mapGetters(['isAuthenticated'])
+    },
   };
 </script>
 
