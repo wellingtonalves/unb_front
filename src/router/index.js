@@ -22,7 +22,7 @@ const routes = [
         name: 'Home',
         component: () => import('../views/Home.vue'),
         meta: {
-          requiresAuth: true,
+          requiresAuth: false,
         },
       },
       {
@@ -522,7 +522,7 @@ router.beforeEach(async (to, from, next) => {
 
   await new Promise(resolve => {
     if (store.getters.isAuthenticated === false && !localStorage.getItem('token')) {
-      next('/login');
+      next('/');
       return;
     }
     if (store.getters.isAuthenticated === true) {
@@ -536,7 +536,7 @@ router.beforeEach(async (to, from, next) => {
     store.dispatch('setAuthenticated', {access_token: localStorage.getItem('token')}).then(() => {
       next();
     }).catch(() => {
-      next('/login');
+      next('/');
     })
   })
 });
