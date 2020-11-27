@@ -31,7 +31,7 @@ const routes = [
         name: ROUTER_CONSTANTS.menuDashboard,
         component: () => import('../views/Dashboard.vue'),
         meta: {
-          requiresAuth: false,
+          requiresAuth: true,
         },
       },
       {
@@ -816,7 +816,7 @@ const router = new VueRouter({
 
 router.beforeEach(async (to, from, next) => {
   const requiresAuth = to.meta.requiresAuth;
-  if (!requiresAuth) {
+  if (!requiresAuth && !localStorage.getItem('token')) {
     next();
     return;
   }

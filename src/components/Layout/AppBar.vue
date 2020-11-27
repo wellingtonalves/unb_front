@@ -110,7 +110,7 @@
       <v-container fluid>
         <v-row>
           <v-col cols="9" class="align-self-start">
-            <h1 class="mr-8 float-left"><a href="/">EV.G: Escola Virtual.Gov</a></h1>
+            <h1 class="mr-8 float-left"><a @click="home()">EV.G: Escola Virtual.Gov</a></h1>
             <v-list nav dense flat id="main-nav" class="d-none d-sm-flex float-left">
 
               <v-list-item href="https://www.escolavirtual.gov.br/catalogo">
@@ -284,6 +284,12 @@ export default {
     },
     login() {
       this.$router.push('/login');
+    },
+    home() {
+      if(this.$router.history.current.path === '/'){
+        return false; 
+      }
+      this.$router.push('/');
     }
   },
   computed: {
