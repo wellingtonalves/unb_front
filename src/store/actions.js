@@ -12,10 +12,8 @@ const actions = {
   async setSnackbar({commit}, data = {}) {
     commit('SET_SNACKBAR', data);
   },
-
-  //TODO - tratamento para erro, status diferente de 200
   async getUserData({commit}) {
-    const response = await user();
+    const response = await user()
     commit('UPDATE_USER_DATA', response.data.data);
   },
 };

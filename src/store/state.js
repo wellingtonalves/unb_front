@@ -1,5 +1,5 @@
 const state = {
-  isAuthenticated: 'false',
+  isAuthenticated: false,
   token: '',
   user: {},
   userRole: {},
@@ -8,7 +8,7 @@ const state = {
     color: '',
     text: '',
     timeout: 2000
-  }
+  },
 };
 
 export default state;

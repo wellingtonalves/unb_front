@@ -1,6 +1,8 @@
 <template>
+
   <v-layout>
     <v-navigation-drawer
+      v-if="isAuthenticated === true"
       v-model="drawerSettings.model"
       :clipped="true"
       :mini-variant="false"
@@ -8,8 +10,9 @@
       overflow
       width="300px"
     >
+
       <v-list dense>
-        <v-list-item link :to="'/'">
+        <v-list-item link :to="'/dashboard'">
           <v-list-item-action>
             <v-icon>mdi-home</v-icon>
           </v-list-item-action>
@@ -101,19 +104,17 @@
         </v-list-group>
       </v-list>
     </v-navigation-drawer>
-
     <v-app-bar :clipped-left="true" app>
-      <v-app-bar-nav-icon @click.stop="drawerSettings.model = !drawerSettings.model"/>
-      
-      <v-container fluid>
+      <v-app-bar-nav-icon v-if="isAuthenticated === true" @click.stop="drawerSettings.model = !drawerSettings.model"/>
 
+      <v-container fluid>
         <v-row>
           <v-col cols="9" class="align-self-start">
             <h1 class="mr-8 float-left">
-              <a href="/">EV.G: Escola Virtual.Gov</a>
+              <a @click="home()">EV.G: Escola Virtual.Gov</a>
             </h1>
-
             <v-list nav dense flat id="main-nav" class="d-none d-sm-flex float-left">
+
               <v-list-item href="https://www.escolavirtual.gov.br/catalogo">
                 <v-list-item-content>
                   <v-list-item-title>{{ $t('message.appBar.catalogoCursos.title') }}</v-list-item-title>
@@ -128,14 +129,14 @@
                 </v-list-item-content>
               </v-list-item>
 
-              <v-list-item href="/conheca-a-escola">
+              <v-list-item to="/conheca-a-escola">
                 <v-list-item-content>
                   <v-list-item-title>{{ $t('message.appBar.conhecaEscola.title') }}</v-list-item-title>
                   <v-list-item-subtitle>{{ $t('message.appBar.conhecaEscola.subtitle') }}</v-list-item-subtitle>
                 </v-list-item-content>
               </v-list-item>
 
-              <v-list-item href="/adesao-institucional">
+              <v-list-item to="/adesao-institucional">
                 <v-list-item-content>
                   <v-list-item-title>{{ $t('message.appBar.adesaoInstitucional.title') }}</v-list-item-title>
                   <v-list-item-subtitle>{{ $t('message.appBar.adesaoInstitucional.subtitle') }}</v-list-item-subtitle>
@@ -149,16 +150,18 @@
                 </v-list-item-content>
               </v-list-item>
 
-              <v-list-item href="/perguntas-frequentes">
+              <v-list-item to="/perguntas-frequentes">
                 <v-list-item-content>
                   <v-list-item-title>{{ $t('message.appBar.perguntasFrequentes.title') }}</v-list-item-title>
                   <v-list-item-subtitle>{{ $t('message.appBar.perguntasFrequentes.subtitle') }}</v-list-item-subtitle>
                 </v-list-item-content>
               </v-list-item>
+
             </v-list>
           </v-col>
 
           <v-col cols="3" class="d-flex justify-end align-center">
+
             <v-btn icon title="Alterar idioma" class="top-button" @click="switchLocale()">
               <v-img
                 v-if="this.$i18n.locale === 'pt'"
@@ -191,12 +194,20 @@
               <v-icon v-else>mdi-invert-colors</v-icon>
             </v-btn>
 
-            <v-btn icon title="Notificações" class="top-button">
+            <v-btn icon title="Notificações" class="top-button" v-if="isAuthenticated === true">
               <v-icon>mdi-bell</v-icon>
             </v-btn>
+            
+            <v-btn tile color="contrast" @click="login()" class="ma-2" v-if="isAuthenticated === false">
+              ENTRAR
+              <v-icon right>
+                mdi-menu-right
+              </v-icon>
+            </v-btn>
 
-            <v-menu offset-y>
+            <v-menu offset-y v-if="isAuthenticated === true">
               <template v-slot:activator="{ on }">
+
                 <v-btn text v-on="on">
                   <v-icon size="25" color="secondary">mdi-account</v-icon>
                   <div class="d-none d-md-flex align-center">
@@ -204,6 +215,7 @@
                     <v-icon color="secondary">mdi-chevron-down</v-icon>
                   </div>
                 </v-btn>
+
               </template>
 
               <v-list nav dense>
@@ -232,16 +244,22 @@
                 </v-list-item>
               </v-list>
             </v-menu>
+
           </v-col>
+
         </v-row>
+
       </v-container>
     </v-app-bar>
+
   </v-layout>
+
 </template>
 
 <script>
-import {logout} from '@/services/auth.service';
-import {checkPermission} from '@/helpers/checkPermission';
+import {checkPermission} from "@/helpers/checkPermission";
+import {mapGetters} from "vuex";
+import {logout} from "@/services/auth.service";
 
 export default {
   name: 'AppBar',
@@ -275,23 +293,25 @@ export default {
 
       if (response.status === 200) {
         await this.$store.dispatch('logout').then(() => {
-          this.$router.push('/login');
+          this.$router.push('/');
         });
       }
     },
-    switchLocale() {
-      this.$i18n.locale === 'pt'
-        ? (this.$i18n.locale = 'en')
-        : (this.$i18n.locale = 'pt');
+    login() {
+      this.$router.push('/login');
     },
-    toRedirect(path) {
-      this.$router.push(`/${path}`);
-    },
+    home() {
+      if(this.$router.history.current.path === '/'){
+        return false; 
+      }
+      this.$router.push('/');
+    }
   },
-};
+  computed: {
+    ...mapGetters(['isAuthenticated', 'user'])
+  },
+}
 </script>
-
-
 
 <style>
 nav.v-navigation-drawer .v-list-item__action,
@@ -301,8 +321,8 @@ nav.v-navigation-drawer .v-list-item__icon {
 }
 nav.v-navigation-drawer .v-list-item__action .v-icon.v-icon,
 nav.v-navigation-drawer .v-list-group .v-list-item__action .v-icon.v-icon {
-  font-size: 18px;
-}
+  font-size: 18px;}
+
 nav.v-navigation-drawer .v-list-group__items .v-list-item {
   padding: 0 32px;
 }
@@ -336,9 +356,10 @@ nav.v-navigation-drawer {
   background-color: var(--v-secondary-base);
   top: 94px !important;
 }
+
 nav.v-navigation-drawer .v-list > .v-list-item:not(:last-child) {
-  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-}
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);}
+
 nav.v-navigation-drawer .v-list-item__title {
   color: var(--v-white-base);
   font-size: 0.85rem;
@@ -355,8 +376,8 @@ nav.v-navigation-drawer .v-list-item__title {
 }
 #main-nav .v-list-item__content {
   display: inline-block;
-  position: relative;
-}
+  position: relative;}
+
 #main-nav .v-list-item__content::after,
 #main-nav .v-list-item__content::before {
   background-color: var(--v-primary-base);
@@ -444,54 +465,64 @@ nav.v-navigation-drawer .v-list-item__title {
     margin-left: 40px;
   }
   #main-nav .v-list-item__content::after,
-  #main-nav .v-list-item__content::before {
-    background-color: var(--v-primary-base);
-    content: "";
-    height: 2px;
-    min-height: 2px;
-    opacity: 0;
-    position: absolute;
-    left: 0;
-    width: 100%;
-    -webkit-transition: opacity .3s,-webkit-transform .6s;
-    -moz-transition: opacity .3s,-moz-transform .6s;
-    transition: opacity .3s,transform .6s;
-    -webkit-transform: translateY(10px);
-    -moz-transform: translateY(10px);
-    transform: translateY(10px);
+#main-nav .v-list-item__content::before {
+  background-color: var(--v-primary-base);
+  content: "";
+  height: 2px;
+  min-height: 2px;
+  opacity: 0;
+  position: absolute;
+  left: 0;
+  width: 100%;
+  -webkit-transition: opacity .3s, -webkit-transform .6s;
+  -moz-transition: opacity .3s, -moz-transform .6s;
+  transition: opacity .3s, transform .6s;
+  -webkit-transform: translateY(10px);
+  -moz-transform: translateY(10px);
+  transform: translateY(10px);
+}
+
+#main-nav .v-list-item__content::after {
+  bottom: 10px;
+}
+
+#main-nav .v-list-item__content::before {
+  top: -10px;
+}
+
+#main-nav .v-list-item__content:hover::after,
+#main-nav .v-list-item__content:hover::before {
+  opacity: .25;
+}
+
+#main-nav .v-list-item__title {
+  font-weight: 300;
+}
+
+#main-nav .v-list-item__subtitle {
+  color: var(--v-primary-base);
+  font-weight: 600;
+}
+
+.top-button {
+  height: 40px !important;
+  width: 40px !important;
+}
+
+@media (max-width: 600px) {
+  header.v-app-bar .container {
+    padding: 0;
   }
-  #main-nav .v-list-item__content::after {
-    bottom: 10px;
+
+  h1 {
+    margin-left: 40px;
   }
-  #main-nav .v-list-item__content::before {
-    top: -10px;
+
+  h1 a {
+    height: 44px;
+    width: 80px;
   }
-  #main-nav .v-list-item__content:hover::after,
-  #main-nav .v-list-item__content:hover::before {
-    opacity: .25;
-  }
-  #main-nav .v-list-item__title {
-    font-weight: 300;
-  }
-  #main-nav .v-list-item__subtitle {
-    color: var(--v-primary-base);
-    font-weight: 600;
-  }
-  .top-button {
-    height: 40px !important;
-    width: 40px !important;
-  }
-  @media (max-width: 600px) {
-    header.v-app-bar .container {
-      padding: 0;
-    }
-    h1 {
-      margin-left: 40px;
-    }
-    h1 a {
-      height: 44px;
-      width: 80px;
-    }
+
     nav.v-navigation-drawer {
       top: 76px !important;
     }
