@@ -16,7 +16,8 @@
 <script>
 import MeusDadosForm from './MeusDadosForm.vue';
 import {get, update} from '@/services/abstract.service';
-import {userData} from '../../helpers/getUserData';
+import {mapGetters} from "vuex";
+
 export default {
   components: {MeusDadosForm},
   data: () => ({
@@ -25,9 +26,7 @@ export default {
     errors: [],
   }),
   computed: {
-    userData() {
-      return userData();
-    },
+    ...mapGetters(['isAuthenticated', 'user'])
   },
   async mounted() {
     await this.getData();
@@ -37,7 +36,7 @@ export default {
       this.data = data;
     },
     async getData() {
-      await get(`usuario/${this.userData.id_usuario}`).then(response => {
+      await get(`usuario/${this.user.id_usuario}`).then(response => {
         this.data = response.data.data;
       });
     },
@@ -50,14 +49,14 @@ export default {
     },
     async save() {
       const response = await update(
-        `usuario/${this.userData.id_usuario}`,
+        `usuario/${this.user.id_usuario}`,
         this.data
       );
       this.errorHandler(response);
     },
     async updatePassword() {
       const response = await update(
-        `usuario/${this.userData.id_usuario}/resetar-senha`,
+        `usuario/${this.user.id_usuario}/resetar-senha`,
         {tx_senha_usuario: this.data.tx_senha_usuario}
       );
       this.errorHandler(response);
