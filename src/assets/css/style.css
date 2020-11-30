@@ -20,6 +20,7 @@ h2.featured {
   color: var(--v-secondary-base);
   font-size: 1.6rem;
   font-weight: 300;
+  width: 100%;
 }
 h2.featured strong {
   color: var(--v-primary-base);
@@ -139,11 +140,7 @@ div.container {
   opacity: 1;
   position: static;
 }
-.layout.course-cards {
-  margin-left: -8px;
-  margin-right: -8px;
-}
-.layout.course-cards .v-card {
+.layout.cards .v-card {
   background-color: var(--v-white-base);
   border-radius: 0;
   box-shadow: 0 0 10px 3px rgba(0,0,0,.075) !important;
@@ -151,6 +148,54 @@ div.container {
   flex-basis: 200px;
   flex-grow: 0;
   margin: 8px;
+}
+.layout.cards dl {
+  display: inline-block;
+  padding: 16px;
+}
+.layout.cards dt {
+  clear: left;
+  color: var(--v-darkgrey-base);
+  font-size: .8rem;
+  font-weight: 300;
+  line-height: 1em;
+}
+.layout.cards dd {
+  color: var(--v-secondary-base);
+  float: left;
+  font-size: .9rem;
+  line-height: 1.3em;
+  margin-right: 5px;
+}
+.layout.cards dd + dt {
+  padding-top: 8px;
+}
+.layout.cards .v-card__title {
+  font-size: 1.3rem;
+  font-weight: 400;
+  line-height: 1.2em;
+  margin-top: 0;
+  padding-bottom: 5px;
+  padding-top: 20px;
+  text-transform: uppercase;
+  word-break: break-word;
+}
+.layout.cards .v-card__title a {
+  color: var(--v-secondary-base);
+  text-decoration: none;
+}
+.layout.cards .v-card__title a:hover {
+  text-decoration: underline;
+}
+.layout.cards .v-card__actions .v-btn {
+  border-width: 2px;
+}
+.layout.cards .v-card__actions .v-btn.contrast {
+  color: var(--v-white-base);
+}
+.layout.course-cards {
+  margin-left: -8px;
+  margin-right: -8px;
 }
 .layout.course-cards .v-card > div:first-child {
   flex: 1 1 auto;
@@ -179,52 +224,14 @@ div.container {
   top: 35px;
   text-transform: none;
 }
-.layout.course-cards .v-card__title {
-  font-size: 1.3rem;
-  font-weight: 400;
-  line-height: 1.2em;
-  margin-top: 0;
-  padding-bottom: 5px;
-  padding-top: 20px;
-  text-transform: uppercase;
-  word-break: break-word;
+.layout.course-cards .v-image {
+  max-width: 268px;
 }
-.layout.course-cards .v-card__title a {
-  color: var(--v-secondary-base);
-  text-decoration: none;
-}
-.layout.course-cards .v-card__title a:hover {
-  text-decoration: underline;
-}
-.layout.course-cards dl {
-  display: inline-block;
-  padding: 16px;
-}
-.layout.course-cards dt {
-  clear: left;
-  color: var(--v-darkgrey-base);
-  font-size: .8rem;
-  font-weight: 300;
-  line-height: 1em;
-}
-.layout.course-cards dd {
-  color: var(--v-secondary-base);
-  float: left;
-  font-size: .9rem;
-  line-height: 1.3em;
-  margin-right: 5px;
-}
-.layout.course-cards dd + dt {
-  padding-top: 8px;
-}
-.layout.course-cards .action-bar {
-  padding: 8px;
-}
-.layout.course-cards .action-bar .v-btn {
-  border-width: 2px;
-}
-.layout.course-cards .action-bar .v-btn.contrast {
-  color: var(--v-white-base);
+.layout.course-cards .v-card--reveal {
+  opacity: 1 !important;
+  position: absolute;
+  bottom: 0;
+  width: calc(100% - 16px);
 }
 .layout.evg-cards {
   margin-left: -8px;
