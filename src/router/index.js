@@ -85,6 +85,76 @@ const routes = [
           ],
         },
       },
+
+      {
+        path: '/meus-dados',
+        component: () => import('../components/Layout/RouterViewComponent.vue'),
+        children: [
+          {
+            path: '',
+            name: 'meus-dados',
+            component: () => import('../views/meusDados/MeusDadosEdit.vue'),
+            meta: {
+              requiresAuth: true,
+              title: 'Meus Dados',
+              breadcrumb: [
+                {
+                  text: 'Início',
+                  disabled: false,
+                  href: '/',
+                },
+                {
+                  text: 'Meus Dados',
+                  disabled: true,
+                  href: '/meus-dados',
+                },
+              ],
+            },
+          },
+          {
+            path: '/meus-dados/alterar-email',
+            name: 'alterar-email',
+            component: () => import('../views/meusDados/MeusDadosEdit.vue'),
+            meta: {
+              requiresAuth: true,
+              title: 'Alterar Email',
+              breadcrumb: [
+                {
+                  text: 'Início',
+                  disabled: false,
+                  href: '/',
+                },
+                {
+                  text: 'Alterar Email',
+                  disabled: true,
+                  href: '/meus-dados/alterar-email',
+                },
+              ],
+            },
+          },
+          {
+            path: '/meus-dados/alterar-senha',
+            name: 'alterar-senha',
+            component: () => import('../views/meusDados/MeusDadosEdit.vue'),
+            meta: {
+              requiresAuth: true,
+              title: 'Alterar Senha',
+              breadcrumb: [
+                {
+                  text: 'Início',
+                  disabled: false,
+                  href: '/',
+                },
+                {
+                  text: 'Alterar Senha',
+                  disabled: true,
+                  href: '/meus-dados/alterar-senha',
+                },
+              ],
+            },
+          },
+        ],
+      },
       {
         path: '/cursos',
         component: () => import('../components/Layout/RouterViewComponent.vue'),
