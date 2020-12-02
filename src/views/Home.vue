@@ -43,17 +43,17 @@
         <strong>em Destaque</strong>
       </h2>
 
-      <v-layout class="course-cards flex-wrap justify-center">
+      <v-layout class="cards course-cards flex-wrap justify-center">
         <v-row>
-          <v-col cols="4" v-for="(curso, i) of cursos.data" :key="i">
-            <v-card>
+          <v-col cols="4" v-for="(curso, c) of cursos.data" :key="c">
+            <v-card class="d-flex">
               <div>
                 <v-img :src="curso.tx_url_imagem_curso"></v-img>
                 <p
                   class="nome-tematica"
                   data-paleta-bg="9"
                 >{{curso.tematica_curso.tx_nome_tematica_curso}}</p>
-                <p class="nome-oferta">{{curso.tp_situacao_curso}}</p>
+                <p class="nome-oferta">{{curso.tp_situacao_curso | displayLabel('statusCurso')}}</p>
                 <h3 class="v-card__title">
                   <a href="https://www.escolavirtual.gov.br/curso/258">{{curso.tx_nome_curso}}</a>
                 </h3>
@@ -64,13 +64,13 @@
                 <dt>Carga Horária:</dt>
                 <dd>{{`${curso.qt_carga_horaria_minima}h`}}</dd>
               </dl>
-              <div class="action-bar d-flex">
+              <v-card-actions>
                 <v-btn
                   tile
                   outlined
                   color="primary"
                   class="ma-2"
-                  href="https://www.escolavirtual.gov.br/curso/258/"
+                  @click="showItemCurso(cursos.data, c)"
                 >
                   <v-icon>mdi-information</v-icon>
                   <span class="d-sr-only">Saiba mais</span>
@@ -78,13 +78,24 @@
                 <v-btn
                   tile
                   color="contrast"
-                  class="ma-2"
+                  class="ma-2 flex-grow-1"
                   href="https://www.escolavirtual.gov.br/secretaria/inscricao/5437"
                 >
                   Inscreva-se
                   <v-icon right>mdi-menu-right</v-icon>
                 </v-btn>
-              </div>
+              </v-card-actions>
+              <v-expand-transition>
+                <v-card
+                  v-if="viewCurso && viewCurso[c]"
+                  class="transition-fast-in-fast-out v-card--reveal"
+                >
+                  <p class="v-card__text">{{curso.tx_apresentacao}}</p>
+                  <v-card-actions>
+                    <v-btn text @click="viewCurso = []">Fechar</v-btn>
+                  </v-card-actions>
+                </v-card>
+              </v-expand-transition>
             </v-card>
           </v-col>
         </v-row>
@@ -97,14 +108,14 @@
       </v-flex>
     </v-row>
     <v-row>
-      <h2 class="featured">
+      <h2 class="featured mt-16">
         Programas
         <strong>em Destaque</strong>
       </h2>
 
-      <v-layout class="course-cards flex-wrap justify-center">
+      <v-layout class="cards course-cards flex-wrap justify-center">
         <v-row>
-          <v-col cols="4" v-for="(programa, i) of programas.data" :key="i">
+          <v-col cols="4" v-for="(programa, p) of programas.data" :key="p">
             <v-card>
               <div>
                 <v-img :src="programa.tx_url_imagem"></v-img>
@@ -116,26 +127,33 @@
                 <dt>Carga Horária:</dt>
                 <dd>{{`${programa.qt_carga_horaria}h`}}</dd>
               </dl>
-              <div class="action-bar d-flex">
+              <v-card-actions>
                 <v-btn
                   tile
                   outlined
                   color="primary"
                   class="ma-2"
+                  @click="showItemPrograma(programas.data, p)"
                 >
                   <v-icon>mdi-information</v-icon>
                   <span class="d-sr-only">Saiba mais</span>
                 </v-btn>
-                <v-btn
-                  tile
-                  color="contrast"
-                  class="ma-2"
-                  href="https://www.escolavirtual.gov.br/secretaria/inscricao/5437"
-                >
+                <v-btn tile color="contrast" class="ma-2 flex-grow-1">
                   Acesse o Programa
                   <v-icon right>mdi-menu-right</v-icon>
                 </v-btn>
-              </div>
+              </v-card-actions>
+              <v-expand-transition>
+                <v-card
+                  v-if="viewPrograma && viewPrograma[p]"
+                  class="transition-fast-in-fast-out v-card--reveal"
+                >
+                  <p class="v-card__text">{{programa.tx_apresentacao}}</p>
+                  <v-card-actions>
+                    <v-btn text @click="viewPrograma = []">Fechar</v-btn>
+                  </v-card-actions>
+                </v-card>
+              </v-expand-transition>
             </v-card>
           </v-col>
         </v-row>
@@ -187,12 +205,17 @@
 <script>
 // @ is an alias to /src
 import {get} from '@/services/abstract.service';
+import filters from '@/filters';
 export default {
   name: 'Home',
   components: {},
+  mixins: [filters],
   data: () => ({
     cursos: {},
     programas: {},
+    reveal: false,
+    viewCurso: [],
+    viewPrograma: [],
   }),
   created() {
     this.getCursosDestaque();
@@ -201,26 +224,26 @@ export default {
   methods: {
     async getCursosDestaque() {
       const response = await get('/curso?search=bl_destaque_curso:1');
-      console.log('response', response.data);
       this.cursos = response.data;
     },
     async getProgramasDestaque() {
       const response = await get('/programas?search=bl_programa_destaque:1');
-      console.log('response', response.data);
       this.programas = response.data;
     },
+    showItemCurso(arr, index) {
+      this.viewCurso = this.insertBoolArr(arr, index);
+    },
+    showItemPrograma(arr, index) {
+      this.viewPrograma = this.insertBoolArr(arr, index);
+    },
+    insertBoolArr(arr, index) {
+      return arr.map((el, i) => (i === index ? !!el : !el));
+    }
   },
 };
 </script>
 
 <style scoped>
-.v-card__actions {
-  padding: 0 32px 32px;
-}
-.v-card__actions .v-icon {
-  font-size: 16px;
-  margin-right: 8px;
-}
 .container {
   clear: both;
   margin: 0 auto;
