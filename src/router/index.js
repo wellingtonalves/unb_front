@@ -226,6 +226,27 @@ const routes = [
               ],
             },
           },
+          {
+            path: '/curso/andamento',
+            component: () =>
+              import('../views/cursos/CursoAndamentoFinalizadosTrancado.vue'),
+            meta: {
+              title: ROUTER_CONSTANTS.menuMeusCursos,
+              requiresAuth: true,
+              breadcrumb: [
+                {
+                  text: ROUTER_CONSTANTS.menuDashboard,
+                  disabled: false,
+                  href: '/',
+                },
+                {
+                  text: ROUTER_CONSTANTS.menuMeusCursos,
+                  disabled: true,
+                  href: '/cursos',
+                },
+              ],
+            },
+          },
         ],
       },
       {
