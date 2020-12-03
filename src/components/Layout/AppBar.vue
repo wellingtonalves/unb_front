@@ -198,7 +198,7 @@
               <v-icon>mdi-bell</v-icon>
             </v-btn>
             
-            <v-btn tile color="contrast" @click="login()" class="ma-2" v-if="isAuthenticated === false">
+            <v-btn tile color="contrast" @click="login()" class="my-2 ml-2 white--text" v-if="isAuthenticated === false">
               ENTRAR
               <v-icon right>
                 mdi-menu-right
@@ -340,10 +340,8 @@ export default {
     box-shadow: 0 0 10px 0 rgba(55, 71, 79, .1) !important;
     height: auto !important;
   }
-
   header.v-app-bar .container {
-    padding-bottom: 0;
-    padding-top: 0;
+    padding: 0 48px;
   }
 
   h1 a {

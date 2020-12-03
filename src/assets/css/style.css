@@ -87,9 +87,7 @@ h3.subtitle {
 }
 
 /* Vuetify Layout Components */
-div.container {
-  padding: 12px 48px;
-}
+
 
 /* Custom Layout Components */
 .action-buttons {
@@ -243,7 +241,7 @@ div.container {
   border-radius: 0;
   box-shadow: 0 0 0 !important;
   flex-flow: column;
-  flex-basis: 200px;
+  flex-basis: 250px;
   flex-grow: 0;
   margin: 8px;
   padding: 8px;
