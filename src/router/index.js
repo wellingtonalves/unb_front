@@ -226,6 +226,13 @@ const routes = [
               ],
             },
           },
+          {
+            path: '/curso/:id',
+            component: () => import('../views/cursos/CursoDetail.vue'),
+            meta: {
+              requiresAuth: false
+            },
+          },
         ],
       },
       {

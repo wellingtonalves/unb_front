@@ -14,7 +14,8 @@ export default {
         : text.replace(/^(\d{2})(\d{4})(\d{4})/, '($1) $2-$3');
     },
     displayLabel(value, name) {
-      return constants[name].find(res => res.value === value).label
+      const item = constants[name].find(res => res.value === value)
+      return item ? item.label : ""
     }
   },
 };

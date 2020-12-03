@@ -63,7 +63,7 @@
                   {{ curso.tp_situacao_curso | displayLabel('statusCurso') }}
                 </p>
                 <h3 class="v-card__title">
-                  <a href="https://www.escolavirtual.gov.br/curso/258">{{
+                  <a @click="$router.push(`/curso/${curso.id_curso}`)">{{
                     curso.tx_nome_curso
                   }}</a>
                 </h3>
@@ -247,6 +247,9 @@ export default {
     async getProgramasDestaque() {
       const response = await get('/programas?search=bl_programa_destaque:1');
       this.programas = response.data;
+    },
+    goTo(path) {
+      return this.$router.push(path)
     }
   },
 };
