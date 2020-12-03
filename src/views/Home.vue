@@ -9,12 +9,13 @@
         />
         <div class="centered">
           <h2 class="white--text">Escola Virtual.Gov – EV.G</h2>
-          <h4
-            class="font-weight-regular white--text"
-          >Portal Único de Governo para a oferta de capacitação a distância.</h4>
-          <p
-            class="font-weight-bold headline white--text"
-          >Cursos on-line e gratuitos de várias áreas de conhecimento para o desenvolvimento da Administração Pública e da Sociedade.</p>
+          <h4 class="font-weight-regular white--text">
+            Portal Único de Governo para a oferta de capacitação a distância.
+          </h4>
+          <p class="font-weight-bold headline white--text">
+            Cursos on-line e gratuitos de várias áreas de conhecimento para o
+            desenvolvimento da Administração Pública e da Sociedade.
+          </p>
           <v-card-text>
             <v-autocomplete
               class="mx-4"
@@ -28,8 +29,14 @@
               clearable
             >
               <template v-slot:no-data>
-                <v-alert :value="true" color="error" icon="fas fa-exclamation-triangle">
-                  <span style="color: white">Não encontramos nenhum curso com este nome.</span>
+                <v-alert
+                  :value="true"
+                  color="error"
+                  icon="fas fa-exclamation-triangle"
+                >
+                  <span style="color: white"
+                    >Não encontramos nenhum curso com este nome.</span
+                  >
                 </v-alert>
               </template>
             </v-autocomplete>
@@ -49,20 +56,23 @@
             <v-card class="d-flex">
               <div>
                 <v-img :src="curso.tx_url_imagem_curso"></v-img>
-                <p
-                  class="nome-tematica"
-                  data-paleta-bg="9"
-                >{{curso.tematica_curso.tx_nome_tematica_curso}}</p>
-                <p class="nome-oferta">{{curso.tp_situacao_curso | displayLabel('statusCurso')}}</p>
+                <p class="nome-tematica" data-paleta-bg="9">
+                  {{ curso.tematica_curso.tx_nome_tematica_curso }}
+                </p>
+                <p class="nome-oferta">
+                  {{ curso.tp_situacao_curso | displayLabel('statusCurso') }}
+                </p>
                 <h3 class="v-card__title">
-                  <a href="https://www.escolavirtual.gov.br/curso/258">{{curso.tx_nome_curso}}</a>
+                  <a href="https://www.escolavirtual.gov.br/curso/258">{{
+                    curso.tx_nome_curso
+                  }}</a>
                 </h3>
               </div>
               <dl>
                 <dt>Conteudista:</dt>
-                <dd>{{curso.tp_origem_curso}}</dd>
+                <dd>{{ curso.tp_origem_curso }}</dd>
                 <dt>Carga Horária:</dt>
-                <dd>{{`${curso.qt_carga_horaria_minima}h`}}</dd>
+                <dd>{{ `${curso.qt_carga_horaria_minima}h` }}</dd>
               </dl>
               <v-card-actions>
                 <v-btn
@@ -70,7 +80,7 @@
                   outlined
                   color="primary"
                   class="ma-2"
-                  @click="showItemCurso(cursos.data, c)"
+                  @click="viewCurso = c"
                 >
                   <v-icon>mdi-information</v-icon>
                   <span class="d-sr-only">Saiba mais</span>
@@ -87,12 +97,12 @@
               </v-card-actions>
               <v-expand-transition>
                 <v-card
-                  v-if="viewCurso && viewCurso[c]"
+                  v-if="viewCurso === c"
                   class="transition-fast-in-fast-out v-card--reveal"
                 >
-                  <p class="v-card__text">{{curso.tx_apresentacao}}</p>
+                  <p class="v-card__text">{{ curso.tx_apresentacao }}</p>
                   <v-card-actions>
-                    <v-btn text @click="viewCurso = []">Fechar</v-btn>
+                    <v-btn text @click="viewCurso = ''">Fechar</v-btn>
                   </v-card-actions>
                 </v-card>
               </v-expand-transition>
@@ -120,12 +130,14 @@
               <div>
                 <v-img :src="programa.tx_url_imagem"></v-img>
                 <h3 class="v-card__title">
-                  <a href="https://www.escolavirtual.gov.br/curso/258">{{programa.tx_nome_programa}}</a>
+                  <a href="https://www.escolavirtual.gov.br/curso/258">{{
+                    programa.tx_nome_programa
+                  }}</a>
                 </h3>
               </div>
               <dl>
                 <dt>Carga Horária:</dt>
-                <dd>{{`${programa.qt_carga_horaria}h`}}</dd>
+                <dd>{{ `${programa.qt_carga_horaria}h` }}</dd>
               </dl>
               <v-card-actions>
                 <v-btn
@@ -133,7 +145,7 @@
                   outlined
                   color="primary"
                   class="ma-2"
-                  @click="showItemPrograma(programas.data, p)"
+                  @click="viewPrograma = p"
                 >
                   <v-icon>mdi-information</v-icon>
                   <span class="d-sr-only">Saiba mais</span>
@@ -145,12 +157,12 @@
               </v-card-actions>
               <v-expand-transition>
                 <v-card
-                  v-if="viewPrograma && viewPrograma[p]"
+                  v-if="viewPrograma === p"
                   class="transition-fast-in-fast-out v-card--reveal"
                 >
-                  <p class="v-card__text">{{programa.tx_apresentacao}}</p>
+                  <p class="v-card__text">{{ programa.tx_apresentacao }}</p>
                   <v-card-actions>
-                    <v-btn text @click="viewPrograma = []">Fechar</v-btn>
+                    <v-btn text @click="viewPrograma = ''">Fechar</v-btn>
                   </v-card-actions>
                 </v-card>
               </v-expand-transition>
@@ -175,7 +187,8 @@
       <v-card class="d-flex">
         <v-card-title>
           Escolha um curso pelo
-          <strong>Catálogo de Cursos</strong> ou pela sugestão da página inicial.
+          <strong>Catálogo de Cursos</strong> ou pela sugestão da página
+          inicial.
         </v-card-title>
         <v-img src="../assets/img/como-funciona-01.svg" alt="Passo 01"></v-img>
       </v-card>
@@ -194,8 +207,13 @@
       </v-card>
 
       <v-card class="d-flex">
-        <v-card-title>... pronto, você já está dentro do ambiente de curso.</v-card-title>
-        <v-card-text>Lá você poderá ver também todos os cursos que você virá a se inscrever.</v-card-text>
+        <v-card-title
+          >... pronto, você já está dentro do ambiente de curso.</v-card-title
+        >
+        <v-card-text
+          >Lá você poderá ver também todos os cursos que você virá a se
+          inscrever.</v-card-text
+        >
         <v-img src="../assets/img/como-funciona-04.svg" alt="Passo 04"></v-img>
       </v-card>
     </v-layout>
@@ -214,8 +232,8 @@ export default {
     cursos: {},
     programas: {},
     reveal: false,
-    viewCurso: [],
-    viewPrograma: [],
+    viewCurso: '',
+    viewPrograma: '',
   }),
   created() {
     this.getCursosDestaque();
@@ -229,15 +247,6 @@ export default {
     async getProgramasDestaque() {
       const response = await get('/programas?search=bl_programa_destaque:1');
       this.programas = response.data;
-    },
-    showItemCurso(arr, index) {
-      this.viewCurso = this.insertBoolArr(arr, index);
-    },
-    showItemPrograma(arr, index) {
-      this.viewPrograma = this.insertBoolArr(arr, index);
-    },
-    insertBoolArr(arr, index) {
-      return arr.map((el, i) => (i === index ? !!el : !el));
     }
   },
 };
