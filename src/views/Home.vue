@@ -46,45 +46,53 @@
       </div>
     </v-row>
     <v-row>
-      <h2 class="featured">
-        Cursos
-        <strong>em Destaque</strong>
-      </h2>
+      <v-flex xs12 sm8 offset-sm2 align-center justify-center>
+        <v-layout column class="justify-center align-center">
+          <h2 class="featured">
+            Cursos
+            <strong>em Destaque</strong>
+          </h2>
 
-      <v-layout class="cards course-cards flex-wrap justify-center">
-        <list-cursos-cards v-if="cursos.data" :curso-data="cursos.data" />
-      </v-layout>
-      <v-flex text-center>
-        <v-btn color="primary" class="font-weight-bold" large outlined>
-          Ver todos os cursos
-          <v-icon>mdi-chevron-right</v-icon>
-        </v-btn>
+          <v-layout class="cards course-cards flex-wrap justify-center">
+            <list-cursos-cards v-if="cursos.data" :curso-data="cursos.data" />
+          </v-layout>
+          <v-flex text-center>
+            <v-btn color="primary" class="font-weight-bold" large outlined>
+              Ver todos os cursos
+              <v-icon>mdi-chevron-right</v-icon>
+            </v-btn>
+          </v-flex>
+        </v-layout>
       </v-flex>
     </v-row>
     <v-row>
-      <h2 class="featured mt-16">
-        Programas
-        <strong>em Destaque</strong>
-      </h2>
+      <v-flex xs12 sm8 offset-sm2 align-center justify-center>
+        <v-layout column class="justify-center align-center">
+          <h2 class="featured mt-16">
+            Programas
+            <strong>em Destaque</strong>
+          </h2>
 
-      <v-layout class="cards course-cards flex-wrap justify-center">
-        <list-programas-cards
-          v-if="programas.data"
-          :programa-data="programas.data"
-        />
-        <v-flex text-center>
-          <v-btn
-            color="primary"
-            @click="$router.push('/catalogo-programas')"
-            class="font-weight-bold"
-            large
-            outlined
-          >
-            Ver todos os programas
-            <v-icon>mdi-chevron-right</v-icon>
-          </v-btn>
-        </v-flex>
-      </v-layout>
+          <v-layout class="cards course-cards flex-wrap justify-center">
+            <list-programas-cards
+              v-if="programas.data"
+              :programa-data="programas.data"
+            />
+            <v-flex text-center>
+              <v-btn
+                color="primary"
+                @click="$router.push('/catalogo-programas')"
+                class="font-weight-bold"
+                large
+                outlined
+              >
+                Ver todos os programas
+                <v-icon>mdi-chevron-right</v-icon>
+              </v-btn>
+            </v-flex>
+          </v-layout>
+        </v-layout>
+      </v-flex>
     </v-row>
 
     <h2 class="featured mt-16">
