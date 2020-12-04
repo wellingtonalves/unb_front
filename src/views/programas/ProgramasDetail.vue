@@ -75,7 +75,7 @@
 <script>
 import {get} from '@/services/abstract.service';
 export default {
-  name: 'ProgramaDetail',
+  name: 'ProgramasDetail',
   data: () => ({
     programa: {},
     loading: false,

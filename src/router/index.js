@@ -560,11 +560,19 @@ const routes = [
           },
           {
             path: '/programa/:id',
-            component: () => import('../views/programas/ProgramaDetail.vue'),
+            component: () => import('../views/programas/ProgramasDetail.vue'),
             meta: {
               requiresAuth: false
             },
           },
+          {
+            path: '/catalogo-programas',
+            component: () => import('../views/programas/ProgramasAll.vue'),
+            meta: {
+              requiresAuth: false,
+              title: 'Catálogo de Programas'
+            },
+          }
         ],
       },
       {

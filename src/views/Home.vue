@@ -20,6 +20,7 @@
             <v-autocomplete
               class="mx-4"
               flat
+              v-model="search"
               hide-details
               color="white"
               style="background-color: white"
@@ -72,7 +73,13 @@
           :programa-data="programas.data"
         />
         <v-flex text-center>
-          <v-btn color="primary" class="font-weight-bold" large outlined>
+          <v-btn
+            color="primary"
+            @click="$router.push('/catalogo-programas')"
+            class="font-weight-bold"
+            large
+            outlined
+          >
             Ver todos os programas
             <v-icon>mdi-chevron-right</v-icon>
           </v-btn>
@@ -129,6 +136,7 @@ export default {
   data: () => ({
     cursos: {},
     programas: {},
+    search: '',
   }),
   created() {
     this.getCursosDestaque();
