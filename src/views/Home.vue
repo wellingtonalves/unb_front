@@ -51,64 +51,7 @@
       </h2>
 
       <v-layout class="cards course-cards flex-wrap justify-center">
-        <v-row>
-          <v-col cols="4" v-for="(curso, c) of cursos.data" :key="c">
-            <v-card class="d-flex">
-              <div>
-                <v-img :src="curso.tx_url_imagem_curso"></v-img>
-                <p class="nome-tematica" data-paleta-bg="9">
-                  {{ curso.tematica_curso.tx_nome_tematica_curso }}
-                </p>
-                <p class="nome-oferta">
-                  {{ curso.tp_situacao_curso | displayLabel('statusCurso') }}
-                </p>
-                <h3 class="v-card__title">
-                  <a @click="$router.push(`/curso/${curso.id_curso}`)">{{
-                    curso.tx_nome_curso
-                  }}</a>
-                </h3>
-              </div>
-              <dl>
-                <dt>Conteudista:</dt>
-                <dd>{{ curso.tp_origem_curso }}</dd>
-                <dt>Carga Horária:</dt>
-                <dd>{{ `${curso.qt_carga_horaria_minima}h` }}</dd>
-              </dl>
-              <v-card-actions>
-                <v-btn
-                  tile
-                  outlined
-                  color="primary"
-                  class="ma-2"
-                  @click="viewCurso = c"
-                >
-                  <v-icon>mdi-information</v-icon>
-                  <span class="d-sr-only">Saiba mais</span>
-                </v-btn>
-                <v-btn
-                  tile
-                  color="contrast"
-                  class="ma-2 flex-grow-1"
-                  href="https://www.escolavirtual.gov.br/secretaria/inscricao/5437"
-                >
-                  Inscreva-se
-                  <v-icon right>mdi-menu-right</v-icon>
-                </v-btn>
-              </v-card-actions>
-              <v-expand-transition>
-                <v-card
-                  v-if="viewCurso === c"
-                  class="transition-fast-in-fast-out v-card--reveal"
-                >
-                  <p class="v-card__text">{{ curso.tx_apresentacao }}</p>
-                  <v-card-actions>
-                    <v-btn text @click="viewCurso = ''">Fechar</v-btn>
-                  </v-card-actions>
-                </v-card>
-              </v-expand-transition>
-            </v-card>
-          </v-col>
-        </v-row>
+        <list-cursos-cards v-if="cursos.data" :curso-data="cursos.data" />
       </v-layout>
       <v-flex text-center>
         <v-btn color="primary" class="font-weight-bold" large outlined>
@@ -124,51 +67,10 @@
       </h2>
 
       <v-layout class="cards course-cards flex-wrap justify-center">
-        <v-row>
-          <v-col cols="4" v-for="(programa, p) of programas.data" :key="p">
-            <v-card>
-              <div>
-                <v-img :src="programa.tx_url_imagem"></v-img>
-                <h3 class="v-card__title">
-                  <a href="https://www.escolavirtual.gov.br/curso/258">{{
-                    programa.tx_nome_programa
-                  }}</a>
-                </h3>
-              </div>
-              <dl>
-                <dt>Carga Horária:</dt>
-                <dd>{{ `${programa.qt_carga_horaria}h` }}</dd>
-              </dl>
-              <v-card-actions>
-                <v-btn
-                  tile
-                  outlined
-                  color="primary"
-                  class="ma-2"
-                  @click="viewPrograma = p"
-                >
-                  <v-icon>mdi-information</v-icon>
-                  <span class="d-sr-only">Saiba mais</span>
-                </v-btn>
-                <v-btn tile color="contrast" class="ma-2 flex-grow-1">
-                  Acesse o Programa
-                  <v-icon right>mdi-menu-right</v-icon>
-                </v-btn>
-              </v-card-actions>
-              <v-expand-transition>
-                <v-card
-                  v-if="viewPrograma === p"
-                  class="transition-fast-in-fast-out v-card--reveal"
-                >
-                  <p class="v-card__text">{{ programa.tx_apresentacao }}</p>
-                  <v-card-actions>
-                    <v-btn text @click="viewPrograma = ''">Fechar</v-btn>
-                  </v-card-actions>
-                </v-card>
-              </v-expand-transition>
-            </v-card>
-          </v-col>
-        </v-row>
+        <list-programas-cards
+          v-if="programas.data"
+          :programa-data="programas.data"
+        />
         <v-flex text-center>
           <v-btn color="primary" class="font-weight-bold" large outlined>
             Ver todos os programas
@@ -221,19 +123,12 @@
 </template>
 
 <script>
-// @ is an alias to /src
 import {get} from '@/services/abstract.service';
-import filters from '@/filters';
 export default {
   name: 'Home',
-  components: {},
-  mixins: [filters],
   data: () => ({
     cursos: {},
     programas: {},
-    reveal: false,
-    viewCurso: '',
-    viewPrograma: '',
   }),
   created() {
     this.getCursosDestaque();
@@ -248,9 +143,6 @@ export default {
       const response = await get('/programas?search=bl_programa_destaque:1');
       this.programas = response.data;
     },
-    goTo(path) {
-      return this.$router.push(path)
-    }
   },
 };
 </script>

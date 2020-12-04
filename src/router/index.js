@@ -558,6 +558,13 @@ const routes = [
               ],
             },
           },
+          {
+            path: '/programa/:id',
+            component: () => import('../views/programas/ProgramaDetail.vue'),
+            meta: {
+              requiresAuth: false
+            },
+          },
         ],
       },
       {
