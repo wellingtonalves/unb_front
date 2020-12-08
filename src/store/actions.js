@@ -16,6 +16,9 @@ const actions = {
     const response = await user()
     commit('UPDATE_USER_DATA', response.data.data);
   },
+  async setMenuDrawer({commit}, data = {}) {
+    commit('SET_MENU_DRAWER', data);
+  },
 };
 
 export default actions;
