@@ -91,7 +91,6 @@ export default {
       const response = await get(`programas/${this.$route.params.id}`);
       this.loading = false;
       this.programa = response.data.data;
-      console.log('programa', this.programa);
     },
     async getCriterioPrograma() {
       const response = await get('/criterio-programa?pagination=false');
