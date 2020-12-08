@@ -23,7 +23,7 @@
         
 <!--        ALUNO-->
 
-        <v-list-item link :to="'/cursos/andamento'" v-show="permission('INSCRICAO_CURSOS_ALUNO')">
+        <v-list-item link :to="'/curso/andamento'" v-show="permission('INSCRICAO_CURSOS_ALUNO')">
           <v-list-item-action>
             <v-icon>mdi-school</v-icon>
           </v-list-item-action>

@@ -1,12 +1,12 @@
 <template>
   <v-layout wrap>
 
-    <filter-expansion-panel @filtrar="filtrar" @resetar="limparFiltros()">
+    <filter-expansion-panel @filtrar="filtrar" @resetar="limparFiltros()" :open="0">
 
       <template v-slot:filterExpansionPanel>
         
         <v-col cols="12" sm="2">
-          <v-select dense v-model="filterData.tp_situacao_inscricao" label="Situação" :items="situacaoCurso" item-text="label" item-value="value" />
+          <v-select dense v-model="situacaoCurso" label="Situação" :items="situacaoCursoSelect" item-text="label" item-value="value" />
         </v-col>
 
         <v-col cols="12" sm="3">
@@ -23,7 +23,12 @@
 
     <v-row class="flex-basis-100">
       <v-col cols="12">
-        <v-card>
+        <v-card v-if="!situacaoCurso">
+          <v-alert text icon="mdi-information" color="warning">
+            <h3>Por favor, realize uma pesquisa por situação.</h3>
+          </v-alert>
+        </v-card>
+        <v-card v-if="situacaoCurso">
 
           <v-data-table
             :headers="headers"
@@ -52,7 +57,7 @@
 
                 <v-tooltip bottom>
                   <template v-slot:activator="{ on }">
-                    <v-btn small tile outlined icon color="primary" @click="$router.push(`/curso/${item.id_curso}/edit`)" v-on="on">
+                    <v-btn small tile outlined icon color="primary" @click="goToCourse(`${item.oferta.ava.tx_url}`)" v-on="on">
                       <v-icon>mdi-arrow-top-right</v-icon>
                     </v-btn>
                   </template>
@@ -91,8 +96,10 @@
     name: "CursoAndamentoFinalizadosTrancado",
     data: () => ({
       expanded: [],
+      situacaoCurso: '',
       filterData: {},
-      situacaoCurso: [
+      search: '',
+      situacaoCursoSelect: [
         {
           label: 'Andamento',
           value: 'andamento'
@@ -117,15 +124,13 @@
         {text: 'Disponibilidade', value: 'oferta.qt_duracao_dias'},
         {text: 'Nota Minímia', value: 'oferta.qt_nota_minima_aprovacao'},
         {text: 'Situação', value: 'tp_situacao_inscricao'},
+        {text: 'Situação', value: 'oferta.ava.tx_url'},
         {text: 'Ações', value: 'action', sortable: false},
       ],
       loading: false,
       dialogDelete: false,
       dialogDeleteData: {},
     }),
-    mounted() {
-      this.get();
-    },
     watch: {
       options: {
         handler (val) {
@@ -134,7 +139,9 @@
             return 
           }
           
-          this.get(`?per_page=${val.itemsPerPage}&page=${val.page}`);
+          if (this.situacaoCurso) {
+            this.get(`?per_page=${val.itemsPerPage}&page=${val.page}`);  
+          }
         },
         deep: true,
       },
@@ -142,8 +149,7 @@
     methods: {
       async get(filter = '') {
         this.loading = true;
-        const response = await get('/inscricao/cursos-aluno/andamento' + filter);
-        console.log(response.data.data)
+        const response = await get(`/inscricao/cursos-aluno/${this.situacaoCurso}` + filter);
         this.pagination = response.data;
         this.data = response.data.data;
         this.loading = false;
@@ -155,6 +161,11 @@
       limparFiltros() {
         this.filterData = {};
         this.get();
+      },
+      goToCourse(url) {
+        console.log(url)
+        let routeData = this.$router.resolve({name: url});
+        window.open(routeData.href, '_blank');
       },
       excluir(item) {
         this.dialogDeleteData = item;
