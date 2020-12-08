@@ -4,9 +4,9 @@
       <v-container>
         <v-row align="center" justify="center">
           <v-col cols="6" lg="5" class="headline white--text">
-            <small class="headline blue-grey--text text--darken-3">{{
-              'PROGRAMA'
-            }}</small>
+            <small class="headline blue-grey--text text--darken-3">
+              {{'PROGRAMA' }}
+            </small>
             <h3 class="font-weight-black blue-grey--text text--darken-3">
               {{ programa.tx_nome_programa }}
             </h3>

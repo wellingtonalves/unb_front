@@ -11,9 +11,7 @@
             {{ curso.tp_situacao_curso | displayLabel('statusCurso') }}
           </p>
           <h3 class="v-card__title">
-            <a @click="$router.push(`/curso/${curso.id_curso}`)">{{
-              curso.tx_nome_curso
-            }}</a>
+            <a @click="$router.push(`/curso/${curso.id_curso}`)">{{curso.tx_nome_curso }}</a>
           </h3>
         </div>
         <dl>
@@ -59,15 +57,16 @@
   </v-row>
 </template>
 <script>
-import filters from '@/filters';
-export default {
-  name: 'ListCursosCards',
-  props: {
-    cursoData: Array,
-  },
-  mixins: [filters],
-  data: () => ({
-    viewCurso: '',
-  }),
-};
+  import filters from '@/filters';
+
+  export default {
+    name: 'ListCursosCards',
+    props: {
+      cursoData: Array,
+    },
+    mixins: [filters],
+    data: () => ({
+      viewCurso: '',
+    }),
+  };
 </script>

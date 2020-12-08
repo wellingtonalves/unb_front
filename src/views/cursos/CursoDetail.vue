@@ -7,11 +7,9 @@
       <v-container>
         <v-row align="center" justify="center">
           <v-col cols="6" lg="5" class="headline white--text">
-            <small>{{
-              curso.tematica_curso
-                ? curso.tematica_curso.tx_nome_tematica_curso
-                : ''
-            }}</small>
+            <small>
+              {{curso.tematica_curso ? curso.tematica_curso.tx_nome_tematica_curso : '' }}
+            </small>
             <h3>{{ curso.tx_nome_curso }}</h3>
             <v-card-text>{{ curso.tx_apresentacao }}</v-card-text>
           </v-col>

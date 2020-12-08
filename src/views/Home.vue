@@ -5,8 +5,7 @@
         <img
           src="https://www.enap.gov.br/media_files/images/noticias/2020/01/evg-50.jpg"
           alt="enap"
-          style="width:100%;height: 400px"
-        />
+          style="width:100%;height: 400px"/>
         <div class="centered">
           <h2 class="white--text">Escola Virtual.Gov – EV.G</h2>
           <h4 class="font-weight-regular white--text">
@@ -40,28 +39,24 @@
                   color="error"
                   icon="fas fa-exclamation-triangle"
                 >
-                  <span style="color: white"
-                    >Não encontramos nenhum curso com este nome.</span
-                  >
+                  <span style="color: white">Não encontramos nenhum curso com este nome.</span>
                 </v-alert>
               </template>
+              
               <template v-slot:item="{item}">
+                
                 <v-list-item-avatar>
                   <v-img
                     v-if="item.tx_url_imagem_curso"
                     :src="item.tx_url_imagem_curso"
                   />
                 </v-list-item-avatar>
-                <v-list-item-content
-                  @click="$router.push(`/curso/${item.id_curso}`)"
-                >
-                  <v-list-item-title
-                    v-text="item.tx_nome_curso"
-                  ></v-list-item-title>
-                  <v-list-item-subtitle
-                    v-text="item.tematica_curso.tx_nome_tematica_curso"
-                  ></v-list-item-subtitle>
+                
+                <v-list-item-content @click="$router.push(`/curso/${item.id_curso}`)">
+                  <v-list-item-title v-text="item.tx_nome_curso" />
+                  <v-list-item-subtitle v-text="item.tematica_curso.tx_nome_tematica_curso" />
                 </v-list-item-content>
+                
               </template>
             </v-autocomplete>
           </v-card-text>
@@ -77,7 +72,7 @@
           </h2>
 
           <v-layout class="cards course-cards flex-wrap justify-center">
-            <list-cursos-cards v-if="cursos.data" :curso-data="cursos.data" />
+            <list-cursos-cards v-if="cursos.data" :curso-data="cursos.data"/>
           </v-layout>
           <v-flex text-center>
             <v-btn color="primary" class="font-weight-bold" large outlined>
@@ -88,6 +83,7 @@
         </v-layout>
       </v-flex>
     </v-row>
+    
     <v-row>
       <v-flex xs12 sm8 offset-sm2 align-center justify-center>
         <v-layout column class="justify-center align-center">
@@ -147,13 +143,12 @@
       </v-card>
 
       <v-card class="d-flex">
-        <v-card-title
-          >... pronto, você já está dentro do ambiente de curso.</v-card-title
-        >
-        <v-card-text
-          >Lá você poderá ver também todos os cursos que você virá a se
-          inscrever.</v-card-text
-        >
+        <v-card-title>
+          ... pronto, você já está dentro do ambiente de curso.
+        </v-card-title>
+        <v-card-text>
+          Lá você poderá ver também todos os cursos que você virá a se inscrever.
+        </v-card-text>
         <v-img src="../assets/img/como-funciona-04.svg" alt="Passo 04"></v-img>
       </v-card>
     </v-layout>
@@ -161,70 +156,72 @@
 </template>
 
 <script>
-import {get} from '@/services/abstract.service';
-export default {
-  name: 'Home',
-  data: () => ({
-    cursos: {},
-    programas: {},
-    search: '',
-    select: null,
-    filteredCursos: [],
-    isLoading: false,
-  }),
-  watch: {
-    search(val) {
-      return val !== this.select ? this.filterCursos(val) : '';
+  import {get} from '@/services/abstract.service';
+
+  export default {
+    name: 'Home',
+    data: () => ({
+      cursos: {},
+      programas: {},
+      search: '',
+      select: null,
+      filteredCursos: [],
+      isLoading: false,
+    }),
+    watch: {
+      search(val) {
+        return val !== this.select ? this.filterCursos(val) : '';
+      },
     },
-  },
-  created() {
-    this.getCursosDestaque();
-    this.getProgramasDestaque();
-  },
-  methods: {
-    async getCursosDestaque() {
-      const response = await get('/curso?search=bl_destaque_curso:1');
-      this.cursos = response.data;
+    created() {
+      this.getCursosDestaque();
+      this.getProgramasDestaque();
     },
-    async getProgramasDestaque() {
-      const response = await get('/programas?search=bl_programa_destaque:1');
-      this.programas = response.data;
+    methods: {
+      async getCursosDestaque() {
+        const response = await get('/curso?search=bl_destaque_curso:1');
+        this.cursos = response.data;
+      },
+      async getProgramasDestaque() {
+        const response = await get('/programas?search=bl_programa_destaque:1');
+        this.programas = response.data;
+      },
+      async filterCursos(val) {
+        this.isLoading = true;
+        let items = await this.getCurso(val);
+        setTimeout(() => {
+          this.filteredCursos = items.filter(res => {
+            return (
+              (res.tx_nome_curso || '')
+                .toLowerCase()
+                .indexOf((val || '').toLowerCase()) > -1
+            );
+          });
+          this.isLoading = false;
+        }, 200);
+      },
+      async getCurso(val) {
+        const response = await get(`/curso?search=tx_nome_curso:${val}`);
+        return response.data ? response.data.data : [];
+      },
     },
-    async filterCursos(val) {
-      this.isLoading = true;
-      let items = await this.getCurso(val);
-      setTimeout(() => {
-        this.filteredCursos = items.filter(res => {
-          return (
-            (res.tx_nome_curso || '')
-              .toLowerCase()
-              .indexOf((val || '').toLowerCase()) > -1
-          );
-        });
-        this.isLoading = false;
-      }, 200);
-    },
-    async getCurso(val) {
-      const response = await get(`/curso?search=tx_nome_curso:${val}`);
-      return response.data ? response.data.data : [];
-    },
-  },
-};
+  };
 </script>
 
 <style scoped>
-.container {
-  clear: both;
-  margin: 0 auto;
-  width: 100%;
-  position: relative;
-  text-align: center;
-}
-/* Centered text */
-.centered {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-}
+  .container {
+    clear: both;
+    margin: 0 auto;
+    width: 100%;
+    position: relative;
+    text-align: center;
+  }
+
+  /* Centered text */
+  .centered {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
 </style>

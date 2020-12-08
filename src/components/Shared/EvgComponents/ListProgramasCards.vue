@@ -5,9 +5,7 @@
         <div>
           <v-img :src="programa.tx_url_imagem"></v-img>
           <h3 class="v-card__title">
-            <a @click="$router.push(`/programa/${programa.id_programa}`)">{{
-              programa.tx_nome_programa
-            }}</a>
+            <a @click="$router.push(`/programa/${programa.id_programa}`)">{{programa.tx_nome_programa }}</a>
           </h3>
         </div>
         <dl>
@@ -46,15 +44,16 @@
   </v-row>
 </template>
 <script>
-import filters from '@/filters';
-export default {
-  name: 'ListProgramasCards',
-  props: {
-    programaData: Array,
-  },
-  mixins: [filters],
-  data: () => ({
-    viewPrograma: '',
-  }),
-};
+  import filters from '@/filters';
+
+  export default {
+    name: 'ListProgramasCards',
+    props: {
+      programaData: Array,
+    },
+    mixins: [filters],
+    data: () => ({
+      viewPrograma: '',
+    }),
+  };
 </script>
