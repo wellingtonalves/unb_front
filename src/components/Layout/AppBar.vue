@@ -121,7 +121,7 @@
                 </v-list-item-content>
               </v-list-item>
 
-              <v-list-item href="https://www.escolavirtual.gov.br/programas">
+              <v-list-item href="/catalogo-programas">
                 <v-list-item-content>
                   <v-list-item-title>{{ $t('message.appBar.catalogoProgramas.title') }}</v-list-item-title>
                   <v-list-item-subtitle>{{ $t('message.appBar.catalogoProgramas.subtitle') }}</v-list-item-subtitle>
