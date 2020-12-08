@@ -20,11 +20,16 @@
             <v-autocomplete
               class="mx-4"
               flat
-              v-model="search"
+              v-model="select"
+              :search-input.sync="search"
               hide-details
               color="white"
-              style="background-color: white"
+              :items="filteredCursos"
+              :loading="isLoading"
+              item-text="tx_nome_curso"
+              item-value="id_curso"
               prepend-inner-icon="mdi-feature-search-outline"
+              style="background-color: white"
               label="Busque um curso"
               solo-inverted
               clearable
@@ -39,6 +44,24 @@
                     >Não encontramos nenhum curso com este nome.</span
                   >
                 </v-alert>
+              </template>
+              <template v-slot:item="{item}">
+                <v-list-item-avatar>
+                  <v-img
+                    v-if="item.tx_url_imagem_curso"
+                    :src="item.tx_url_imagem_curso"
+                  />
+                </v-list-item-avatar>
+                <v-list-item-content
+                  @click="$router.push(`/curso/${item.id_curso}`)"
+                >
+                  <v-list-item-title
+                    v-text="item.tx_nome_curso"
+                  ></v-list-item-title>
+                  <v-list-item-subtitle
+                    v-text="item.tematica_curso.tx_nome_tematica_curso"
+                  ></v-list-item-subtitle>
+                </v-list-item-content>
               </template>
             </v-autocomplete>
           </v-card-text>
@@ -145,7 +168,15 @@ export default {
     cursos: {},
     programas: {},
     search: '',
+    select: null,
+    filteredCursos: [],
+    isLoading: false,
   }),
+  watch: {
+    search(val) {
+      return val !== this.select ? this.filterCursos(val) : '';
+    },
+  },
   created() {
     this.getCursosDestaque();
     this.getProgramasDestaque();
@@ -158,6 +189,24 @@ export default {
     async getProgramasDestaque() {
       const response = await get('/programas?search=bl_programa_destaque:1');
       this.programas = response.data;
+    },
+    async filterCursos(val) {
+      this.isLoading = true;
+      let items = await this.getCurso(val);
+      setTimeout(() => {
+        this.filteredCursos = items.filter(res => {
+          return (
+            (res.tx_nome_curso || '')
+              .toLowerCase()
+              .indexOf((val || '').toLowerCase()) > -1
+          );
+        });
+        this.isLoading = false;
+      }, 200);
+    },
+    async getCurso(val) {
+      const response = await get(`/curso?search=tx_nome_curso:${val}`);
+      return response.data ? response.data.data : [];
     },
   },
 };

@@ -120,8 +120,8 @@
                   </p>
                   <p>
                     Realize o
-                    <a class="primary--text">seu cadastro</a> ou faça o
-                    seu <a class="primary--text">login</a> no botão
+                    <a class="primary--text">seu cadastro</a> ou faça o seu
+                    <a class="primary--text">login</a> no botão
                     <a class="contrast--text">Entrar</a>.
                   </p>
                   <p>
@@ -169,7 +169,6 @@ export default {
       const response = await get(`curso/${this.$route.params.id}`);
       this.loading = false;
       this.curso = response.data.data;
-      console.log('curso', this.curso);
     },
     loadImg(path) {
       let imgPath = path.replace(/\s+/g, '%20');
