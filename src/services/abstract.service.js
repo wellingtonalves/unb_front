@@ -1,11 +1,11 @@
 import httpClient from './httpClient.service';
 import store from './../store'
 
-export const get = async url => {
+export const get = async (url, options = {}) => {
   return await httpClient
-    .get(url)
+    .get(url, options)
     .then(response => response)
-    .catch(error => error.response);
+    .catch(error => errorHandler(error));
 };
 
 export const create = async (url, data) => {
@@ -48,6 +48,9 @@ function errorHandler(error) {
 }
 
 function handleMessage(response) {
+  if(!response.data.message){
+    return;
+  }
   store.dispatch('setSnackbar', {text: response.data.message, color: response.data.messageType, active: true})
   return response
 }

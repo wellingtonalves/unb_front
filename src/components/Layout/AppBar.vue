@@ -21,7 +21,7 @@
           </v-list-item-content>
         </v-list-item>
 
-        <v-list-item link :to="'/cursos/'" v-show="permission('CURSO_LISTAR')">
+        <v-list-item link :to="'/cursos'" v-show="permission('CURSO_LISTAR')">
           <v-list-item-action>
             <v-icon>mdi-book-open-page-variant</v-icon>
           </v-list-item-action>
@@ -30,7 +30,7 @@
           </v-list-item-content>
         </v-list-item>
 
-        <v-list-item link :to="'/ofertas/'" v-show="permission('OFERTA_LISTAR')">
+        <v-list-item link :to="'/ofertas'" v-show="permission('OFERTA_LISTAR')">
           <v-list-item-action>
             <v-icon>mdi-format-list-bulleted-square</v-icon>
           </v-list-item-action>
@@ -39,7 +39,7 @@
           </v-list-item-content>
         </v-list-item>
 
-        <v-list-item link :to="'/ava/'" v-show="permission('AVA_LISTAR')">
+        <v-list-item link :to="'/ava'" v-show="permission('AVA_LISTAR')">
           <v-list-item-action>
             <v-icon>mdi-school-outline</v-icon>
           </v-list-item-action>
@@ -48,7 +48,7 @@
           </v-list-item-content>
         </v-list-item>
 
-        <v-list-item link :to="'/tarefas-agendadas/'" v-show="permission('TAREFA_AGENDADA_LISTAR')">
+        <v-list-item link :to="'/tarefas-agendadas'" v-show="permission('TAREFA_AGENDADA_LISTAR')">
           <v-list-item-action>
             <v-icon>mdi-briefcase-clock</v-icon>
           </v-list-item-action>
@@ -57,7 +57,7 @@
           </v-list-item-content>
         </v-list-item>
 
-        <v-list-item link :to="'/programas/'" v-show="permission('PROGRAMA_LISTAR')">
+        <v-list-item link :to="'/programas'" v-show="permission('PROGRAMA_LISTAR')">
           <v-list-item-action>
             <v-icon>mdi-school-outline</v-icon>
           </v-list-item-action>
@@ -102,6 +102,15 @@
             </v-list-item-content>
           </v-list-item>
         </v-list-group>
+
+        <v-list-item link :to="'/certificados'" v-show="permission('CERTIFICADO_LISTAR')">
+          <v-list-item-action>
+            <v-icon>mdi-school-outline</v-icon>
+          </v-list-item-action>
+          <v-list-item-content>
+            <v-list-item-title>Certificados</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
       </v-list>
     </v-navigation-drawer>
     <v-app-bar :clipped-left="true" app>
@@ -121,7 +130,7 @@
                 </v-list-item-content>
               </v-list-item>
 
-              <v-list-item href="/catalogo-programas">
+              <v-list-item to="/catalogo-programas">
                 <v-list-item-content>
                   <v-list-item-title>{{ $t('message.appBar.catalogoProgramas.title') }}</v-list-item-title>
                   <v-list-item-subtitle>{{ $t('message.appBar.catalogoProgramas.subtitle') }}</v-list-item-subtitle>
