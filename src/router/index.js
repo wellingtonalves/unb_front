@@ -227,6 +227,13 @@ const routes = [
             },
           },
           {
+            path: '/curso/:id',
+            component: () => import('../views/cursos/CursoDetail.vue'),
+            meta: {
+              requiresAuth: false
+            },
+          },
+          {
             path: '/curso/andamento',
             component: () =>
               import('../views/cursos/CursoAndamentoFinalizadosTrancado.vue'),
@@ -572,6 +579,21 @@ const routes = [
               ],
             },
           },
+          {
+            path: '/programa/:id',
+            component: () => import('../views/programas/ProgramasDetail.vue'),
+            meta: {
+              requiresAuth: false
+            },
+          },
+          {
+            path: '/catalogo-programas',
+            component: () => import('../views/programas/ProgramasAll.vue'),
+            meta: {
+              requiresAuth: false,
+              title: 'Catálogo de Programas'
+            },
+          }
         ],
       },
       {
@@ -889,6 +911,34 @@ const routes = [
                   text: ROUTER_CONSTANTS.menuEditarTarefa,
                   disabled: true,
                   href: '/tarefas-agendadas',
+                },
+              ],
+            },
+          },
+        ],
+      },
+      {
+        path: '/certificados',
+        component: () => import('../components/Layout/RouterViewComponent.vue'),
+        children: [
+          {
+            path: '',
+            name: 'certificados',
+            component: () =>
+              import('../views/certificados/Certificado.vue'),
+            meta: {
+              requiresAuth: true,
+              title: ROUTER_CONSTANTS.menuCertificados,
+              breadcrumb: [
+                {
+                  text: ROUTER_CONSTANTS.menuDashboard,
+                  disabled: false,
+                  href: '/',
+                },
+                {
+                  text: ROUTER_CONSTANTS.menuCertificados,
+                  disabled: true,
+                  href: '/certificados',
                 },
               ],
             },

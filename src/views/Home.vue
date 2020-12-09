@@ -1,236 +1,139 @@
 <template>
   <v-layout wrap>
-
-    <h2 class="featured">Cursos <strong>em Destaque</strong></h2>
-
-    <v-layout class="cards course-cards flex-wrap justify-center">
-
-      <v-card class="d-flex">
-        <div>
-          <v-img src="https://cdn.evg.gov.br/cursos/234_EVG/banner.svg" alt="Logo do Curso Inovação Social para o Aperfeiçoamento de Políticas Públicas"></v-img>
-          <p class="nome-tematica" data-paleta-bg="9" title="Gestão de Políticas Públicas">Gestão de Políticas Públicas</p>
-          <p class="nome-oferta">Curso Aberto</p>
-          <h3 class="v-card__title"><a href="https://www.escolavirtual.gov.br/curso/258">Inovação Social para o Aperfeiçoamento de Políticas Públicas</a></h3>
+    <v-row>
+      <div class="container">
+        <img
+          src="https://www.enap.gov.br/media_files/images/noticias/2020/01/evg-50.jpg"
+          alt="enap"
+          style="width:100%;height: 400px"/>
+        <div class="centered">
+          <h2 class="white--text">Escola Virtual.Gov – EV.G</h2>
+          <h4 class="font-weight-regular white--text">
+            Portal Único de Governo para a oferta de capacitação a distância.
+          </h4>
+          <p class="font-weight-bold headline white--text">
+            Cursos on-line e gratuitos de várias áreas de conhecimento para o
+            desenvolvimento da Administração Pública e da Sociedade.
+          </p>
+          <v-card-text>
+            <v-autocomplete
+              class="mx-4"
+              flat
+              v-model="select"
+              :search-input.sync="search"
+              hide-details
+              color="white"
+              :items="filteredCursos"
+              :loading="isLoading"
+              item-text="tx_nome_curso"
+              item-value="id_curso"
+              prepend-inner-icon="mdi-feature-search-outline"
+              style="background-color: white"
+              label="Busque um curso"
+              solo-inverted
+              clearable
+            >
+              <template v-slot:no-data>
+                <v-alert
+                  :value="true"
+                  color="error"
+                  icon="fas fa-exclamation-triangle"
+                >
+                  <span style="color: white">Não encontramos nenhum curso com este nome.</span>
+                </v-alert>
+              </template>
+              
+              <template v-slot:item="{item}">
+                
+                <v-list-item-avatar>
+                  <v-img
+                    v-if="item.tx_url_imagem_curso"
+                    :src="item.tx_url_imagem_curso"
+                  />
+                </v-list-item-avatar>
+                
+                <v-list-item-content @click="$router.push(`/curso/${item.id_curso}`)">
+                  <v-list-item-title v-text="item.tx_nome_curso" />
+                  <v-list-item-subtitle v-text="item.tematica_curso.tx_nome_tematica_curso" />
+                </v-list-item-content>
+                
+              </template>
+            </v-autocomplete>
+          </v-card-text>
         </div>
-        <dl>
-             <dt>Conteudista:</dt>
-             <dd>TCU</dd>
-            <dt>Carga Horária:</dt>
-            <dd>20h</dd>
-        </dl>
-        <v-card-actions>
-          <v-btn tile outlined color="primary" class="ma-2" href="https://www.escolavirtual.gov.br/curso/258/">
-            <v-icon>mdi-information</v-icon>
-            <span class="d-sr-only">Saiba mais</span>
-          </v-btn>
-          <v-btn tile color="contrast" class="ma-2 flex-grow-1" href="https://www.escolavirtual.gov.br/secretaria/inscricao/5437">
-            Inscreva-se
-            <v-icon right>
-              mdi-menu-right
-            </v-icon>
-          </v-btn>
-        </v-card-actions>
-      </v-card>
+      </div>
+    </v-row>
+    <v-row>
+      <v-flex xs12 sm8 offset-sm2 align-center justify-center>
+        <v-layout column class="justify-center align-center">
+          <h2 class="featured">
+            Cursos
+            <strong>em Destaque</strong>
+          </h2>
 
-      <v-card class="d-flex">
-        <div>
-          <v-img src="https://cdn.evg.gov.br/cursos/258_EVG/banner.svg" alt="Logo do Curso Inovação Social para o Aperfeiçoamento de Políticas Públicas"></v-img>
-          <p class="nome-tematica" data-paleta-bg="9" title="Gestão de Políticas Públicas">Gestão de Políticas Públicas</p>
-          <p class="nome-oferta">Curso Aberto</p>
-          <h3 class="v-card__title"><a href="https://www.escolavirtual.gov.br/curso/258">Planejamento Governamental</a></h3>
-        </div>
-        <dl>
-             <dt>Conteudista:</dt>
-             <dd>TCU</dd>
-            <dt>Carga Horária:</dt>
-            <dd>20h</dd>
-        </dl>
-        <v-card-actions>
-          <v-btn tile outlined color="primary" class="ma-2" href="https://www.escolavirtual.gov.br/curso/258/">
-            <v-icon>mdi-information</v-icon>
-            <span class="d-sr-only">Saiba mais</span>
-          </v-btn>
-          <v-btn tile color="contrast" class="ma-2 flex-grow-1" href="https://www.escolavirtual.gov.br/secretaria/inscricao/5437">
-            Inscreva-se
-            <v-icon right>
-              mdi-menu-right
-            </v-icon>
-          </v-btn>
-        </v-card-actions>
-      </v-card>
+          <v-layout class="cards course-cards flex-wrap justify-center">
+            <list-cursos-cards v-if="cursos.data" :curso-data="cursos.data"/>
+          </v-layout>
+          <v-flex text-center>
+            <v-btn color="primary" class="font-weight-bold" large outlined>
+              Ver todos os cursos
+              <v-icon>mdi-chevron-right</v-icon>
+            </v-btn>
+          </v-flex>
+        </v-layout>
+      </v-flex>
+    </v-row>
+    
+    <v-row>
+      <v-flex xs12 sm8 offset-sm2 align-center justify-center>
+        <v-layout column class="justify-center align-center">
+          <h2 class="featured mt-16">
+            Programas
+            <strong>em Destaque</strong>
+          </h2>
 
-      <v-card class="d-flex">
-        <div>
-          <v-img src="https://cdn.evg.gov.br/cursos/258_EVG/banner.svg" alt="Logo do Curso Inovação Social para o Aperfeiçoamento de Políticas Públicas"></v-img>
-          <p class="nome-tematica" data-paleta-bg="9" title="Gestão de Políticas Públicas">Gestão de Políticas Públicas</p>
-          <p class="nome-oferta">Curso Aberto</p>
-          <h3 class="v-card__title"><a href="https://www.escolavirtual.gov.br/curso/258">Inovação Social para o Aperfeiçoamento de Políticas Públicas</a></h3>
-        </div>
-        <dl>
-             <dt>Conteudista:</dt>
-             <dd>TCU</dd>
-            <dt>Carga Horária:</dt>
-            <dd>20h</dd>
-        </dl>
-        <v-card-actions>
-          <v-btn tile outlined color="primary" class="ma-2" href="https://www.escolavirtual.gov.br/curso/258/">
-            <v-icon>mdi-information</v-icon>
-            <span class="d-sr-only">Saiba mais</span>
-          </v-btn>
-          <v-btn tile color="contrast" class="ma-2 flex-grow-1" href="https://www.escolavirtual.gov.br/secretaria/inscricao/5437">
-            Inscreva-se
-            <v-icon right>
-              mdi-menu-right
-            </v-icon>
-          </v-btn>
-        </v-card-actions>
-      </v-card>
-
-      <v-card class="d-flex">
-        <div>
-          <v-img src="https://cdn.evg.gov.br/cursos/258_EVG/banner.svg" alt="Logo do Curso Inovação Social para o Aperfeiçoamento de Políticas Públicas"></v-img>
-          <p class="nome-tematica" data-paleta-bg="9" title="Gestão de Políticas Públicas">Gestão de Políticas Públicas</p>
-          <p class="nome-oferta">Curso Aberto</p>
-          <h3 class="v-card__title"><a href="https://www.escolavirtual.gov.br/curso/258">Inovação Social para o Aperfeiçoamento de Políticas Públicas</a></h3>
-        </div>
-        <dl>
-             <dt>Conteudista:</dt>
-             <dd>TCU</dd>
-            <dt>Carga Horária:</dt>
-            <dd>20h</dd>
-        </dl>
-        <v-card-actions>
-          <v-btn tile outlined color="primary" class="ma-2" href="https://www.escolavirtual.gov.br/curso/258/">
-            <v-icon>mdi-information</v-icon>
-            <span class="d-sr-only">Saiba mais</span>
-          </v-btn>
-          <v-btn tile color="contrast" class="ma-2 flex-grow-1" href="https://www.escolavirtual.gov.br/secretaria/inscricao/5437">
-            Inscreva-se
-            <v-icon right>
-              mdi-menu-right
-            </v-icon>
-          </v-btn>
-        </v-card-actions>
-      </v-card>
-
-    </v-layout>
-
-    <h2 class="featured mt-16">Programas <strong>em Destaque</strong></h2>
-
-    <v-layout class="cards course-cards flex-wrap justify-center">
-
-      <v-card class="d-flex">
-        <v-img src="https://cdn.evg.gov.br/programas/imagem_programa_2.png" alt="Logo do Programa Certificação em Ouvidoria"></v-img>
-        <div>
-          <h3 class="v-card__title"><a href="#">Certificação em Ouvidoria - 160 horas</a></h3>
-          <dl>
-            <dt>Carga Horária:</dt>
-            <dd>160h</dd>
-          </dl>
-        </div>
-        <v-card-actions>
-          <v-btn tile outlined color="primary" class="ma-2" @click="reveal = true">
-            <v-icon>mdi-information</v-icon>
-            <span class="d-sr-only">Saiba mais</span>
-          </v-btn>
-          <v-btn tile color="contrast" class="ma-2 flex-grow-1" href="https://www.escolavirtual.gov.br/secretaria/inscricao/5437">
-            Acesse
-            <v-icon right>
-              mdi-menu-right
-            </v-icon>
-          </v-btn>
-        </v-card-actions>
-        <v-expand-transition>
-          <v-card v-if="reveal" class="transition-fast-in-fast-out v-card--reveal">
-            <p class="v-card__text">A CERTIFICAÇÃO EM OUVIDORIA é concedida pela Ouvidoria-Geral da União (OGU), da Controladoria-Geral da União (CGU), em parceria com Escola Nacional de Administração Pública (Enap), aos alunos que concluírem oito cursos oferecidos em modalidade a distância, com carga horária total de 160 horas, realizadas dentro do mesmo ano. Para mais informações sobre o PROFOCO e a CERTIFICAÇÃO EM OUVIDORIA, aces...o (CGU), em parceria com Escola Nacional de Administração Pública (Enap), aos alunos que concluírem oito cursos oferecidos em modalidade a distância, com carga horária total de 160 horas, realizadas dentro do mesmo ano. Para mais informações sobre o PROFOCO e a CERTIFICAÇÃO EM OUVIDORIA, aces...</p>
-            <v-card-actions>
-              <v-btn text @click="reveal = false">
-                Fechar
+          <v-layout class="cards course-cards flex-wrap justify-center">
+            <list-programas-cards
+              v-if="programas.data"
+              :programa-data="programas.data"
+            />
+            <v-flex text-center>
+              <v-btn
+                color="primary"
+                @click="$router.push('/catalogo-programas')"
+                class="font-weight-bold"
+                large
+                outlined
+              >
+                Ver todos os programas
+                <v-icon>mdi-chevron-right</v-icon>
               </v-btn>
-            </v-card-actions>
-          </v-card>
-        </v-expand-transition>
-      </v-card>
+            </v-flex>
+          </v-layout>
+        </v-layout>
+      </v-flex>
+    </v-row>
 
-      <v-card class="d-flex">
-        <v-img src="https://cdn.evg.gov.br/programas/imagem_programa_2.png" alt="Logo do Programa Certificação em Ouvidoria"></v-img>
-        <div>
-          <h3 class="v-card__title"><a href="#">Certificação em Ouvidoria - 160 horas</a></h3>
-          <dl>
-            <dt>Carga Horária:</dt>
-            <dd>160h</dd>
-          </dl>
-        </div>
-        <v-card-actions>
-          <v-btn tile outlined color="primary" class="ma-2" @click="reveal = true">
-            <v-icon>mdi-information</v-icon>
-            <span class="d-sr-only">Saiba mais</span>
-          </v-btn>
-          <v-btn tile color="contrast" class="ma-2 flex-grow-1" href="https://www.escolavirtual.gov.br/secretaria/inscricao/5437">
-            Acesse
-            <v-icon right>
-              mdi-menu-right
-            </v-icon>
-          </v-btn>
-        </v-card-actions>
-        <v-expand-transition>
-          <v-card v-if="reveal" class="transition-fast-in-fast-out v-card--reveal">
-            <p class="v-card__text">A CERTIFICAÇÃO EM OUVIDORIA é concedida pela Ouvidoria-Geral da União (OGU), da Controladoria-Geral da União (CGU), em parceria com Escola Nacional de Administração Pública (Enap), aos alunos que concluírem oito cursos oferecidos em modalidade a distância, com carga horária total de 160 horas, realizadas dentro do mesmo ano. Para mais informações sobre o PROFOCO e a CERTIFICAÇÃO EM OUVIDORIA, aces...o (CGU), em parceria com Escola Nacional de Administração Pública (Enap), aos alunos que concluírem oito cursos oferecidos em modalidade a distância, com carga horária total de 160 horas, realizadas dentro do mesmo ano. Para mais informações sobre o PROFOCO e a CERTIFICAÇÃO EM OUVIDORIA, aces...</p>
-            <v-card-actions>
-              <v-btn text @click="reveal = false">
-                Fechar
-              </v-btn>
-            </v-card-actions>
-          </v-card>
-        </v-expand-transition>
-      </v-card>
-
-      <v-card class="d-flex">
-        <v-img src="https://cdn.evg.gov.br/programas/imagem_programa_2.png" alt="Logo do Programa Certificação em Ouvidoria"></v-img>
-        <div>
-          <h3 class="v-card__title"><a href="#">Certificação em Ouvidoria - 160 horas</a></h3>
-          <dl>
-            <dt>Carga Horária:</dt>
-            <dd>160h</dd>
-          </dl>
-        </div>
-        <v-card-actions>
-          <v-btn tile outlined color="primary" class="ma-2" @click="reveal = true">
-            <v-icon>mdi-information</v-icon>
-            <span class="d-sr-only">Saiba mais</span>
-          </v-btn>
-          <v-btn tile color="contrast" class="ma-2 flex-grow-1" href="https://www.escolavirtual.gov.br/secretaria/inscricao/5437">
-            Acesse
-            <v-icon right>
-              mdi-menu-right
-            </v-icon>
-          </v-btn>
-        </v-card-actions>
-        <v-expand-transition>
-          <v-card v-if="reveal" class="transition-fast-in-fast-out v-card--reveal">
-            <p class="v-card__text">A CERTIFICAÇÃO EM OUVIDORIA é concedida pela Ouvidoria-Geral da União (OGU), da Controladoria-Geral da União (CGU), em parceria com Escola Nacional de Administração Pública (Enap), aos alunos que concluírem oito cursos oferecidos em modalidade a distância, com carga horária total de 160 horas, realizadas dentro do mesmo ano. Para mais informações sobre o PROFOCO e a CERTIFICAÇÃO EM OUVIDORIA, aces...o (CGU), em parceria com Escola Nacional de Administração Pública (Enap), aos alunos que concluírem oito cursos oferecidos em modalidade a distância, com carga horária total de 160 horas, realizadas dentro do mesmo ano. Para mais informações sobre o PROFOCO e a CERTIFICAÇÃO EM OUVIDORIA, aces...</p>
-            <v-card-actions>
-              <v-btn text @click="reveal = false">
-                Fechar
-              </v-btn>
-            </v-card-actions>
-          </v-card>
-        </v-expand-transition>
-      </v-card>
-
-    </v-layout>
-
-    <h2 class="featured mt-16">Como a escola <strong>funciona</strong></h2>
+    <h2 class="featured mt-16">
+      Como a escola
+      <strong>funciona</strong>
+    </h2>
 
     <v-layout class="evg-cards count-items flex-wrap justify-center">
-
       <v-card class="d-flex">
-        <v-card-title>Escolha um curso pelo <strong>Catálogo de Cursos</strong> ou pela sugestão da página inicial.</v-card-title>
+        <v-card-title>
+          Escolha um curso pelo
+          <strong>Catálogo de Cursos</strong> ou pela sugestão da página
+          inicial.
+        </v-card-title>
         <v-img src="../assets/img/como-funciona-01.svg" alt="Passo 01"></v-img>
       </v-card>
 
       <v-card class="d-flex">
-        <v-card-title>Leia a descrição do curso e acesse o link <strong>Inscreva-se</strong>.</v-card-title>
+        <v-card-title>
+          Leia a descrição do curso e acesse o link
+          <strong>Inscreva-se</strong>.
+        </v-card-title>
         <v-img src="../assets/img/como-funciona-02.svg" alt="Passo 02"></v-img>
       </v-card>
 
@@ -240,28 +143,85 @@
       </v-card>
 
       <v-card class="d-flex">
-        <v-card-title>... pronto, você já está dentro do ambiente de curso.</v-card-title>
-        <v-card-text>Lá você poderá ver também todos os cursos que você virá a se inscrever.</v-card-text>
+        <v-card-title>
+          ... pronto, você já está dentro do ambiente de curso.
+        </v-card-title>
+        <v-card-text>
+          Lá você poderá ver também todos os cursos que você virá a se inscrever.
+        </v-card-text>
         <v-img src="../assets/img/como-funciona-04.svg" alt="Passo 04"></v-img>
       </v-card>
-
     </v-layout>
-
   </v-layout>
 </template>
 
 <script>
-// @ is an alias to /src
+  import {get} from '@/services/abstract.service';
 
-export default {
-  name: 'Home',
-  data: () => ({
-    reveal: false,
-  }),
-  components: {}
-}
+  export default {
+    name: 'Home',
+    data: () => ({
+      cursos: {},
+      programas: {},
+      search: '',
+      select: null,
+      filteredCursos: [],
+      isLoading: false,
+    }),
+    watch: {
+      search(val) {
+        return val !== this.select ? this.filterCursos(val) : '';
+      },
+    },
+    created() {
+      this.getCursosDestaque();
+      this.getProgramasDestaque();
+    },
+    methods: {
+      async getCursosDestaque() {
+        const response = await get('/curso?search=bl_destaque_curso:1');
+        this.cursos = response.data;
+      },
+      async getProgramasDestaque() {
+        const response = await get('/programas?search=bl_programa_destaque:1');
+        this.programas = response.data;
+      },
+      async filterCursos(val) {
+        this.isLoading = true;
+        let items = await this.getCurso(val);
+        setTimeout(() => {
+          this.filteredCursos = items.filter(res => {
+            return (
+              (res.tx_nome_curso || '')
+                .toLowerCase()
+                .indexOf((val || '').toLowerCase()) > -1
+            );
+          });
+          this.isLoading = false;
+        }, 200);
+      },
+      async getCurso(val) {
+        const response = await get(`/curso?search=tx_nome_curso:${val}`);
+        return response.data ? response.data.data : [];
+      },
+    },
+  };
 </script>
 
 <style scoped>
+  .container {
+    clear: both;
+    margin: 0 auto;
+    width: 100%;
+    position: relative;
+    text-align: center;
+  }
 
+  /* Centered text */
+  .centered {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
 </style>

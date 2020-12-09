@@ -23,6 +23,9 @@ const mutations = {
   },
   SET_SNACKBAR(state, data = {}) {
     state.snackbar = data
+  },
+  SET_MENU_DRAWER(state, data = {}) {
+    state.drawerSettings = data
   }
 };
 

@@ -31,4 +31,5 @@ export const ROUTER_CONSTANTS = {
   menuCadastrarTarefa: 'Cadastrar Tarefa',
   menuEditarTarefa: 'Editar Tarefa',
   menuControleAcessos: 'Controle de Acessos',
+  menuCertificados: 'Certificados',
 };

@@ -9,6 +9,10 @@ const state = {
     text: '',
     timeout: 2000
   },
+  drawerSettings: {
+    model: null,
+    clipped: true,
+  }
 };
 
 export default state;
