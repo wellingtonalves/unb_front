@@ -154,6 +154,7 @@ export default {
         return false;
       }
       this.download(response.data)
+      await this.get();
     },
     download(file) {
       const url = window.URL.createObjectURL(new Blob([file]));
