@@ -87,7 +87,10 @@ h3.subtitle {
 }
 
 /* Vuetify Layout Components */
-
+div.container {
+  padding-left: 0;
+  padding-right: 0;
+}
 
 /* Custom Layout Components */
 .action-buttons {

@@ -1,5 +1,5 @@
 <template>
-  <v-layout wrap>
+  <v-container>
 
     <section class="conheca-escola">
 
@@ -114,7 +114,7 @@
       </div>
     </section>
 
-  </v-layout>
+  </v-container>
 </template>
 
 <style scoped>

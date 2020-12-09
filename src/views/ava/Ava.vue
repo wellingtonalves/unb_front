@@ -1,5 +1,5 @@
 <template>
-  <v-layout v-show="permission('AVA_LISTAR')" wrap class="align-stretch">
+  <v-container v-show="permission('AVA_LISTAR')">
 
     <filter-expansion-panel @filtrar="filtrar" @resetar="limparFiltros()">
       
@@ -120,7 +120,7 @@
       </v-btn>
     </v-snackbar>
 
-  </v-layout>
+  </v-container>
 </template>
 
 <script>

@@ -1,5 +1,5 @@
 <template>
-  <v-layout wrap>
+  <v-container>
 
     <h3 v-show="!loading" class="subheading">
       Oferta:
@@ -104,7 +104,7 @@
         @excluir="excluirValorExclusividade(dialogValorExclusividadeDeleteData.id_valor_exclusividade_oferta)" />
     
     </div>
-  </v-layout>
+  </v-container>
 </template>
 
 <script>

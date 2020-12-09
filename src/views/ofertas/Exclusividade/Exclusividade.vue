@@ -1,5 +1,5 @@
 <template>
-  <v-layout wrap>
+  <v-container>
 
     <h3 class="subheading">
       Oferta: <strong>{{oferta.tx_nome_curso + " ( " + oferta.tx_nome_oferta + " )"}}</strong>
@@ -22,7 +22,7 @@
       </exclusividade-form>
       
     </card-default>
-  </v-layout>
+  </v-container>
 </template>
 
 <script>

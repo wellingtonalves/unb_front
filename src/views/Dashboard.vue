@@ -1,12 +1,12 @@
 <template>
-  <v-layout wrap>
+  <v-container>
 
     <h2 class="featured">
       <strong>Dashboard</strong>
     </h2>
 
     
-  </v-layout>
+  </v-container>
 </template>
 
 <script>

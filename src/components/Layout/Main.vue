@@ -2,11 +2,15 @@
   <v-app>
     <AppBar />
     <v-main>
-      
-      <v-container :fluid="isAuthenticated === true">
+
+      <v-container>
         <v-breadcrumbs v-if="isAuthenticated === true" :items="$route.meta.breadcrumb" divider="→" />
         <h2>{{this.$route.meta.title}}</h2>
-        <router-view />
+      </v-container>
+      
+      <router-view />
+
+      <v-container>
         <AppFooter />
       </v-container>
 
