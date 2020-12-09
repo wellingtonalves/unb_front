@@ -896,6 +896,34 @@ const routes = [
           },
         ],
       },
+      {
+        path: '/certificados',
+        component: () => import('../components/Layout/RouterViewComponent.vue'),
+        children: [
+          {
+            path: '',
+            name: 'certificados',
+            component: () =>
+              import('../views/certificados/Certificado.vue'),
+            meta: {
+              requiresAuth: true,
+              title: ROUTER_CONSTANTS.menuCertificados,
+              breadcrumb: [
+                {
+                  text: ROUTER_CONSTANTS.menuDashboard,
+                  disabled: false,
+                  href: '/',
+                },
+                {
+                  text: ROUTER_CONSTANTS.menuCertificados,
+                  disabled: true,
+                  href: '/certificados',
+                },
+              ],
+            },
+          },
+        ],
+      },
     ],
   },
 ];
