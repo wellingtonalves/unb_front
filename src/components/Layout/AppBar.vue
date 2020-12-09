@@ -104,6 +104,7 @@
         </v-list-group>
       </v-list>
     </v-navigation-drawer>
+
     <v-app-bar :clipped-left="true" app>
       <v-app-bar-nav-icon v-if="isAuthenticated === true" @click.stop="drawerSettings.model = !drawerSettings.model"/>
 
@@ -340,6 +341,7 @@ export default {
     box-shadow: 0 0 10px 0 rgba(55, 71, 79, .1) !important;
     height: auto !important;
   }
+
   header.v-app-bar .container {
     padding: 0 48px;
   }
