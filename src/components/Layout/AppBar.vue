@@ -197,13 +197,8 @@
             <v-btn icon title="Notificações" class="top-button" v-if="isAuthenticated === true">
               <v-icon>mdi-bell</v-icon>
             </v-btn>
-<<<<<<< HEAD
             
             <v-btn tile color="contrast" @click="login()" class="my-2 ml-2 white--text" v-if="isAuthenticated === false">
-=======
-
-            <v-btn tile color="contrast" @click="login()" class="ma-2" v-if="isAuthenticated === false">
->>>>>>> 17e0940535e0370976f4cb08c4747e81081342d4
               ENTRAR
               <v-icon right>
                 mdi-menu-right
