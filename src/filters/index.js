@@ -1,3 +1,4 @@
+import constants from '../util/constants'
 export default {
   filters: {
     maskCpfCnpj(text = '') {
@@ -12,5 +13,9 @@ export default {
         ? text.replace(/^(\d{2})(\d{5})(\d{4})/, '($1) $2-$3')
         : text.replace(/^(\d{2})(\d{4})(\d{4})/, '($1) $2-$3');
     },
+    displayLabel(value, name) {
+      const item = constants[name].find(res => res.value === value)
+      return item ? item.label : ""
+    }
   },
 };

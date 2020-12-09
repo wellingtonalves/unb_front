@@ -226,6 +226,13 @@ const routes = [
               ],
             },
           },
+          {
+            path: '/curso/:id',
+            component: () => import('../views/cursos/CursoDetail.vue'),
+            meta: {
+              requiresAuth: false
+            },
+          },
         ],
       },
       {
@@ -551,6 +558,21 @@ const routes = [
               ],
             },
           },
+          {
+            path: '/programa/:id',
+            component: () => import('../views/programas/ProgramasDetail.vue'),
+            meta: {
+              requiresAuth: false
+            },
+          },
+          {
+            path: '/catalogo-programas',
+            component: () => import('../views/programas/ProgramasAll.vue'),
+            meta: {
+              requiresAuth: false,
+              title: 'Catálogo de Programas'
+            },
+          }
         ],
       },
       {
