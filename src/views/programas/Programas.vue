@@ -55,13 +55,13 @@
             </template>
 
             <template v-slot:item.bl_programa_destaque="{ item }">
-              <p v-if="item.bl_programa_destaque == 1">Sim</p>
-              <p v-else>Não</p>
+              <span v-if="item.bl_programa_destaque == 1">Sim</span>
+              <span v-else>Não</span>
             </template>
 
             <template v-slot:item.tp_situacao_programa="{ item }">
-              <p v-if="item.tp_situacao_programa == 'A'">Ativo</p>
-              <p v-else>Inativo</p>
+              <span v-if="item.tp_situacao_programa == 'A'">Ativo</span>
+              <span v-else>Inativo</span>
             </template>
 
             <template v-slot:item.action="{ item }">

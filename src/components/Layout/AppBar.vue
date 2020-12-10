@@ -199,7 +199,7 @@
             </v-btn>
             
             <v-btn tile color="contrast" @click="login()" class="my-2 ml-2 white--text" v-if="isAuthenticated === false">
-              ENTRAR
+              Entrar
               <v-icon right>
                 mdi-menu-right
               </v-icon>
@@ -218,7 +218,7 @@
 
               </template>
 
-              <v-list nav dense>
+              <v-list nav dense id="menu-meus-dados">
                 <v-list-item
                   v-for="(item, i) in dropdownMenu"
                   :key="i"
@@ -437,6 +437,14 @@ nav.v-navigation-drawer .v-list-item__title {
 #main-nav .v-list-item__subtitle {
   color: var(--v-primary-base);
   font-weight: 600;
+}
+
+#menu-meus-dados .v-list-item .v-list-item__icon {
+  margin-right: 8px;
+}
+
+#menu-meus-dados .v-list-item .v-list-item__icon .v-icon.v-icon {
+  font-size: 20px;
 }
 
 .top-button {

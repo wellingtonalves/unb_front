@@ -2,23 +2,21 @@
   <v-layout wrap>
 
     <v-layout id="featured">
-      <div class="centered">
-        <h2 class="white--text">Escola Virtual.Gov – EV.G</h2>
-        <h3 class="font-weight-regular white--text">
+      <div  class="centered">
+        <h2 class="white--text text-center">Escola Virtual.Gov – EV.G</h2>
+        <h3 class="font-weight-regular white--text text-center">
           Portal Único de Governo para a oferta de capacitação a distância.
         </h3>
-        <p class="font-weight-light headline white--text">
+        <p class="font-weight-light headline white--text text-center">
           Cursos on-line e gratuitos de várias áreas de conhecimento para o
           desenvolvimento da Administração Pública e da Sociedade.
         </p>
         <v-card-text>
           <v-autocomplete
-            class="mx-4"
             flat
             v-model="select"
             :search-input.sync="search"
             hide-details
-            color="white"
             :items="filteredCursos"
             :loading="isLoading"
             item-text="tx_nome_curso"
@@ -58,7 +56,7 @@
       </div>
     </v-layout>
 
-    <v-container>
+    <v-container class="mt-6">
       <v-flex align-center justify-center>
         <v-layout column class="justify-center align-center">
           <h2 class="featured">
@@ -68,38 +66,32 @@
 
           <list-cursos-cards v-if="cursos.data" :curso-data="cursos.data"/>          
 
-          <v-flex text-center>
-            <v-btn color="primary" class="font-weight-bold" large outlined>
+          <v-flex text-center class="mt-6">
+            <v-btn large outlined color="primary">
               Ver todos os cursos
-              <v-icon>mdi-chevron-right</v-icon>
+              <v-icon right>mdi-menu-right</v-icon>
             </v-btn>
           </v-flex>
         </v-layout>
       </v-flex>
     </v-container>
     
-    <v-container>
+    <v-container class="mt-6">
       <v-flex align-center justify-center>
         <v-layout column class="justify-center align-center">
-          <h2 class="featured mt-16">
+          <h2 class="featured">
             Programas
             <strong>em Destaque</strong>
           </h2>
           
-          <list-programas-cards
-            v-if="programas.data"
-            :programa-data="programas.data"
-          />
-          <v-flex text-center>
-            <v-btn
+          <list-programas-cards v-if="programas.data" :programa-data="programas.data"/>
+          
+          <v-flex text-center class="mt-6">
+            <v-btn large outlined
               color="primary"
-              @click="$router.push('/catalogo-programas')"
-              class="font-weight-bold"
-              large
-              outlined
-            >
+              @click="$router.push('/catalogo-programas')">
               Ver todos os programas
-              <v-icon>mdi-chevron-right</v-icon>
+              <v-icon right>mdi-menu-right</v-icon>
             </v-btn>
           </v-flex>
 
@@ -107,8 +99,8 @@
       </v-flex>
     </v-container>
 
-    <v-container>
-      <h2 class="featured mt-16">
+    <v-container class="mt-6">
+      <h2 class="featured">
         Como a escola
         <strong>funciona</strong>
       </h2>
@@ -234,8 +226,28 @@
     left: 50%;
     transform: translate(-50%, -50%);
   }
+</style>
 
+<style> 
   #featured .v-input__slot {
     background-color: var(--v-white-base);
+  }
+  #featured .v-select__slot input {
+    color: var(--v-black-base);
+  }
+  #featured .v-text-field .v-input__prepend-inner {
+    padding-right: 12px;
+  }
+  .v-menu__content.v-autocomplete__content .v-alert.error {
+    color: var(--v-white-base);
+    margin-left: 8px;
+    margin-right: 8px;
+    margin-bottom: 0;
+  }
+  .v-menu__content.v-autocomplete__content .v-list-item.v-list-item--link {
+    padding: 0 24px;
+  }
+  .v-menu__content.v-autocomplete__content .v-list-item.v-list-item--link .v-avatar {
+    /*display: none;*/
   }
 </style>

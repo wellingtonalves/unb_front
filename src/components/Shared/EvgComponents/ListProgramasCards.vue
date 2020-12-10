@@ -1,6 +1,6 @@
 <template>
   <v-layout class="cards course-cards flex-wrap justify-center">
-    <v-card v-for="(programa, p) of programaData" :key="p">
+    <v-card class="d-flex" v-for="(programa, p) of programaData" :key="p">
       <div>
         <v-img :src="programa.tx_url_imagem"></v-img>
         <h3 class="v-card__title">
@@ -23,7 +23,7 @@
           <span class="d-sr-only">Saiba mais</span>
         </v-btn>
         <v-btn tile color="contrast" class="ma-2 flex-grow-1">
-          Acesse o Programa
+          Acesse
           <v-icon right>mdi-menu-right</v-icon>
         </v-btn>
       </v-card-actions>
