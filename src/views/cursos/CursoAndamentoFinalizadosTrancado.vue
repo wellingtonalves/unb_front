@@ -2,9 +2,7 @@
   <v-layout wrap>
 
     <filter-expansion-panel @filtrar="filtrar" @resetar="limparFiltros()" :open="0">
-
       <template v-slot:filterExpansionPanel>
-        
         <v-col cols="12" sm="2">
           <v-select dense v-model="situacaoCurso" label="Situação" :items="situacaoCursoSelect" item-text="label" item-value="value" />
         </v-col>
@@ -16,9 +14,7 @@
                         placeholder="Informe o nome do curso"
           />
         </v-col>
-        
       </template>
-
     </filter-expansion-panel>
 
     <v-row class="flex-basis-100">
@@ -52,9 +48,7 @@
             
 
             <template v-slot:item.action="{ item }">
-
               <v-layout wrap class="action-buttons">
-
                 <v-tooltip bottom>
                   <template v-slot:activator="{ on }">
                     <v-btn small tile outlined icon color="primary" @click="goToCourse(`${item.tx_url_ava}`)" v-on="on">
@@ -63,27 +57,13 @@
                   </template>
                   <span>Ver Curso</span>
                 </v-tooltip>
-
-                <v-tooltip bottom>
-                  <template v-slot:activator="{ on }">
-                    <v-btn small tile outlined icon color="error" @click="excluir(item)" v-on="on">
-                      <v-icon>mdi-close</v-icon>
-                    </v-btn>
-                  </template>
-                  <span>Finalizar Curso</span>
-                </v-tooltip>
-
               </v-layout>
-
             </template>
-            
           </v-data-table>
 
         </v-card>
       </v-col>
     </v-row>
-
-    <dialog-delete-component :text="dialogDeleteData.tx_nome_curso" v-model="dialogDelete" @excluir="excluirItem(dialogDeleteData.id_curso)" />
 
   </v-layout>
 </template>
@@ -91,7 +71,6 @@
 <script>
   import {get} from "@/services/abstract.service";
   import {filterFormat} from "@/helpers/filterFormat";
-  import {remove} from "@/services/abstract.service";
   export default {
     name: "CursoAndamentoFinalizadosTrancado",
     data: () => ({
@@ -164,15 +143,6 @@
       goToCourse(url) {
         window.open(url, '_blank');
       },
-      excluir(item) {
-        this.dialogDeleteData = item;
-        this.dialogDelete = true;
-      },
-      async excluirItem(id) {
-        await remove(`/curso/${id}`);
-        this.dialogDelete = false;
-        await this.get();
-      }
     }
   }
 </script>
