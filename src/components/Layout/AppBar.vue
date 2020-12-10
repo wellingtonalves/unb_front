@@ -39,6 +39,24 @@
           </v-list-item-content>
         </v-list-item>
 
+        <v-list-item link :to="'/programas'" v-show="permission('PROGRAMA_LISTAR')">
+          <v-list-item-action>
+            <v-icon>mdi-format-list-text</v-icon>
+          </v-list-item-action>
+          <v-list-item-content>
+            <v-list-item-title>Programas</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+
+        <v-list-item link :to="'/certificados'" v-show="permission('CERTIFICADO_LISTAR')">
+          <v-list-item-action>
+            <v-icon>mdi-certificate</v-icon>
+          </v-list-item-action>
+          <v-list-item-content>
+            <v-list-item-title>Certificados</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+
         <v-list-item link :to="'/ava'" v-show="permission('AVA_LISTAR')">
           <v-list-item-action>
             <v-icon>mdi-school-outline</v-icon>
@@ -54,15 +72,6 @@
           </v-list-item-action>
           <v-list-item-content>
             <v-list-item-title>Tarefas agendadas</v-list-item-title>
-          </v-list-item-content>
-        </v-list-item>
-
-        <v-list-item link :to="'/programas'" v-show="permission('PROGRAMA_LISTAR')">
-          <v-list-item-action>
-            <v-icon>mdi-school-outline</v-icon>
-          </v-list-item-action>
-          <v-list-item-content>
-            <v-list-item-title>Programas</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
 
@@ -102,15 +111,6 @@
             </v-list-item-content>
           </v-list-item>
         </v-list-group>
-
-        <v-list-item link :to="'/certificados'" v-show="permission('CERTIFICADO_LISTAR')">
-          <v-list-item-action>
-            <v-icon>mdi-school-outline</v-icon>
-          </v-list-item-action>
-          <v-list-item-content>
-            <v-list-item-title>Certificados</v-list-item-title>
-          </v-list-item-content>
-        </v-list-item>
       </v-list>
     </v-navigation-drawer>
 
