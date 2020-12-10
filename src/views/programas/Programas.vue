@@ -1,5 +1,5 @@
 <template>
-  <v-layout wrap class="align-stretch">
+  <v-container>
 
     <filter-expansion-panel @filtrar="filtrar" @resetar="limparFiltros()">
 
@@ -55,13 +55,13 @@
             </template>
 
             <template v-slot:item.bl_programa_destaque="{ item }">
-              <p v-if="item.bl_programa_destaque == 1">Sim</p>
-              <p v-else>Não</p>
+              <span v-if="item.bl_programa_destaque == 1">Sim</span>
+              <span v-else>Não</span>
             </template>
 
             <template v-slot:item.tp_situacao_programa="{ item }">
-              <p v-if="item.tp_situacao_programa == 'A'">Ativo</p>
-              <p v-else>Inativo</p>
+              <span v-if="item.tp_situacao_programa == 'A'">Ativo</span>
+              <span v-else>Inativo</span>
             </template>
 
             <template v-slot:item.action="{ item }">
@@ -99,7 +99,7 @@
     </v-row>
 
     <dialog-delete-component :text="dialogDeleteData.tx_nome_programa" v-model="dialogDelete" @excluir="excluirItem(dialogDeleteData.id_programa)"></dialog-delete-component>
-  </v-layout>
+  </v-container>
 </template>
 
 <script>

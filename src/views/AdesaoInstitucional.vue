@@ -1,5 +1,5 @@
 <template>
-  <v-layout wrap>
+  <v-container>
 
     <v-row class="section">
       
@@ -153,7 +153,7 @@
 
     </v-row>
 
-  </v-layout>
+  </v-container>
 </template>
 
 <script>

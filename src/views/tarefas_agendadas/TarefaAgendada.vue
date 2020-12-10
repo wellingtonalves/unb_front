@@ -1,5 +1,5 @@
 <template>
-  <v-layout v-show="permission('TAREFA_AGENDADA_LISTAR')" wrap class="align-stretch">
+  <v-container v-show="permission('TAREFA_AGENDADA_LISTAR')">
 
     <filter-expansion-panel @filtrar="filtrar" @resetar="limparFiltros()">
       <template v-slot:filterExpansionPanel>
@@ -115,7 +115,7 @@
       </v-btn>
     </v-snackbar>
 
-  </v-layout>
+  </v-container>
 </template>
 
 <script>

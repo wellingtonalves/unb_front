@@ -1,5 +1,5 @@
 <template>
-  <v-layout wrap>
+  <v-container>
 
     <h3 class="subheading">
       Oferta:
@@ -65,7 +65,7 @@
       </div>
       
     </card-default>
-  </v-layout>
+  </v-container>
 </template>
 
 <script>

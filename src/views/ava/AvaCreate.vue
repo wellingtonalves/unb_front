@@ -1,5 +1,5 @@
 <template>
-  <v-layout wrap>
+  <v-container>
 
     <v-card width="100%" elevation="10">
       <v-container class="pa-5" fluid>
@@ -26,7 +26,7 @@
       </v-container>
     </v-card>
 
-  </v-layout>
+  </v-container>
 </template>
 
 <script>

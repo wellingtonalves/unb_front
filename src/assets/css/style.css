@@ -33,6 +33,7 @@ h2.featured strong {
   padding: 8px;
   width: 100%;
 }
+.box > h3:first-child,
 .box > h4:first-child {
   background-color: var(--v-lightgrey-base);
   color: var(--v-primary-base);
@@ -43,13 +44,21 @@ h2.featured strong {
   padding: 0 16px;
   text-transform: uppercase;
 }
+.box .row {
+  margin-left: 0;
+  margin-right: 0;
+}
 .box .layout > div {
   flex-grow: 1;
   flex-shrink: 0;
   flex-basis: 300px;
+}
+.box .layout > div,
+.box .row > div {
   padding: 16px;
 }
-.box .layout h5 {
+.box .layout h5,
+.box .row > div h4 {
   color: var(--v-primary-base);
   font-size: 1rem;
   font-weight: 300;
@@ -88,7 +97,8 @@ h3.subtitle {
 
 /* Vuetify Layout Components */
 div.container {
-  padding: 12px 48px;
+  padding-left: 48px;
+  padding-right: 48px;
 }
 
 /* Custom Layout Components */
@@ -145,7 +155,7 @@ div.container {
   border-radius: 0;
   box-shadow: 0 0 10px 3px rgba(0,0,0,.075) !important;
   flex-direction: column;
-  flex-basis: 200px;
+  flex-basis: 265px;
   flex-grow: 0;
   margin: 8px;
 }
@@ -243,7 +253,7 @@ div.container {
   border-radius: 0;
   box-shadow: 0 0 0 !important;
   flex-flow: column;
-  flex-basis: 200px;
+  flex-basis: 250px;
   flex-grow: 0;
   margin: 8px;
   padding: 8px;
@@ -348,5 +358,10 @@ div.container {
   }
   div.container {
     padding: 12px;
+  }
+}
+@media (min-width: 1264px) {
+  div.container {
+    max-width: 1286px;
   }
 }

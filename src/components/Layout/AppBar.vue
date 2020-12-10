@@ -218,9 +218,9 @@
             <v-btn icon title="Notificações" class="top-button" v-if="isAuthenticated === true">
               <v-icon>mdi-bell</v-icon>
             </v-btn>
-
-            <v-btn tile color="contrast" @click="login()" class="ma-2" v-if="isAuthenticated === false">
-              ENTRAR
+            
+            <v-btn tile color="contrast" @click="login()" class="my-2 ml-2 white--text" v-if="isAuthenticated === false">
+              Entrar
               <v-icon right>
                 mdi-menu-right
               </v-icon>
@@ -239,7 +239,7 @@
 
               </template>
 
-              <v-list nav dense>
+              <v-list nav dense id="menu-meus-dados">
                 <v-list-item
                   v-for="(item, i) in dropdownMenu"
                   :key="i"
@@ -369,8 +369,7 @@ header.v-app-bar {
 }
 
 header.v-app-bar .container {
-  padding-bottom: 0;
-  padding-top: 0;
+  padding: 0 48px;
 }
 
 h1 a {
@@ -459,6 +458,14 @@ nav.v-navigation-drawer .v-list-item__title {
 #main-nav .v-list-item__subtitle {
   color: var(--v-primary-base);
   font-weight: 600;
+}
+
+#menu-meus-dados .v-list-item .v-list-item__icon {
+  margin-right: 8px;
+}
+
+#menu-meus-dados .v-list-item .v-list-item__icon .v-icon.v-icon {
+  font-size: 20px;
 }
 
 .top-button {

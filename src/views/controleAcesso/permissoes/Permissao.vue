@@ -1,5 +1,5 @@
 <template>
-  <v-layout wrap>
+  <v-container>
 
     <v-row class="flex-basis-100">
       <v-col cols="12">
@@ -65,7 +65,7 @@
 
     <dialog-delete-component :text="dialogDeleteData.tx_nome_permissao" v-model="dialogDelete" @excluir="excluirItem(dialogDeleteData.id_permissao)"/>
 
-  </v-layout>
+  </v-container>
 </template>
 
 <script>

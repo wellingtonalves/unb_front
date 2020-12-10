@@ -1,5 +1,5 @@
 <template>
-  <v-layout wrap>
+  <v-container>
     <card-default>
       <programas-form @update="update" :errors="errors">
         <template v-slot:buttons>
@@ -15,7 +15,7 @@
         </template>
       </programas-form>
     </card-default>
-  </v-layout>
+  </v-container>
 </template>
 
 <script>

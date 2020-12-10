@@ -1,5 +1,5 @@
 <template>
-  <v-layout wrap>
+  <v-container>
 
 <!--    <filter-expansion-panel @filtrar="filtrar" @resetar="limparFiltros()">-->
 
@@ -72,7 +72,7 @@
       </v-col>
     </v-row>
 
-  </v-layout>
+  </v-container>
 </template>
 
 <script>
