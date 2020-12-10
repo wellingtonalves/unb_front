@@ -19,12 +19,7 @@
 
     <v-row class="flex-basis-100">
       <v-col cols="12">
-        <v-card v-if="!situacaoCurso">
-          <v-alert text icon="mdi-information" color="warning">
-            <h3>Por favor, realize uma pesquisa por situação.</h3>
-          </v-alert>
-        </v-card>
-        <v-card v-if="situacaoCurso">
+        <v-card>
 
           <v-data-table
             :headers="headers"
@@ -75,7 +70,7 @@
     name: "CursoAndamentoFinalizadosTrancado",
     data: () => ({
       expanded: [],
-      situacaoCurso: '',
+      situacaoCurso: 'andamento',
       filterData: {},
       search: '',
       situacaoCursoSelect: [
@@ -134,6 +129,8 @@
       },
       async filtrar() {
         const filters = await filterFormat(this.filterData);
+        
+        console.log('?search=' + filters + '&searchJoin=and')
         await this.get('?search=' + filters + '&searchJoin=and');
       },
       limparFiltros() {
