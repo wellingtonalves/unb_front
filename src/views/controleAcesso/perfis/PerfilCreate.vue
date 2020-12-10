@@ -1,5 +1,5 @@
 <template>
-  <v-layout wrap>
+  <v-container>
     <card-default>
       <v-container class="pa-5" fluid>
         <perfil-form @update="update" :errors="errors">
@@ -17,7 +17,7 @@
         </perfil-form>
       </v-container>
     </card-default>
-  </v-layout>
+  </v-container>
 </template>
 
 <script>

@@ -1,5 +1,5 @@
 <template>
-  <v-layout wrap>
+  <v-container>
     <v-row
       v-if="!loading && curso.tematica_curso"
       style="background-color: #FB8C00"
@@ -144,7 +144,7 @@
         </v-row>
       </v-layout> -->
     </v-row>
-  </v-layout>
+  </v-container>
 </template>
 <script>
 import {get} from '@/services/abstract.service';

@@ -1,5 +1,5 @@
 <template>
-  <v-layout wrap>
+  <v-container>
     <v-card class="mx-auto" height="100%" width="100%" elevation="10">
       <v-container class="pa-5" fluid>
         <meus-dados-form @update="receiveData" ref="userForm" :user-data="data" :errors="errors">
@@ -11,7 +11,7 @@
         </meus-dados-form>
       </v-container>
     </v-card>
-  </v-layout>
+  </v-container>
 </template>
 <script>
 import MeusDadosForm from './MeusDadosForm.vue';

@@ -1,5 +1,5 @@
 <template>
-  <v-layout wrap>
+  <v-container>
     <v-row v-if="!loading && programa">
       <v-container>
         <v-row align="center" justify="center">
@@ -70,7 +70,7 @@
         </v-layout>
       </v-flex>
     </v-row>
-  </v-layout>
+  </v-container>
 </template>
 <script>
 import {get} from '@/services/abstract.service';

@@ -1,5 +1,5 @@
 <template>
-  <v-layout wrap>
+  <v-container>
     
     <filter-expansion-panel @filtrar="filtrar" @resetar="limparFiltros()">
       <template v-slot:filterExpansionPanel>
@@ -101,7 +101,7 @@
 
     <dialog-delete-component :text="dialogDeleteData.pessoa.tx_nome_pessoa" v-model="dialogDelete" @excluir="excluirItem(dialogDeleteData.id_usuario)" />
 
-  </v-layout>
+  </v-container>
 </template>
 
 <script>

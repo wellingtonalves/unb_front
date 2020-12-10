@@ -113,6 +113,7 @@
         </v-list-item>
       </v-list>
     </v-navigation-drawer>
+
     <v-app-bar :clipped-left="true" app>
       <v-app-bar-nav-icon v-if="isAuthenticated === true" @click.stop="changeDrawer()"/>
 
@@ -205,8 +206,8 @@
             <v-btn icon title="Notificações" class="top-button" v-if="isAuthenticated === true">
               <v-icon>mdi-bell</v-icon>
             </v-btn>
-
-            <v-btn tile color="contrast" @click="login()" class="ma-2" v-if="isAuthenticated === false">
+            
+            <v-btn tile color="contrast" @click="login()" class="my-2 ml-2 white--text" v-if="isAuthenticated === false">
               ENTRAR
               <v-icon right>
                 mdi-menu-right
@@ -356,8 +357,7 @@ header.v-app-bar {
 }
 
 header.v-app-bar .container {
-  padding-bottom: 0;
-  padding-top: 0;
+  padding: 0 48px;
 }
 
 h1 a {
