@@ -1,17 +1,13 @@
 <template>
   <v-layout wrap>
 
-    <v-row id="featured">
-      <img
-        src="https://www.enap.gov.br/media_files/images/noticias/2020/01/evg-50.jpg"
-        alt="enap"
-        style="width:100%;height: 400px"/>
+    <v-layout id="featured">
       <div class="centered">
         <h2 class="white--text">Escola Virtual.Gov – EV.G</h2>
-        <h4 class="font-weight-regular white--text">
+        <h3 class="font-weight-regular white--text">
           Portal Único de Governo para a oferta de capacitação a distância.
-        </h4>
-        <p class="font-weight-bold headline white--text">
+        </h3>
+        <p class="font-weight-light headline white--text">
           Cursos on-line e gratuitos de várias áreas de conhecimento para o
           desenvolvimento da Administração Pública e da Sociedade.
         </p>
@@ -28,7 +24,6 @@
             item-text="tx_nome_curso"
             item-value="id_curso"
             prepend-inner-icon="mdi-feature-search-outline"
-            style="background-color: white"
             label="Busque um curso"
             solo-inverted
             clearable
@@ -39,7 +34,7 @@
                 color="error"
                 icon="fas fa-exclamation-triangle"
               >
-                <span style="color: white">Não encontramos nenhum curso com este nome.</span>
+                <span>Não encontramos nenhum curso com este nome.</span>
               </v-alert>
             </template>
             
@@ -61,7 +56,7 @@
           </v-autocomplete>
         </v-card-text>
       </div>
-    </v-row>
+    </v-layout>
 
     <v-container>
       <v-flex align-center justify-center>
@@ -211,15 +206,36 @@
 
 <style scoped>
   #featured {
-    margin-top: -60px;
+    background-attachment: fixed;
+    background-image: url(../assets/img/bg-index.jpg);
+    background-position: center center;
+    background-size: cover;
+    display: inline-block;
+    margin-top: -80px;
+    min-height: 500px;
+    padding-top: 100px;
+    padding-bottom: 100px; 
     position: relative;
+    width: 100%;
   }
 
-  /* Centered text */
-  .centered {
+  #featured h2 {
+    padding-bottom: 4px;
+    text-transform: none;
+  }
+
+  #featured h3 {
+    padding-bottom: 24px;
+  }
+
+  #featured .centered {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+  }
+
+  #featured .v-input__slot {
+    background-color: var(--v-white-base);
   }
 </style>

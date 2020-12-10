@@ -49,10 +49,6 @@
     background-color: var(--v-lightgrey-base);
     padding-top: 110px !important;
   }
-  main.v-main .container {
-    padding-left: 0;
-    padding-right: 0;
-  }
   .v-breadcrumbs {
     padding-bottom: 0;
     padding-left: 0;

@@ -88,8 +88,8 @@ h3.subtitle {
 
 /* Vuetify Layout Components */
 div.container {
-  padding-left: 0;
-  padding-right: 0;
+  padding-left: 48px;
+  padding-right: 48px;
 }
 
 /* Custom Layout Components */
@@ -349,5 +349,10 @@ div.container {
   }
   div.container {
     padding: 12px;
+  }
+}
+@media (min-width: 1264px) {
+  div.container {
+    max-width: 1286px;
   }
 }
