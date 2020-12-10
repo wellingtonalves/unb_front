@@ -227,13 +227,6 @@ const routes = [
             },
           },
           {
-            path: '/curso/:id',
-            component: () => import('../views/cursos/CursoDetail.vue'),
-            meta: {
-              requiresAuth: false
-            },
-          },
-          {
             path: '/curso/andamento',
             component: () =>
               import('../views/cursos/CursoAndamentoFinalizadosTrancado.vue'),
@@ -252,6 +245,13 @@ const routes = [
                   href: '/cursos',
                 },
               ],
+            },
+          },
+          {
+            path: '/curso/:id',
+            component: () => import('../views/cursos/CursoDetail.vue'),
+            meta: {
+              requiresAuth: false,
             },
           },
         ],
@@ -583,7 +583,7 @@ const routes = [
             path: '/programa/:id',
             component: () => import('../views/programas/ProgramasDetail.vue'),
             meta: {
-              requiresAuth: false
+              requiresAuth: false,
             },
           },
           {
@@ -591,9 +591,9 @@ const routes = [
             component: () => import('../views/programas/ProgramasAll.vue'),
             meta: {
               requiresAuth: false,
-              title: 'Catálogo de Programas'
+              title: 'Catálogo de Programas',
             },
-          }
+          },
         ],
       },
       {
@@ -924,8 +924,7 @@ const routes = [
           {
             path: '',
             name: 'certificados',
-            component: () =>
-              import('../views/certificados/Certificado.vue'),
+            component: () => import('../views/certificados/Certificado.vue'),
             meta: {
               requiresAuth: true,
               title: ROUTER_CONSTANTS.menuCertificados,
