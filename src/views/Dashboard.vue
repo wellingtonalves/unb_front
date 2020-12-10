@@ -1,9 +1,6 @@
 <template>
   <v-container>
 
-    <h2 class="featured">
-      <strong>Dashboard</strong>
-    </h2>
 
     
   </v-container>

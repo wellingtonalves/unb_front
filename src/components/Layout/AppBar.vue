@@ -39,6 +39,24 @@
           </v-list-item-content>
         </v-list-item>
 
+        <v-list-item link :to="'/programas'" v-show="permission('PROGRAMA_LISTAR')">
+          <v-list-item-action>
+            <v-icon>mdi-format-list-text</v-icon>
+          </v-list-item-action>
+          <v-list-item-content>
+            <v-list-item-title>Programas</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+
+        <v-list-item link :to="'/certificados'" v-show="permission('CERTIFICADO_LISTAR')">
+          <v-list-item-action>
+            <v-icon>mdi-certificate</v-icon>
+          </v-list-item-action>
+          <v-list-item-content>
+            <v-list-item-title>Certificados</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+
         <v-list-item link :to="'/ava'" v-show="permission('AVA_LISTAR')">
           <v-list-item-action>
             <v-icon>mdi-school-outline</v-icon>
@@ -54,15 +72,6 @@
           </v-list-item-action>
           <v-list-item-content>
             <v-list-item-title>Tarefas agendadas</v-list-item-title>
-          </v-list-item-content>
-        </v-list-item>
-
-        <v-list-item link :to="'/programas'" v-show="permission('PROGRAMA_LISTAR')">
-          <v-list-item-action>
-            <v-icon>mdi-school-outline</v-icon>
-          </v-list-item-action>
-          <v-list-item-content>
-            <v-list-item-title>Programas</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
 
@@ -102,15 +111,6 @@
             </v-list-item-content>
           </v-list-item>
         </v-list-group>
-
-        <v-list-item link :to="'/certificados'" v-show="permission('CERTIFICADO_LISTAR')">
-          <v-list-item-action>
-            <v-icon>mdi-school-outline</v-icon>
-          </v-list-item-action>
-          <v-list-item-content>
-            <v-list-item-title>Certificados</v-list-item-title>
-          </v-list-item-content>
-        </v-list-item>
       </v-list>
     </v-navigation-drawer>
 
@@ -208,7 +208,7 @@
             </v-btn>
             
             <v-btn tile color="contrast" @click="login()" class="my-2 ml-2 white--text" v-if="isAuthenticated === false">
-              ENTRAR
+              Entrar
               <v-icon right>
                 mdi-menu-right
               </v-icon>
@@ -227,7 +227,7 @@
 
               </template>
 
-              <v-list nav dense>
+              <v-list nav dense id="menu-meus-dados">
                 <v-list-item
                   v-for="(item, i) in dropdownMenu"
                   :key="i"
@@ -446,6 +446,14 @@ nav.v-navigation-drawer .v-list-item__title {
 #main-nav .v-list-item__subtitle {
   color: var(--v-primary-base);
   font-weight: 600;
+}
+
+#menu-meus-dados .v-list-item .v-list-item__icon {
+  margin-right: 8px;
+}
+
+#menu-meus-dados .v-list-item .v-list-item__icon .v-icon.v-icon {
+  font-size: 20px;
 }
 
 .top-button {

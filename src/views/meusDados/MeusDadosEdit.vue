@@ -5,7 +5,7 @@
         <meus-dados-form @update="receiveData" ref="userForm" :user-data="data" :errors="errors">
           <template v-slot:buttons>
             <v-btn class="mr-4" color="primary" :loading="loading" @click="onSave()">
-              <v-icon class="mr-2">mdi-content-save</v-icon>Alterar Dados
+              <v-icon class="mr-2">mdi-content-save</v-icon> Salvar
             </v-btn>
           </template>
         </meus-dados-form>

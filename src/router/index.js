@@ -42,7 +42,7 @@ const routes = [
           requiresAuth: false,
           title: 'Conheça a Escola',
           breadcrumb: [
-            {text: ROUTER_CONSTANTS.menuCursos, disabled: false, href: '/'},
+            {text: ROUTER_CONSTANTS.menuInicio, disabled: false, href: '/'},
             {
               text: 'Conheça a Escola',
               disabled: true,
@@ -59,7 +59,7 @@ const routes = [
           requiresAuth: false,
           title: 'Adesão Institucional',
           breadcrumb: [
-            {text: ROUTER_CONSTANTS.menuCursos, disabled: false, href: '/'},
+            {text: ROUTER_CONSTANTS.menuInicio, disabled: false, href: '/'},
             {
               text: 'Adesão Institucional',
               disabled: true,
@@ -76,7 +76,7 @@ const routes = [
           requiresAuth: false,
           title: 'Perguntas Frequentes',
           breadcrumb: [
-            {text: ROUTER_CONSTANTS.menuCursos, disabled: false, href: '/'},
+            {text: ROUTER_CONSTANTS.menuInicio, disabled: false, href: '/'},
             {
               text: 'Perguntas Frequentes',
               disabled: true,
