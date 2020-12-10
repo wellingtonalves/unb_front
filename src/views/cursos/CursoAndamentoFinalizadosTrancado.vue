@@ -57,7 +57,7 @@
 
                 <v-tooltip bottom>
                   <template v-slot:activator="{ on }">
-                    <v-btn small tile outlined icon color="primary" @click="goToCourse(`${item.oferta.ava.tx_url}`)" v-on="on">
+                    <v-btn small tile outlined icon color="primary" @click="goToCourse(`${item.tx_url_ava}`)" v-on="on">
                       <v-icon>mdi-arrow-top-right</v-icon>
                     </v-btn>
                   </template>
@@ -124,7 +124,6 @@
         {text: 'Disponibilidade', value: 'oferta.qt_duracao_dias'},
         {text: 'Nota Minímia', value: 'oferta.qt_nota_minima_aprovacao'},
         {text: 'Situação', value: 'tp_situacao_inscricao'},
-        {text: 'Situação', value: 'oferta.ava.tx_url'},
         {text: 'Ações', value: 'action', sortable: false},
       ],
       loading: false,
@@ -163,9 +162,7 @@
         this.get();
       },
       goToCourse(url) {
-        console.log(url)
-        let routeData = this.$router.resolve({name: url});
-        window.open(routeData.href, '_blank');
+        window.open(url, '_blank');
       },
       excluir(item) {
         this.dialogDeleteData = item;
