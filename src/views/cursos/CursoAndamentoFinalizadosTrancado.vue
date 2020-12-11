@@ -1,71 +1,70 @@
 <template>
-  <v-layout wrap>
+  <v-container>
 
-    <filter-expansion-panel @filtrar="filtrar" @resetar="limparFiltros()" :open="0">
-      <template v-slot:filterExpansionPanel>
-        <v-col cols="12" sm="2">
-          <v-select dense v-model="situacaoCurso" label="Situação" :items="situacaoCursoSelect" item-text="label" item-value="value" />
+      <filter-expansion-panel @filtrar="filtrar" @resetar="limparFiltros()" :open="0">
+        <template v-slot:filterExpansionPanel>
+          <v-col cols="12" sm="2">
+            <v-select dense v-model="situacaoCurso" label="Situação" :items="situacaoCursoSelect" item-text="label" item-value="value" />
+          </v-col>
+
+          <v-col cols="12" sm="3">
+            <v-text-field dense
+                          v-model="filterData.tx_nome_curso"
+                          label="Nome"
+                          placeholder="Informe o nome do curso"
+            />
+          </v-col>
+        </template>
+      </filter-expansion-panel>
+
+      <v-row class="flex-basis-100">
+        <v-col cols="12">
+          <v-card>
+
+            <v-data-table
+              :headers="headers"
+              :items="data"
+              :loading="loading"
+              :server-items-length="pagination.total"
+              :items-per-page="15"
+              :options.sync="options"
+              item-key="id_curso"
+              sort-by="tx_nome_curso"
+              class="elevation-1"
+              no-data-text="Nenhum registro encontrado."
+              no-results-text="Nenhum registro encontrado."
+              loading-text="Aguarde, estamos carregando os dados.">
+
+              <template v-slot:top>
+                <v-toolbar flat>
+                  <v-toolbar-title>Listagem de Cursos</v-toolbar-title>
+                </v-toolbar>
+              </template>
+
+
+              <template v-slot:item.action="{ item }">
+                <v-layout wrap class="action-buttons">
+                  <v-tooltip bottom>
+                    <template v-slot:activator="{ on }">
+                      <v-btn small tile outlined icon color="primary" @click="goToCourse(`${item.tx_url_ava}`)" v-on="on">
+                        <v-icon>mdi-arrow-top-right</v-icon>
+                      </v-btn>
+                    </template>
+                    <span>Ver Curso</span>
+                  </v-tooltip>
+                </v-layout>
+              </template>
+            </v-data-table>
+
+          </v-card>
         </v-col>
+      </v-row>
 
-        <v-col cols="12" sm="3">
-          <v-text-field dense
-                        v-model="filterData.tx_nome_curso"
-                        label="Nome"
-                        placeholder="Informe o nome do curso"
-          />
-        </v-col>
-      </template>
-    </filter-expansion-panel>
-
-    <v-row class="flex-basis-100">
-      <v-col cols="12">
-        <v-card>
-
-          <v-data-table
-            :headers="headers"
-            :items="data"
-            :loading="loading"
-            :server-items-length="pagination.total"
-            :items-per-page="15"
-            :options.sync="options"
-            item-key="id_curso"
-            sort-by="tx_nome_curso"
-            class="elevation-1"
-            no-data-text="Nenhum registro encontrado."
-            no-results-text="Nenhum registro encontrado."
-            loading-text="Aguarde, estamos carregando os dados.">
-
-            <template v-slot:top>
-              <v-toolbar flat>
-                <v-toolbar-title>Listagem de Cursos</v-toolbar-title>
-              </v-toolbar>
-            </template>
-            
-
-            <template v-slot:item.action="{ item }">
-              <v-layout wrap class="action-buttons">
-                <v-tooltip bottom>
-                  <template v-slot:activator="{ on }">
-                    <v-btn small tile outlined icon color="primary" @click="goToCourse(`${item.tx_url_ava}`)" v-on="on">
-                      <v-icon>mdi-arrow-top-right</v-icon>
-                    </v-btn>
-                  </template>
-                  <span>Ver Curso</span>
-                </v-tooltip>
-              </v-layout>
-            </template>
-          </v-data-table>
-
-        </v-card>
-      </v-col>
-    </v-row>
-
-  </v-layout>
+  </v-container>
 </template>
 
 <script>
   import {get} from "@/services/abstract.service";
-  import {filterFormat} from "@/helpers/filterFormat";
   export default {
     name: "CursoAndamentoFinalizadosTrancado",
     data: () => ({
@@ -128,10 +127,8 @@
         this.loading = false;
       },
       async filtrar() {
-        const filters = await filterFormat(this.filterData);
-        
-        console.log('?search=' + filters + '&searchJoin=and')
-        await this.get('?search=' + filters + '&searchJoin=and');
+        let filter = this.filterData.tx_nome_curso ? '?search=oferta.tx_nome_curso:' + this.filterData.tx_nome_curso :  '';
+        await this.get(filter);
       },
       limparFiltros() {
         this.filterData = {};
