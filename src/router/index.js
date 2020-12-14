@@ -233,6 +233,14 @@ const routes = [
               requiresAuth: false
             },
           },
+          {
+            path: '/catalogo-cursos',
+            component: () => import('../views/cursos/CursosAll.vue'),
+            meta: {
+              requiresAuth: false,
+              title: 'Catálogo de Cursos'
+            },
+          }
         ],
       },
       {

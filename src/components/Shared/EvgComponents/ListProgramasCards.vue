@@ -4,7 +4,9 @@
       <div>
         <v-img :src="programa.tx_url_imagem"></v-img>
         <h3 class="v-card__title">
-          <a @click="$router.push(`/programa/${programa.id_programa}`)">{{programa.tx_nome_programa }}</a>
+          <a @click="goToDetailPrograma(programa.id_programa)">{{
+            programa.tx_nome_programa
+          }}</a>
         </h3>
       </div>
       <dl>
@@ -17,7 +19,7 @@
           outlined
           color="primary"
           class="ma-2"
-          @click="viewPrograma = p"
+          @click="goToDetailPrograma(programa.id_programa)"
         >
           <v-icon>mdi-information</v-icon>
           <span class="d-sr-only">Saiba mais</span>
@@ -27,7 +29,7 @@
           <v-icon right>mdi-menu-right</v-icon>
         </v-btn>
       </v-card-actions>
-      <v-expand-transition>
+      <!-- <v-expand-transition>
         <v-card
           v-if="viewPrograma === p"
           class="transition-fast-in-fast-out v-card--reveal"
@@ -37,21 +39,26 @@
             <v-btn text @click="viewPrograma = ''">Fechar</v-btn>
           </v-card-actions>
         </v-card>
-      </v-expand-transition>
+      </v-expand-transition> -->
     </v-card>
   </v-layout>
 </template>
 <script>
-  import filters from '@/filters';
+import filters from '@/filters';
 
-  export default {
-    name: 'ListProgramasCards',
-    props: {
-      programaData: Array,
+export default {
+  name: 'ListProgramasCards',
+  props: {
+    programaData: Array,
+  },
+  mixins: [filters],
+  data: () => ({
+    viewPrograma: '',
+  }),
+  methods: {
+    goToDetailPrograma(path) {
+      return this.$router.push(`/programa/${path}`);
     },
-    mixins: [filters],
-    data: () => ({
-      viewPrograma: '',
-    }),
-  };
+  },
+};
 </script>

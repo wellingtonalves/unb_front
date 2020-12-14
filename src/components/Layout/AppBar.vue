@@ -124,7 +124,7 @@
               <a @click="home()">EV.G: Escola Virtual.Gov</a>
             </h1>
             <v-list nav dense flat id="main-nav" class="d-none d-sm-flex float-left">
-              <v-list-item href="https://www.escolavirtual.gov.br/catalogo">
+              <v-list-item to="/catalogo-cursos">
                 <v-list-item-content>
                   <v-list-item-title>{{ $t('message.appBar.catalogoCursos.title') }}</v-list-item-title>
                   <v-list-item-subtitle>{{ $t('message.appBar.catalogoCursos.subtitle') }}</v-list-item-subtitle>
