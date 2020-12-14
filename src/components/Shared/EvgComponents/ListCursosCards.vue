@@ -6,7 +6,7 @@
         <p v-if="curso.tematica_curso" class="nome-tematica" data-paleta-bg="9">
           {{ curso.tematica_curso.tx_nome_tematica_curso }}
         </p>
-        <p class="nome-oferta">
+        <p v-if="!viewCatalago" class="nome-oferta">
           {{ curso.tp_situacao_curso | displayLabel('statusCurso') }}
         </p>
         <h3 class="v-card__title">
@@ -35,10 +35,15 @@
         <v-btn
           tile
           color="contrast"
+          :disabled="curso.tp_situacao_curso != 'A'"
           class="ma-2 flex-grow-1"
           href="https://www.escolavirtual.gov.br/secretaria/inscricao/5437"
         >
-          Inscreva-se
+          {{
+            curso.tp_situacao_curso == 'A'
+              ? 'Inscreva-se'
+              : 'Inscrições Fechadas'
+          }}
           <v-icon right>mdi-menu-right</v-icon>
         </v-btn>
       </v-card-actions>
@@ -52,6 +57,10 @@ export default {
   name: 'ListCursosCards',
   props: {
     cursoData: Array,
+    viewCatalago: {
+      type: Boolean,
+      default: false,
+    },
   },
   mixins: [filters],
   methods: {
