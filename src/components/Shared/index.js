@@ -7,6 +7,7 @@ import SnackBarComponent from './SnackBarComponent';
 import DialogDeleteComponent from './DialogDeleteComponent';
 import ListCursosCards from './EvgComponents/ListCursosCards';
 import ListProgramasCards from './EvgComponents/ListProgramasCards';
+import ListPerguntas from './EvgComponents/ListPerguntas';
 
 Vue.component('card-default', CardComponent);
 Vue.component('form-skeleton', FormSkeletonComponent);
@@ -15,3 +16,4 @@ Vue.component('snack-bar-component', SnackBarComponent);
 Vue.component('dialog-delete-component', DialogDeleteComponent);
 Vue.component('list-cursos-cards', ListCursosCards);
 Vue.component('list-programas-cards', ListProgramasCards);
+Vue.component('list-perguntas', ListPerguntas);

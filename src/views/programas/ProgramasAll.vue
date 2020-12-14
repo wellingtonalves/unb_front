@@ -15,7 +15,7 @@
             Perguntas<br />
             Frequentes
           </h2>
-          <PerguntasFrequentes />
+          <list-perguntas type="programas"/>
         </v-row>
       </v-layout>
     </v-flex>
@@ -23,9 +23,7 @@
 </template>
 <script>
 import {get} from '@/services/abstract.service';
-import PerguntasFrequentes from '@/views/PerguntasFrequentes.vue';
 export default {
-  components: {PerguntasFrequentes},
   data: () => ({
     programaData: {},
   }),
