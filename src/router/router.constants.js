@@ -4,6 +4,7 @@ export const ROUTER_CONSTANTS = {
   menuCursos: 'Cursos',
   menuCadastrarCurso: 'Cadastrar Curso',
   menuEditarCurso: 'Editar Curso',
+  menuMeusCursos: 'Meus Cursos',
   menuAVA: 'AVA',
   menuCadastrarAVA: 'Cadastrar AVA',
   menuEditarAVA: 'Editar AVA',

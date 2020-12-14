@@ -20,7 +20,28 @@
             <v-list-item-title>Dashboard</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
+        
+<!--        ALUNO-->
 
+        <v-list-item link :to="'/curso/andamento'" v-show="permission('INSCRICAO_CURSOS_ALUNO')">
+          <v-list-item-action>
+            <v-icon>mdi-school</v-icon>
+          </v-list-item-action>
+          <v-list-item-content>
+            <v-list-item-title>Cursos</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+
+        <v-list-item link :to="'/certificados'" v-show="permission('CERTIFICADO_LISTAR')">
+          <v-list-item-action>
+            <v-icon>mdi-school-outline</v-icon>
+          </v-list-item-action>
+          <v-list-item-content>
+            <v-list-item-title>Certificados</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+
+<!--        ADMIN-->
         <v-list-item link :to="'/cursos'" v-show="permission('CURSO_LISTAR')">
           <v-list-item-action>
             <v-icon>mdi-book-open-page-variant</v-icon>
@@ -39,24 +60,6 @@
           </v-list-item-content>
         </v-list-item>
 
-        <v-list-item link :to="'/programas'" v-show="permission('PROGRAMA_LISTAR')">
-          <v-list-item-action>
-            <v-icon>mdi-format-list-text</v-icon>
-          </v-list-item-action>
-          <v-list-item-content>
-            <v-list-item-title>Programas</v-list-item-title>
-          </v-list-item-content>
-        </v-list-item>
-
-        <v-list-item link :to="'/certificados'" v-show="permission('CERTIFICADO_LISTAR')">
-          <v-list-item-action>
-            <v-icon>mdi-certificate</v-icon>
-          </v-list-item-action>
-          <v-list-item-content>
-            <v-list-item-title>Certificados</v-list-item-title>
-          </v-list-item-content>
-        </v-list-item>
-
         <v-list-item link :to="'/ava'" v-show="permission('AVA_LISTAR')">
           <v-list-item-action>
             <v-icon>mdi-school-outline</v-icon>
@@ -72,6 +75,15 @@
           </v-list-item-action>
           <v-list-item-content>
             <v-list-item-title>Tarefas agendadas</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+
+        <v-list-item link :to="'/programas'" v-show="permission('PROGRAMA_LISTAR')">
+          <v-list-item-action>
+            <v-icon>mdi-school-outline</v-icon>
+          </v-list-item-action>
+          <v-list-item-content>
+            <v-list-item-title>Programas</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
 
@@ -113,7 +125,7 @@
         </v-list-group>
       </v-list>
     </v-navigation-drawer>
-
+    
     <v-app-bar :clipped-left="true" app>
       <v-app-bar-nav-icon v-if="isAuthenticated === true" @click.stop="changeDrawer()"/>
 
