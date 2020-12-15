@@ -19,7 +19,7 @@
           outlined
           color="primary"
           class="ma-2"
-          @click="goToDetailPrograma(programa.id_programa)"
+          @click="viewPrograma = p"
         >
           <v-icon>mdi-information</v-icon>
           <span class="d-sr-only">Saiba mais</span>
@@ -29,7 +29,7 @@
           <v-icon right>mdi-menu-right</v-icon>
         </v-btn>
       </v-card-actions>
-      <!-- <v-expand-transition>
+      <v-expand-transition>
         <v-card
           v-if="viewPrograma === p"
           class="transition-fast-in-fast-out v-card--reveal"
@@ -39,7 +39,7 @@
             <v-btn text @click="viewPrograma = ''">Fechar</v-btn>
           </v-card-actions>
         </v-card>
-      </v-expand-transition> -->
+      </v-expand-transition>
     </v-card>
   </v-layout>
 </template>
