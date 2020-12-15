@@ -3,8 +3,8 @@
     <AppBar />
     <v-main>
 
-      <v-container>
-        <v-breadcrumbs v-if="isAuthenticated === true" :items="$route.meta.breadcrumb" divider="→" />
+      <v-container v-if="isAuthenticated === true">
+        <v-breadcrumbs :items="$route.meta.breadcrumb" divider="→" />
         <h2>{{this.$route.meta.title}}</h2>
       </v-container>
       

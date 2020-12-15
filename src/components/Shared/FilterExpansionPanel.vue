@@ -1,5 +1,5 @@
 <template>
-  <v-expansion-panels>
+  <v-expansion-panels :value="open">
     <v-expansion-panel>
       <v-expansion-panel-header>
         Filtros
@@ -31,6 +31,7 @@
 <script>
 export default {
   name: "FilterExpansionPanel",
+  props: ['open'],
   methods: {
     filtrar() {
       this.$emit('filtrar');
