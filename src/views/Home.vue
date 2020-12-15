@@ -2,7 +2,7 @@
   <v-layout wrap>
 
     <v-layout id="featured">
-      <div  class="centered">
+      <div class="centered">
         <h2 class="white--text text-center">Escola Virtual.Gov – EV.G</h2>
         <h3 class="font-weight-regular white--text text-center">
           Portal Único de Governo para a oferta de capacitação a distância.
