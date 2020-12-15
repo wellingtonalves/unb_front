@@ -3,16 +3,14 @@
     <v-layout id="featured">
       <div class="centered">
         <h2 class="white--text text-center">Escola Virtual.Gov – EV.G</h2>
-        <h3 class="font-weight-regular white--text text-center">
+        <h3 class="font-weight-light white--text text-center">
           Portal Único de Governo para a oferta de capacitação a distância.
         </h3>
-        <p class="font-weight-light headline white--text text-center">
+        <p class="font-weight-light white--text text-center">
           Cursos on-line e gratuitos de várias áreas de conhecimento para o
           desenvolvimento da Administração Pública e da Sociedade.
         </p>
-        <v-card-text>
-          <search-curso />
-        </v-card-text>
+        <search-curso />
       </div>
     </v-layout>
 
@@ -27,7 +25,7 @@
           <list-cursos-cards v-if="cursos.data" :curso-data="cursos.data" />
 
           <v-flex text-center class="mt-6">
-            <v-btn large outlined color="primary">
+            <v-btn large outlined color="primary" @click="$router.push('/catalogo-cursos')">
               Ver todos os cursos
               <v-icon right>mdi-menu-right</v-icon>
             </v-btn>
@@ -162,12 +160,18 @@ export default {
 }
 
 #featured h2 {
+  font-size: 2.25rem;
   padding-bottom: 4px;
   text-transform: none;
 }
 
 #featured h3 {
+  font-size: 1rem;
   padding-bottom: 24px;
+}
+
+#featured p {
+  font-size: 1.25rem;
 }
 
 #featured .centered {
@@ -176,30 +180,13 @@ export default {
   left: 50%;
   transform: translate(-50%, -50%);
 }
-</style>
 
-<style>
-#featured .v-input__slot {
-  background-color: var(--v-white-base);
-}
-#featured .v-select__slot input {
-  color: var(--v-black-base);
-}
-#featured .v-text-field .v-input__prepend-inner {
-  padding-right: 12px;
-}
-.v-menu__content.v-autocomplete__content .v-alert.error {
-  color: var(--v-white-base);
-  margin-left: 8px;
-  margin-right: 8px;
-  margin-bottom: 0;
-}
-.v-menu__content.v-autocomplete__content .v-list-item.v-list-item--link {
-  padding: 0 24px;
-}
-.v-menu__content.v-autocomplete__content
-  .v-list-item.v-list-item--link
-  .v-avatar {
-  /*display: none;*/
+@media (max-width: 600px) {
+  #featured .centered {
+    padding-left: 12px;
+    padding-right: 12px;
+    position: static;
+    transform: none;
+  }
 }
 </style>
