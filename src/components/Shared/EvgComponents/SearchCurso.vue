@@ -1,4 +1,5 @@
 <template>
+  <div id="busca-curso">
   <v-autocomplete
     flat
     v-model="select"
@@ -35,6 +36,7 @@
       </v-list-item-content>
     </template>
   </v-autocomplete>
+</div>
 </template>
 <script>
 import {get} from '@/services/abstract.service';
@@ -72,3 +74,24 @@ export default {
   },
 };
 </script>
+
+<style>
+#busca-curso .v-input__slot {
+  background-color: var(--v-white-base);
+}
+#busca-curso .v-select__slot input {
+  color: var(--v-black-base);
+}
+#busca-curso .v-text-field .v-input__prepend-inner {
+  padding-right: 12px;
+}
+.v-menu__content.v-autocomplete__content .v-alert.error {
+  color: var(--v-white-base);
+  margin-left: 8px;
+  margin-right: 8px;
+  margin-bottom: 0;
+}
+.v-menu__content.v-autocomplete__content .v-list-item.v-list-item--link {
+  padding: 0 24px;
+}
+</style>

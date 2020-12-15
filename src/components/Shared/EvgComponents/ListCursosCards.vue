@@ -16,8 +16,8 @@
         </h3>
       </div>
       <dl>
-        <dt>Conteudista:</dt>
-        <dd>{{ curso.tp_origem_curso }}</dd>
+        <dt v-if="curso.tp_origem_curso">Conteudista:</dt>
+        <dd v-if="curso.tp_origem_curso">{{ curso.tp_origem_curso }}</dd>
         <dt>Carga Horária:</dt>
         <dd>{{ `${curso.qt_carga_horaria_minima}h` }}</dd>
       </dl>
@@ -42,9 +42,9 @@
           {{
             curso.tp_situacao_curso == 'A'
               ? 'Inscreva-se'
-              : 'Inscrições Fechadas'
+              : 'Em breve'
           }}
-          <v-icon right>mdi-menu-right</v-icon>
+          <v-icon v-if="curso.tp_situacao_curso == 'A'" right>mdi-menu-right</v-icon>
         </v-btn>
       </v-card-actions>
     </v-card>
