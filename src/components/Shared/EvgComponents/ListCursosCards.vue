@@ -6,7 +6,7 @@
         <p v-if="curso.tematica_curso" class="nome-tematica" data-paleta-bg="9">
           {{ curso.tematica_curso.tx_nome_tematica_curso }}
         </p>
-        <p v-if="!viewCatalago" class="nome-oferta">
+        <p v-if="!viewCatalogo" class="nome-oferta">
           {{ curso.tp_situacao_curso | displayLabel('statusCurso') }}
         </p>
         <h3 class="v-card__title">
@@ -57,7 +57,7 @@ export default {
   name: 'ListCursosCards',
   props: {
     cursoData: Array,
-    viewCatalago: {
+    viewCatalogo: {
       type: Boolean,
       default: false,
     },
