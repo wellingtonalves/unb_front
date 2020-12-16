@@ -24,14 +24,7 @@
       </v-row>
     </v-container>
   
-    <v-container v-if="!loading && curso.tematica_curso">
-      <!-- <v-img
-          max-width="200"
-          max-height="140"
-          class="tematica-personagem"
-          :src="loadImg(curso.tematica_curso.tx_url_imagem_personagem)"
-        ></v-img> -->
-      
+    <v-container v-if="!loading && curso.tematica_curso">      
       <div class="box my-16">
         <h3>Oferta</h3>
         <v-row>
@@ -65,7 +58,6 @@
     </v-container>
 
     <v-container class="outras-informacoes" :data-paleta-bg="curso.tematica_curso.tx_paleta_de_cores">
-
       <v-row class="align-center">
         <v-col cols="12" sm="3">
           <v-img
@@ -99,7 +91,6 @@
           </v-layout>
         </v-col>
       </v-row>
-
     </v-container>
 
   </v-layout>
