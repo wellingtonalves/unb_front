@@ -2,37 +2,37 @@
   <v-layout column>
 
     <!-- TODO: substituir RED no style abaixo por COR DA TEMÁTICA -->
-    <v-container v-if="!loading && curso.tematica_curso" style="background-color:red;">
-      <v-row align="center" justify="center">
-        <v-col cols="12" sm="6" class="white--text">
+    <v-container
+      v-if="!loading && curso.tematica_curso"   
+      class="py-8"
+      :data-paleta-bg="curso.tematica_curso.tx_paleta_de_cores"
+    >
+      <v-row>
+        <v-col cols="12" sm="8" class="white--text">
           <small>
             {{curso.tematica_curso ? curso.tematica_curso.tx_nome_tematica_curso : '' }}
           </small>
           <h2 class="white--text">{{ curso.tx_nome_curso }}</h2>
-          <p>{{ curso.tx_apresentacao }}</p>
+          <p class="mt-2">{{ curso.tx_apresentacao }}</p>
         </v-col>
-        <v-col cols="12" sm="6">
-          <v-img :src="loadImg(curso.tematica_curso.tx_url_imagem_bg)" contain></v-img>
-          <v-chip
-            absolute
-            left
-            dark
-            style="border-radius: 15px 50px;margin-top: -8px"
-          >
+        <v-col cols="12" sm="4">
+          <v-img :src="curso.tx_url_imagem_curso"></v-img>
+          <v-chip color="secondary">
             {{ curso.tp_situacao_curso | displayLabel('statusCurso') }}
           </v-chip>
         </v-col>
       </v-row>
     </v-container>
   
-    <v-container v-if="!loading && curso.tematica_curso" style="margin-top: -48px">
-      <v-img
+    <v-container v-if="!loading && curso.tematica_curso">
+      <!-- <v-img
           max-width="200"
           max-height="140"
+          class="tematica-personagem"
           :src="loadImg(curso.tematica_curso.tx_url_imagem_personagem)"
-        ></v-img>
+        ></v-img> -->
       
-      <div class="box">
+      <div class="box my-16">
         <h3>Oferta</h3>
         <v-row>
           <v-col cols="12" sm="6">
@@ -62,11 +62,27 @@
           </v-btn>
         </v-flex>
       </div>
-      
-      <div class="box mt-12">
-        <h3>Outras Informações</h3>
-        <v-layout class="flex-wrap">
-          <div>
+    </v-container>
+
+    <v-container class="outras-informacoes" :data-paleta-bg="curso.tematica_curso.tx_paleta_de_cores">
+
+      <v-row class="align-center">
+        <v-col cols="12" sm="3">
+          <v-img
+            max-width="200"
+            max-height="140"
+            class="tematica-personagem"
+            :src="loadImg(curso.tematica_curso.tx_url_imagem_personagem)"
+          ></v-img>
+        </v-col>
+
+        <v-col cols="12" sm="3">
+          <h3 class="white--text font-weight-light">Outras Informações</h3>
+        </v-col>
+
+        <v-col cols="12" sm="6">
+          
+          <v-layout wrap class="white--text">
             <p>
               Você pode inscrever-se a qualquer momento e iniciar imediatamente.
             </p>
@@ -80,13 +96,15 @@
               Verifique no campo Público-Alvo se este curso é aberto ou
               restrito a um público específico.
             </p>
-          </div>
-        </v-layout>
-      </div>
-      
+          </v-layout>
+        </v-col>
+      </v-row>
+
     </v-container>
+
   </v-layout>
 </template>
+
 <script>
 import {get} from '@/services/abstract.service';
 import filters from '@/filters';
@@ -116,3 +134,31 @@ export default {
   },
 };
 </script>
+
+<style>
+.outras-informacoes {
+  position: relative;
+}
+.outras-informacoes h3 {
+  font-size: 1.75rem;
+  text-transform: uppercase;
+}
+.outras-informacoes p:last-child {
+  margin-bottom: 0;
+}
+.tematica-personagem {
+  position: absolute;
+  bottom: 0;
+  left: 48px;
+}
+.v-chip {
+  border-radius: 0 16px 16px 16px !important;
+  margin-top: -8px;
+}
+
+@media (max-width: 600px) {
+  .tematica-personagem {
+    display: none;
+  }
+}
+</style>

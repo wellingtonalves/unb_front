@@ -47,7 +47,7 @@
   }
   main.v-main {
     background-color: var(--v-lightgrey-base);
-    padding-top: 110px !important;
+    padding-top: 94px !important;
   }
   .v-breadcrumbs {
     padding-bottom: 0;

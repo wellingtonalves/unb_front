@@ -1,6 +1,6 @@
 <template>
   <v-container>
-    <v-row class="section">
+    <v-row class="section align-center">
       <v-col cols="12" sm="6">
         <h3 class="subtitle">Qual curso você está procurando?</h3>
         <p>
@@ -13,11 +13,13 @@
       </v-col>
     </v-row>
 
-    <v-tabs vertical>
+    <v-tabs vertical class="mt-4">
       <v-tab
         v-for="(item, i) in catalogo.data"
         :key="i"
         @click="setListCurso(i)"
+        :data-paleta-bg-active="item.tx_paleta_de_cores"
+        :data-paleta-arrow="item.tx_paleta_de_cores"
       >
         {{ item.tx_nome_tematica_curso }}
       </v-tab>
@@ -30,6 +32,7 @@
         />
       </v-tabs-items>
     </v-tabs>
+
   </v-container>
 </template>
 <script>
@@ -60,7 +63,37 @@ export default {
 .theme--light.v-tabs-items {
   background-color: transparent;
 }
-
+.v-tab {
+  justify-content: flex-end;
+}
+.v-tabs-bar {
+  margin-top: 8px;
+  margin-right: 8px;
+}
+.v-tabs-slider-wrapper {
+  display: none;
+}
+.v-tabs--vertical > .v-tabs-bar .v-tab {
+  color: var(--v-white-base);
+  padding-right: 24px;
+}
+.v-tabs--vertical > .v-tabs-bar .v-tab:before {
+  display: none;
+}
+.v-tabs--vertical > .v-tabs-bar .v-tab.v-tab--active:after {
+  border-style: solid;
+  border-width: 24px 0 24px 16px;
+  border-bottom-color: var(--v-lightgrey-base);
+  border-right-color: var(--v-lightgrey-base);
+  border-top-color: var(--v-lightgrey-base);
+  content: "";
+  float: right;
+  height: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 0;
+}
 @media (max-width: 600px) {
   .v-tabs--vertical {
     flex-wrap: wrap;

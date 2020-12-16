@@ -3,7 +3,7 @@
     <v-card class="d-flex" v-for="(curso, c) of cursoData" :key="c">
       <div>
         <v-img :src="curso.tx_url_imagem_curso"></v-img>
-        <p v-if="curso.tematica_curso" class="nome-tematica" data-paleta-bg="9">
+        <p v-if="curso.tematica_curso" class="nome-tematica" :data-paleta-bg="curso.tematica_curso.tx_paleta_de_cores">
           {{ curso.tematica_curso.tx_nome_tematica_curso }}
         </p>
         <p v-if="!viewCatalogo" class="nome-oferta">
