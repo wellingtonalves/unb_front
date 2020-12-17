@@ -1,31 +1,18 @@
 <template>
   <v-container>
 
-<!--    <filter-expansion-panel @filtrar="filtrar" @resetar="limparFiltros()">-->
+    <filter-expansion-panel @filtrar="filtrar" @resetar="limparFiltros()">
 
-<!--      <template v-slot:filterExpansionPanel>-->
+      <template v-slot:filterExpansionPanel>
 
-<!--        <v-col cols="12" sm="2">-->
-<!--          <v-select dense v-model="filterData.tp_situacao_curso" label="Status" :items="statusCurso" item-text="label"-->
-<!--                    item-value="value"/>-->
-<!--        </v-col>-->
+        <v-col cols="12" sm="2">
+          <v-select dense v-model="tipoCertificado" label="Tipo do Certificado" :items="tpCertificado" item-text="label"
+                    item-value="value"/>
+        </v-col>
 
-<!--        <v-col cols="12" sm="2">-->
-<!--          <v-select dense v-model="filterData.tp_origem_curso" label="Origem" :items="tpOrigemCurso" item-text="label"-->
-<!--                    item-value="value"/>-->
-<!--        </v-col>-->
+      </template>
 
-<!--        <v-col cols="12" sm="3">-->
-<!--          <v-text-field dense-->
-<!--                        v-model="filterData.tx_nome_curso"-->
-<!--                        label="Nome"-->
-<!--                        placeholder="Informe o nome do curso"-->
-<!--          />-->
-<!--        </v-col>-->
-
-<!--      </template>-->
-
-<!--    </filter-expansion-panel>-->
+    </filter-expansion-panel>
 
     <v-row class="flex-basis-100">
       <v-col cols="12">
@@ -84,14 +71,14 @@ export default {
   data: () => ({
     expanded: [],
     filterData: {},
-    statusCurso: [
+    tpCertificado: [
       {
-        label: 'ATIVO',
-        value: 'A'
+        label: 'Certificado',
+        value: 'certificado'
       },
       {
-        label: 'INATIVO',
-        value: 'I'
+        label: 'Programa',
+        value: 'certificado-programa'
       },
     ],
     tpOrigemCurso: [
@@ -101,16 +88,23 @@ export default {
     data: [],
     pagination: {},
     options: {},
-    headers: [
+    headers: [],
+    headersCertificado: [
       {text: 'Oferta', value: 'oferta.tx_nome_oferta', align: 'start'},
       {text: 'Curso', value: 'oferta.curso.tx_nome_curso', align: 'start'},
       {text: 'Situação', value: 'tp_situacao_inscricao', align: 'start'},
       {text: 'Data de Término', value: 'oferta.dt_termino_oferta_formatada', align: 'start'},
       {text: 'Ações', value: 'action', sortable: false},
     ],
+    headersCertificadoPrograma: [
+      {text: 'Programa', value: 'tx_nome_programa', align: 'start'},
+      {text: 'Data de Término', value: 'dt_termino_validade_formatada', align: 'start'},
+      {text: 'Ações', value: 'action', sortable: false},
+    ],
     loading: false,
     dialogDelete: false,
     dialogDeleteData: {},
+    tipoCertificado: 'certificado'
   }),
   mounted() {
     this.get();
@@ -131,10 +125,26 @@ export default {
   methods: {
     async get(filter = '') {
       this.loading = true;
-      const response = await get('/certificado' + filter);
+      let response = await this.getCertificado(filter);
+
       this.pagination = response.data;
       this.data = response.data.data;
       this.loading = false;
+    },
+    getCertificado(filter) {
+      return new Promise((resolve, reject) => {
+        if (this.tipoCertificado === 'certificado') {
+          const response = get('/certificado' + filter);
+          this.headers = this.headersCertificado
+          resolve(response);
+        } else if (this.tipoCertificado === 'certificado-programa') {
+          const response = get('/certificado-programa' + filter);
+          this.headers = this.headersCertificadoPrograma
+          resolve(response);
+        } else {
+          reject();
+        }
+      })
     },
     async filtrar() {
       const filters = await filterFormat(this.filterData);
