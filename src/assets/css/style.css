@@ -210,7 +210,6 @@ div.container {
   flex: 1 1 auto;
 }
 .layout.course-cards .nome-tematica {
-  background-color: var(--v-primary-base);
   border-radius: 0 5px 5px 0;
   color: var(--v-white-base);
   font-size: .8rem;
@@ -234,7 +233,7 @@ div.container {
   text-transform: none;
 }
 .layout.course-cards .v-image {
-  max-width: 268px;
+  max-width: 265px;
 }
 .layout.course-cards .v-card--reveal {
   opacity: 1 !important;
@@ -350,6 +349,40 @@ div.container {
 .v-list.links-bordered .v-list-item__title {
   font-weight: 500;
 }
+
+/* Paleta das Tematicas */
+[data-paleta-arrow="1"]:after { border-color: var(--v-tematica1-base); }
+[data-paleta-arrow="2"]:after { border-color: var(--v-tematica2-base); }
+[data-paleta-arrow="3"]:after { border-color: var(--v-tematica3-base); }
+[data-paleta-arrow="4"]:after { border-color: var(--v-tematica4-base); }
+[data-paleta-arrow="5"]:after { border-color: var(--v-tematica5-base); }
+[data-paleta-arrow="6"]:after { border-color: var(--v-tematica6-base); }
+[data-paleta-arrow="7"]:after { border-color: var(--v-tematica7-base); }
+[data-paleta-arrow="8"]:after { border-color: var(--v-tematica8-base); }
+[data-paleta-arrow="9"]:after { border-color: var(--v-tematica9-base); }
+[data-paleta-arrow="10"]:after { border-color: var(--v-tematica10-base); }
+[data-paleta-arrow="11"]:after { border-color: var(--v-tematica11-base); }
+[data-paleta-arrow="12"]:after { border-color: var(--v-tematica12-base); }
+[data-paleta-arrow="13"]:after { border-color: var(--v-tematica13-base); }
+[data-paleta-arrow="14"]:after { border-color: var(--v-tematica14-base); }
+[data-paleta-arrow="15"]:after { border-color: var(--v-tematica15-base); }
+[data-paleta-arrow="16"]:after { border-color: var(--v-tematica16-base); }
+[data-paleta-bg="1"], [data-paleta-bg-active="1"].v-tab--active { background-color: var(--v-tematica1-base); }
+[data-paleta-bg="2"], [data-paleta-bg-active="2"].v-tab--active { background-color: var(--v-tematica2-base); }
+[data-paleta-bg="3"], [data-paleta-bg-active="3"].v-tab--active { background-color: var(--v-tematica3-base); }
+[data-paleta-bg="4"], [data-paleta-bg-active="4"].v-tab--active { background-color: var(--v-tematica4-base); }
+[data-paleta-bg="5"], [data-paleta-bg-active="5"].v-tab--active { background-color: var(--v-tematica5-base); }
+[data-paleta-bg="6"], [data-paleta-bg-active="6"].v-tab--active { background-color: var(--v-tematica6-base); }
+[data-paleta-bg="7"], [data-paleta-bg-active="7"].v-tab--active { background-color: var(--v-tematica7-base); }
+[data-paleta-bg="8"], [data-paleta-bg-active="8"].v-tab--active { background-color: var(--v-tematica8-base); }
+[data-paleta-bg="9"], [data-paleta-bg-active="9"].v-tab--active { background-color: var(--v-tematica9-base); }
+[data-paleta-bg="10"], [data-paleta-bg-active="10"].v-tab--active { background-color: var(--v-tematica10-base); }
+[data-paleta-bg="11"], [data-paleta-bg-active="11"].v-tab--active { background-color: var(--v-tematica11-base); }
+[data-paleta-bg="12"], [data-paleta-bg-active="12"].v-tab--active { background-color: var(--v-tematica12-base); }
+[data-paleta-bg="13"], [data-paleta-bg-active="13"].v-tab--active { background-color: var(--v-tematica13-base); }
+[data-paleta-bg="14"], [data-paleta-bg-active="14"].v-tab--active { background-color: var(--v-tematica14-base); }
+[data-paleta-bg="15"], [data-paleta-bg-active="15"].v-tab--active { background-color: var(--v-tematica15-base); }
+[data-paleta-bg="16"], [data-paleta-bg-active="16"].v-tab--active { background-color: var(--v-tematica16-base); }
 
 @media (max-width: 600px) {
   .box .layout > div {
