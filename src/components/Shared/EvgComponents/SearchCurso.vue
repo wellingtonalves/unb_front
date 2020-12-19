@@ -1,42 +1,42 @@
 <template>
   <div id="busca-curso">
-  <v-autocomplete
-    flat
-    v-model="select"
-    :search-input.sync="search"
-    hide-details
-    :items="filteredCursos"
-    :loading="isLoading"
-    item-text="tx_nome_curso"
-    item-value="id_curso"
-    prepend-inner-icon="mdi-feature-search-outline"
-    label="Busque um curso"
-    solo-inverted
-    clearable
-  >
-    <template v-slot:no-data>
-      <v-alert :value="true" color="error" icon="fas fa-exclamation-triangle">
-        <span>Não encontramos nenhum curso com este nome.</span>
-      </v-alert>
-    </template>
+    <v-autocomplete
+      flat
+      v-model="select"
+      :search-input.sync="search"
+      hide-details
+      :items="filteredCursos"
+      :loading="isLoading"
+      item-text="tx_nome_curso"
+      item-value="id_curso"
+      prepend-inner-icon="mdi-feature-search-outline"
+      label="Busque um curso"
+      solo-inverted
+      clearable
+    >
+      <template v-slot:no-data>
+        <v-alert :value="true" color="error" icon="fas fa-exclamation-triangle">
+          <span>Não encontramos nenhum curso com este nome.</span>
+        </v-alert>
+      </template>
 
-    <template v-slot:item="{item}">
-      <v-list-item-avatar>
-        <v-img
-          v-if="item.tx_url_imagem_curso"
-          :src="item.tx_url_imagem_curso"
-        />
-      </v-list-item-avatar>
+      <template v-slot:item="{item}">
+        <v-list-item-avatar>
+          <v-img
+            v-if="item.tx_url_imagem_curso"
+            :src="item.tx_url_imagem_curso"
+          />
+        </v-list-item-avatar>
 
-      <v-list-item-content @click="$router.push(`/curso/${item.id_curso}`)">
-        <v-list-item-title v-text="item.tx_nome_curso" />
-        <v-list-item-subtitle
-          v-text="item.tematica_curso.tx_nome_tematica_curso"
-        />
-      </v-list-item-content>
-    </template>
-  </v-autocomplete>
-</div>
+        <v-list-item-content @click="$router.push(`/curso/${item.id_curso}`)">
+          <v-list-item-title v-text="item.tx_nome_curso" />
+          <v-list-item-subtitle
+            v-text="item.tematica_curso.tx_nome_tematica_curso"
+          />
+        </v-list-item-content>
+      </template>
+    </v-autocomplete>
+  </div>
 </template>
 <script>
 import {get} from '@/services/abstract.service';
