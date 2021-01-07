@@ -350,6 +350,16 @@ div.container {
   font-weight: 500;
 }
 
+.desktop-scroll {
+  width: 100%;
+  height: 520px;
+  overflow-x: hidden;
+}
+
+.content-desktop {
+  width: 100%;
+}
+
 /* Paleta das Tematicas */
 [data-paleta-arrow="1"]:after { border-color: var(--v-tematica1-base); }
 [data-paleta-arrow="2"]:after { border-color: var(--v-tematica2-base); }
