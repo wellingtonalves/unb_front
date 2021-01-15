@@ -27,7 +27,7 @@
             @model="cursoIndex"
             :carousel-data="cursos"
             v-if="cursos.length"
-            :perSlide="4"
+            :perSlide="2"
           >
             <template v-slot:items>
               <list-cursos-cards :curso-data="slidesCursos[modelCurso]" />

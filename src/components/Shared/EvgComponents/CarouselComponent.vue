@@ -48,13 +48,13 @@ export default {
     },
     chunkCarousel(array, chunkSize) {
       let chunkCount = Math.ceil(array.length / chunkSize);
-      let chunks = new Array(chunkCount);
-      for (let i = 0, j = 0, k = chunkSize; i < chunkCount; ++i) {
-        chunks[i] = array.slice(j, k);
-        j = k;
-        k += chunkSize;
+      let newCarousel = new Array(chunkCount);
+      for (let i = 0, start = 0, end = chunkSize; i < chunkCount; ++i) {
+        newCarousel[i] = array.slice(start, end);
+        start = end;
+        end += chunkSize;
       }
-      return chunks;
+      return newCarousel;
     },
   },
 };
