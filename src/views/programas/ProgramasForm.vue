@@ -110,7 +110,7 @@
             </v-row>
             <v-row>
                 <v-col>
-                    <span>Público algo</span>
+                    <span>Público-alvo</span>
                     <ckeditor :editor="editor" v-model="dataResponse.tx_publico_alvo"></ckeditor>
                 </v-col>
             </v-row>
