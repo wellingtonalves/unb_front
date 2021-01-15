@@ -22,28 +22,17 @@
             <strong>em Destaque</strong>
           </h2>
 
-          <v-carousel hide-delimiters v-model="cursoModel" interval="6000" cycle>
-            <v-carousel-item v-for="index in arrCount" :key="index">
-              <v-responsive dark>
-                <v-row no-gutters justify="space-around">
-                  <v-col class="d-flex justify-center">
-                    <div class="desktop-scroll scroll">
-                      <div class="content-desktop">
-                        <v-row>
-                          <v-col>
-                            <list-cursos-cards
-                              v-if="carouselItems.length"
-                              :curso-data="carouselItems[cursoModel]"
-                            />
-                          </v-col>
-                        </v-row>
-                      </div>
-                    </div>
-                  </v-col>
-                </v-row>
-              </v-responsive>
-            </v-carousel-item>
-          </v-carousel>
+          <carousel-component
+            @values="receiveCursos"
+            @model="cursoIndex"
+            :carouselData="cursos"
+            v-if="cursos.length"
+            :perSlide="4"
+          >
+            <template v-slot:items>
+              <list-cursos-cards :curso-data="slidesCursos[modelCurso]" />
+            </template>
+          </carousel-component>
 
           <v-flex text-center class="mt-6">
             <v-btn large outlined color="primary" @click="$router.push('/catalogo-cursos')">
@@ -124,32 +113,24 @@ export default {
   name: 'Home',
   data: () => ({
     programas: {},
-    carouselItems: [],
-    arrCount: [],
-    cursoModel: 0,
+    cursos: [],
+    slidesCursos: [],
+    modelCurso: 0,
   }),
   created() {
     this.getCursosDestaque();
     this.getProgramasDestaque();
   },
   methods: {
-    countSlides(arr) {
-      this.arrCount = Array.from({length: arr.length}, (_, i) => i + 1);
+    receiveCursos(data) {
+      this.slidesCursos = data;
     },
-    chunkCarousel(array, chunkSize) {
-      let chunkCount = Math.ceil(array.length / chunkSize);
-      let chunks = new Array(chunkCount);
-      for (let i = 0, j = 0, k = chunkSize; i < chunkCount; ++i) {
-        chunks[i] = array.slice(j, k);
-        j = k;
-        k += chunkSize;
-      }
-      return chunks;
+    cursoIndex(index) {
+      this.modelCurso = index;
     },
     async getCursosDestaque() {
       const response = await get('/curso?search=bl_destaque_curso:1');
-      this.carouselItems = this.chunkCarousel(response.data.data, 4);
-      this.countSlides(this.carouselItems);
+      this.cursos = response.data.data;
     },
     async getProgramasDestaque() {
       const response = await get('/programas?search=bl_programa_destaque:1');

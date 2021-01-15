@@ -9,6 +9,7 @@ import ListCursosCards from './EvgComponents/ListCursosCards';
 import ListProgramasCards from './EvgComponents/ListProgramasCards';
 import ListPerguntas from './EvgComponents/ListPerguntas';
 import SearchCurso from './EvgComponents/SearchCurso';
+import CarouselComponent from './EvgComponents/CarouselComponent';
 
 Vue.component('card-default', CardComponent);
 Vue.component('form-skeleton', FormSkeletonComponent);
@@ -19,3 +20,4 @@ Vue.component('list-cursos-cards', ListCursosCards);
 Vue.component('list-programas-cards', ListProgramasCards);
 Vue.component('list-perguntas', ListPerguntas);
 Vue.component('search-curso', SearchCurso);
+Vue.component('carousel-component', CarouselComponent);
