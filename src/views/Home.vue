@@ -3,9 +3,9 @@
     <v-layout id="featured">
       <div class="centered">
         <h2 class="white--text text-center">Escola Virtual.Gov – EV.G</h2>
-        <h3 class="font-weight-light white--text text-center">
-          Portal Único de Governo para a oferta de capacitação a distância.
-        </h3>
+        <h3
+          class="font-weight-light white--text text-center"
+        >Portal Único de Governo para a oferta de capacitação a distância.</h3>
         <p class="font-weight-light white--text text-center">
           Cursos on-line e gratuitos de várias áreas de conhecimento para o
           desenvolvimento da Administração Pública e da Sociedade.
@@ -22,7 +22,17 @@
             <strong>em Destaque</strong>
           </h2>
 
-          <list-cursos-cards v-if="cursos.data" :curso-data="cursos.data" />
+          <carousel-component
+            @values="receiveCursos"
+            @model="cursoIndex"
+            :carousel-data="cursos"
+            v-if="cursos.length"
+            :perSlide="4"
+          >
+            <template v-slot:items>
+              <list-cursos-cards :curso-data="slidesCursos[modelCurso]" />
+            </template>
+          </carousel-component>
 
           <v-flex text-center class="mt-6">
             <v-btn large outlined color="primary" @click="$router.push('/catalogo-cursos')">
@@ -42,18 +52,10 @@
             <strong>em Destaque</strong>
           </h2>
 
-          <list-programas-cards
-            v-if="programas.data"
-            :programa-data="programas.data"
-          />
+          <list-programas-cards v-if="programas.data" :programa-data="programas.data" />
 
           <v-flex text-center class="mt-6">
-            <v-btn
-              large
-              outlined
-              color="primary"
-              @click="$router.push('/catalogo-programas')"
-            >
+            <v-btn large outlined color="primary" @click="$router.push('/catalogo-programas')">
               Ver todos os programas
               <v-icon right>mdi-menu-right</v-icon>
             </v-btn>
@@ -75,10 +77,7 @@
             <strong>Catálogo de Cursos</strong> ou pela sugestão da página
             inicial.
           </v-card-title>
-          <v-img
-            src="../assets/img/como-funciona-01.svg"
-            alt="Passo 01"
-          ></v-img>
+          <v-img src="../assets/img/como-funciona-01.svg" alt="Passo 01"></v-img>
         </v-card>
 
         <v-card class="d-flex">
@@ -86,32 +85,21 @@
             Leia a descrição do curso e acesse o link
             <strong>Inscreva-se</strong>.
           </v-card-title>
-          <v-img
-            src="../assets/img/como-funciona-02.svg"
-            alt="Passo 02"
-          ></v-img>
+          <v-img src="../assets/img/como-funciona-02.svg" alt="Passo 02"></v-img>
         </v-card>
 
         <v-card class="d-flex">
           <v-card-title>Acompanhe as instruções de cadastro e...</v-card-title>
-          <v-img
-            src="../assets/img/como-funciona-03.svg"
-            alt="Passo 03"
-          ></v-img>
+          <v-img src="../assets/img/como-funciona-03.svg" alt="Passo 03"></v-img>
         </v-card>
 
         <v-card class="d-flex">
-          <v-card-title>
-            ... pronto, você já está dentro do ambiente de curso.
-          </v-card-title>
+          <v-card-title>... pronto, você já está dentro do ambiente de curso.</v-card-title>
           <v-card-text>
             Lá você poderá ver também todos os cursos que você virá a se
             inscrever.
           </v-card-text>
-          <v-img
-            src="../assets/img/como-funciona-04.svg"
-            alt="Passo 04"
-          ></v-img>
+          <v-img src="../assets/img/como-funciona-04.svg" alt="Passo 04"></v-img>
         </v-card>
       </v-layout>
     </v-container>
@@ -124,17 +112,25 @@ import {get} from '@/services/abstract.service';
 export default {
   name: 'Home',
   data: () => ({
-    cursos: {},
     programas: {},
+    cursos: [],
+    slidesCursos: [],
+    modelCurso: 0,
   }),
   created() {
     this.getCursosDestaque();
     this.getProgramasDestaque();
   },
   methods: {
+    receiveCursos(data) {
+      this.slidesCursos = data;
+    },
+    cursoIndex(index) {
+      this.modelCurso = index;
+    },
     async getCursosDestaque() {
       const response = await get('/curso?search=bl_destaque_curso:1');
-      this.cursos = response.data;
+      this.cursos = response.data.data;
     },
     async getProgramasDestaque() {
       const response = await get('/programas?search=bl_programa_destaque:1');
