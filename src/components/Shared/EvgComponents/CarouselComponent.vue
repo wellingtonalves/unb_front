@@ -1,6 +1,6 @@
 <template>
   <v-carousel hide-delimiters v-model="carouselModel" interval="6000" cycle>
-    <v-carousel-item v-for="index in arrCount" :key="index">
+    <v-carousel-item v-for="index in slides" :key="index">
       <v-responsive dark>
         <v-row no-gutters justify="space-around">
           <v-col class="d-flex justify-center">
@@ -24,7 +24,7 @@ export default {
   props: ['carouselData', 'perSlide'],
   data: () => ({
     carouselItems: [],
-    arrCount: [],
+    slides: [],
     carouselModel: 0,
   }),
   watch: {
@@ -36,12 +36,15 @@ export default {
     },
   },
   mounted() {
-    this.carouselItems = this.chunkCarousel(this.carouselData, this.perSlide);
-    this.countSlides(this.carouselItems);
+    this.loadItems();
   },
   methods: {
+    loadItems() {
+      this.carouselItems = this.chunkCarousel(this.carouselData, this.perSlide);
+      this.countSlides(this.carouselItems);
+    },
     countSlides(arr) {
-      this.arrCount = Array.from({length: arr.length}, (_, i) => i + 1);
+      this.slides = Array.from({length: arr.length}, (_, i) => i + 1);
     },
     chunkCarousel(array, chunkSize) {
       let chunkCount = Math.ceil(array.length / chunkSize);

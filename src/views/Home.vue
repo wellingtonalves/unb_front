@@ -25,7 +25,7 @@
           <carousel-component
             @values="receiveCursos"
             @model="cursoIndex"
-            :carouselData="cursos"
+            :carousel-data="cursos"
             v-if="cursos.length"
             :perSlide="4"
           >
