@@ -165,7 +165,7 @@
                 </v-list-item-content>
               </v-list-item>
 
-              <v-list-item href="https://www.escolavirtual.gov.br/documentos/validacao">
+              <v-list-item to="/validacao-documentos">
                 <v-list-item-content>
                   <v-list-item-title>{{ $t('message.appBar.validacaoDocumentos.title') }}</v-list-item-title>
                   <v-list-item-subtitle>{{ $t('message.appBar.validacaoDocumentos.subtitle') }}</v-list-item-subtitle>
