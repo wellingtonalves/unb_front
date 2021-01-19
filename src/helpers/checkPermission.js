@@ -1,3 +1,4 @@
+import Vue from 'vue'
 import store from './../store';
 
 /**
@@ -18,3 +19,5 @@ export const checkPermission = permissao => {
 
   return false;
 };
+
+Vue.prototype.$permissao = checkPermission;

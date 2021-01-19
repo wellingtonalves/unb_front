@@ -41,6 +41,15 @@
           </v-list-item-content>
         </v-list-item>
 
+        <v-list-item link :to="'/aluno/inscricoes'" v-show="permission('ALUNO_INSCRICOES_LISTAR')">
+          <v-list-item-action>
+            <v-icon>mdi-school-outline</v-icon>
+          </v-list-item-action>
+          <v-list-item-content>
+            <v-list-item-title>Comprovantes de Inscrição</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+
         <!-- ADMIN -->
 
         <v-list-item link :to="'/cursos'" v-show="permission('CURSO_LISTAR')">

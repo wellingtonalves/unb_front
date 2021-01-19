@@ -952,6 +952,33 @@ const routes = [
           },
         ],
       },
+      {
+        path: '/aluno/inscricoes',
+        component: () => import('../components/Layout/RouterViewComponent.vue'),
+        children: [
+          {
+            path: '',
+            name: 'inscricoes',
+            component: () => import('../views/aluno/inscricoes/Inscricoes.vue'),
+            meta: {
+              requiresAuth: true,
+              title: ROUTER_CONSTANTS.menuAlunoIncricoes,
+              breadcrumb: [
+                {
+                  text: ROUTER_CONSTANTS.menuDashboard,
+                  disabled: false,
+                  href: '/',
+                },
+                {
+                  text: ROUTER_CONSTANTS.menuAlunoIncricoes,
+                  disabled: true,
+                  href: '/inscricoes',
+                },
+              ],
+            },
+          },
+        ],
+      },
     ],
   },
 ];
