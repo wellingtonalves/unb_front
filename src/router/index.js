@@ -69,6 +69,23 @@ const routes = [
         },
       },
       {
+        path: '/validacao-documentos',
+        name: 'Validação de Documentos',
+        component: () => import('../views/validacao_documentos/ValidacaoDocumentos.vue'),
+        meta: {
+          requiresAuth: false,
+          title: 'Perguntas Frequentes',
+          breadcrumb: [
+            {text: ROUTER_CONSTANTS.menuInicio, disabled: false, href: '/'},
+            {
+              text: 'Perguntas Frequentes',
+              disabled: true,
+              href: '/perguntas-frequentes',
+            },
+          ],
+        },
+      },
+      {
         path: '/perguntas-frequentes',
         name: 'Perguntas Frequentes',
         component: () => import('../views/PerguntasFrequentes.vue'),
