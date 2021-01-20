@@ -80,7 +80,7 @@
             :perSlide="4"
           >
             <template v-slot:items>
-              <list-cursos-cards :curso-data="slidesCursos[modelCursoDia]" />
+              <list-cursos-cards :curso-data="slidesCursosDia[modelCursoDia]" />
             </template>
           </carousel-component>
 
@@ -110,7 +110,7 @@
             :perSlide="4"
           >
             <template v-slot:items>
-              <list-cursos-cards :curso-data="slidesCursos[modelCursoSemana]" />
+              <list-cursos-cards :curso-data="slidesCursosSemana[modelCursoSemana]" />
             </template>
           </carousel-component>
 
@@ -140,7 +140,7 @@
             :perSlide="4"
           >
             <template v-slot:items>
-              <list-cursos-cards :curso-data="slidesCursos[modelCursoNovos]" />
+              <list-cursos-cards :curso-data="slidesCursosNovos[modelCursoNovos]" />
             </template>
           </carousel-component>
 
