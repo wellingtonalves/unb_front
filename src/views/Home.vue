@@ -65,6 +65,96 @@
     </v-container>
 
     <v-container class="mt-6">
+      <v-flex align-center justify-center>
+        <v-layout column class="justify-center align-center">
+          <h2 class="featured">
+            Melhores cursos
+            <strong>do dia</strong>
+          </h2>
+
+          <carousel-component
+            @values="receiveCursosDia"
+            @model="cursoDiaIndex"
+            :carousel-data="cursosDia"
+            v-if="cursosDia.length"
+            :perSlide="4"
+          >
+            <template v-slot:items>
+              <list-cursos-cards :curso-data="slidesCursosDia[modelCursoDia]" />
+            </template>
+          </carousel-component>
+
+          <v-flex text-center class="mt-6">
+            <v-btn large outlined color="primary" @click="$router.push('/catalogo-cursos')">
+              Ver todos os cursos
+              <v-icon right>mdi-menu-right</v-icon>
+            </v-btn>
+          </v-flex>
+        </v-layout>
+      </v-flex>
+    </v-container>
+
+    <v-container class="mt-6">
+      <v-flex align-center justify-center>
+        <v-layout column class="justify-center align-center">
+          <h2 class="featured">
+            Melhores cursos
+            <strong>da semana</strong>
+          </h2>
+
+          <carousel-component
+            @values="receiveCursosSemana"
+            @model="cursoSemanaIndex"
+            :carousel-data="cursosSemana"
+            v-if="cursosSemana.length"
+            :perSlide="4"
+          >
+            <template v-slot:items>
+              <list-cursos-cards :curso-data="slidesCursosSemana[modelCursoSemana]" />
+            </template>
+          </carousel-component>
+
+          <v-flex text-center class="mt-6">
+            <v-btn large outlined color="primary" @click="$router.push('/catalogo-cursos')">
+              Ver todos os cursos
+              <v-icon right>mdi-menu-right</v-icon>
+            </v-btn>
+          </v-flex>
+        </v-layout>
+      </v-flex>
+    </v-container>
+
+    <v-container class="mt-6">
+      <v-flex align-center justify-center>
+        <v-layout column class="justify-center align-center">
+          <h2 class="featured">
+            Cursos
+            <strong>novos</strong>
+          </h2>
+
+          <carousel-component
+            @values="receiveCursosNovos"
+            @model="cursoNovosIndex"
+            :carousel-data="cursosNovos"
+            v-if="cursosNovos.length"
+            :perSlide="4"
+          >
+            <template v-slot:items>
+              <list-cursos-cards :curso-data="slidesCursosNovos[modelCursoNovos]" />
+            </template>
+          </carousel-component>
+
+          <v-flex text-center class="mt-6">
+            <v-btn large outlined color="primary" @click="$router.push('/catalogo-cursos')">
+              Ver todos os cursos
+              <v-icon right>mdi-menu-right</v-icon>
+            </v-btn>
+          </v-flex>
+        </v-layout>
+      </v-flex>
+    </v-container>
+
+    <v-container class="mt-6">
       <h2 class="featured">
         Como a escola
         <strong>funciona</strong>
@@ -114,12 +204,25 @@ export default {
   data: () => ({
     programas: {},
     cursos: [],
+    cursosDia: [],
+    cursosSemana: [],
+    cursosNovos: [],
     slidesCursos: [],
+    slidesCursosDia: [],
+    slidesCursosSemana: [],
+    slidesCursosNovos: [],
     modelCurso: 0,
+    modelCursoDia: 0,
+    modelCursoSemana: 0,
+    modelCursoNovos: 0,
+    
   }),
   created() {
     this.getCursosDestaque();
     this.getProgramasDestaque();
+    this.getMelhoresCursosDoDia();
+    this.getMelhoresCursosDaSemana();
+    this.getCursosNovos();
   },
   methods: {
     receiveCursos(data) {
@@ -127,6 +230,24 @@ export default {
     },
     cursoIndex(index) {
       this.modelCurso = index;
+    },
+    receiveCursosDia(data) {
+      this.slidesCursosDia = data;
+    },
+    cursoDiaIndex(index) {
+      this.modelCursoDia = index;
+    },
+    receiveCursosSemana(data) {
+      this.slidesCursosSemana = data;
+    },
+    cursoSemanaIndex(index) {
+      this.modelCursoSemana = index;
+    },
+    receiveCursosNovos(data) {
+      this.slidesCursosNovos = data;
+    },
+    cursoNovosIndex(index) {
+      this.modelCursoNovos = index;
     },
     async getCursosDestaque() {
       const response = await get('/curso?search=bl_destaque_curso:1');
@@ -136,6 +257,18 @@ export default {
       const response = await get('/programas?search=bl_programa_destaque:1');
       this.programas = response.data;
     },
+    async getMelhoresCursosDoDia(){
+      const response = await get('/inscricao/cursos-mais-acessados/dia');
+      this.cursosDia = response.data.data;
+    },
+    async getMelhoresCursosDaSemana(){
+      const response = await get('/inscricao/cursos-mais-acessados/semana');
+      this.cursosSemana = response.data.data;
+    },
+    async getCursosNovos(){
+      const response = await get('/curso?orderBy=created_at&sortedBy=desc&pagination=false');
+      this.cursosNovos = response.data.data.filter((value) => (value.created_at != null)).filter((v, index) => (index < 8))
+    }
   },
 };
 </script>
