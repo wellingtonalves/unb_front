@@ -1,24 +1,15 @@
 <template>
-  <v-carousel hide-delimiters v-model="carouselModel" interval="6000" cycle>
+  <v-carousel hide-delimiters v-model="carouselModel" interval="6000">
     <v-carousel-item v-for="index in slides" :key="index">
-      <v-responsive dark>
-        <v-row no-gutters justify="space-around">
-          <v-col class="d-flex justify-center">
-            <div class="desktop-scroll scroll">
-              <div class="content-desktop">
-                <v-row>
-                  <v-col>
-                    <slot name="items"></slot>
-                  </v-col>
-                </v-row>
-              </div>
-            </div>
-          </v-col>
-        </v-row>
-      </v-responsive>
+      <div class="desktop-scroll scroll">
+        <div class="content-desktop">
+          <slot name="items"></slot>
+        </div>
+      </div>
     </v-carousel-item>
   </v-carousel>
 </template>
+
 <script>
 export default {
   props: ['carouselData', 'perSlide'],
