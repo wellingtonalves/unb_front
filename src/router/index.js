@@ -996,6 +996,33 @@ const routes = [
           },
         ],
       },
+      {
+        path: '/formulario-inscricao/:id',
+        component: () => import('../components/Layout/RouterViewComponent.vue'),
+        children: [
+          {
+            path: '',
+            name: 'formulario-inscricao',
+            component: () => import('../views/inscricoes/formInscricao.vue'),
+            meta: {
+              requiresAuth: true,
+              title: ROUTER_CONSTANTS.formInscricao,
+              breadcrumb: [
+                {
+                  text: ROUTER_CONSTANTS.menuDashboard,
+                  disabled: false,
+                  href: '/',
+                },
+                {
+                  text: ROUTER_CONSTANTS.formInscricao,
+                  disabled: true,
+                  href: '/formulario-inscricao',
+                },
+              ],
+            },
+          },
+        ],
+      },
     ],
   },
 ];
