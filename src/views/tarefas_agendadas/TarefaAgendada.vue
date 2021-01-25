@@ -1,5 +1,5 @@
 <template>
-  <v-container v-show="permission('TAREFA_AGENDADA_LISTAR')">
+  <v-container v-show="$permissao('TAREFA_AGENDADA_LISTAR')">
 
     <filter-expansion-panel @filtrar="filtrar" @resetar="limparFiltros()">
       <template v-slot:filterExpansionPanel>
@@ -50,7 +50,7 @@
                 <v-toolbar-title>Listagem das Tarefas Agendadas</v-toolbar-title>
                 <v-spacer></v-spacer>
 
-                <v-btn v-show="permission('TAREFA_AGENDADA_INCLUIR')" color="primary" dark outlined rounded @click="$router.push('/tarefa-agendada/create')">
+                <v-btn v-show="$permissao('TAREFA_AGENDADA_INCLUIR')" color="primary" dark outlined rounded @click="$router.push('/tarefa-agendada/create')">
                   <v-icon>mdi-plus</v-icon>
                   Novo
                 </v-btn>
@@ -68,7 +68,7 @@
 
                 <v-tooltip bottom>
                   <template v-slot:activator="{ on }">
-                    <v-btn small tile outlined icon v-show="permission('TAREFA_AGENDADA_EDITAR')" color="primary" @click="$router.push(`/tarefa-agendada/${item.id_tarefa_agendada}/edit`)" v-on="on">
+                    <v-btn small tile outlined icon v-show="$permissao('TAREFA_AGENDADA_EDITAR')" color="primary" @click="$router.push(`/tarefa-agendada/${item.id_tarefa_agendada}/edit`)" v-on="on">
                       <v-icon>mdi-pencil</v-icon>
                     </v-btn>
                   </template>
@@ -77,7 +77,7 @@
 
                 <v-tooltip bottom>
                   <template v-slot:activator="{ on }">
-                    <v-btn small tile outlined icon v-show="permission('TAREFA_AGENDADA_EXCLUIR')" color="error" @click="excluir(item)" v-on="on">
+                    <v-btn small tile outlined icon v-show="$permissao('TAREFA_AGENDADA_EXCLUIR')" color="error" @click="excluir(item)" v-on="on">
                       <v-icon>mdi-delete</v-icon>
                     </v-btn>
                   </template>
@@ -122,7 +122,6 @@
   import {get} from "@/services/abstract.service";
   import {filterFormat} from "@/helpers/filterFormat";
   import {remove} from "../../services/abstract.service";
-  import {checkPermission} from "@/helpers/checkPermission";
 
   export default {
     name: "TarefaAgendada",
@@ -207,10 +206,7 @@
         this.snackbar.active = true;
 
         await this.get();
-      },
-      permission(rule) {
-        return checkPermission(rule);
-      },
+      }
     }
   }
 </script>

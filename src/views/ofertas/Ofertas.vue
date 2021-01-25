@@ -69,7 +69,7 @@
                 <v-toolbar-title>Listagem de Ofertas</v-toolbar-title>
                 <v-spacer></v-spacer>
 
-                <v-btn v-show="permission('OFERTA_INCLUIR')" color="primary" dark outlined rounded
+                <v-btn v-show="$permissao('OFERTA_INCLUIR')" color="primary" dark outlined rounded
                        @click="$router.push('/ofertas/create')">
                   <v-icon>mdi-plus</v-icon>
                   Novo
@@ -82,14 +82,14 @@
               <v-layout wrap class="action-buttons">
 
                 <div v-if="item.exclusividade">
-                  <v-btn small outlined tile v-show="permission('OFERTA_EDITAR')" color="primary"
+                  <v-btn small outlined tile v-show="$permissao('OFERTA_EDITAR')" color="primary"
                          @click="$router.push(`/ofertas/${item.id_oferta}/gerenciar-exclusividade`)">
                          <v-icon>mdi-cog</v-icon>
                     Gerenciar Exclusividade
                   </v-btn>
                 </div>
                 <div v-else>
-                  <v-btn small outlined tile v-show="permission('EXCLUSIVIDADE_OFERTA_INCLUIR')" color="primary" 
+                  <v-btn small outlined tile v-show="$permissao('EXCLUSIVIDADE_OFERTA_INCLUIR')" color="primary" 
                          @click="$router.push(`/ofertas/${item.id_oferta}/exclusividade`)">
                          <v-icon>mdi-thumb-up</v-icon>
                     Tornar Exclusiva
@@ -98,7 +98,7 @@
 
                 <v-tooltip bottom>
                   <template v-slot:activator="{ on }">
-                    <v-btn small tile outlined icon v-show="permission('OFERTA_EDITAR')" color="primary"
+                    <v-btn small tile outlined icon v-show="$permissao('OFERTA_EDITAR')" color="primary"
                            @click="$router.push(`/ofertas/${item.id_oferta}/edit`)" v-on="on">
                       <v-icon>mdi-pencil</v-icon>
                       <span class="d-sr-only">Editar</span>
@@ -109,7 +109,7 @@
 
                 <v-tooltip bottom>
                   <template v-slot:activator="{ on }">
-                    <v-btn small tile outlined icon v-show="permission('OFERTA_EXCLUIR')" color="error" @click="excluir(item)" v-on="on">
+                    <v-btn small tile outlined icon v-show="$permissao('OFERTA_EXCLUIR')" color="error" @click="excluir(item)" v-on="on">
                       <v-icon>mdi-delete</v-icon>
                       <span class="d-sr-only">Excluir</span>
                     </v-btn>
@@ -135,7 +135,6 @@
 import {get} from "@/services/abstract.service";
 import {filterFormat} from "@/helpers/filterFormat";
 import {remove} from "../../services/abstract.service";
-import {checkPermission} from "@/helpers/checkPermission";
 
 export default {
   name: "Ofertas",
@@ -231,9 +230,6 @@ export default {
       this.dialogDelete = false;
 
       await this.get();
-    },
-    permission(rule) {
-      return checkPermission(rule);
     },
     getTipoOferta() {
       get('/tipo-oferta?pagination=false').then(response => {
