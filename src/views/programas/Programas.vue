@@ -46,7 +46,7 @@
                 <v-toolbar-title>Listagem de Programas</v-toolbar-title>
                 <v-spacer></v-spacer>
 
-                <v-btn v-show="permission('PROGRAMA_INCLUIR')" color="primary" dark outlined rounded
+                <v-btn v-show="$permissao('PROGRAMA_INCLUIR')" color="primary" dark outlined rounded
                        @click="$router.push('/programas/create')">
                   <v-icon>mdi-plus</v-icon>
                   Novo
@@ -70,7 +70,7 @@
 
                 <v-tooltip bottom>
                   <template v-slot:activator="{ on }">
-                    <v-btn small tile outlined icon v-show="permission('PROGRAMA_EDITAR')" color="primary"
+                    <v-btn small tile outlined icon v-show="$permissao('PROGRAMA_EDITAR')" color="primary"
                            @click="$router.push(`/programas/${item.id_programa}/edit`)" v-on="on">
                       <v-icon>mdi-pencil</v-icon>
                     </v-btn>
@@ -80,7 +80,7 @@
 
                 <v-tooltip bottom>
                   <template v-slot:activator="{ on }">
-                    <v-btn small tile outlined icon v-show="permission('PROGRAMA_EXCLUIR')" color="error" @click="excluir(item)"
+                    <v-btn small tile outlined icon v-show="$permissao('PROGRAMA_EXCLUIR')" color="error" @click="excluir(item)"
                            v-on="on">
                       <v-icon>mdi-delete</v-icon>
                     </v-btn>
@@ -106,7 +106,6 @@
 import {get} from "@/services/abstract.service";
 import {filterFormat} from "@/helpers/filterFormat";
 import {remove} from "../../services/abstract.service";
-import {checkPermission} from "@/helpers/checkPermission";
 
 export default {
   name: "Ava",
@@ -193,9 +192,6 @@ export default {
       await remove(`/ofertas/${id}`);
       this.dialogDelete = false;
       await this.get();
-    },
-    permission(rule) {
-      return checkPermission(rule);
     },
     getTipoOferta() {
       get('/tipo-oferta?pagination=false').then(response => {

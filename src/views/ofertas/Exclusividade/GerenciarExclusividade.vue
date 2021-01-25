@@ -20,17 +20,17 @@
               Voltar
             </v-btn>
 
-            <v-btn outlined color="primary" v-show="permission('EXCLUSIVIDADE_EDITAR')"
+            <v-btn outlined color="primary" v-show="$permissao('EXCLUSIVIDADE_EDITAR')"
                @click="$router.push(`/ofertas/${oferta.id_oferta}/gerenciar-exclusividade/${oferta.exclusividade.id_exclusividade_oferta}/create`)" class="ma-1">
               Adicionar Valor
             </v-btn>
 
-            <v-btn outlined color="primary" v-show="permission('EXCLUSIVIDADE_EDITAR')"
+            <v-btn outlined color="primary" v-show="$permissao('EXCLUSIVIDADE_EDITAR')"
                    @click="$router.push(`/ofertas/${oferta.id_oferta}/exclusividade/${oferta.exclusividade.id_exclusividade_oferta}/edit`)" class="ma-1">
               Editar
             </v-btn>
 
-            <v-btn outlined color="error" v-show="permission('EXCLUSIVIDADE_EXCLUIR')"
+            <v-btn outlined color="error" v-show="$permissao('EXCLUSIVIDADE_EXCLUIR')"
                    @click="excluir()" class="ma-1">
               Remover exclusividade
             </v-btn>
@@ -69,7 +69,7 @@
 
               <v-tooltip bottom>
                 <template v-slot:activator="{ on }">
-                  <v-btn v-show="permission('VALOR_EXCLUSIVIDADE_EXCLUIR')" small color="error" icon @click="confirmarExcluirValorExclusividade(item)"
+                  <v-btn v-show="$permissao('VALOR_EXCLUSIVIDADE_EXCLUIR')" small color="error" icon @click="confirmarExcluirValorExclusividade(item)"
                          v-on="on">
                     <v-icon>mdi-delete</v-icon>
                   </v-btn>
@@ -109,7 +109,6 @@
 
 <script>
   import {get, remove} from "@/services/abstract.service";
-  import {checkPermission} from "@/helpers/checkPermission";
   
   export default {
     name: "GerenciarExclusividade",
@@ -134,9 +133,6 @@
       await this.getOferta();
     },
     methods: {
-      permission(rule) {
-        return checkPermission(rule);
-      },
       async getOferta() {
         const response = await get(`ofertas/${this.$route.params.id}`);
         this.oferta = response.data.data;
