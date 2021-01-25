@@ -37,7 +37,7 @@
           color="contrast"
           :disabled="curso.tp_situacao_curso != 'A'"
           class="ma-2 flex-grow-1"
-          href="https://www.escolavirtual.gov.br/secretaria/inscricao/5437"
+          @click="goToFormInscricao(curso)"
         >
           {{
             curso.tp_situacao_curso == 'A'
@@ -67,6 +67,16 @@ export default {
     goToDetailCurso(path) {
       return this.$router.push(`/curso/${path}`);
     },
+    goToFormInscricao(curso) {
+      console.log('curso')
+      console.log(curso)
+      
+      if(curso.oferta_atual) {
+        return this.$router.push(`/formulario-inscricao/${curso.oferta_atual.id_oferta}`);
+      }
+      
+      alert('implementar a exceção...')
+    }
   },
 };
 </script>
