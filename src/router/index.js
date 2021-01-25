@@ -976,7 +976,7 @@ const routes = [
           {
             path: '',
             name: 'inscricoes',
-            component: () => import('../views/aluno/inscricoes/Inscricoes.vue'),
+            component: () => import('../views/inscricoes/ComprovanteInscricao.vue'),
             meta: {
               requiresAuth: true,
               title: ROUTER_CONSTANTS.menuAlunoIncricoes,
