@@ -286,7 +286,7 @@ export default {
             <li>Nome da Instituição certificadora</li>
             <li>Nome do aluno(a)</li>
             <li>Título do curso (turma/mês/ano)</li>
-            <li>Período de disponibilidade de realização do curso (data de início e término)</li>
+            <li>Data de início do curso</li>
             <li>Carga-horária total</li>
             <li>Signatário</li>
             <li>Logotipo da instituição certificadora</li>
