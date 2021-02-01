@@ -17,7 +17,7 @@
     <v-container class="mt-6">
       <v-flex align-center justify-center>
         <v-layout column class="justify-center align-center">
-          <h2 class="featured">
+          <h2 class="featured pb-4">
             Cursos
             <strong>em Destaque</strong>
           </h2>
@@ -33,13 +33,49 @@
               <list-cursos-cards :curso-data="slidesCursos[modelCurso]" />
             </template>
           </carousel-component>
+        </v-layout>
+      </v-flex>
+    </v-container>
 
-          <v-flex text-center class="mt-6">
-            <v-btn large outlined color="primary" @click="$router.push('/catalogo-cursos')">
-              Ver todos os cursos
-              <v-icon right>mdi-menu-right</v-icon>
-            </v-btn>
-          </v-flex>
+    <v-container class="mt-6 TODO-cursos-com-menos-detalhes">
+      <v-flex align-center justify-center>
+        <v-layout>
+          <div class="pr-6 flex-grow-1">
+            <h2 class="featured pb-4">
+              Melhores Cursos
+              <strong>do Dia</strong>
+            </h2>
+
+            <carousel-component
+              @values="receiveCursosDia"
+              @model="cursoDiaIndex"
+              :carousel-data="cursosDia"
+              v-if="cursosDia.length"
+              :perSlide="4"
+            >
+              <template v-slot:items>
+                <list-cursos-cards :curso-data="slidesCursosDia[modelCursoDia]" />
+              </template>
+            </carousel-component>
+          </div>
+          <div class="pl-6 flex-grow-1">
+            <h2 class="featured pb-4">
+              Melhores Cursos
+              <strong>da Semana</strong>
+            </h2>
+
+            <carousel-component
+              @values="receiveCursosSemana"
+              @model="cursoSemanaIndex"
+              :carousel-data="cursosSemana"
+              v-if="cursosSemana.length"
+              :perSlide="2"
+            >
+              <template v-slot:items>
+                <list-cursos-cards :curso-data="slidesCursosSemana[modelCursoSemana]" />
+              </template>
+            </carousel-component>
+          </div>
         </v-layout>
       </v-flex>
     </v-container>
@@ -47,89 +83,8 @@
     <v-container class="mt-6">
       <v-flex align-center justify-center>
         <v-layout column class="justify-center align-center">
-          <h2 class="featured">
-            Programas
-            <strong>em Destaque</strong>
-          </h2>
-
-          <list-programas-cards v-if="programas.data" :programa-data="programas.data" />
-
-          <v-flex text-center class="mt-6">
-            <v-btn large outlined color="primary" @click="$router.push('/catalogo-programas')">
-              Ver todos os programas
-              <v-icon right>mdi-menu-right</v-icon>
-            </v-btn>
-          </v-flex>
-        </v-layout>
-      </v-flex>
-    </v-container>
-
-    <v-container class="mt-6">
-      <v-flex align-center justify-center>
-        <v-layout column class="justify-center align-center">
-          <h2 class="featured">
-            Melhores cursos
-            <strong>do dia</strong>
-          </h2>
-
-          <carousel-component
-            @values="receiveCursosDia"
-            @model="cursoDiaIndex"
-            :carousel-data="cursosDia"
-            v-if="cursosDia.length"
-            :perSlide="4"
-          >
-            <template v-slot:items>
-              <list-cursos-cards :curso-data="slidesCursosDia[modelCursoDia]" />
-            </template>
-          </carousel-component>
-
-          <v-flex text-center class="mt-6">
-            <v-btn large outlined color="primary" @click="$router.push('/catalogo-cursos')">
-              Ver todos os cursos
-              <v-icon right>mdi-menu-right</v-icon>
-            </v-btn>
-          </v-flex>
-        </v-layout>
-      </v-flex>
-    </v-container>
-
-    <v-container class="mt-6">
-      <v-flex align-center justify-center>
-        <v-layout column class="justify-center align-center">
-          <h2 class="featured">
-            Melhores cursos
-            <strong>da semana</strong>
-          </h2>
-
-          <carousel-component
-            @values="receiveCursosSemana"
-            @model="cursoSemanaIndex"
-            :carousel-data="cursosSemana"
-            v-if="cursosSemana.length"
-            :perSlide="4"
-          >
-            <template v-slot:items>
-              <list-cursos-cards :curso-data="slidesCursosSemana[modelCursoSemana]" />
-            </template>
-          </carousel-component>
-
-          <v-flex text-center class="mt-6">
-            <v-btn large outlined color="primary" @click="$router.push('/catalogo-cursos')">
-              Ver todos os cursos
-              <v-icon right>mdi-menu-right</v-icon>
-            </v-btn>
-          </v-flex>
-        </v-layout>
-      </v-flex>
-    </v-container>
-
-    <v-container class="mt-6">
-      <v-flex align-center justify-center>
-        <v-layout column class="justify-center align-center">
-          <h2 class="featured">
-            Cursos
-            <strong>novos</strong>
+          <h2 class="featured pb-4">
+            Cursos <strong>Novos</strong>
           </h2>
 
           <carousel-component
@@ -147,6 +102,26 @@
           <v-flex text-center class="mt-6">
             <v-btn large outlined color="primary" @click="$router.push('/catalogo-cursos')">
               Ver todos os cursos
+              <v-icon right>mdi-menu-right</v-icon>
+            </v-btn>
+          </v-flex>
+        </v-layout>
+      </v-flex>
+    </v-container>
+
+    <v-container class="mt-6">
+      <v-flex align-center justify-center>
+        <v-layout column class="justify-center align-center">
+          <h2 class="featured pb-4">
+            Programas
+            <strong>em Destaque</strong>
+          </h2>
+
+          <list-programas-cards v-if="programas.data" :programa-data="programas.data" />
+
+          <v-flex text-center class="mt-6">
+            <v-btn large outlined color="primary" @click="$router.push('/catalogo-programas')">
+              Ver todos os programas
               <v-icon right>mdi-menu-right</v-icon>
             </v-btn>
           </v-flex>
@@ -280,10 +255,7 @@ export default {
   background-position: center center;
   background-size: cover;
   display: inline-block;
-  margin-top: -80px;
   min-height: 500px;
-  padding-top: 100px;
-  padding-bottom: 100px;
   position: relative;
   width: 100%;
 }
@@ -317,5 +289,15 @@ export default {
     position: static;
     transform: none;
   }
+}
+</style>
+<style>
+.v-carousel,
+.v-carousel__item {
+  height: auto !important;
+}
+.TODO-cursos-com-menos-detalhes dl,
+.TODO-cursos-com-menos-detalhes .v-card__actions {
+  display: none;
 }
 </style>
