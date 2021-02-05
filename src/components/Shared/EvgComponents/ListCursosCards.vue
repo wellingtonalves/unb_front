@@ -2,7 +2,7 @@
   <v-layout class="cards course-cards flex-wrap justify-center">
     <v-card class="d-flex" v-for="(curso, c) of cursoData" :key="c">
       <div>
-        <a @click="goToDetailCurso(curso.id_curso)">
+        <a :href="`/curso/${curso.id_curso}`" @click="goToDetailCurso(curso.id_curso)">
           <v-img :src="curso.tx_url_imagem_curso"></v-img>
         </a>
         <p v-if="curso.tematica_curso" class="nome-tematica" :data-paleta-bg="curso.tematica_curso.tx_paleta_de_cores">
@@ -12,7 +12,7 @@
           {{ curso.tp_situacao_curso | displayLabel('statusCurso') }}
         </p>
         <h3 class="v-card__title">
-          <a @click="goToDetailCurso(curso.id_curso)">{{
+          <a :href="`/curso/${curso.id_curso}`" @click="goToDetailCurso(curso.id_curso)">{{
             curso.tx_nome_curso
           }}</a>
         </h3>
