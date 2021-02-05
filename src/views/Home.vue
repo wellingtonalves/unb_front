@@ -234,11 +234,11 @@ export default {
     },
     async getMelhoresCursosDoDia(){
       const response = await get('/inscricao/cursos-mais-acessados/dia');
-      this.cursosDia = response.data;
+      this.cursosDia = response.data.data;
     },
     async getMelhoresCursosDaSemana(){
       const response = await get('/inscricao/cursos-mais-acessados/semana');
-      this.cursosSemana = response.data;
+      this.cursosSemana = response.data.data;
     },
     async getCursosNovos(){
       const response = await get('/curso?orderBy=created_at&sortedBy=desc&pagination=false');
