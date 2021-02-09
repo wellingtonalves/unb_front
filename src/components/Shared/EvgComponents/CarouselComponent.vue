@@ -1,8 +1,9 @@
 <template>
-  <v-carousel hide-delimiters v-model="carouselModel" interval="6000">
+  <v-carousel hide-delimiters v-model="carouselModel" interval="6000" :show-arrows="(carouselData.length > 4)">
     <v-carousel-item v-for="index in slides" :key="index">
       <div class="desktop-scroll scroll">
         <div class="content-desktop">
+          {{carouselData.length}}
           <slot name="items"></slot>
         </div>
       </div>
