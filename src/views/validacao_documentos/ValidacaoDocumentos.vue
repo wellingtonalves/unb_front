@@ -1,6 +1,5 @@
 <template>
   <v-container>
-    <h2 class="mt-8">Validação de Documentos</h2>
     <template v-if="(!inscricao && !certificado)">
       <v-row>
         <v-col>

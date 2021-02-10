@@ -74,13 +74,13 @@ const routes = [
         component: () => import('../views/validacao_documentos/ValidacaoDocumentos.vue'),
         meta: {
           requiresAuth: false,
-          title: 'Perguntas Frequentes',
+          title: 'Validação de Documentos',
           breadcrumb: [
             {text: ROUTER_CONSTANTS.menuInicio, disabled: false, href: '/'},
             {
-              text: 'Perguntas Frequentes',
+              text: 'Validação de Documentos',
               disabled: true,
-              href: '/perguntas-frequentes',
+              href: '/validacao-documentos',
             },
           ],
         },
