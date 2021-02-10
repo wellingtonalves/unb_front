@@ -66,9 +66,46 @@
           
 
           <h3>Endereço</h3>
-          <v-row>
+          <v-col>
 
-          </v-row>
+            <v-col>
+              <v-switch
+                v-model="resideNoBrasil"
+                inset
+                label="Não Resido no Brasil"
+              />
+            </v-col>
+
+            <v-row>
+              <v-col class="d-flex" cols="12" sm="6">
+                <v-select v-model="dataResponse.sg_uf_servidor_estadual" :error-messages="errorData.sg_uf_servidor_estadual"
+                          :items="sgUfServidorEstadual" outlined label="De qual UF?" item-text="tx_nome_uf" item-value="sg_uf" @change="getMunicipio()"/>
+              </v-col>
+
+              <v-col class="d-flex" cols="12" sm="6">
+                <v-select v-model="dataResponse.sg_uf_servidor_estadual" :error-messages="errorData.sg_uf_servidor_estadual"
+                          :items="sgUfServidorEstadual" outlined label="De qual Municipio?" item-text="tx_nome_uf" item-value="sg_uf" @change="getMunicipio()"/>
+              </v-col>
+
+              <v-col class="d-flex" cols="12" sm="6">
+                <v-select v-model="dataResponse.sg_uf_servidor_estadual" :error-messages="errorData.sg_uf_servidor_estadual"
+                          :items="sgUfServidorEstadual" outlined label="Qual país?" item-text="tx_nome_uf" item-value="sg_uf" @change="getMunicipio()"/>
+              </v-col>
+            </v-row>
+
+          </v-col>
+
+          <h3>MOTIVO DE REALIZAÇÃO DO CURSO</h3>
+          <v-col>
+
+            <v-row>
+              <v-col class="d-flex" cols="12" sm="6">
+                <v-select v-model="dataResponse.sg_uf_servidor_estadual" :error-messages="errorData.sg_uf_servidor_estadual"
+                          :items="sgUfServidorEstadual" outlined label="Qual o motivo de realização do curso?" item-text="tx_nome_uf" item-value="sg_uf" @change="getMunicipio()"/>
+              </v-col>
+            </v-row>
+
+          </v-col>
 
         </v-form>
       </form-skeleton>
@@ -175,6 +212,7 @@ export default {
     sgUfServidorEstadual: [],
     idMunicipioServidorMunicipal: [],
     idOrgaoServidor: [],
+    resideNoBrasil: false,
   }),
   async mounted() {
     await this.getUf();
