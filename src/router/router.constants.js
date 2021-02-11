@@ -33,5 +33,5 @@ export const ROUTER_CONSTANTS = {
   menuControleAcessos: 'Controle de Acessos',
   menuCertificados: 'Certificados',
   menuAlunoIncricoes: 'Comprovantes de Inscrição',
-  formInscricao: 'Formulário de inscrição'
+  formInscricao: 'Formulário de Inscrição'
 };
