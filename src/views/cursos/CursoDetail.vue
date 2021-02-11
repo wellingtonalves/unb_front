@@ -143,10 +143,16 @@ export default {
   margin-bottom: 0;
 }
 .tematica-personagem {
-  margin-bottom: -26px !important;
+  position: absolute;
+  bottom: 0;
 }
 .v-chip {
   border-radius: 0 16px 16px 16px !important;
   margin-top: -8px;
+}
+@media (max-width: 600px) {
+  .tematica-personagem {
+    display: none;
+  }
 }
 </style>

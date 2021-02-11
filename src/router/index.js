@@ -52,6 +52,23 @@ const routes = [
         },
       },
       {
+        path: '/politica-privacidade',
+        name: 'Política de Privacidade',
+        component: () => import('../views/PoliticaPrivacidade.vue'),
+        meta: {
+          requiresAuth: false,
+          title: 'Política de Privacidade',
+          breadcrumb: [
+            {text: ROUTER_CONSTANTS.menuInicio, disabled: false, href: '/'},
+            {
+              text: 'Política de Privacidade',
+              disabled: true,
+              href: '/politica-privacidade',
+            },
+          ],
+        },
+      },
+      {
         path: '/adesao-institucional',
         name: 'Adesão Institucional',
         component: () => import('../views/AdesaoInstitucional.vue'),
@@ -1008,10 +1025,11 @@ const routes = [
               requiresAuth: true,
               title: ROUTER_CONSTANTS.formInscricao,
               breadcrumb: [
+                {text: ROUTER_CONSTANTS.menuInicio, disabled: false, href: '/'},
                 {
-                  text: ROUTER_CONSTANTS.menuDashboard,
+                  text: ROUTER_CONSTANTS.menuCursos,
                   disabled: false,
-                  href: '/',
+                  href: '/cursos',
                 },
                 {
                   text: ROUTER_CONSTANTS.formInscricao,
