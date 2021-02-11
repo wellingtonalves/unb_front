@@ -72,12 +72,12 @@ export default {
     goToFormInscricao(curso) {
       console.log('curso')
       console.log(curso)
+      return this.$router.push(`/formulario-inscricao/${12333}`);
+      // if(curso.oferta_atual) {
+      //   return this.$router.push(`/formulario-inscricao/${curso.oferta_atual.id_oferta}`);
+      // }
       
-      if(curso.oferta_atual) {
-        return this.$router.push(`/formulario-inscricao/${curso.oferta_atual.id_oferta}`);
-      }
-      
-      alert('implementar a exceção...')
+      // alert('implementar a exceção...')
     }
   },
 };

@@ -215,8 +215,8 @@ export default {
     resideNoBrasil: false,
   }),
   async mounted() {
-    await this.getUf();
-    await this.getOrgao();
+    // await this.getUf();
+    // await this.getOrgao();
   },
   methods: {
     async getUf() {
