@@ -3,7 +3,6 @@
     <v-carousel-item v-for="index in slides" :key="index">
       <div class="desktop-scroll scroll">
         <div class="content-desktop">
-          {{carouselData.length}}
           <slot name="items"></slot>
         </div>
       </div>

@@ -26,14 +26,19 @@ h2.featured strong {
   display: block;
   font-weight: 900;
 }
-.box {
+.box,
+.custom-fieldset {
   border: 2px solid var(--v-primary-base);
   clear: both;
   padding: 8px;
   width: 100%;
 }
+.custom-fieldset {
+  padding: 24px;
+}
 .box > h3:first-child,
-.box > h4:first-child {
+.box > h4:first-child,
+.custom-fieldset > legend {
   background-color: var(--v-lightgrey-base);
   color: var(--v-primary-base);
   display: table;
@@ -62,6 +67,16 @@ h2.featured strong {
   font-size: 1rem;
   font-weight: 300;
   text-transform: uppercase;
+}
+.custom-fieldset + .custom-fieldset {
+  margin-top: 24px;
+}
+.custom-fieldset .v-text-field .v-input__control > .v-input__slot {
+  background-color: var(--v-white-base) !important;
+  box-shadow: 0 0 10px 3px rgba(0,0,0,.075) !important;
+}
+.custom-fieldset .v-text-field--outlined fieldset {
+  border-color: var(--v-white-base);
 }
 .flex-basis-100 {
   flex-basis: 100% !important;
