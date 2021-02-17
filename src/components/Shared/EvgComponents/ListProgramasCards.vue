@@ -9,7 +9,7 @@
           }}</a>
         </h3>
       </div>
-      <dl>
+      <dl v-if="programa.qt_carga_horaria">
         <dt>Carga Horária:</dt>
         <dd>{{ `${programa.qt_carga_horaria}h` }}</dd>
       </dl>

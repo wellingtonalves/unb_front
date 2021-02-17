@@ -11,10 +11,9 @@
           
         </v-row>
         <v-row>
-          <h2 class="primary--text mt-16">
-            Perguntas<br />
-            Frequentes
-          </h2>
+          <h3 class="subtitle mt-16">
+            Perguntas Frequentes
+          </h3>
           <list-perguntas type="programas"/>
         </v-row>
       </v-layout>

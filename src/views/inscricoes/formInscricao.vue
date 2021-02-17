@@ -1,115 +1,110 @@
 <template>
   <v-container>
-    <card-default>
-      <form-skeleton :loading="loading">
-        <v-form lazy-validation ref="form" v-model="validForm" v-show="!loading">
+    
+    <form-skeleton :loading="loading">
+      <v-form lazy-validation ref="form" v-model="validForm" v-show="!loading">
 
-          <h3>Dados Profissionais</h3>
+        <fieldset class="custom-fieldset">
+          <legend>Dados Profissionais</legend>
           <v-row>
-            <v-col class="d-flex" cols="12" sm="6">
+            <v-col cols="12" sm="6">
               <v-select v-model="dataResponse.tp_servidor_militar_cidadao" :error-messages="errorData.tp_servidor_militar_cidadao"
                         :items="tpServidorMilitarCidadao" outlined label="Você é..." item-text="label" item-value="value" />
             </v-col>
 
-            <v-col class="d-flex" cols="12" sm="6">
+            <v-col cols="12" sm="6">
               <v-select v-model="dataResponse.tp_poder_execut_legisl_judic" :error-messages="errorData.tp_poder_execut_legisl_judic"
                         :items="tpPoderExectLegislJudic" outlined label="De qual poder?" item-text="label" item-value="value" />
             </v-col>
 
-            <v-col class="d-flex" cols="12" sm="6">
+            <v-col cols="12" sm="4">
               <v-select v-model="dataResponse.tp_esfera_servidor_militar" :error-messages="errorData.tp_esfera_servidor_militar"
                         :items="tpEsferaServidorMilitar" outlined label="De qual esfera?" item-text="label" item-value="value" />
             </v-col>
 
-            <v-col class="d-flex" cols="12" sm="6">
+            <v-col cols="12" sm="4">
               <v-select v-model="dataResponse.sg_uf_servidor_estadual" :error-messages="errorData.sg_uf_servidor_estadual"
                         :items="sgUfServidorEstadual" outlined label="De qual UF?" item-text="tx_nome_uf" item-value="sg_uf" @change="getMunicipio()"/>
             </v-col>
 
-            <v-col class="d-flex" cols="12" sm="6">
+            <v-col cols="12" sm="4">
               <v-select v-model="dataResponse.id_municipio_servidor_municipal" :error-messages="errorData.id_municipio_servidor_municipal"
                         :items="idMunicipioServidorMunicipal" outlined label="De qual Município?" item-text="tx_nome_municipio" item-value="id_municipio" />
             </v-col>
 
-            <v-col class="d-flex" cols="12" sm="6">
-              <v-col>
-                <span>
-                  As informações deste campo são disponibilizadas pelo Sistema de Informações Organizacionais do Governo Federal.
-                            Caso não encontre a informação que deseje na relação, utilize o órgão imediatamente superior.
-                </span>
-              </v-col>
-              <v-col>
-                <v-select v-model="dataResponse.id_orgao_servidor" :error-messages="errorData.id_orgao_servidor"
-                          :items="idOrgaoServidor" outlined label="De qual órgão?" item-text="tx_nome_orgao" item-value="id_orgao" />
-              </v-col>
-              
+            <v-col cols="12">
+              <v-select v-model="dataResponse.id_orgao_servidor" :error-messages="errorData.id_orgao_servidor"
+                          :items="idOrgaoServidor" outlined label="De qual órgão?" item-text="tx_nome_orgao" item-value="id_orgao"
+                          hint="As informações deste campo são disponibilizadas pelo Sistema de Informações Organizacionais do Governo Federal. Caso não encontre a informação que deseje na relação, utilize o órgão imediatamente superior." persistent-hint />
             </v-col>
 
-            <v-col class="d-flex" cols="12" sm="6">
+            <v-col cols="12" sm="6">
               <v-select v-model="dataResponse.tp_ocupa_cargo_funcao" :error-messages="errorData.tp_ocupa_cargo_funcao"
-                        :items="tpOcupaCargoFuncao" outlined label="Você ocupa função comissionada?" item-text="label" item-value="value" />
+                        :items="tpOcupaCargoFuncao" outlined label="Ocupa função comissionada?" item-text="label" item-value="value" />
             </v-col>
 
-            <v-col>
+            <v-col cols="12" sm="6">
 <!--              TODO -- essa lista deverá ser filtrada e não está de acordo com os dados de produção-->
               <v-select v-model="dataResponse.tp_empregado_terceiro_setor" :error-messages="errorData.tp_empregado_terceiro_setor"
                         :items="idOrgaoServidor" outlined label="De qual empresa?" item-text="tx_nome_orgao" item-value="id_orgao" />
             </v-col>
 
-
-            <v-col class="d-flex" cols="12" sm="6">
+            <v-col cols="12">
               <v-select v-model="dataResponse.tp_sem_vinculo" :error-messages="errorData.tp_sem_vinculo"
-                        :items="tpSemVinculo" outlined label="Selecione sua situação:" item-text="label" item-value="value" />
+                        :items="tpSemVinculo" outlined label="Selecione sua situação" item-text="label" item-value="value" />
             </v-col>
             
           </v-row>
-          
+        </fieldset>
 
-          <h3>Endereço</h3>
-          <v-col>
+        <fieldset class="custom-fieldset">
+          <legend>Endereço</legend>
+          <v-row>
 
-            <v-col>
+            <v-col cols="12">
               <v-switch
                 v-model="resideNoBrasil"
                 inset
-                label="Não Resido no Brasil"
+                label="Não resido no Brasil"
               />
             </v-col>
 
-            <v-row>
-              <v-col class="d-flex" cols="12" sm="6">
-                <v-select v-model="dataResponse.sg_uf_servidor_estadual" :error-messages="errorData.sg_uf_servidor_estadual"
-                          :items="sgUfServidorEstadual" outlined label="De qual UF?" item-text="tx_nome_uf" item-value="sg_uf" @change="getMunicipio()"/>
-              </v-col>
+            <v-col cols="12" sm="4">
+              <v-select v-model="dataResponse.sg_uf_servidor_estadual" :error-messages="errorData.sg_uf_servidor_estadual"
+                        :items="sgUfServidorEstadual" outlined label="De qual UF?" item-text="tx_nome_uf" item-value="sg_uf" @change="getMunicipio()"/>
+            </v-col>
 
-              <v-col class="d-flex" cols="12" sm="6">
-                <v-select v-model="dataResponse.sg_uf_servidor_estadual" :error-messages="errorData.sg_uf_servidor_estadual"
-                          :items="sgUfServidorEstadual" outlined label="De qual Municipio?" item-text="tx_nome_uf" item-value="sg_uf" @change="getMunicipio()"/>
-              </v-col>
+            <v-col cols="12" sm="4">
+              <v-select v-model="dataResponse.sg_uf_servidor_estadual" :error-messages="errorData.sg_uf_servidor_estadual"
+                        :items="sgUfServidorEstadual" outlined label="De qual Municipio?" item-text="tx_nome_uf" item-value="sg_uf" @change="getMunicipio()"/>
+            </v-col>
 
-              <v-col class="d-flex" cols="12" sm="6">
-                <v-select v-model="dataResponse.sg_uf_servidor_estadual" :error-messages="errorData.sg_uf_servidor_estadual"
-                          :items="sgUfServidorEstadual" outlined label="Qual país?" item-text="tx_nome_uf" item-value="sg_uf" @change="getMunicipio()"/>
-              </v-col>
-            </v-row>
+            <v-col cols="12" sm="4">
+              <v-select v-model="dataResponse.sg_uf_servidor_estadual" :error-messages="errorData.sg_uf_servidor_estadual"
+                        :items="sgUfServidorEstadual" outlined label="Qual país?" item-text="tx_nome_uf" item-value="sg_uf" @change="getMunicipio()"/>
+            </v-col>
 
-          </v-col>
+          </v-row>
+        </fieldset>
 
-          <h3>MOTIVO DE REALIZAÇÃO DO CURSO</h3>
-          <v-col>
+        <fieldset class="custom-fieldset">
+          <legend>Motivo de Realização do Curso</legend>
+          <v-row>
+            <v-col>
+              <v-select v-model="dataResponse.sg_uf_servidor_estadual" :error-messages="errorData.sg_uf_servidor_estadual"
+                        :items="sgUfServidorEstadual" outlined label="Qual o motivo de realização do curso?" item-text="tx_nome_uf" item-value="sg_uf" @change="getMunicipio()"/>
+            </v-col>
+          </v-row>
+        </fieldset>
 
-            <v-row>
-              <v-col class="d-flex" cols="12" sm="6">
-                <v-select v-model="dataResponse.sg_uf_servidor_estadual" :error-messages="errorData.sg_uf_servidor_estadual"
-                          :items="sgUfServidorEstadual" outlined label="Qual o motivo de realização do curso?" item-text="tx_nome_uf" item-value="sg_uf" @change="getMunicipio()"/>
-              </v-col>
-            </v-row>
+        <v-btn class="mt-8" color="primary" :loading="loading" @click="save()">
+          <v-icon class="mr-2">mdi-content-save</v-icon>
+          Enviar
+        </v-btn>
 
-          </v-col>
-
-        </v-form>
-      </form-skeleton>
-    </card-default>
+      </v-form>
+    </form-skeleton>
+    
   </v-container>
 </template>
 

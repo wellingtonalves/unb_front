@@ -24,25 +24,25 @@
 
           <h3>{{ $t('message.appFooter.sobreEscola') }}</h3>
           <v-list dense flat>
-            <v-list-item href="https://www.escolavirtual.gov.br/catalogo">
+            <v-list-item href="/catalogo-cursos">
               <v-list-item-content>
                 <v-list-item-title>{{ $t('message.appFooter.catalogoCursos') }}</v-list-item-title>
               </v-list-item-content>
             </v-list-item>
 
-            <v-list-item href="https://www.escolavirtual.gov.br/programas">
+            <v-list-item href="/catalogo-programas">
               <v-list-item-content>
                 <v-list-item-title>{{ $t('message.appFooter.catalogoProgramas') }}</v-list-item-title>
               </v-list-item-content>
             </v-list-item>
 
-            <v-list-item href="https://www.escolavirtual.gov.br/conheca-a-escola">
+            <v-list-item href="/conheca-a-escola">
               <v-list-item-content>
                 <v-list-item-title>{{ $t('message.appFooter.conhecaEscola') }}</v-list-item-title>
               </v-list-item-content>
             </v-list-item>
 
-            <v-list-item href="https://www.escolavirtual.gov.br/adesao-institucional">
+            <v-list-item href="/adesao-institucional">
               <v-list-item-content>
                 <v-list-item-title>{{ $t('message.appFooter.adesaoInstitucional') }}</v-list-item-title>
               </v-list-item-content>
@@ -54,7 +54,7 @@
               </v-list-item-content>
             </v-list-item>
 
-            <v-list-item href="https://www.escolavirtual.gov.br/politica-privacidade">
+            <v-list-item href="/politica-privacidade">
               <v-list-item-content>
                 <v-list-item-title>{{ $t('message.appFooter.politicaPrivacidade') }}</v-list-item-title>
               </v-list-item-content>
@@ -68,13 +68,13 @@
 
           <h3>{{ $t('message.appFooter.utilidades') }}</h3>
           <v-list dense flat>
-            <v-list-item href="https://www.escolavirtual.gov.br/documentos/validacao">
+            <v-list-item href="/validacao-documentos">
               <v-list-item-content>
                 <v-list-item-title>{{ $t('message.appFooter.validacaoDocumentos') }}</v-list-item-title>
               </v-list-item-content>
             </v-list-item>
 
-            <v-list-item href="https://www.escolavirtual.gov.br/perguntas-frequentes">
+            <v-list-item href="/perguntas-frequentes">
               <v-list-item-content>
                 <v-list-item-title>{{ $t('message.appFooter.perguntasFrequentes') }}</v-list-item-title>
               </v-list-item-content>

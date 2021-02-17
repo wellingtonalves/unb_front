@@ -59,6 +59,9 @@ export default {
 </script>
 
 <style>
+.section.row {
+    margin-top: 0;
+}
 .theme--light.v-tabs > .v-tabs-bar,
 .theme--light.v-tabs-items {
   background-color: transparent;

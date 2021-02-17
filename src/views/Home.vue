@@ -130,7 +130,7 @@
     </v-container>
 
     <v-container class="mt-6">
-      <h2 class="featured">
+      <h2 class="featured pb-4">
         Como a escola
         <strong>funciona</strong>
       </h2>

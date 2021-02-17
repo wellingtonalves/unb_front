@@ -136,14 +136,23 @@ export default {
   font-size: 1.75rem;
   text-transform: uppercase;
 }
+.outras-informacoes p {
+  margin-bottom: 8px;
+}
 .outras-informacoes p:last-child {
   margin-bottom: 0;
 }
 .tematica-personagem {
-  margin-bottom: -36px !important;
+  position: absolute;
+  bottom: 0;
 }
 .v-chip {
   border-radius: 0 16px 16px 16px !important;
   margin-top: -8px;
+}
+@media (max-width: 600px) {
+  .tematica-personagem {
+    display: none;
+  }
 }
 </style>
