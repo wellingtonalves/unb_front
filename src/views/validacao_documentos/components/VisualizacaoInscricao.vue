@@ -1,21 +1,24 @@
 <template>
   <div>
-    <h3>Comprovante de inscrição</h3>
-    <p class="label">Código:</p>
-    <p>{{data.nr_codigo_validador}}</p>
-    <p class="label">Realizado por:</p>
-    <p>{{data.pessoa.tx_nome_pessoa}}</p>
-    <p class="label">Curso:</p>
-    <p>{{data.oferta.curso.tx_nome_curso}}</p>
-    <p class="label">Data da Inscrição:</p>
-    <p>{{ data.dt_inscricao_formatada }}</p>
+    <h3 class="mb-2">Comprovante de Inscrição</h3>
+
+    <dl class="description-list">
+      <dt>Código:</dt>
+      <dd>{{data.nr_codigo_validador}}</dd>
+      <dt>Realizado por:</dt>
+      <dd>{{data.pessoa.tx_nome_pessoa}}</dd>
+      <dt>Curso:</dt>
+      <dd>{{data.oferta.curso.tx_nome_curso}}</dd>
+      <dt>Data da Inscrição:</dt>
+      <dd>{{ data.dt_inscricao_formatada }}</dd>
+    </dl>
 
     <v-row>
       <v-col>
-        <v-btn large color="accent" @click="print()">
+        <v-btn large color="primary" @click="print()">
           Imprimir
         </v-btn>
-        <v-btn class="ml-2" large color="accent" @click="$emit('close')">
+        <v-btn class="ml-2" @click="$emit('close')">
           Voltar
         </v-btn>
       </v-col>

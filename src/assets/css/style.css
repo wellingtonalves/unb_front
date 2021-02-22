@@ -164,6 +164,17 @@ div.container {
   opacity: 1;
   position: static;
 }
+.description-list dt {
+  color: var(--v-primary-base);
+  font-weight: 600;
+}
+.description-list dd {
+  padding-bottom: .5rem;
+}
+.description-list dd + dt {
+  border-top: 1px solid var(--v-mediumgrey-base);
+  padding-top: .5rem;
+}
 .layout.cards .v-card {
   background-color: var(--v-white-base);
   border-radius: 0;
