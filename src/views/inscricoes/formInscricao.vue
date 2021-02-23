@@ -28,7 +28,7 @@
             <v-col cols="12" sm="4">
               <v-autocomplete v-model="dataResponse.sg_uf_servidor_estadual" :error-messages="errorData.sg_uf_servidor_estadual" :loading="loadingUf"
                         :items="sgUfServidorEstadual" outlined label="De qual UF?" item-text="tx_nome_uf" item-value="sg_uf" 
-                        v-show="showFields.sg_uf_servidor_estadual" @change="verificarRegrasParaUf()"/>
+                        v-show="showFields.sg_uf_servidor_estadual" @change="tratarRegrasParaUf()"/>
             </v-col>
 
             <v-col cols="12" sm="4">
@@ -251,9 +251,8 @@ export default {
       this.loadingOrgaos = false;
     },
     
-    
-    
     tratarServidorPublico() {
+      this.dataResponse.tp_esfera_servidor_militar = null;
       const tipoPoder = this.dataResponse.tp_poder_execut_legisl_judic;
       const tipoEsfera = this.tpEsferaServidorMilitar;
       
@@ -275,93 +274,140 @@ export default {
     tratarEsfera() {
       const tipoPoder = this.dataResponse.tp_poder_execut_legisl_judic;
       const tipoEsfera = this.dataResponse.tp_esfera_servidor_militar;
+
+      this.showFields.id_orgao_servidor = false;
+      this.showFields.sg_uf_servidor_estadual = false;
+      this.showFields.id_municipio_servidor_municipal = false;
       
       if (tipoPoder === 'E') {
-        if (tipoEsfera === 'F') {
-          this.getOrgao(';id_esfera:1;id_vinculo:4');
-          this.showFields.id_orgao_servidor = true;
-        }
-
-        if (tipoEsfera === 'E' || tipoEsfera === 'M') {
-          this.showFields.id_orgao_servidor = false;
-          this.showFields.sg_uf_servidor_estadual = true;
-          this.getUf();
-        }
+        this.tratarRegrasServidorPublicoExecutivo(tipoEsfera);
       }
 
       if (tipoPoder === 'J') {
-        if (tipoEsfera === 'F') {
-          this.getOrgao(';id_esfera:1;id_vinculo:2');
-          this.showFields.id_orgao_servidor = true;
-        }
-
-        if (tipoEsfera === 'E') {
-          this.getOrgao(';id_esfera:2;id_vinculo:2');
-          this.showFields.id_orgao_servidor = true;
-          this.showFields.sg_uf_servidor_estadual = true;
-          this.getUf();
-        }
+        this.tratarRegrasServidorPublicoJudiciario(tipoEsfera);
       }
 
       if (tipoPoder === 'L') {
-        if (tipoEsfera === 'F') {
-          this.getOrgao(';id_esfera:1;id_vinculo:3');
-          this.showFields.id_orgao_servidor = true;
-        }
-
-        if (tipoEsfera === 'E') {
-          this.getOrgao(';id_esfera:1;id_vinculo:3');
-          this.showFields.id_orgao_servidor = true;
-          this.showFields.sg_uf_servidor_estadual = true;
-          this.getUf();
-        }
-
-        if (tipoEsfera === 'M') {
-          this.getOrgao(';id_esfera:3;id_vinculo:3');
-          this.showFields.id_orgao_servidor = true;
-          this.showFields.sg_uf_servidor_estadual = true;
-          this.getUf();
-        }
+        this.tratarRegrasServidorPublicoLegislativo(tipoEsfera);
       }
 
       if (tipoPoder === 'O') {
-        if (tipoEsfera === 'F') {
-          this.getOrgao(';id_esfera:1;id_vinculo:4');
-          this.showFields.id_orgao_servidor = true;
-        }
-
-        if (tipoEsfera === 'E') {
-          // this.getOrgao(';id_esfera:2;id_vinculo:4');
-          // this.showFields.id_orgao_servidor = true;
-          this.showFields.sg_uf_servidor_estadual = true;
-          this.getUf();
-        }
-
-        if (tipoEsfera === 'M') {
-          this.getOrgao(';id_esfera:3;id_vinculo:3');
-          this.showFields.id_orgao_servidor = true;
-          this.showFields.sg_uf_servidor_estadual = true;
-          this.getUf();
-        }
+        this.tratarRegrasServidorPublicoOrgaosAutonomos(tipoEsfera);
       }
       
     },
-    async verificarRegrasParaUf() {
+    tratarRegrasServidorPublicoExecutivo(tipoEsfera){
+      this.limparCamposUfMunicipioOrgao();
+      
+      if (tipoEsfera === 'F') {
+        this.getOrgao(';id_esfera:1;id_vinculo:4');
+        this.showFields.id_orgao_servidor = true;
+      }
+
+      if (tipoEsfera === 'E' || tipoEsfera === 'M') {
+        this.showFields.id_orgao_servidor = false;
+        this.showFields.sg_uf_servidor_estadual = true;
+        this.getUf();
+      }
+    },
+    tratarRegrasServidorPublicoJudiciario(tipoEsfera){
+      if (tipoEsfera === 'F') {
+        this.getOrgao(';id_esfera:1;id_vinculo:2');
+        this.showFields.id_orgao_servidor = true;
+      }
+
+      if (tipoEsfera === 'E') {
+        this.getOrgao(';id_esfera:2;id_vinculo:2');
+        this.showFields.id_orgao_servidor = true;
+        this.showFields.sg_uf_servidor_estadual = true;
+        this.getUf();
+      }
+    },
+    tratarRegrasServidorPublicoLegislativo(tipoEsfera){
+      this.limparCamposUfMunicipioOrgao();
+
+      if (tipoEsfera === 'F') {
+        this.getOrgao(';id_esfera:1;id_vinculo:3');
+        this.showFields.id_orgao_servidor = true;
+      }
+
+      if (tipoEsfera === 'E') {
+        this.getOrgao(';id_esfera:1;id_vinculo:3');
+        this.showFields.id_orgao_servidor = true;
+        this.showFields.sg_uf_servidor_estadual = true;
+        this.getUf();
+      }
+
+      if (tipoEsfera === 'M') {
+        this.getOrgao(';id_esfera:3;id_vinculo:3');
+        this.showFields.id_orgao_servidor = true;
+        this.showFields.sg_uf_servidor_estadual = true;
+        this.getUf();
+      }
+    },
+    tratarRegrasServidorPublicoOrgaosAutonomos(tipoEsfera){
+      this.limparCamposUfMunicipioOrgao();
+      
+      if (tipoEsfera === 'F') {
+        this.getOrgao(';id_esfera:1;id_vinculo:4');
+        this.showFields.id_orgao_servidor = true;
+      }
+
+      if (tipoEsfera === 'E') {
+        this.showFields.sg_uf_servidor_estadual = true;
+        this.getUf();
+      }
+
+      if (tipoEsfera === 'M') {
+        this.getOrgao(';id_esfera:3;id_vinculo:3');
+        // this.showFields.id_orgao_servidor = true;
+        this.showFields.sg_uf_servidor_estadual = true;
+        this.getUf();
+      }
+    },
+    async tratarRegrasParaUf() {
       const tipoPoder = this.dataResponse.tp_poder_execut_legisl_judic;
       const tipoEsfera = this.dataResponse.tp_esfera_servidor_militar;
+      const uf = this.dataResponse.sg_uf_servidor_estadual;
+
 
       if (tipoEsfera === 'M') {
         this.showFields.id_municipio_servidor_municipal = true;
         this.getMunicipio()
       }
       
-      if (tipoPoder === 'O') {
-        const uf = await get(`/uf/${this.dataResponse.sg_uf_servidor_estadual}`);
-        this.getOrgao(`;id_esfera:2;id_vinculo:4;tx_nome_orgao:${uf.data.data.tx_nome_uf}`);
+      if (tipoPoder === 'O' && tipoEsfera == 'E') {
+        const result = await get(`/uf/${this.dataResponse.sg_uf_servidor_estadual}`);
+        this.getOrgao(`;id_esfera:2;id_vinculo:4;tx_nome_orgao:${result.data.data.tx_nome_uf}`);
         this.showFields.id_orgao_servidor = true;
       }
       
-      //TODO - criar regra para orgao autonomo - municipal... BH, GO, PA
+      if (tipoPoder === 'O' && tipoEsfera == 'M') {
+        this.tratarRegrasParaMunicipio(uf);
+      }
+    },
+    /**
+     * Quando for um servidor publico, do poder orgãos autonomos da esfera municipal, existe uma regra que diz...
+     * se a UF for = BA, GO ou PA, a combo de orgão vai carregar um valor especifico, se não for nenhuma das 3 opções
+     * não vai mostrar a combo do orgão e vai setar o valor id_orgao = 100000
+     */
+    tratarRegrasParaMunicipio(uf) {
+      this.showFields.id_municipio_servidor_municipal = true;
+      this.getMunicipio()
+
+      if (uf === 'BA' || uf === 'GO' || uf === 'PA') {
+        this.idOrgaoServidor = [];
+        this.idOrgaoServidor.push({id_orgao: 345, tx_nome_orgao: 'Tribunal de Contas dos Municípios'})
+        this.showFields.id_orgao_servidor = true;
+      } else {
+        this.showFields.id_orgao_servidor = false;
+        this.dataResponse.id_orgao_servidor = 100000;
+      }
+    },
+    limparCamposUfMunicipioOrgao() {
+      this.dataResponse.sg_uf_servidor_estadual = [];
+      this.dataResponse.id_municipio_servidor_municipal = [];
+      this.dataResponse.id_orgao_servidor = [];
     }
   }
 }
