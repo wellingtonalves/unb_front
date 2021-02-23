@@ -261,8 +261,7 @@ export default {
         this.tpEsferaServidorMilitar.push({label: 'MUNICIPAL', value: 'M'})
       }
       
-      
-      if (tipoPoder == 'E' || tipoPoder == 'L') {
+      if (tipoPoder == 'E' || tipoPoder == 'L' || tipoPoder == 'O') {
         this.showFields.tp_esfera_servidor_militar =  true;
         this.tratarEsfera();
       }
@@ -272,18 +271,6 @@ export default {
         this.showFields.tp_esfera_servidor_militar =  true;
         this.tratarEsfera();
       }
-
-      // if (tipoPoder == 'E') {
-      //   this.tratarEsferaPoderExecutivoServidor();
-      // } else if (tipoPoder == 'J') {
-      //   // Remove a opcao de esfera municipal para o poder judiciario
-      //   // $("#tp_esfera_servidor_militar option[value='3']").remove();
-      //   // tratarEsferaPoderJudiciarioServidor();
-      // } else if (tipoPoder == 'L') {
-      //   // tratarEsferaPoderLegislativoServidor();
-      // } else if (tipoPoder == 'O') {
-      //   // tratarEsferaPoderAutonomosServidor();
-      // }
     },
     tratarEsfera() {
       const tipoPoder = this.dataResponse.tp_poder_execut_legisl_judic;
@@ -336,16 +323,45 @@ export default {
           this.getUf();
         }
       }
+
+      if (tipoPoder === 'O') {
+        if (tipoEsfera === 'F') {
+          this.getOrgao(';id_esfera:1;id_vinculo:4');
+          this.showFields.id_orgao_servidor = true;
+        }
+
+        if (tipoEsfera === 'E') {
+          // this.getOrgao(';id_esfera:2;id_vinculo:4');
+          // this.showFields.id_orgao_servidor = true;
+          this.showFields.sg_uf_servidor_estadual = true;
+          this.getUf();
+        }
+
+        if (tipoEsfera === 'M') {
+          this.getOrgao(';id_esfera:3;id_vinculo:3');
+          this.showFields.id_orgao_servidor = true;
+          this.showFields.sg_uf_servidor_estadual = true;
+          this.getUf();
+        }
+      }
       
     },
-    verificarRegrasParaUf() {
-      // const tipoPoder = this.dataResponse.tp_poder_execut_legisl_judic;
+    async verificarRegrasParaUf() {
+      const tipoPoder = this.dataResponse.tp_poder_execut_legisl_judic;
       const tipoEsfera = this.dataResponse.tp_esfera_servidor_militar;
 
       if (tipoEsfera === 'M') {
         this.showFields.id_municipio_servidor_municipal = true;
         this.getMunicipio()
       }
+      
+      if (tipoPoder === 'O') {
+        const uf = await get(`/uf/${this.dataResponse.sg_uf_servidor_estadual}`);
+        this.getOrgao(`;id_esfera:2;id_vinculo:4;tx_nome_orgao:${uf.data.data.tx_nome_uf}`);
+        this.showFields.id_orgao_servidor = true;
+      }
+      
+      //TODO - criar regra para orgao autonomo - municipal... BH, GO, PA
     }
   }
 }
