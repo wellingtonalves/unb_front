@@ -262,7 +262,7 @@ export default {
       }
       
       
-      if (tipoPoder == 'E') {
+      if (tipoPoder == 'E' || tipoPoder == 'L') {
         this.showFields.tp_esfera_servidor_militar =  true;
         this.tratarEsfera();
       }
@@ -310,6 +310,27 @@ export default {
 
         if (tipoEsfera === 'E') {
           this.getOrgao(';id_esfera:2;id_vinculo:2');
+          this.showFields.id_orgao_servidor = true;
+          this.showFields.sg_uf_servidor_estadual = true;
+          this.getUf();
+        }
+      }
+
+      if (tipoPoder === 'L') {
+        if (tipoEsfera === 'F') {
+          this.getOrgao(';id_esfera:1;id_vinculo:3');
+          this.showFields.id_orgao_servidor = true;
+        }
+
+        if (tipoEsfera === 'E') {
+          this.getOrgao(';id_esfera:1;id_vinculo:3');
+          this.showFields.id_orgao_servidor = true;
+          this.showFields.sg_uf_servidor_estadual = true;
+          this.getUf();
+        }
+
+        if (tipoEsfera === 'M') {
+          this.getOrgao(';id_esfera:3;id_vinculo:3');
           this.showFields.id_orgao_servidor = true;
           this.showFields.sg_uf_servidor_estadual = true;
           this.getUf();
