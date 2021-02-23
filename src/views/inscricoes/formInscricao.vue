@@ -16,14 +16,12 @@
               <v-select v-model="dataResponse.tp_poder_execut_legisl_judic" :error-messages="errorData.tp_poder_execut_legisl_judic"
                         :items="tpPoderExectLegislJudic" outlined label="De qual poder?" item-text="label" item-value="value" 
                         v-show="showFields.tp_servidor_militar_cidadao" @change="tratarPessoa()"/>
-<!--                        v-show="dataResponse.tp_servidor_militar_cidadao == 'S'" @change="tratarServidorPublico()" />-->
             </v-col>
 
             <v-col cols="12" sm="4">
               <v-select v-model="dataResponse.tp_esfera_servidor_militar" :error-messages="errorData.tp_esfera_servidor_militar"
                         :items="tpEsferaServidorMilitar" outlined label="De qual esfera?" item-text="label" item-value="value"
                         v-show="showFields.tp_esfera_servidor_militar" @change="tratarEsfera()"/>
-<!--                        v-show="dataResponse.tp_servidor_militar_cidadao == 'M' || dataResponse.tp_servidor_militar_cidadao == 'E'" />-->
             </v-col>
 
             <v-col cols="12" sm="4">
@@ -52,10 +50,9 @@
             </v-col>
 
             <v-col cols="12" sm="6">
-<!--              TODO -- essa lista deverá ser filtrada e não está de acordo com os dados de produção-->
-              <v-select v-model="dataResponse.tp_empregado_terceiro_setor" :error-messages="errorData.tp_empregado_terceiro_setor"
+              <v-autocomplete v-model="dataResponse.tp_empregado_terceiro_setor" :error-messages="errorData.tp_empregado_terceiro_setor" :loading="loadingEmpresas"
                         :items="idOrgaoServidor" outlined label="De qual empresa?" item-text="tx_nome_orgao" item-value="id_orgao"
-                        v-show="dataResponse.tp_servidor_militar_cidadao == 'ETR'" />
+                        v-show="showFields.tp_empregado_terceiro_setor" />
             </v-col>
 
             <v-col cols="12">
@@ -221,6 +218,7 @@ export default {
     loadingOrgaos: false,
     loadingUf: false,
     loadingMunicipio: false,
+    loadingEmpresas: false,
     showFields: {
       tp_servidor_militar_cidadao: false,
       tp_esfera_servidor_militar: false,
@@ -229,10 +227,6 @@ export default {
       id_municipio_servidor_municipal: false
     }
   }),
-  async mounted() {
-    // await this.getUf();
-    // await this.getOrgao();
-  },
   methods: {
     async getUf() {
       this.loadingUf = true;
@@ -269,6 +263,13 @@ export default {
         this.dataResponse.tp_poder_execut_legisl_judic =  [];
         this.showFields.tp_esfera_servidor_militar =  true;
         this.tratarEsfera();
+      }
+      
+      if (this.dataResponse.tp_servidor_militar_cidadao === 'ETR') {
+        this.showFields.tp_empregado_terceiro_setor = true;
+        this.loadingEmpresas = true;
+        this.getOrgao(';id_vinculo:7');
+        this.loadingEmpresas = false;
       }
       
     },
