@@ -255,16 +255,22 @@ export default {
     tratarPessoa(){
       this.showFields.tp_esfera_servidor_militar = false;
       this.showFields.tp_servidor_militar_cidadao = false;
+      this.limparTodosOsCampos();
       
       if (this.dataResponse.tp_servidor_militar_cidadao === 'S') {
         this.showFields.tp_servidor_militar_cidadao = true;
         this.tratarServidorPublico();
       }
 
-      if (this.dataResponse.tp_servidor_militar_cidadao === 'M') {
+      if (this.dataResponse.tp_servidor_militar_cidadao === 'M' || this.dataResponse.tp_servidor_militar_cidadao === 'E') {
+        if (this.tpEsferaServidorMilitar.length < 3) {
+          this.tpEsferaServidorMilitar.push({label: 'MUNICIPAL', value: 'M'})
+        }
         this.dataResponse.tp_poder_execut_legisl_judic =  [];
-        this.tratarServidorMilitar();
+        this.showFields.tp_esfera_servidor_militar =  true;
+        this.tratarEsfera();
       }
+      
     },
     tratarServidorPublico() {
       this.dataResponse.tp_esfera_servidor_militar = null;
@@ -285,10 +291,6 @@ export default {
         this.showFields.tp_esfera_servidor_militar =  true;
         this.tratarEsfera();
       }
-    },
-    tratarServidorMilitar() {
-      this.showFields.tp_esfera_servidor_militar =  true;
-      this.tratarEsfera();
     },
     tratarEsfera() {
       const tipoPessoa = this.dataResponse.tp_servidor_militar_cidadao;
@@ -333,6 +335,23 @@ export default {
         if (tipoEsfera === 'M') {
           this.getOrgao(';id_esfera:3;id_vinculo:5');
           this.showFields.id_orgao_servidor = true;
+          this.showFields.sg_uf_servidor_estadual = true;
+          this.getUf();
+        }
+      }
+
+      if (tipoPessoa === 'E') {
+        if (tipoEsfera === 'F') {
+          this.getOrgao(';id_esfera:1;id_vinculo:6');
+          this.showFields.id_orgao_servidor = true;
+        }
+
+        if (tipoEsfera === 'E') {
+          this.showFields.sg_uf_servidor_estadual = true;
+          this.getUf();
+        }
+
+        if (tipoEsfera === 'M') {
           this.showFields.sg_uf_servidor_estadual = true;
           this.getUf();
         }
@@ -453,7 +472,6 @@ export default {
       this.dataResponse.id_orgao_servidor = [];
     },
     limparTodosOsCampos(){
-      this.dataResponse.tp_poder_execut_legisl_judic =  [];
       this.dataResponse.tp_esfera_servidor_militar =  [];
       this.dataResponse.sg_uf_servidor_estadual = [];
       this.dataResponse.id_municipio_servidor_municipal = [];
