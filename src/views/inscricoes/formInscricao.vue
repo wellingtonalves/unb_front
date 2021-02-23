@@ -21,7 +21,7 @@
             <v-col cols="12" sm="4">
               <v-select v-model="dataResponse.tp_esfera_servidor_militar" :error-messages="errorData.tp_esfera_servidor_militar"
                         :items="tpEsferaServidorMilitar" outlined label="De qual esfera?" item-text="label" item-value="value"
-                        v-show="showFields.tp_esfera_servidor_militar" @change="tratarEsferaPoderExecutivoServidor()"/>
+                        v-show="showFields.tp_esfera_servidor_militar" @change="tratarEsfera()"/>
 <!--                        v-show="dataResponse.tp_servidor_militar_cidadao == 'M' || dataResponse.tp_servidor_militar_cidadao == 'E'" />-->
             </v-col>
 
@@ -255,20 +255,22 @@ export default {
     
     tratarServidorPublico() {
       const tipoPoder = this.dataResponse.tp_poder_execut_legisl_judic;
-      this.showFields.tp_esfera_servidor_militar =  true;
+      const tipoEsfera = this.tpEsferaServidorMilitar;
       
-      switch (tipoPoder) {
-        case tipoPoder == 'E':
-          this.tratarEsferaPoderExecutivoServidor();
-          break;
-        case tipoPoder == 'J':
-          break;
-        case tipoPoder == 'L':
-          break;
-        case tipoPoder == 'O':
-          break;
-        default:
-          break
+      if (tipoEsfera.length < 3) {
+        this.tpEsferaServidorMilitar.push({label: 'MUNICIPAL', value: 'M'})
+      }
+      
+      
+      if (tipoPoder == 'E') {
+        this.showFields.tp_esfera_servidor_militar =  true;
+        this.tratarEsfera();
+      }
+
+      if (tipoPoder == 'J') {
+        this.tpEsferaServidorMilitar = this.tpEsferaServidorMilitar.filter(value => value.value !== 'M')
+        this.showFields.tp_esfera_servidor_militar =  true;
+        this.tratarEsfera();
       }
 
       // if (tipoPoder == 'E') {
@@ -283,12 +285,11 @@ export default {
       //   // tratarEsferaPoderAutonomosServidor();
       // }
     },
-    tratarEsferaPoderExecutivoServidor() {
+    tratarEsfera() {
       const tipoPoder = this.dataResponse.tp_poder_execut_legisl_judic;
       const tipoEsfera = this.dataResponse.tp_esfera_servidor_militar;
       
       if (tipoPoder === 'E') {
-        
         if (tipoEsfera === 'F') {
           this.getOrgao(';id_esfera:1;id_vinculo:4');
           this.showFields.id_orgao_servidor = true;
@@ -299,15 +300,22 @@ export default {
           this.showFields.sg_uf_servidor_estadual = true;
           this.getUf();
         }
-        
-        //TODO - deixei esse if, para se caso durante o desenvolvimento precisar de regras especificas...
-        // if (tipoEsfera === 'M') {
-        //   this.showFields.id_orgao_servidor = false;
-        //   this.showFields.sg_uf_servidor_estadual = true;
-        //   this.getUf();
-        // }
-        
       }
+
+      if (tipoPoder === 'J') {
+        if (tipoEsfera === 'F') {
+          this.getOrgao(';id_esfera:1;id_vinculo:2');
+          this.showFields.id_orgao_servidor = true;
+        }
+
+        if (tipoEsfera === 'E') {
+          this.getOrgao(';id_esfera:2;id_vinculo:2');
+          this.showFields.id_orgao_servidor = true;
+          this.showFields.sg_uf_servidor_estadual = true;
+          this.getUf();
+        }
+      }
+      
     },
     verificarRegrasParaUf() {
       // const tipoPoder = this.dataResponse.tp_poder_execut_legisl_judic;
