@@ -73,22 +73,23 @@
                 v-model="naoResideNoBrasil"
                 inset
                 label="Não resido no Brasil"
+                @change="getNaoResideNoBrasil()"
               />
             </v-col>
 
             <v-col cols="12" sm="4" v-show="!naoResideNoBrasil">
-              <v-select v-model="dataResponse.sg_uf_servidor_estadual" :error-messages="errorData.sg_uf_servidor_estadual"
-                        :items="sgUfServidorEstadual" outlined label="De qual UF?" item-text="tx_nome_uf" item-value="sg_uf" @change="getMunicipio()"/>
+              <v-autocomplete v-model="dataResponse.uf_pessoal" :error-messages="errorData.uf_pessoal"
+                        :items="ufPessoal" outlined label="De qual UF?" item-text="tx_nome_uf" item-value="sg_uf" @change="getMunicipioPessoal()"/>
             </v-col>
 
             <v-col cols="12" sm="4" v-show="!naoResideNoBrasil">
-              <v-select v-model="dataResponse.sg_uf_servidor_estadual" :error-messages="errorData.sg_uf_servidor_estadual"
-                        :items="sgUfServidorEstadual" outlined label="De qual Municipio?" item-text="tx_nome_uf" item-value="sg_uf" @change="getMunicipio()"/>
+              <v-autocomplete v-model="dataResponse.id_municipio_endereco_residencial" :error-messages="errorData.id_municipio_endereco_residencial"
+                        :items="municipioPessoal" outlined label="De qual Municipio?" item-text="tx_nome_municipio" item-value="id_municipio" />
             </v-col>
 
             <v-col cols="12" sm="4" v-show="naoResideNoBrasil">
-              <v-select v-model="dataResponse.sg_uf_servidor_estadual" :error-messages="errorData.sg_uf_servidor_estadual"
-                        :items="sgUfServidorEstadual" outlined label="Qual país?" item-text="tx_nome_uf" item-value="sg_uf" @change="getMunicipio()"/>
+              <v-autocomplete v-model="dataResponse.id_pais" :error-messages="errorData.id_pais" :loading="loadingPais"
+                        :items="listaPaises" outlined label="Qual país?" item-text="tx_nome_pais" item-value="sg_pais" />
             </v-col>
 
           </v-row>
@@ -98,16 +99,24 @@
           <legend>Motivo de Realização do Curso</legend>
           <v-row>
             <v-col>
-              <v-select v-model="dataResponse.sg_uf_servidor_estadual" :error-messages="errorData.sg_uf_servidor_estadual"
-                        :items="sgUfServidorEstadual" outlined label="Qual o motivo de realização do curso?" item-text="tx_nome_uf" item-value="sg_uf" @change="getMunicipio()"/>
+              <v-select v-model="dataResponse.tp_motivo_realiz_curso" :error-messages="errorData.tp_motivo_realiz_curso"
+                        :items="tpMotivoRealizCurso" outlined label="Qual o motivo de realização do curso?" item-text="label" item-value="value"/>
             </v-col>
           </v-row>
         </fieldset>
+        
+        
+        <div>
+          <v-btn class="mx-2" @click="$router.go(-1)">
+            <v-icon class="mr-2">mdi-backup-restore</v-icon>
+            Voltar
+          </v-btn>
 
-        <v-btn class="mt-8" color="primary" :loading="loading" @click="save()">
-          <v-icon class="mr-2">mdi-content-save</v-icon>
-          Enviar
-        </v-btn>
+          <v-btn class="mx-2" color="primary" :loading="loading" @click="save()">
+            <v-icon class="mr-2">mdi-content-save</v-icon>
+            Salvar
+          </v-btn>
+        </div>
 
       </v-form>
     </form-skeleton>
@@ -211,14 +220,32 @@ export default {
         value: 'N'
       },
     ],
+    tpMotivoRealizCurso: [
+      {
+        label: 'Aquisição de Conhecimento',
+        value: 'A'
+      },
+      {
+        label: 'Evolução Funcional',
+        value: 'E'
+      },
+      {
+        label: 'Solicitação da Chefia',
+        value: 'S'
+      },
+    ],
     sgUfServidorEstadual: [],
     idMunicipioServidorMunicipal: [],
     idOrgaoServidor: [],
+    listaPaises: [],
     naoResideNoBrasil: false,
+    ufPessoal: [],
+    municipioPessoal: [],
     loadingOrgaos: false,
     loadingUf: false,
     loadingMunicipio: false,
     loadingEmpresas: false,
+    loadingPais: false,
     showFields: {
       tp_servidor_militar_cidadao: false,
       tp_esfera_servidor_militar: false,
@@ -227,6 +254,9 @@ export default {
       id_municipio_servidor_municipal: false
     }
   }),
+  mounted() {
+    this.getUfPessoal();
+  },
   methods: {
     async getUf() {
       this.loadingUf = true;
@@ -239,6 +269,23 @@ export default {
       const response = await get(`/municipio?pagination=false&search=sg_uf:${this.dataResponse.sg_uf_servidor_estadual}`);
       this.idMunicipioServidorMunicipal = response.data.data;
       this.loadingMunicipio = false;
+    },
+    async getUfPessoal() {
+      const response = await get('/uf?pagination=false');
+      this.ufPessoal = response.data.data;
+    },
+    async getMunicipioPessoal() {
+      const response = await get(`/municipio?pagination=false&search=sg_uf:${this.dataResponse.uf_pessoal}`);
+      this.municipioPessoal = response.data.data;
+    },
+    async getNaoResideNoBrasil() {
+      this.loadingPais = true;
+      this.dataResponse.uf_pessoal = null;
+      this.dataResponse.id_municipio_endereco_residencial = null;
+      this.dataResponse.id_pais = null;
+      let response = await get('/pais?pagination=false');
+      this.listaPaises = response.data.data.filter(value => value.sg_pais !== 'BR');
+      this.loadingPais = false;
     },
     async getOrgao(params) {
       this.loadingOrgaos = true;
