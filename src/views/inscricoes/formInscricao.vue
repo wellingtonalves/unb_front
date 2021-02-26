@@ -106,7 +106,7 @@
         </fieldset>
         
         
-        <div>
+        <v-row style="justify-content: center; margin-top: 30px">
           <v-btn class="mx-2" @click="$router.go(-1)">
             <v-icon class="mr-2">mdi-backup-restore</v-icon>
             Voltar
@@ -116,7 +116,7 @@
             <v-icon class="mr-2">mdi-content-save</v-icon>
             Salvar
           </v-btn>
-        </div>
+        </v-row>
 
       </v-form>
     </form-skeleton>
@@ -125,7 +125,8 @@
 </template>
 
 <script>
-import {get} from "@/services/abstract.service";
+import {get, create} from "@/services/abstract.service";
+import {mapGetters} from "vuex";
 
 export default {
   name: "formInscricao",
@@ -254,6 +255,9 @@ export default {
       id_municipio_servidor_municipal: false
     }
   }),
+  computed: {
+    ...mapGetters(['user'])
+  },
   mounted() {
     this.getUfPessoal();
   },
@@ -515,15 +519,34 @@ export default {
       }
     },
     limparCamposUfMunicipioOrgao() {
-      this.dataResponse.sg_uf_servidor_estadual = [];
-      this.dataResponse.id_municipio_servidor_municipal = [];
-      this.dataResponse.id_orgao_servidor = [];
+      this.dataResponse.sg_uf_servidor_estadual = null;
+      this.dataResponse.id_municipio_servidor_municipal = null;
+      this.dataResponse.id_orgao_servidor = null;
     },
     limparTodosOsCampos(){
-      this.dataResponse.tp_esfera_servidor_militar =  [];
-      this.dataResponse.sg_uf_servidor_estadual = [];
-      this.dataResponse.id_municipio_servidor_municipal = [];
-      this.dataResponse.id_orgao_servidor = [];
+      this.dataResponse.tp_esfera_servidor_militar =  null;
+      this.dataResponse.sg_uf_servidor_estadual = null;
+      this.dataResponse.id_municipio_servidor_municipal = null;
+      this.dataResponse.id_orgao_servidor = null;
+    },
+    async save() {
+      this.dataResponse.id_oferta = this.$route.params.id;
+      this.dataResponse.id_pessoa = this.user.id_usuario;
+      this.dataResponse.dt_inscricao = new Date();
+      //TODO -- isso aqui vai virar regra de negocio na API
+      this.dataResponse.tp_situacao_inscricao = 'EM_CURSO'
+      console.log(this.dataResponse);
+
+      this.loading = true;
+      const response = await create('inscricao', this.dataResponse)
+      this.loading = false;
+
+      if (response.errors) {
+        this.errorData = response.errors;
+        return false;
+      }
+      
+      // this.$router.go(-1);
     }
   }
 }
