@@ -61,7 +61,7 @@
           color="contrast"
           :disabled="curso.oferta_atual === null"
           class="ma-2 flex-grow-1"
-          @click="goToFormInscricao(curso)"
+          @click="goToAcesseCurso()"
           v-if="curso.oferta_atual !== null && curso.hasOwnProperty('inscricao') && curso.inscricao !== null"
         >
           Acesse o curso
@@ -96,6 +96,9 @@ export default {
       } else {
         alert('implementar a exceção...')
       }
+    },
+    goToAcesseCurso() {
+      alert('implementar o acesse o curso...')
     }
   },
 };
