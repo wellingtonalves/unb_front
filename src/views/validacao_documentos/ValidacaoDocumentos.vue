@@ -91,6 +91,12 @@ export default {
       loadingCertificado: false,
     }
   },
+  mounted() {
+    if(this.$route.query.codigo_validador){
+      this.codigoCertificado = this.$route.query.codigo_validador;
+      this.validarCertificado();
+    }
+  },
   methods: {
     async validarInscricao() {
       this.inscricao = null;
