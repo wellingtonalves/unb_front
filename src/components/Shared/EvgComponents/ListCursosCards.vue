@@ -12,9 +12,7 @@
           {{ curso.tp_situacao_curso | displayLabel('statusCurso') }}
         </p>
         <h3 class="v-card__title">
-          <a :href="`/curso/${curso.id_curso}`" @click="goToDetailCurso(curso.id_curso)">{{
-            curso.tx_nome_curso
-          }}</a>
+          <a :href="`/curso/${curso.id_curso}`" @click="goToDetailCurso(curso.id_curso)">{{ curso.tx_nome_curso }}</a>
         </h3>
       </div>
       <dl>
@@ -34,20 +32,42 @@
           <v-icon>mdi-information</v-icon>
           <span class="d-sr-only">Saiba mais</span>
         </v-btn>
+
         <v-btn
           tile
           color="contrast"
-          :disabled="curso.tp_situacao_curso != 'A'"
+          disabled
+          class="ma-2 flex-grow-1"
+          v-if="curso.oferta_atual == null"
+        >
+          Em breve
+          <v-icon v-if="curso.oferta_atual !== null" right>mdi-menu-right</v-icon>
+        </v-btn>
+
+        <v-btn
+          tile
+          color="contrast"
+          :disabled="curso.oferta_atual === null"
           class="ma-2 flex-grow-1"
           @click="goToFormInscricao(curso)"
+          v-if="curso.oferta_atual !== null && (!curso.hasOwnProperty('inscricao') || curso.inscricao === null)"
         >
-          {{
-            curso.tp_situacao_curso == 'A'
-              ? 'Inscreva-se'
-              : 'Em breve'
-          }}
-          <v-icon v-if="curso.tp_situacao_curso == 'A'" right>mdi-menu-right</v-icon>
+          Inscreva-se
+          <v-icon v-if="curso.oferta_atual !== null" right>mdi-menu-right</v-icon>
         </v-btn>
+
+        <v-btn
+          tile
+          color="contrast"
+          :disabled="curso.oferta_atual === null"
+          class="ma-2 flex-grow-1"
+          @click="goToAcesseCurso()"
+          v-if="curso.oferta_atual !== null && curso.hasOwnProperty('inscricao') && curso.inscricao !== null"
+        >
+          Acesse o curso
+          <v-icon v-if="curso.oferta_atual !== null && curso.inscricao !== null" right>mdi-menu-right</v-icon>
+        </v-btn>
+
       </v-card-actions>
     </v-card>
   </v-layout>
@@ -70,14 +90,15 @@ export default {
       return this.$router.push(`/curso/${path}`);
     },
     goToFormInscricao(curso) {
-      console.log('curso')
-      console.log(curso)
-      return this.$router.push(`/formulario-inscricao/${12333}`);
-      // if(curso.oferta_atual) {
-      //   return this.$router.push(`/formulario-inscricao/${curso.oferta_atual.id_oferta}`);
-      // }
-      
-      // alert('implementar a exceção...')
+
+      if (curso.oferta_atual) {
+        return this.$router.push(`/formulario-inscricao/${curso.oferta_atual.id_oferta}`);
+      } else {
+        alert('implementar a exceção...')
+      }
+    },
+    goToAcesseCurso() {
+      alert('implementar o acesse o curso...')
     }
   },
 };

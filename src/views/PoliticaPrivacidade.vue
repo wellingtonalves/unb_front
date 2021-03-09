@@ -1,7 +1,7 @@
 <template>
   <v-container>
 
-    <p>A Política de Privacidade da Escola Virtual Gov foi criada para reafirmar o nosso compromisso com a segurança e a privacidade das informações coletadas daqueles que utilizam nossos produtos e serviços e também das informações de navegação nas páginas públicas da {{ config('app.dominio', 'localhost') }}.</p>
+    <p>A Política de Privacidade da Escola Virtual Gov foi criada para reafirmar o nosso compromisso com a segurança e a privacidade das informações coletadas daqueles que utilizam nossos produtos e serviços e também das informações de navegação nas páginas públicas da {{ url }}.</p>
 
     <p>Coletamos dois tipos de informações sobre nossos usuários por meio do site:</p>
 
@@ -18,7 +18,7 @@
       <li>As informações pessoais fornecidas pelos usuários serão coletadas por meios éticos e legais;</li>
       <li>As informações pessoais requeridas no processo de cadastro e inscrição em cursos são previstas em lei e/ou regulamentação específica e são necessárias para a emissão do certificado. Outros dados poderão ser solicitados para mapeamento do perfil dos usuários, a fim de produzir dados e estatísticas relativos à capacitação a distância no serviço público;</li>
       <li>Não há coleta automática de dados dos usuários;</li>
-      <li>Em respeito à Lei de Acesso a Informação Pública (Lei 12.527/2011) e ao Decreto 8.777/2016, as informações coletadas são disponibilizadas no formato de dados abertos no portal Em Números (https://emnumeros.{{ config('app.dominio', 'localhost') }}), garantindo-se o sigilo das informações pessoais que permitem identificar individualmente os usuários;</li>
+      <li>Em respeito à Lei de Acesso a Informação Pública (Lei 12.527/2011) e ao Decreto 8.777/2016, as informações coletadas são disponibilizadas no formato de dados abertos no portal Em Números (https://emnumeros.{{ url }}), garantindo-se o sigilo das informações pessoais que permitem identificar individualmente os usuários;</li>
       <li>O acesso às informações coletadas está restrito a servidores autorizados para o uso adequado desses dados, incluindo servidores públicos e instituições que atuam diretamente na Escola Virtual de Governo e na oferta de seus cursos;</li>
       <li>Os servidores que utilizarem indevidamente essas informações, ferindo a Política de Privacidade e as demais políticas internas, estarão sujeitos às penalidades previstas em lei;</li>
       <li>A integridade das informações fornecidas será mantida;</li>
@@ -41,3 +41,15 @@
 
   </v-container>
 </template>
+
+<script>
+
+export default {
+  name: 'ListCursosCards',
+  data: () => {
+    return {
+      url: process.env.VUE_APP_URL
+    }
+  }
+};
+</script>

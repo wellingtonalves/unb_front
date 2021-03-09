@@ -37,6 +37,7 @@
 </template>
 <script>
 import {get} from '@/services/abstract.service';
+import {mapGetters} from "vuex";
 export default {
   data: () => ({
     cursoData: [],
@@ -45,9 +46,13 @@ export default {
   created() {
     this.getAllCatalogo();
   },
+  computed: {
+    ...mapGetters(['user'])
+  },
   methods: {
     async getAllCatalogo() {
-      const response = await get('/catalogo-curso');
+      let url = this.user.id_usuario ?`/catalogo-curso?id_usuario=${this.user.id_usuario}` : `/catalogo-curso`;
+      const response = await get(url);
       this.catalogo = response.data;
       this.setListCurso(0);
     },
