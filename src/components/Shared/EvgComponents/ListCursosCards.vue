@@ -12,9 +12,7 @@
           {{ curso.tp_situacao_curso | displayLabel('statusCurso') }}
         </p>
         <h3 class="v-card__title">
-          <a :href="`/curso/${curso.id_curso}`" @click="goToDetailCurso(curso.id_curso)">{{
-            curso.tx_nome_curso
-          }}</a>
+          <a :href="`/curso/${curso.id_curso}`" @click="goToDetailCurso(curso.id_curso)">{{ curso.tx_nome_curso }}</a>
         </h3>
       </div>
       <dl>
@@ -69,13 +67,14 @@
           Acesse o curso
           <v-icon v-if="curso.oferta_atual !== null && curso.inscricao !== null" right>mdi-menu-right</v-icon>
         </v-btn>
-        
+
       </v-card-actions>
     </v-card>
   </v-layout>
 </template>
 <script>
 import filters from '@/filters';
+
 export default {
   name: 'ListCursosCards',
   props: {
@@ -91,8 +90,8 @@ export default {
       return this.$router.push(`/curso/${path}`);
     },
     goToFormInscricao(curso) {
-      
-      if(curso.oferta_atual) {
+
+      if (curso.oferta_atual) {
         return this.$router.push(`/formulario-inscricao/${curso.oferta_atual.id_oferta}`);
       } else {
         alert('implementar a exceção...')
