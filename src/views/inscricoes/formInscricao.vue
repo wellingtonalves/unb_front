@@ -532,9 +532,6 @@ export default {
     async save() {
       this.dataResponse.id_oferta = this.$route.params.id;
       this.dataResponse.id_pessoa = this.user.id_usuario;
-      this.dataResponse.dt_inscricao = new Date();
-      //TODO -- isso aqui vai virar regra de negocio na API
-      this.dataResponse.tp_situacao_inscricao = 'EM_CURSO'
       console.log(this.dataResponse);
 
       this.loading = true;
