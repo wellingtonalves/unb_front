@@ -12,7 +12,8 @@ const state = {
   drawerSettings: {
     model: null,
     clipped: true,
-  }
+  },
+  loading: false
 };
 
 export default state;

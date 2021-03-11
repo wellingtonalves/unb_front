@@ -1063,7 +1063,7 @@ router.beforeEach(async (to, from, next) => {
       store.getters.isAuthenticated === false &&
       !localStorage.getItem('token')
     ) {
-      next('/');
+      next('/login');
       return;
     }
     if (store.getters.isAuthenticated === true) {
