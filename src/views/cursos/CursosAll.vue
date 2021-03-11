@@ -37,24 +37,27 @@
 </template>
 <script>
 import {get} from '@/services/abstract.service';
-import {mapGetters} from "vuex";
+import {mapGetters, mapActions} from "vuex";
 export default {
   data: () => ({
     cursoData: [],
     catalogo: {},
   }),
-  created() {
+  mounted() {
+    this.setLoading(true);
     this.getAllCatalogo();
   },
   computed: {
     ...mapGetters(['user'])
   },
   methods: {
+    ...mapActions(['setLoading']),
     async getAllCatalogo() {
       let url = this.user.id_usuario ?`/catalogo-curso?id_usuario=${this.user.id_usuario}` : `/catalogo-curso`;
       const response = await get(url);
       this.catalogo = response.data;
       this.setListCurso(0);
+      this.setLoading(false);
     },
     setListCurso(index) {
       this.cursoData = this.catalogo.data[index].curso;

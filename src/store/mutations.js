@@ -26,6 +26,9 @@ const mutations = {
   },
   SET_MENU_DRAWER(state, data = {}) {
     state.drawerSettings = data
+  },
+  SET_LOADING(state, data = {}) {
+    state.loading = data
   }
 };
 
