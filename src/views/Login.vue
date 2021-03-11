@@ -99,7 +99,7 @@
           }
 
           await this.$store.dispatch('setAuthenticated', response.data.data).then(() => {
-            this.$router.push('/dashboard');
+            this.$router.go(-1);
           });
           
           this.loading = false;
