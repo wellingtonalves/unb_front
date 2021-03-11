@@ -16,7 +16,7 @@
               <h1><a href="/">Secretaria Virtual - Login</a></h1>
             </v-col>
 
-            <v-form ref="form" lazy-validation v-model="validForm" class="mb-8">
+            <v-form @submit.prevent="login()" ref="form" lazy-validation v-model="validForm" class="mb-8">
               <v-text-field
                 v-model="username"
                 :rules="rules.email"
@@ -32,7 +32,7 @@
                 placeholder="Informe sua senha"
               />
 
-              <v-btn block large color="accent" :loading="loading" v-if="validForm" @click="login()">
+              <v-btn block large color="accent" :loading="loading" v-if="validForm" type="submit">
                 Acessar
               </v-btn>
 
@@ -89,7 +89,6 @@
         if (this.$refs.form.validate()) {
           this.loading = true;
           let response = await login(this.username, this.password);
-
           if (response.status !== 200) {
             this.snackbar.text = response.data.message;
             this.snackbar.color = response.data.messageType;
