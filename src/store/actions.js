@@ -19,6 +19,9 @@ const actions = {
   async setMenuDrawer({commit}, data = {}) {
     commit('SET_MENU_DRAWER', data);
   },
+  setLoading({commit}, data) {
+    commit('SET_LOADING', data);
+  }
 };
 
 export default actions;

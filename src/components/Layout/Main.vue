@@ -1,21 +1,18 @@
 <template>
   <v-app>
-    <AppBar />
-    <v-main>
-
-      <v-container>
-        <v-breadcrumbs :items="$route.meta.breadcrumb" divider="→" />
-        <h2>{{this.$route.meta.title}}</h2>
-      </v-container>
-      
-      <router-view />
-
-      <v-container>
-        <AppFooter />
-      </v-container>
-
-    </v-main>
-    <snack-bar-component/>    
+    <loading-component/>
+      <AppBar />
+      <v-main>
+        <v-container>
+          <v-breadcrumbs :items="$route.meta.breadcrumb" divider="→" />
+          <h2>{{this.$route.meta.title}}</h2>
+        </v-container>
+        <router-view />
+        <v-container>
+          <AppFooter />
+        </v-container>
+      </v-main>
+      <snack-bar-component/>
   </v-app>
 </template>
 
@@ -31,7 +28,7 @@
       //
     }),
     computed: {
-      ...mapGetters(['isAuthenticated'])
+      ...mapGetters(['isAuthenticated', 'loading'])
     },
   };
 </script>

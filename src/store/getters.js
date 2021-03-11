@@ -5,6 +5,7 @@ const getters = {
   userRole: state => state.userRole,
   snackbar: state => state.snackbar,
   menu: state => state.drawerSettings,
+  loading: state => state.loading,
 };
 
 export default getters;
