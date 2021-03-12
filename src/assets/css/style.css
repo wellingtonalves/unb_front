@@ -421,8 +421,17 @@ div.container {
 [data-paleta-bg="16"], [data-paleta-bg-active="16"].v-tab--active { background-color: var(--v-tematica16-base); }
 
 @media (max-width: 600px) {
-  .box .layout > div {
+  .box .layout > div,
+  .layout.cards .v-card,
+  .layout.evg-cards .v-card {
     flex-basis: 100%;
+  }
+  .layout.course-cards .v-image {
+    max-width: 100%;
+  }
+  .layout.course-cards .nome-tematica,
+  .layout.course-cards .nome-oferta {
+    left: 8px;
   }
   div.container {
     padding: 12px;

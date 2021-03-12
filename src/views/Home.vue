@@ -268,6 +268,7 @@ export default {
 
 #featured h3 {
   font-size: 1rem;
+  line-height: 1.25em;
   padding-bottom: 24px;
 }
 
@@ -283,9 +284,15 @@ export default {
 }
 
 @media (max-width: 600px) {
+  #featured {
+    height: auto;
+    min-height: auto;
+  }
+  #featured h2 {
+    font-size: 1.8rem;
+  }
   #featured .centered {
-    padding-left: 12px;
-    padding-right: 12px;
+    padding: 32px 12px 36px;
     position: static;
     transform: none;
   }
