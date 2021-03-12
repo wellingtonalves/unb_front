@@ -40,7 +40,7 @@
     <v-container class="mt-6 TODO-cursos-com-menos-detalhes">
       <v-flex align-center justify-center>
         <v-layout>
-          <div class="pr-6 flex-grow-1">
+          <div class="pr-6 flex-grow-1" v-if="cursosDia.length">
             <h2 class="featured pb-4">
               Melhores Cursos
               <strong>do Dia</strong>
@@ -58,7 +58,7 @@
               </template>
             </carousel-component>
           </div>
-          <div class="pl-6 flex-grow-1">
+          <div class="pl-6 flex-grow-1" v-if="cursosSemana.length">
             <h2 class="featured pb-4">
               Melhores Cursos
               <strong>da Semana</strong>
