@@ -20,17 +20,17 @@
               Voltar
             </v-btn>
 
-            <v-btn outlined color="primary" v-show="$permissao('EXCLUSIVIDADE_EDITAR')"
+            <v-btn outlined color="primary" v-show="$permissao('EXCLUSIVIDADE_OFERTA_EDITAR')"
                @click="$router.push(`/ofertas/${oferta.id_oferta}/gerenciar-exclusividade/${oferta.exclusividade.id_exclusividade_oferta}/create`)" class="ma-1">
               Adicionar Valor
             </v-btn>
 
-            <v-btn outlined color="primary" v-show="$permissao('EXCLUSIVIDADE_EDITAR')"
+            <v-btn outlined color="primary" v-show="$permissao('EXCLUSIVIDADE_OFERTA_EDITAR')"
                    @click="$router.push(`/ofertas/${oferta.id_oferta}/exclusividade/${oferta.exclusividade.id_exclusividade_oferta}/edit`)" class="ma-1">
               Editar
             </v-btn>
 
-            <v-btn outlined color="error" v-show="$permissao('EXCLUSIVIDADE_EXCLUIR')"
+            <v-btn outlined color="error" v-show="$permissao('EXCLUSIVIDADE_OFERTA_EXCLUIR')"
                    @click="excluir()" class="ma-1">
               Remover exclusividade
             </v-btn>
