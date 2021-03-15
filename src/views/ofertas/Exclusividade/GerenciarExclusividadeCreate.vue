@@ -5,6 +5,7 @@
       Oferta:
       <strong>{{oferta.tx_nome_curso + " ( " + oferta.tx_nome_oferta + " )"}}</strong>
     </h3>
+    <p>Tipo de exclusividade: <strong>{{oferta.exclusividade ? oferta.exclusividade.tipo_exclusividade.tx_descricao_tipo_exclusividade_oferta: ''}}</strong></p>
 
     <card-default>
 
@@ -19,6 +20,7 @@
                 outlined
                 label="Valor"
                 required
+                v-mask="'###.###.###-##'"
                 v-model="valor_exclusividade"
                 :error-messages="errors.valor_exclusividade"
               />
@@ -69,9 +71,12 @@
 </template>
 
 <script>
+  import {mask} from 'vue-the-mask';
+  
   import {get, create} from "@/services/abstract.service";
   export default {
     name: "GerenciarExclusividadeCreate",
+    directives: {mask},
     data: () => ({
       data: {},
       loadingOferta: true,

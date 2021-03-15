@@ -14,6 +14,7 @@
 
           <v-toolbar color="elevation-1">
             <v-toolbar-title class="d-sr-only">Ações</v-toolbar-title>
+            <small class="mr-2"><strong>Tipo de exclusividade:</strong> {{oferta.exclusividade ? oferta.exclusividade.tipo_exclusividade.tx_descricao_tipo_exclusividade_oferta: ''}}</small>
             <v-spacer></v-spacer>
             <v-btn outlined class="ma-1" @click="$router.push('/ofertas')">
               <v-icon class="mr-2">mdi-backup-restore</v-icon>
@@ -65,6 +66,10 @@
               </v-toolbar>
             </template>
 
+            <template v-slot:item.valor_exclusividade="{ item }">
+              {{item.valor_exclusividade | maskCpfCnpj}}
+            </template>
+            
             <template v-slot:item.action="{ item }">
 
               <v-tooltip bottom>
@@ -109,9 +114,11 @@
 
 <script>
   import {get, remove} from "@/services/abstract.service";
+  import filters from "@/filters";
   
   export default {
     name: "GerenciarExclusividade",
+    mixins: [filters],
     data: () => ({
       data: [],
       loading: true,
