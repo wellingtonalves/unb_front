@@ -12,53 +12,53 @@
                         :items="tpServidorMilitarCidadao" outlined label="Você é..." item-text="label" item-value="value" @change="tratarPessoa()"/>
             </v-col>
 
-            <v-col cols="12" sm="6">
+            <v-col cols="12" sm="6" v-show="showFields.tp_servidor_militar_cidadao">
               <v-select v-model="dataResponse.tp_poder_execut_legisl_judic" :error-messages="errorData.tp_poder_execut_legisl_judic"
                         :items="tpPoderExectLegislJudic" outlined label="De qual poder?" item-text="label" item-value="value" 
-                        v-show="showFields.tp_servidor_militar_cidadao" @change="tratarPessoa()"/>
+                        @change="tratarPessoa()"/>
             </v-col>
 
-            <v-col cols="12" sm="4">
+            <v-col cols="12" sm="4" v-show="showFields.tp_esfera_servidor_militar">
               <v-select v-model="dataResponse.tp_esfera_servidor_militar" :error-messages="errorData.tp_esfera_servidor_militar"
                         :items="tpEsferaServidorMilitar" outlined label="De qual esfera?" item-text="label" item-value="value"
-                        v-show="showFields.tp_esfera_servidor_militar" @change="tratarEsfera()"/>
+                        @change="tratarEsfera()"/>
             </v-col>
 
-            <v-col cols="12" sm="4">
+            <v-col cols="12" sm="4" v-show="showFields.sg_uf_servidor_estadual">
               <v-autocomplete v-model="dataResponse.sg_uf_servidor_estadual" :error-messages="errorData.sg_uf_servidor_estadual" :loading="loadingUf"
                         :items="sgUfServidorEstadual" outlined label="De qual UF?" item-text="tx_nome_uf" item-value="sg_uf" 
-                        v-show="showFields.sg_uf_servidor_estadual" @change="tratarRegrasParaUf()"/>
+                        @change="tratarRegrasParaUf()"/>
             </v-col>
 
-            <v-col cols="12" sm="4">
+            <v-col cols="12" sm="4" v-show="showFields.id_municipio_servidor_municipal">
               <v-autocomplete v-model="dataResponse.id_municipio_servidor_municipal" :error-messages="errorData.id_municipio_servidor_municipal" :loading="loadingMunicipio"
                         :items="idMunicipioServidorMunicipal" outlined label="De qual Município?" item-text="tx_nome_municipio" item-value="id_municipio" 
-                        v-show="showFields.id_municipio_servidor_municipal" />
+              />
             </v-col>
 
-            <v-col cols="12">
+            <v-col cols="12" v-show="showFields.id_orgao_servidor">
               <v-autocomplete v-model="dataResponse.id_orgao_servidor" :error-messages="errorData.id_orgao_servidor" :loading="loadingOrgaos"
                         :items="idOrgaoServidor" outlined label="De qual órgão?" item-text="tx_nome_orgao" item-value="id_orgao" 
                         hint="As informações deste campo são disponibilizadas pelo Sistema de Informações Organizacionais do Governo Federal. Caso não encontre a informação que deseje na relação, utilize o órgão imediatamente superior." persistent-hint 
-                        v-show="showFields.id_orgao_servidor" />
+              />
             </v-col>
 
-            <v-col cols="12" sm="6">
+            <v-col cols="12" sm="6" v-show="dataResponse.tp_servidor_militar_cidadao == 'S'">
               <v-select v-model="dataResponse.tp_ocupa_cargo_funcao" :error-messages="errorData.tp_ocupa_cargo_funcao"
                         :items="tpOcupaCargoFuncao" outlined label="Ocupa função comissionada?" item-text="label" item-value="value" 
-                        v-show="dataResponse.tp_servidor_militar_cidadao == 'S'" />
+              />
             </v-col>
 
-            <v-col cols="12" sm="6">
+            <v-col cols="12" sm="6" v-show="showFields.tp_empregado_terceiro_setor">
               <v-autocomplete v-model="dataResponse.tp_empregado_terceiro_setor" :error-messages="errorData.tp_empregado_terceiro_setor" :loading="loadingEmpresas"
                         :items="idOrgaoServidor" outlined label="De qual empresa?" item-text="tx_nome_orgao" item-value="id_orgao"
-                        v-show="showFields.tp_empregado_terceiro_setor" />
+              />
             </v-col>
 
-            <v-col cols="12">
+            <v-col cols="12" v-show="dataResponse.tp_servidor_militar_cidadao == 'SV'">
               <v-select v-model="dataResponse.tp_sem_vinculo" :error-messages="errorData.tp_sem_vinculo"
                         :items="tpSemVinculo" outlined label="Selecione sua situação" item-text="label" item-value="value"
-                                      v-show="dataResponse.tp_servidor_militar_cidadao == 'SV'" />
+              />
             </v-col>
             
           </v-row>
