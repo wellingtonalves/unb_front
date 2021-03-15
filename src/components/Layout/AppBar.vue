@@ -141,7 +141,7 @@
 
       <v-container fluid>
         <v-row>
-          <v-col cols="9" class="align-self-start">
+          <v-col class="align-self-start col-5 col-sm-9">
             <h1 class="mr-8 float-left">
               <a @click="home()">EV.G: Escola Virtual.Gov</a>
             </h1>
@@ -191,7 +191,7 @@
             </v-list>
           </v-col>
 
-          <v-col cols="3" class="d-flex justify-end align-center">
+          <v-col class="d-flex justify-end align-center col-7 col-sm-3 pr-6 pr-sm-3">
 
             <v-btn icon title="Alterar idioma" class="top-button" @click="switchLocale()">
               <v-img
@@ -489,7 +489,7 @@ nav.v-navigation-drawer .v-list-item__title {
   }
 
   h1 {
-    margin-left: 40px;
+    margin-left: 50px;
   }
 
   h1 a {

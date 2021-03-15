@@ -2,7 +2,9 @@
   <v-layout class="cards course-cards flex-wrap justify-center">
     <v-card class="d-flex" v-for="(programa, p) of programaData" :key="p">
       <div>
-        <v-img :src="programa.tx_url_imagem"></v-img>
+        <a @click="goToDetailPrograma(programa.id_programa)">
+          <v-img :src="programa.tx_url_imagem"></v-img>
+        </a>
         <h3 class="v-card__title">
           <a @click="goToDetailPrograma(programa.id_programa)">{{
             programa.tx_nome_programa
