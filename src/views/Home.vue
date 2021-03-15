@@ -241,7 +241,7 @@ export default {
       this.cursosSemana = response.data.data;
     },
     async getCursosNovos(){
-      const response = await get('/curso?orderBy=created_at&sortedBy=desc&pagination=false');
+      const response = await get('/curso?search=tp_situacao_curso:A&orderBy=created_at&sortedBy=desc&pagination=false');
       this.cursosNovos = response.data.data.filter((value) => (value.created_at != null)).filter((v, index) => (index < 8))
     }
   },
