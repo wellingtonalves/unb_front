@@ -160,7 +160,7 @@
 // @ is an alias to /src
 
 export default {
-  name: 'Adesão Institucional',
+  name: 'AdesãoInstitucional',
   data: () => ({
     documentosImportantes: [
       {text: 'Protocolo de Intenções', icon: 'mdi-home', href: 'https://drive.google.com/file/d/1JzKK5PhWqtD8rb3Y-6b-Qii1KOHB4WoP/view?usp=sharing'},

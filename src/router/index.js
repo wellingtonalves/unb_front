@@ -293,7 +293,15 @@ const routes = [
             component: () => import('../views/cursos/CursosAll.vue'),
             meta: {
               requiresAuth: false,
-              title: 'Catálogo de Cursos'
+              title: ROUTER_CONSTANTS.menuCatalogoCursos,
+              breadcrumb: [
+                {text: ROUTER_CONSTANTS.menuInicio, disabled: false, href: '/'},
+                {
+                  text: ROUTER_CONSTANTS.menuCatalogoCursos,
+                  disabled: true,
+                  href: '/catalogo-cursos',
+                },
+              ],
             },
           }
         ],
@@ -633,7 +641,15 @@ const routes = [
             component: () => import('../views/programas/ProgramasAll.vue'),
             meta: {
               requiresAuth: false,
-              title: 'Catálogo de Programas',
+              title: ROUTER_CONSTANTS.menuCatalogoProgramas,
+              breadcrumb: [
+                {text: ROUTER_CONSTANTS.menuInicio, disabled: false, href: '/'},
+                {
+                  text: ROUTER_CONSTANTS.menuCatalogoProgramas,
+                  disabled: true,
+                  href: '/catalogo-programas',
+                },
+              ],
             },
           },
         ],
