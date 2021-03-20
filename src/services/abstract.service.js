@@ -4,8 +4,8 @@ import store from './../store'
 export const get = async (url, options = {}) => {
   return await httpClient
     .get(url, options)
-    .then(response => response)
-    .catch(error => errorHandler(error));
+    .then((response = {}) => response)
+    .catch((error = {}) => errorHandler(error));
 };
 
 export const create = async (url, data) => {
