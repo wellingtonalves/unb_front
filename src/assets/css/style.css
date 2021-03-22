@@ -427,7 +427,7 @@ div.container {
     flex-basis: 100%;
   }
   .layout.course-cards .v-image {
-    max-width: 100%;
+    min-width: 100%;
   }
   .layout.course-cards .nome-tematica,
   .layout.course-cards .nome-oferta {

@@ -10,7 +10,6 @@
       overflow
       width="300px"
     >
-
       <v-list dense>
         <v-list-item link :to="'/dashboard'">
           <v-list-item-action>
@@ -309,13 +308,6 @@ export default {
       },
     ],
   }),
-  watch: {
-    '$route': function (route){
-      if (route.meta.requiresAuth === false) {
-        this.$store.dispatch('setMenuDrawer', {...this.menu, model: false})
-      }
-    }
-  },
   methods: {
     permission(rule) {
       return checkPermission(rule);

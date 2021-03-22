@@ -119,6 +119,23 @@ const routes = [
           ],
         },
       },
+      {
+        path: '/instituicoes-participantes',
+        name: 'Instituições Participantes',
+        component: () => import('../views/InstituicoesParticipantes.vue'),
+        meta: {
+          requiresAuth: false,
+          title: ROUTER_CONSTANTS.instituicoesParticipantes,
+          breadcrumb: [
+            {text: ROUTER_CONSTANTS.menuInicio, disabled: false, href: '/'},
+            {
+              text: ROUTER_CONSTANTS.instituicoesParticipantes,
+              disabled: true,
+              href: '/instituicoes-participantes',
+            },
+          ],
+        },
+      },
 
       {
         path: '/meus-dados',
@@ -293,7 +310,15 @@ const routes = [
             component: () => import('../views/cursos/CursosAll.vue'),
             meta: {
               requiresAuth: false,
-              title: 'Catálogo de Cursos'
+              title: ROUTER_CONSTANTS.menuCatalogoCursos,
+              breadcrumb: [
+                {text: ROUTER_CONSTANTS.menuInicio, disabled: false, href: '/'},
+                {
+                  text: ROUTER_CONSTANTS.menuCatalogoCursos,
+                  disabled: true,
+                  href: '/catalogo-cursos',
+                },
+              ],
             },
           }
         ],
@@ -493,7 +518,7 @@ const routes = [
             component: () =>
               import(
                 '../views/ofertas/Exclusividade/GerenciarExclusividade.vue'
-              ),
+                ),
             meta: {
               title: ROUTER_CONSTANTS.menuGerenciarExclusividadeOferta,
               requiresAuth: true,
@@ -521,7 +546,7 @@ const routes = [
             component: () =>
               import(
                 '../views/ofertas/Exclusividade/GerenciarExclusividadeCreate.vue'
-              ),
+                ),
             meta: {
               title: ROUTER_CONSTANTS.menuAdicionarValores,
               requiresAuth: true,
@@ -633,7 +658,15 @@ const routes = [
             component: () => import('../views/programas/ProgramasAll.vue'),
             meta: {
               requiresAuth: false,
-              title: 'Catálogo de Programas',
+              title: ROUTER_CONSTANTS.menuCatalogoProgramas,
+              breadcrumb: [
+                {text: ROUTER_CONSTANTS.menuInicio, disabled: false, href: '/'},
+                {
+                  text: ROUTER_CONSTANTS.menuCatalogoProgramas,
+                  disabled: true,
+                  href: '/catalogo-programas',
+                },
+              ],
             },
           },
         ],

@@ -168,6 +168,31 @@
         </v-card>
       </v-layout>
     </v-container>
+    
+    <v-container class="mt-6">
+      <h2 class="featured pb-4">
+        Instituições
+        <strong>Participantes</strong>
+      </h2>
+
+      <v-layout column>
+        <v-flex>
+          <v-layout>
+            <v-flex class="" v-for="instituicao in instituicoesParticipantes" :key="instituicao.id_orgao">
+              <a :href="instituicao.tx_link_orgao" target="_blank">
+                <v-img width="200px" :src="instituicao.tx_url" :alt="instituicao.tx_nome_orgao"/>
+              </a>
+            </v-flex>
+          </v-layout>
+        </v-flex>
+        <v-flex text-center class="mt-6">
+          <v-btn large outlined color="primary" @click="$router.push('/instituicoes-participantes')">
+            Ver todos as Instituições
+            <v-icon right>mdi-menu-right</v-icon>
+          </v-btn>
+        </v-flex>
+      </v-layout>
+    </v-container>
   </v-layout>
 </template>
 
@@ -190,6 +215,7 @@ export default {
     modelCursoDia: 0,
     modelCursoSemana: 0,
     modelCursoNovos: 0,
+    instituicoesParticipantes: []
     
   }),
   created() {
@@ -198,6 +224,7 @@ export default {
     this.getMelhoresCursosDoDia();
     this.getMelhoresCursosDaSemana();
     this.getCursosNovos();
+    this.getInstituicoesParticipantes();
   },
   methods: {
     receiveCursos(data) {
@@ -243,6 +270,10 @@ export default {
     async getCursosNovos(){
       const response = await get('/curso?search=tp_situacao_curso:A&orderBy=created_at&sortedBy=desc&pagination=false');
       this.cursosNovos = response.data.data.filter((value) => (value.created_at != null)).filter((v, index) => (index < 8))
+    },
+    async getInstituicoesParticipantes(){
+      const response = await get('/orgao?random=true&pagination=false');
+      this.instituicoesParticipantes = response.data.data;
     }
   },
 };
