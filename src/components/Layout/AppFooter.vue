@@ -48,7 +48,7 @@
               </v-list-item-content>
             </v-list-item>
 
-            <v-list-item href="https://www.escolavirtual.gov.br/instituicoes-participantes">
+            <v-list-item href="/instituicoes-participantes">
               <v-list-item-content>
                 <v-list-item-title>{{ $t('message.appFooter.instituicoesParticipantes') }}</v-list-item-title>
               </v-list-item-content>
