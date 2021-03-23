@@ -228,6 +228,12 @@ div.container {
 .layout.cards .v-card__actions .v-btn.contrast {
   color: var(--v-white-base);
 }
+.layout.cards .v-card__actions .v-btn--disabled {
+  border: 2px solid var(--v-mediumgrey-base);
+}
+.layout.cards .v-card__actions .v-btn--disabled .v-btn__content {
+  color: var(--v-mediumgrey-base);
+}
 .layout.course-cards {
   margin-left: -8px;
   margin-right: -8px;
@@ -425,6 +431,10 @@ div.container {
   .layout.cards .v-card,
   .layout.evg-cards .v-card {
     flex-basis: 100%;
+  }
+  .layout.course-cards {
+    margin-left: 0;
+    margin-right: 0;
   }
   .layout.course-cards .v-image {
     min-width: 100%;

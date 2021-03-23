@@ -58,13 +58,13 @@
 
         <v-btn
           tile
-          color="contrast"
+          color="primary"
           :disabled="curso.oferta_atual === null"
           class="ma-2 flex-grow-1"
           @click="goToAcesseCurso()"
           v-if="curso.oferta_atual !== null && curso.hasOwnProperty('inscricao') && curso.inscricao !== null"
         >
-          Acesse o curso
+          Acesse
           <v-icon v-if="curso.oferta_atual !== null && curso.inscricao !== null" right>mdi-menu-right</v-icon>
         </v-btn>
 
